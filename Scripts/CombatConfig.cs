@@ -25,4 +25,9 @@ public partial class CombatConfig : Resource
 
     [Export]
     public float[] Multipliers = new float[30]; // 6 x 5
+
+    [Export]
+    public float CombatStartDelay = 4.0f;
+    [Export]
+    public float AttackInterval = 2.0f;
 }

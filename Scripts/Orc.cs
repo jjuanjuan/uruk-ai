@@ -104,4 +104,6 @@ public partial class Orc : Node
 			GD.Print($"Subió a nivel {progress.Level} en {CharacterClass.GetClassName()}");
 		}
 	}
+
+	public CharacterClass GetCharacterClass() { return CharacterClass; }
 }
