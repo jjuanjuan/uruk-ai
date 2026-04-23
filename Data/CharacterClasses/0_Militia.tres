@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="CharacterClass" format=3 uid="uid://c7rktj3ymrup"]
 
 [ext_resource type="Script" uid="uid://1pbhreu2codn" path="res://Scripts/CharacterClass.cs" id="1_87h34"]
-[ext_resource type="Resource" uid="uid://nwnecenxibir" path="res://Scripts/AttackActions/Basic Slash.tres" id="1_vcdok"]
+[ext_resource type="Resource" uid="uid://nwnecenxibir" path="res://Data/AttackActions/Basic Slash.tres" id="1_vcdok"]
 [ext_resource type="Script" uid="uid://du724smqstcfc" path="res://Scripts/AttackPerPosition.cs" id="2_kq20t"]
 [ext_resource type="Texture2D" uid="uid://d16kcku6f2bb3" path="res://Art/Placeholders/0_militia_front.png" id="3_kq20t"]
 [ext_resource type="Texture2D" uid="uid://de5j0u588upr7" path="res://Art/Placeholders/0_militia_back.png" id="3_tq6mj"]
@@ -28,4 +28,5 @@ ClassName = "Militia"
 ClassTextureFront = ExtResource("3_kq20t")
 ClassTextureBack = ExtResource("3_tq6mj")
 AttacksPerPosition = Array[Object]([SubResource("Resource_tq6mj"), SubResource("Resource_fvaiu"), SubResource("Resource_ooqhg")])
+Requirements = Array[Object]([])
 metadata/_custom_type_script = "uid://1pbhreu2codn"

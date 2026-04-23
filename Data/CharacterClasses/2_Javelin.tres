@@ -1,0 +1,43 @@
+[gd_resource type="Resource" script_class="CharacterClass" format=3 uid="uid://bn71ukjld3gxd"]
+
+[ext_resource type="Resource" uid="uid://brtv75x54g11n" path="res://Data/AttackActions/Basic Pierce.tres" id="1_8j605"]
+[ext_resource type="Script" uid="uid://du724smqstcfc" path="res://Scripts/AttackPerPosition.cs" id="2_0pddx"]
+[ext_resource type="Texture2D" uid="uid://de5j0u588upr7" path="res://Art/Placeholders/0_militia_back.png" id="3_mmev6"]
+[ext_resource type="Texture2D" uid="uid://d3hh1phe5julb" path="res://Art/Placeholders/1_lancer_front.png" id="4_wjhpl"]
+[ext_resource type="Resource" uid="uid://d0rashb28ycuo" path="res://Data/CharacterClasses/1_Lancer.tres" id="5_8j605"]
+[ext_resource type="Script" uid="uid://bmylglyshe6wd" path="res://Scripts/ClassRequirements.cs" id="6_l7x81"]
+[ext_resource type="Script" uid="uid://1pbhreu2codn" path="res://Scripts/CharacterClass.cs" id="7_6i3il"]
+
+[sub_resource type="Resource" id="Resource_ncstq"]
+script = ExtResource("2_0pddx")
+AttackAction = ExtResource("1_8j605")
+Amount = 2
+metadata/_custom_type_script = "uid://du724smqstcfc"
+
+[sub_resource type="Resource" id="Resource_fpcew"]
+script = ExtResource("2_0pddx")
+AttackAction = ExtResource("1_8j605")
+Amount = 2
+metadata/_custom_type_script = "uid://du724smqstcfc"
+
+[sub_resource type="Resource" id="Resource_hqaj3"]
+script = ExtResource("2_0pddx")
+AttackAction = ExtResource("1_8j605")
+metadata/_custom_type_script = "uid://du724smqstcfc"
+
+[sub_resource type="Resource" id="Resource_rbfhh"]
+script = ExtResource("6_l7x81")
+RequiredClass = ExtResource("5_8j605")
+RequiredLevel = 5
+metadata/_custom_type_script = "uid://bmylglyshe6wd"
+
+[resource]
+script = ExtResource("7_6i3il")
+ClassName = "Javelin"
+BaseHP = 150
+ClassTextureFront = ExtResource("4_wjhpl")
+ClassTextureBack = ExtResource("3_mmev6")
+AttacksPerPosition = Array[Object]([SubResource("Resource_ncstq"), SubResource("Resource_fpcew"), SubResource("Resource_hqaj3")])
+BaseAttackDamage = 15
+Requirements = Array[Object]([SubResource("Resource_rbfhh")])
+metadata/_custom_type_script = "uid://1pbhreu2codn"

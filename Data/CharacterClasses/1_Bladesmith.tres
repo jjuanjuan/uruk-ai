@@ -1,10 +1,12 @@
 [gd_resource type="Resource" script_class="CharacterClass" format=3 uid="uid://qsh7t800l3tc"]
 
-[ext_resource type="Resource" uid="uid://nwnecenxibir" path="res://Scripts/AttackActions/Basic Slash.tres" id="1_daw4q"]
+[ext_resource type="Resource" uid="uid://nwnecenxibir" path="res://Data/AttackActions/Basic Slash.tres" id="1_daw4q"]
 [ext_resource type="Script" uid="uid://du724smqstcfc" path="res://Scripts/AttackPerPosition.cs" id="2_r1tbe"]
 [ext_resource type="Texture2D" uid="uid://de5j0u588upr7" path="res://Art/Placeholders/0_militia_back.png" id="3_3jc0v"]
 [ext_resource type="Script" uid="uid://1pbhreu2codn" path="res://Scripts/CharacterClass.cs" id="3_ywtj5"]
 [ext_resource type="Texture2D" uid="uid://c76bfxwbynew8" path="res://Art/Placeholders/1_bladesmith_front.png" id="4_dppkv"]
+[ext_resource type="Resource" uid="uid://c7rktj3ymrup" path="res://Data/CharacterClasses/0_Militia.tres" id="5_dppkv"]
+[ext_resource type="Script" uid="uid://bmylglyshe6wd" path="res://Scripts/ClassRequirements.cs" id="6_miafs"]
 
 [sub_resource type="Resource" id="Resource_ncstq"]
 script = ExtResource("2_r1tbe")
@@ -23,6 +25,12 @@ script = ExtResource("2_r1tbe")
 AttackAction = ExtResource("1_daw4q")
 metadata/_custom_type_script = "uid://du724smqstcfc"
 
+[sub_resource type="Resource" id="Resource_qyw1s"]
+script = ExtResource("6_miafs")
+RequiredClass = ExtResource("5_dppkv")
+RequiredLevel = 3
+metadata/_custom_type_script = "uid://bmylglyshe6wd"
+
 [resource]
 script = ExtResource("3_ywtj5")
 ClassName = "Bladesmith"
@@ -31,4 +39,5 @@ ClassTextureFront = ExtResource("4_dppkv")
 ClassTextureBack = ExtResource("3_3jc0v")
 AttacksPerPosition = Array[Object]([SubResource("Resource_ncstq"), SubResource("Resource_fpcew"), SubResource("Resource_hqaj3")])
 BaseAttackDamage = 15
+Requirements = Array[Object]([SubResource("Resource_qyw1s")])
 metadata/_custom_type_script = "uid://1pbhreu2codn"

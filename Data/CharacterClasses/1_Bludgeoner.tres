@@ -1,10 +1,12 @@
 [gd_resource type="Resource" script_class="CharacterClass" format=3 uid="uid://dsywmpxgobhst"]
 
-[ext_resource type="Resource" uid="uid://o3gvmrl8qchx" path="res://Scripts/AttackActions/Basic Smash.tres" id="1_pj32f"]
+[ext_resource type="Resource" uid="uid://o3gvmrl8qchx" path="res://Data/AttackActions/Basic Smash.tres" id="1_pj32f"]
 [ext_resource type="Script" uid="uid://1pbhreu2codn" path="res://Scripts/CharacterClass.cs" id="1_uo8t1"]
 [ext_resource type="Script" uid="uid://du724smqstcfc" path="res://Scripts/AttackPerPosition.cs" id="2_vu0c2"]
 [ext_resource type="Texture2D" uid="uid://de5j0u588upr7" path="res://Art/Placeholders/0_militia_back.png" id="3_ncstq"]
 [ext_resource type="Texture2D" uid="uid://cyp873npp1tpu" path="res://Art/Placeholders/1_bludgeoner_front.png" id="4_fpcew"]
+[ext_resource type="Resource" uid="uid://c7rktj3ymrup" path="res://Data/CharacterClasses/0_Militia.tres" id="5_hqaj3"]
+[ext_resource type="Script" uid="uid://bmylglyshe6wd" path="res://Scripts/ClassRequirements.cs" id="6_rue22"]
 
 [sub_resource type="Resource" id="Resource_ncstq"]
 script = ExtResource("2_vu0c2")
@@ -23,6 +25,12 @@ script = ExtResource("2_vu0c2")
 AttackAction = ExtResource("1_pj32f")
 metadata/_custom_type_script = "uid://du724smqstcfc"
 
+[sub_resource type="Resource" id="Resource_exk64"]
+script = ExtResource("6_rue22")
+RequiredClass = ExtResource("5_hqaj3")
+RequiredLevel = 3
+metadata/_custom_type_script = "uid://bmylglyshe6wd"
+
 [resource]
 script = ExtResource("1_uo8t1")
 ClassName = "Bludgeoner"
@@ -31,4 +39,5 @@ ClassTextureFront = ExtResource("4_fpcew")
 ClassTextureBack = ExtResource("3_ncstq")
 AttacksPerPosition = Array[Object]([SubResource("Resource_ncstq"), SubResource("Resource_fpcew"), SubResource("Resource_hqaj3")])
 BaseAttackDamage = 15
+Requirements = Array[Object]([SubResource("Resource_exk64")])
 metadata/_custom_type_script = "uid://1pbhreu2codn"

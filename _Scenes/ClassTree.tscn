@@ -1,0 +1,35 @@
+[gd_scene format=3 uid="uid://c5ug66lr4e0cx"]
+
+[ext_resource type="Script" uid="uid://c06glxn1g2j0" path="res://Scripts/UI/UIClassTree.cs" id="1_vudcq"]
+[ext_resource type="PackedScene" uid="uid://dk7d38pi0j0nt" path="res://_Scenes/ClassNode.tscn" id="2_h0mmf"]
+
+[node name="ClassTree" type="Control" unique_id=1290781945]
+layout_mode = 3
+anchor_left = 0.05
+anchor_top = 0.05
+anchor_right = 0.95
+anchor_bottom = 0.75
+offset_left = -27.600002
+offset_top = -2.4000015
+offset_right = -1064.4
+offset_bottom = -456.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("1_vudcq")
+ClassNodeScene = ExtResource("2_h0mmf")
+
+[node name="NodesParent" type="Control" parent="." unique_id=429232750]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CloseButton" type="Button" parent="." unique_id=1965634114]
+layout_mode = 0
+offset_left = 31.0
+offset_top = 582.0
+offset_right = 123.0
+offset_bottom = 626.0
+text = "CLOSE"

@@ -5,7 +5,7 @@ public partial class Orc : Node
 {
 	[Export]
 	string FirstName;
-	
+
 	[Export]
 	CharacterClass CharacterClass;
 
@@ -17,16 +17,18 @@ public partial class Orc : Node
 	RichTextLabel classLabel;
 	[Export]
 	RichTextLabel hpLabel;
+	[Export]
+	Godot.Collections.Array<ClassProgress> ClassProgresses = new Godot.Collections.Array<ClassProgress>();
 
 	int damage = 0;
 	bool alive => CurrentHP > 0;
+	public int CurrentHP { get => CharacterClass.GetBaseHP() - damage; }
+	public bool IsAlive { get => alive; }
 
 	public override void _Ready()
 	{
 		nameLabel.Text = FirstName;
-		classLabel.Text = CharacterClass.GetClassName();
-		hpLabel.Text = CurrentHP.ToString();
-		Sprite2D.Texture = CharacterClass.GetFrontTexture();
+		UpdateClass();
 	}
 
 	public override void _Process(double delta)
@@ -34,6 +36,72 @@ public partial class Orc : Node
 		hpLabel.Text = CurrentHP.ToString();
 	}
 
-	public int CurrentHP{ get => CharacterClass.GetBaseHP() - damage; }
-	public bool IsAlive{ get => alive; }
+	public void ChangeClass(CharacterClass characterClass)
+	{
+		if (!CanChangeToClass(characterClass))
+		{
+			GD.Print("No cumple requisitos");
+			return;
+		}
+
+		CharacterClass = characterClass;
+		UpdateClass();
+	}
+
+	public void UpdateClass()
+	{
+		classLabel.Text = CharacterClass.GetClassName();
+		hpLabel.Text = CurrentHP.ToString();
+		Sprite2D.Texture = CharacterClass.GetFrontTexture();
+	}
+
+	public ClassProgress GetProgress(CharacterClass characterClass)
+	{
+		foreach (var cp in ClassProgresses)
+		{
+			if (cp.CharacterClass == characterClass)
+				return cp;
+		}
+
+		// si no existe, crear
+		var newProgress = new ClassProgress
+		{
+			CharacterClass = characterClass,
+			Level = 0,
+			XP = 0
+		};
+
+		ClassProgresses.Add(newProgress);
+		return newProgress;
+	}
+
+	public bool CanChangeToClass(CharacterClass newClass)
+	{
+		foreach (var req in newClass.GetRequirements())
+		{
+			var progress = GetProgress(req.RequiredClass);
+
+			if (progress.Level < req.RequiredLevel)
+				return false;
+		}
+
+		return true;
+	}
+
+	public void GainXP(int amount)
+	{
+		var progress = GetProgress(CharacterClass);
+
+		progress.XP += amount;
+
+		int xpToLevel = CharacterClass.GetXPToNextLevel();
+
+		while (progress.XP >= xpToLevel)
+		{
+			progress.XP -= xpToLevel;
+			progress.Level++;
+
+			GD.Print($"Subió a nivel {progress.Level} en {CharacterClass.GetClassName()}");
+		}
+	}
 }

@@ -2,8 +2,24 @@
 
 [ext_resource type="Texture2D" uid="uid://bib73y474e4y" path="res://Art/base ork front.png" id="1_i8h54"]
 [ext_resource type="Script" uid="uid://bi2itk31laaik" path="res://Scripts/Orc.cs" id="2_b8jug"]
-[ext_resource type="Resource" uid="uid://c7rktj3ymrup" path="res://Scripts/CharacterClasses/0_Militia.tres" id="3_hbunu"]
-[ext_resource type="Resource" uid="uid://bgcytl2hmpbiy" path="res://Scripts/CharacterClasses/2_Chicoteador.tres" id="4_i8h54"]
+[ext_resource type="Resource" uid="uid://c7rktj3ymrup" path="res://Data/CharacterClasses/0_Militia.tres" id="3_hbunu"]
+[ext_resource type="Resource" uid="uid://bgcytl2hmpbiy" path="res://Data/CharacterClasses/2_Chicoteador.tres" id="4_i8h54"]
+[ext_resource type="Script" uid="uid://cq2rp0ntu4360" path="res://Scripts/ClassProgress.cs" id="5_hgf3e"]
+[ext_resource type="Script" uid="uid://qae3crcpu528" path="res://Scripts/UI/UIMain.cs" id="5_xtiqn"]
+[ext_resource type="Resource" uid="uid://dsywmpxgobhst" path="res://Data/CharacterClasses/1_Bludgeoner.tres" id="6_jxfli"]
+[ext_resource type="PackedScene" uid="uid://c5ug66lr4e0cx" path="res://_Scenes/ClassTree.tscn" id="6_nnxkq"]
+
+[sub_resource type="Resource" id="Resource_q6n8c"]
+script = ExtResource("5_hgf3e")
+CharacterClass = ExtResource("3_hbunu")
+Level = 3
+metadata/_custom_type_script = "uid://cq2rp0ntu4360"
+
+[sub_resource type="Resource" id="Resource_31cma"]
+script = ExtResource("5_hgf3e")
+CharacterClass = ExtResource("6_jxfli")
+Level = 5
+metadata/_custom_type_script = "uid://cq2rp0ntu4360"
 
 [node name="Node2D" type="Node2D" unique_id=1963946473]
 
@@ -65,6 +81,7 @@ Sprite2D = NodePath("Sprite2D")
 nameLabel = NodePath("Nombre")
 classLabel = NodePath("Clase")
 hpLabel = NodePath("HP")
+ClassProgresses = Array[ExtResource("5_hgf3e")]([SubResource("Resource_q6n8c"), SubResource("Resource_31cma")])
 
 [node name="Sprite2D" type="Sprite2D" parent="Team 1/Orc2" unique_id=1363623075]
 position = Vector2(816, 227)
@@ -104,3 +121,20 @@ offset_top = 229.0
 offset_right = -267.04797
 offset_bottom = 237.984
 text = "100"
+
+[node name="UI Main" type="Control" parent="." unique_id=219697555 node_paths=PackedStringArray("Orc")]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 1030.0
+offset_bottom = 647.0
+script = ExtResource("5_xtiqn")
+ClassTreeScene = ExtResource("6_nnxkq")
+Orc = NodePath("../Team 1/Orc2")
+
+[node name="OpenClassTreeButton" type="Button" parent="UI Main" unique_id=675934931]
+layout_mode = 0
+offset_left = 515.0
+offset_top = 355.0
+offset_right = 745.0
+offset_bottom = 425.0
+text = "Open class tree"
