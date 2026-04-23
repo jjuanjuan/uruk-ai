@@ -151,6 +151,7 @@ public partial class CombatConfigInspector : EditorInspectorPlugin
                     config.Multipliers[index] = (float)value;
                     UpdateVisual(panel, value, atk, armor);
                     config.EmitChanged();
+                    ResourceSaver.Save(config);
                 };
 
                 grid.AddChild(panel);
