@@ -1,0 +1,36 @@
+[gd_resource type="Resource" script_class="CharacterClass" format=3 uid="uid://bgcytl2hmpbiy"]
+
+[ext_resource type="Resource" uid="uid://12oxed00qf40" path="res://Scripts/AttackActions/Whip Column.tres" id="1_jakd5"]
+[ext_resource type="Script" uid="uid://du724smqstcfc" path="res://Scripts/AttackPerPosition.cs" id="2_jakd5"]
+[ext_resource type="Script" uid="uid://1pbhreu2codn" path="res://Scripts/CharacterClass.cs" id="3_fmxnv"]
+[ext_resource type="Resource" uid="uid://d0vr5cfpj2204" path="res://Scripts/AttackActions/Whip Strike.tres" id="3_sjlno"]
+[ext_resource type="Texture2D" uid="uid://de5j0u588upr7" path="res://Art/Placeholders/0_militia_back.png" id="4_sjlno"]
+[ext_resource type="Texture2D" uid="uid://cws3fd2g1sjue" path="res://Art/Placeholders/2_chicoteador_front.png" id="5_pmgdi"]
+
+[sub_resource type="Resource" id="Resource_ncstq"]
+script = ExtResource("2_jakd5")
+AttackAction = ExtResource("1_jakd5")
+Amount = 2
+metadata/_custom_type_script = "uid://du724smqstcfc"
+
+[sub_resource type="Resource" id="Resource_fpcew"]
+script = ExtResource("2_jakd5")
+AttackAction = ExtResource("3_sjlno")
+Amount = 3
+metadata/_custom_type_script = "uid://du724smqstcfc"
+
+[sub_resource type="Resource" id="Resource_hqaj3"]
+script = ExtResource("2_jakd5")
+AttackAction = ExtResource("3_sjlno")
+Amount = 2
+metadata/_custom_type_script = "uid://du724smqstcfc"
+
+[resource]
+script = ExtResource("3_fmxnv")
+ClassName = "Chicoteador"
+BaseHP = 180
+ClassTextureFront = ExtResource("5_pmgdi")
+ClassTextureBack = ExtResource("4_sjlno")
+AttacksPerPosition = Array[Object]([SubResource("Resource_ncstq"), SubResource("Resource_fpcew"), SubResource("Resource_hqaj3")])
+BaseAttackDamage = 15
+metadata/_custom_type_script = "uid://1pbhreu2codn"

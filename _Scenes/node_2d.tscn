@@ -1,0 +1,106 @@
+[gd_scene format=3 uid="uid://bte5gvthbexir"]
+
+[ext_resource type="Texture2D" uid="uid://bib73y474e4y" path="res://Art/base ork front.png" id="1_i8h54"]
+[ext_resource type="Script" uid="uid://bi2itk31laaik" path="res://Scripts/Orc.cs" id="2_b8jug"]
+[ext_resource type="Resource" uid="uid://c7rktj3ymrup" path="res://Scripts/CharacterClasses/0_Militia.tres" id="3_hbunu"]
+[ext_resource type="Resource" uid="uid://bgcytl2hmpbiy" path="res://Scripts/CharacterClasses/2_Chicoteador.tres" id="4_i8h54"]
+
+[node name="Node2D" type="Node2D" unique_id=1963946473]
+
+[node name="Team 1" type="Node" parent="." unique_id=1378121061]
+
+[node name="Orc" type="Node" parent="Team 1" unique_id=824183852 node_paths=PackedStringArray("Sprite2D", "nameLabel", "classLabel", "hpLabel")]
+script = ExtResource("2_b8jug")
+FirstName = "Pedro"
+CharacterClass = ExtResource("3_hbunu")
+Sprite2D = NodePath("Sprite2D")
+nameLabel = NodePath("Nombre")
+classLabel = NodePath("Clase")
+hpLabel = NodePath("HP")
+
+[node name="Sprite2D" type="Sprite2D" parent="Team 1/Orc" unique_id=1483923719]
+position = Vector2(589, 242)
+texture = ExtResource("1_i8h54")
+
+[node name="Nombre" type="RichTextLabel" parent="Team 1/Orc" unique_id=1025877789]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -50.0
+offset_top = 144.0
+offset_right = 150.0
+offset_bottom = 167.0
+grow_horizontal = 2
+text = "Pedro"
+fit_content = true
+
+[node name="Clase" type="RichTextLabel" parent="Team 1/Orc" unique_id=521719060]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -47.0
+offset_top = 170.0
+offset_right = 153.0
+offset_bottom = 193.0
+grow_horizontal = 2
+text = "Pibe"
+fit_content = true
+
+[node name="HP" type="RichTextLabel" parent="Team 1/Orc" unique_id=2146310929]
+anchors_preset = -1
+anchor_left = 1.0
+anchor_right = 1.641
+anchor_bottom = 0.21900001
+offset_left = -552.0
+offset_top = 177.0
+offset_right = -552.048
+offset_bottom = 185.984
+text = "100"
+
+[node name="Orc2" type="Node" parent="Team 1" unique_id=1441869972 node_paths=PackedStringArray("Sprite2D", "nameLabel", "classLabel", "hpLabel")]
+script = ExtResource("2_b8jug")
+FirstName = "Marquitos"
+CharacterClass = ExtResource("4_i8h54")
+Sprite2D = NodePath("Sprite2D")
+nameLabel = NodePath("Nombre")
+classLabel = NodePath("Clase")
+hpLabel = NodePath("HP")
+
+[node name="Sprite2D" type="Sprite2D" parent="Team 1/Orc2" unique_id=1363623075]
+position = Vector2(816, 227)
+texture = ExtResource("1_i8h54")
+
+[node name="Nombre" type="RichTextLabel" parent="Team 1/Orc2" unique_id=689228901]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 218.0
+offset_top = 137.0
+offset_right = 418.0
+offset_bottom = 160.0
+grow_horizontal = 2
+text = "Pedro"
+fit_content = true
+
+[node name="Clase" type="RichTextLabel" parent="Team 1/Orc2" unique_id=1823565588]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 220.0
+offset_top = 166.0
+offset_right = 420.0
+offset_bottom = 189.0
+grow_horizontal = 2
+text = "Pibe"
+fit_content = true
+
+[node name="HP" type="RichTextLabel" parent="Team 1/Orc2" unique_id=779290465]
+anchors_preset = -1
+anchor_left = 1.0
+anchor_right = 1.641
+anchor_bottom = 0.21900001
+offset_left = -267.0
+offset_top = 229.0
+offset_right = -267.04797
+offset_bottom = 237.984
+text = "100"
