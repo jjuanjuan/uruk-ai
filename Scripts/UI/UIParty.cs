@@ -4,11 +4,12 @@ public partial class UIParty : Control
 {
     [Export] public PackedScene SlotScene;
     [Export] public CharacterParty Party;
-    [Export] GridContainer grid;
+    [Export] public Control BoardRoot;
 
     public override void _Ready()
     {
         BuildGrid();
+        CallDeferred(nameof(LayoutSlots));
         Refresh();
     }
 
@@ -25,24 +26,50 @@ public partial class UIParty : Control
                 slot.Party = Party;
                 slot.UIParty = this;
 
-                grid.AddChild(slot);
+                BoardRoot.AddChild(slot);
             }
         }
     }
 
     public void Refresh()
     {
-        int i = 0;
-
-        foreach (PartySlot slot in grid.GetChildren())
+        foreach (PartySlot slot in BoardRoot.GetChildren())
         {
-            int r = slot.Row;
-            int c = slot.Column;
-
-            var orc = Party.GetOrc(r, c);
+            var orc = Party.GetOrc(slot.Row, slot.Column);
             slot.SetOrc(orc);
-
-            i++;
         }
+    }
+
+    public void LayoutSlots()
+    {
+        float width = BoardRoot.Size.X;
+        float height = BoardRoot.Size.Y;
+
+        float cellW = width / CharacterParty.COLUMNS;
+        float cellH = height / CharacterParty.ROWS;
+
+        foreach (PartySlot slot in BoardRoot.GetChildren())
+        {
+            slot.Position = new Vector2(
+                slot.Column * cellW,
+                slot.Row * cellH
+            );
+
+            slot.CustomMinimumSize = new Vector2(cellW, cellH);
+            slot.Size = new Vector2(cellW, cellH);
+        }
+    }
+
+    public Vector2 GetVisualPosition(int row, int col)
+    {
+        float width = BoardRoot.Size.X;
+        float height = BoardRoot.Size.Y;
+
+        float[] xMap = { 0.00f, 0.22f, 0.48f, 0.74f, 1.00f };
+
+        float x = xMap[col] * width;
+        float y = row * (height / CharacterParty.ROWS);
+
+        return new Vector2(x, y);
     }
 }

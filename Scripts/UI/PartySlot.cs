@@ -6,9 +6,9 @@ public partial class PartySlot : PanelContainer
     [Export] public int Column;
 
     [Export]
-    TextureRect icon;
+    TextureRect CharImg;
     [Export]
-    RichTextLabel label;
+    RichTextLabel CharName;
 
     public Orc Orc;
     public CharacterParty Party;
@@ -25,18 +25,22 @@ public partial class PartySlot : PanelContainer
         BuildStyles();
         ApplyNormal();
         UpdateVisual();
+
+        UIParty?.LayoutSlots();
     }
 
     public void UpdateVisual()
     {
         if (Orc == null)
         {
-            label.Visible = false;
+            CharImg.Visible = false;
+            CharName.Visible = false;
         }
         else
         {
-            label.Visible = true;
-            label.Text = Orc.GetFirstName();
+            CharImg.Visible = true;
+            CharName.Text = Orc.GetFirstName();
+            CharName.Visible = true;
         }
     }
 
@@ -82,14 +86,14 @@ public partial class PartySlot : PanelContainer
 
         if (orc == null)
         {
-            icon.Texture = null;
-            label.Text = "";
+            CharImg.Texture = null;
+            CharName.Text = "";
             UpdateVisual();
             return;
         }
 
-        icon.Texture = orc.GetCharacterClass().GetFrontTexture();
-        label.Text = orc.GetFirstName();
+        CharImg.Texture = orc.GetCharacterClass().GetFrontTexture();
+        CharName.Text = orc.GetFirstName();
         UpdateVisual();
     }
 
@@ -113,7 +117,7 @@ public partial class PartySlot : PanelContainer
         // preview
         var preview = new TextureRect
         {
-            Texture = icon.Texture,
+            Texture = CharImg.Texture,
             CustomMinimumSize = new Vector2(48, 48)
         };
 
@@ -224,5 +228,11 @@ public partial class PartySlot : PanelContainer
 
         if (valid) ApplyValid();
         else ApplyInvalid();
+    }
+
+    public void UpdateLayout()
+    {
+        Vector2 pos = UIParty.GetVisualPosition(Row, Column);
+        Position = pos;
     }
 }

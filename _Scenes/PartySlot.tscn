@@ -4,18 +4,17 @@
 [ext_resource type="Texture2D" uid="uid://3geatbyu0jce" path="res://Art/Placeholders/2_knight_front.png" id="2_8yise"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8yise"]
-bg_color = Color(0, 0, 0, 0.25)
+bg_color = Color(0, 0, 0, 0.5)
 
-[node name="PartySlot" type="PanelContainer" unique_id=32862197 node_paths=PackedStringArray("icon", "label")]
-custom_minimum_size = Vector2(100, 100)
+[node name="PartySlot" type="PanelContainer" unique_id=32862197 node_paths=PackedStringArray("CharImg", "CharName")]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_54qfb")
-icon = NodePath("MarginContainer/AspectRatioContainer/Control/CharImg")
-label = NodePath("MarginContainer/AspectRatioContainer/Control/CharName")
+CharImg = NodePath("MarginContainer/AspectRatioContainer/Control/CharImg")
+CharName = NodePath("MarginContainer/AspectRatioContainer/Control/CharName")
 
 [node name="MarginContainer" type="MarginContainer" parent="." unique_id=1598539679]
 layout_mode = 2
@@ -47,13 +46,18 @@ stretch_mode = 6
 
 [node name="CharName" type="RichTextLabel" parent="MarginContainer/AspectRatioContainer/Control" unique_id=843140937]
 layout_mode = 1
-anchors_preset = 10
+anchors_preset = 12
+anchor_top = 1.0
 anchor_right = 1.0
-offset_bottom = 17.0
+anchor_bottom = 1.0
+offset_top = -14.0
 grow_horizontal = 2
+grow_vertical = 0
 mouse_filter = 2
-theme_override_font_sizes/normal_font_size = 12
+theme_override_font_sizes/normal_font_size = 10
 theme_override_styles/normal = SubResource("StyleBoxFlat_8yise")
 text = "Boris"
 fit_content = true
+scroll_active = false
+horizontal_alignment = 1
 vertical_alignment = 2
