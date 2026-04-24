@@ -65,7 +65,7 @@ public partial class UIParty : Control
         float width = BoardRoot.Size.X;
         float height = BoardRoot.Size.Y;
 
-        float[] xMap = { 0.00f, 0.22f, 0.48f, 0.74f, 1.00f };
+        float[] xMap = [0.00f, 0.25f, 0.5f, 0.75f, 1.00f];
 
         float x = xMap[col] * width;
         float y = row * (height / CharacterParty.ROWS);

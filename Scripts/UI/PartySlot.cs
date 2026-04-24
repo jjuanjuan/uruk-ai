@@ -49,29 +49,18 @@ public partial class PartySlot : PanelContainer
         normalStyle = new StyleBoxFlat
         {
             BgColor = new Color(0f, 0f, 0f, .1f),
-            BorderColor = new Color(0.4f, 0.4f, 0.4f)
         };
 
         // válido (verde leve)
         highlightValid = new StyleBoxFlat
         {
             BgColor = normalStyle.BgColor.Lerp(new Color(0.2f, 0.6f, 0.2f), 0.5f),
-            BorderWidthBottom = normalStyle.BorderWidthBottom + 1,
-            BorderWidthLeft = normalStyle.BorderWidthLeft + 1,
-            BorderWidthRight = normalStyle.BorderWidthRight + 1,
-            BorderWidthTop = normalStyle.BorderWidthTop + 1,
-            BorderColor = new Color(0.3f, 0.9f, 0.3f)
         };
 
         // inválido (rojo leve)
         highlightInvalid = new StyleBoxFlat
         {
             BgColor = normalStyle.BgColor.Lerp(new Color(0.6f, 0.2f, 0.2f), 0.5f),
-            BorderWidthBottom = normalStyle.BorderWidthBottom + 1,
-            BorderWidthLeft = normalStyle.BorderWidthLeft + 1,
-            BorderWidthRight = normalStyle.BorderWidthRight + 1,
-            BorderWidthTop = normalStyle.BorderWidthTop + 1,
-            BorderColor = new Color(0.9f, 0.3f, 0.3f)
         };
     }
 
@@ -118,6 +107,7 @@ public partial class PartySlot : PanelContainer
         var preview = new TextureRect
         {
             Texture = CharImg.Texture,
+            Size = new Vector2(48, 48),
             CustomMinimumSize = new Vector2(48, 48)
         };
 
@@ -135,23 +125,22 @@ public partial class PartySlot : PanelContainer
         }
 
         var dict = (Godot.Collections.Dictionary)data;
-        var orc = dict["orc"].As<Orc>();
         string source = dict["source"].AsString();
+        var orc = dict["orc"].As<Orc>();
 
-        bool valid = false;
+        bool valid = true;
 
-        if (source == "pool")
+        // válido si la celda está vacía y no tiene adyacentes en Column
+        int start = Mathf.Max(0, Column - 1);
+        int end = Mathf.Min(4, Column + 1);
+
+        for (int c = start; c <= end; c++)
         {
-            // válido si la celda está vacía
-            valid = Party.GetOrc(Row, Column) == null;
-        }
-        else if (source == "party")
-        {
-            // válido si es swap o mover a vacío
-            int fromRow = (int)dict["from_row"];
-            int fromCol = (int)dict["from_col"];
-
-            valid = !(fromRow == Row && fromCol == Column);
+            if (Party.GetOrc(Row, c) != null && Party.GetOrc(Row, c) != orc)
+            {
+                valid = false;
+                break;
+            }
         }
 
         if (valid) ApplyValid();
@@ -208,22 +197,20 @@ public partial class PartySlot : PanelContainer
             return;
 
         var dict = DragState.Data;
-
         var orc = dict["orc"].As<Orc>();
-        string source = dict["source"].AsString();
+        bool valid = true;
 
-        bool valid = false;
+        // válido si la celda está vacía y no tiene adyacentes en Column
+        int start = Mathf.Max(0, Column - 1);
+        int end = Mathf.Min(4, Column + 1);
 
-        if (source == "pool")
+        for (int c = start; c <= end; c++)
         {
-            valid = Party.GetOrc(Row, Column) == null;
-        }
-        else if (source == "party")
-        {
-            int fromRow = (int)dict["from_row"];
-            int fromCol = (int)dict["from_col"];
-
-            valid = !(fromRow == Row && fromCol == Column);
+            if (Party.GetOrc(Row, c) != null && Party.GetOrc(Row, c) != orc)
+            {
+                valid = false;
+                break;
+            }
         }
 
         if (valid) ApplyValid();
