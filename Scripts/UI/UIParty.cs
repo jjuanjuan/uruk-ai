@@ -4,13 +4,10 @@ public partial class UIParty : Control
 {
     [Export] public PackedScene SlotScene;
     [Export] public CharacterParty Party;
-
-    GridContainer grid;
+    [Export] GridContainer grid;
 
     public override void _Ready()
     {
-        grid = GetNode<GridContainer>("Grid");
-
         BuildGrid();
         Refresh();
     }
@@ -26,6 +23,7 @@ public partial class UIParty : Control
                 slot.Row = r;
                 slot.Column = c;
                 slot.Party = Party;
+                slot.UIParty = this;
 
                 grid.AddChild(slot);
             }

@@ -11,6 +11,9 @@ public partial class CharacterParty : Node
 
     [Export] public int MaxUnits = 6;
 
+    [Signal]
+    public delegate void PartyChangedEventHandler();
+
     public int CurrentUnits
     {
         get
@@ -34,6 +37,7 @@ public partial class CharacterParty : Node
             return false;
 
         grid[row, column] = orc;
+        EmitSignal(SignalName.PartyChanged);
         return true;
     }
 
@@ -46,15 +50,18 @@ public partial class CharacterParty : Node
         grid[r2, c2] = grid[r1, c1];
         grid[r1, c1] = temp;
 
+        EmitSignal(SignalName.PartyChanged);
         return true;
     }
-    
+
     public void RemoveOrc(int row, int column)
     {
         if (!IsValidPosition(row, column))
             return;
 
         grid[row, column] = null;
+
+        EmitSignal(SignalName.PartyChanged);
     }
 
     public Orc GetOrc(int row, int column)

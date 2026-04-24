@@ -17,6 +17,7 @@ public partial class PoolItem : PanelContainer
         label.Text = orc.GetFirstName();
     }
 
+    // DRAG START
     public override Variant _GetDragData(Vector2 atPosition)
     {
         if (Orc == null)
@@ -27,6 +28,9 @@ public partial class PoolItem : PanelContainer
             { "orc", Orc },
             { "source", "pool" }
         };
+
+        DragState.IsDragging = true;
+        DragState.Data = data;
 
         var preview = new TextureRect
         {

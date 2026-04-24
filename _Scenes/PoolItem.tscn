@@ -1,24 +1,59 @@
 [gd_scene format=3 uid="uid://jh1ftys40xae"]
 
 [ext_resource type="Script" uid="uid://bp5ip3qv54ejt" path="res://Scripts/UI/PoolItem.cs" id="1_vi3u1"]
+[ext_resource type="Texture2D" uid="uid://3geatbyu0jce" path="res://Art/Placeholders/2_knight_front.png" id="2_685wl"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1ywp0"]
+bg_color = Color(0, 0, 0, 0.25)
 
 [node name="PoolItem" type="PanelContainer" unique_id=1735390392 node_paths=PackedStringArray("icon", "label")]
-custom_minimum_size = Vector2(80, 80)
+custom_minimum_size = Vector2(100, 100)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 script = ExtResource("1_vi3u1")
-icon = NodePath("HBoxContainer/CharImg")
-label = NodePath("HBoxContainer/CharName")
+icon = NodePath("MarginContainer/AspectRatioContainer/Control/CharImg")
+label = NodePath("MarginContainer/AspectRatioContainer/Control/CharName")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=1026898872]
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=861780736]
 layout_mode = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
 
-[node name="CharImg" type="TextureRect" parent="HBoxContainer" unique_id=903198085]
+[node name="AspectRatioContainer" type="AspectRatioContainer" parent="MarginContainer" unique_id=1006742606]
 layout_mode = 2
-size_flags_horizontal = 3
+mouse_filter = 2
 
-[node name="CharName" type="RichTextLabel" parent="HBoxContainer" unique_id=1301385720]
+[node name="Control" type="Control" parent="MarginContainer/AspectRatioContainer" unique_id=776742615]
 layout_mode = 2
-size_flags_horizontal = 3
+mouse_filter = 2
+
+[node name="CharImg" type="TextureRect" parent="MarginContainer/AspectRatioContainer/Control" unique_id=328199878]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 size_flags_vertical = 3
+mouse_filter = 2
+texture = ExtResource("2_685wl")
+stretch_mode = 6
+
+[node name="CharName" type="RichTextLabel" parent="MarginContainer/AspectRatioContainer/Control" unique_id=452970716]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 17.0
+grow_horizontal = 2
+mouse_filter = 2
 theme_override_font_sizes/normal_font_size = 12
+theme_override_styles/normal = SubResource("StyleBoxFlat_1ywp0")
 text = "Boris"
+fit_content = true
 vertical_alignment = 2
