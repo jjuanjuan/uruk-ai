@@ -24,11 +24,13 @@ public partial class Orc : Node
 	bool alive => CurrentHP > 0;
 	public int CurrentHP { get => CharacterClass.GetBaseHP() - damage; }
 	public bool IsAlive { get => alive; }
+	public PartyPosition Position;
 
 	public override void _Ready()
 	{
 		nameLabel.Text = FirstName;
 		UpdateClass();
+		AddToGroup("orcs");
 	}
 
 	public override void _Process(double delta)
@@ -105,5 +107,6 @@ public partial class Orc : Node
 		}
 	}
 
+	public string GetFirstName() { return FirstName; }
 	public CharacterClass GetCharacterClass() { return CharacterClass; }
 }

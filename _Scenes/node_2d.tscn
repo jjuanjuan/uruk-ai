@@ -8,6 +8,11 @@
 [ext_resource type="Script" uid="uid://qae3crcpu528" path="res://Scripts/UI/UIMain.cs" id="5_xtiqn"]
 [ext_resource type="Resource" uid="uid://dsywmpxgobhst" path="res://Data/CharacterClasses/1_Bludgeoner.tres" id="6_jxfli"]
 [ext_resource type="PackedScene" uid="uid://c5ug66lr4e0cx" path="res://_Scenes/ClassTree.tscn" id="6_nnxkq"]
+[ext_resource type="Script" uid="uid://bkti6f1dxgf7i" path="res://Scripts/UI/UIParty.cs" id="9_q6n8c"]
+[ext_resource type="PackedScene" uid="uid://dn0of61i2vxkg" path="res://_Scenes/PartySlot.tscn" id="10_31cma"]
+[ext_resource type="Script" uid="uid://dex1blf0jm6sh" path="res://Scripts/CharacterParty.cs" id="11_31cma"]
+[ext_resource type="Script" uid="uid://jw62aqdff52j" path="res://Scripts/UI/UIOrcPool.cs" id="11_g5s02"]
+[ext_resource type="PackedScene" uid="uid://jh1ftys40xae" path="res://_Scenes/PoolItem.tscn" id="12_70ebp"]
 
 [sub_resource type="Resource" id="Resource_q6n8c"]
 script = ExtResource("5_hgf3e")
@@ -122,14 +127,15 @@ offset_right = -267.04797
 offset_bottom = 237.984
 text = "100"
 
-[node name="UI Main" type="Control" parent="." unique_id=219697555 node_paths=PackedStringArray("Orc")]
+[node name="UI Main" type="Control" parent="." unique_id=219697555 node_paths=PackedStringArray("OrcForTree", "PoolUI")]
 layout_mode = 3
 anchors_preset = 0
 offset_right = 1030.0
 offset_bottom = 647.0
 script = ExtResource("5_xtiqn")
 ClassTreeScene = ExtResource("6_nnxkq")
-Orc = NodePath("../Team 1/Orc2")
+OrcForTree = NodePath("../Team 1/Orc2")
+PoolUI = NodePath("UI Orc Pool")
 
 [node name="OpenClassTreeButton" type="Button" parent="UI Main" unique_id=675934931]
 layout_mode = 0
@@ -138,3 +144,33 @@ offset_top = 355.0
 offset_right = 745.0
 offset_bottom = 425.0
 text = "Open class tree"
+
+[node name="UI Party" type="Control" parent="UI Main" unique_id=1486031699 node_paths=PackedStringArray("Party")]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("9_q6n8c")
+SlotScene = ExtResource("10_31cma")
+Party = NodePath("../../CharacterParty")
+
+[node name="Grid" type="GridContainer" parent="UI Main/UI Party" unique_id=1570512231]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+columns = 5
+
+[node name="UI Orc Pool" type="Control" parent="UI Main" unique_id=1290300285 node_paths=PackedStringArray("list")]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("11_g5s02")
+PoolItemScene = ExtResource("12_70ebp")
+list = NodePath("VBoxContainer")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI Main/UI Orc Pool" unique_id=1864118992]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="CharacterParty" type="Node" parent="." unique_id=1465183896]
+script = ExtResource("11_31cma")

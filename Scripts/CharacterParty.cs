@@ -37,23 +37,18 @@ public partial class CharacterParty : Node
         return true;
     }
 
-    public bool MoveOrc(int fromRow, int fromCol, int toRow, int toCol)
+    public bool SwapOrc(int r1, int c1, int r2, int c2)
     {
-        if (!IsValidPosition(toRow, toCol))
+        if (!IsValidPosition(r1, c1) || !IsValidPosition(r2, c2))
             return false;
 
-        if (grid[fromRow, fromCol] == null)
-            return false;
-
-        if (grid[toRow, toCol] != null)
-            return false;
-
-        grid[toRow, toCol] = grid[fromRow, fromCol];
-        grid[fromRow, fromCol] = null;
+        var temp = grid[r2, c2];
+        grid[r2, c2] = grid[r1, c1];
+        grid[r1, c1] = temp;
 
         return true;
     }
-
+    
     public void RemoveOrc(int row, int column)
     {
         if (!IsValidPosition(row, column))

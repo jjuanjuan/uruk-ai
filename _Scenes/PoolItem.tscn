@@ -1,0 +1,24 @@
+[gd_scene format=3 uid="uid://jh1ftys40xae"]
+
+[ext_resource type="Script" uid="uid://bp5ip3qv54ejt" path="res://Scripts/UI/PoolItem.cs" id="1_vi3u1"]
+
+[node name="PoolItem" type="PanelContainer" unique_id=1735390392 node_paths=PackedStringArray("icon", "label")]
+custom_minimum_size = Vector2(80, 80)
+script = ExtResource("1_vi3u1")
+icon = NodePath("HBoxContainer/CharImg")
+label = NodePath("HBoxContainer/CharName")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=1026898872]
+layout_mode = 2
+
+[node name="CharImg" type="TextureRect" parent="HBoxContainer" unique_id=903198085]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="CharName" type="RichTextLabel" parent="HBoxContainer" unique_id=1301385720]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_font_sizes/normal_font_size = 12
+text = "Boris"
+vertical_alignment = 2

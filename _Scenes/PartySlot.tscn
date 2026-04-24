@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://dn0of61i2vxkg"]
+
+[ext_resource type="Script" uid="uid://5781d3mwk2dl" path="res://Scripts/UI/PartySlot.cs" id="1_54qfb"]
+
+[node name="PartySlot" type="PanelContainer" unique_id=32862197 node_paths=PackedStringArray("icon", "label")]
+custom_minimum_size = Vector2(80, 80)
+script = ExtResource("1_54qfb")
+icon = NodePath("VBoxContainer/CharImg")
+label = NodePath("VBoxContainer/CharName")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1764655449]
+layout_mode = 2
+
+[node name="CharImg" type="TextureRect" parent="VBoxContainer" unique_id=34993198]
+layout_mode = 2
+stretch_mode = 5
+
+[node name="CharName" type="RichTextLabel" parent="VBoxContainer" unique_id=843140937]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/normal_font_size = 12
+text = "Boris"
+vertical_alignment = 2
