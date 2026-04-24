@@ -41,5 +41,6 @@ ClassTextureFront = ExtResource("5_pmgdi")
 ClassTextureBack = ExtResource("4_sjlno")
 AttacksPerPosition = Array[Object]([SubResource("Resource_ncstq"), SubResource("Resource_fpcew"), SubResource("Resource_hqaj3")])
 BaseAttackDamage = 15
+BaseSpeed = 2
 Requirements = Array[Object]([SubResource("Resource_hs6x5")])
 metadata/_custom_type_script = "uid://1pbhreu2codn"

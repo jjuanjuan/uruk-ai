@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="AttackAction" format=3 uid="uid://b6qbtcv87hfo7"]
+
+[ext_resource type="Script" uid="uid://8p18r81fnngn" path="res://Scripts/AttackAction.cs" id="1_iad48"]
+
+[resource]
+script = ExtResource("1_iad48")
+BaseDamageMultiplier = 0.75
+AttackType = 0
+Target = 5
+metadata/_custom_type_script = "uid://8p18r81fnngn"

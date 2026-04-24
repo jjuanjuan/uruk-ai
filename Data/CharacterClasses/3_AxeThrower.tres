@@ -1,10 +1,10 @@
 [gd_resource type="Resource" script_class="CharacterClass" format=3 uid="uid://cg4wg58pgbr6l"]
 
-[ext_resource type="Resource" uid="uid://12oxed00qf40" path="res://Data/AttackActions/Whip Column.tres" id="1_redvm"]
+[ext_resource type="Resource" uid="uid://nwnecenxibir" path="res://Data/AttackActions/Basic Slash.tres" id="1_redvm"]
 [ext_resource type="Script" uid="uid://du724smqstcfc" path="res://Scripts/AttackPerPosition.cs" id="2_282le"]
-[ext_resource type="Resource" uid="uid://d0vr5cfpj2204" path="res://Data/AttackActions/Whip Strike.tres" id="3_wjhir"]
+[ext_resource type="Resource" uid="uid://qwogd66tp0tt" path="res://Data/AttackActions/Axe Throw.tres" id="3_282le"]
 [ext_resource type="Texture2D" uid="uid://de5j0u588upr7" path="res://Art/Placeholders/0_militia_back.png" id="4_hoord"]
-[ext_resource type="Texture2D" uid="uid://cws3fd2g1sjue" path="res://Art/Placeholders/2_chicoteador_front.png" id="5_2lbbq"]
+[ext_resource type="Texture2D" uid="uid://b60b2c527tf7m" path="res://Art/Placeholders/3_axethrower_front.png" id="5_wjhir"]
 [ext_resource type="Resource" uid="uid://bn71ukjld3gxd" path="res://Data/CharacterClasses/2_Javelin.tres" id="6_redvm"]
 [ext_resource type="Script" uid="uid://bmylglyshe6wd" path="res://Scripts/ClassRequirements.cs" id="7_xhdix"]
 [ext_resource type="Script" uid="uid://1pbhreu2codn" path="res://Scripts/CharacterClass.cs" id="8_6b5yi"]
@@ -17,13 +17,13 @@ metadata/_custom_type_script = "uid://du724smqstcfc"
 
 [sub_resource type="Resource" id="Resource_fpcew"]
 script = ExtResource("2_282le")
-AttackAction = ExtResource("3_wjhir")
+AttackAction = ExtResource("3_282le")
 Amount = 3
 metadata/_custom_type_script = "uid://du724smqstcfc"
 
 [sub_resource type="Resource" id="Resource_hqaj3"]
 script = ExtResource("2_282le")
-AttackAction = ExtResource("3_wjhir")
+AttackAction = ExtResource("3_282le")
 Amount = 2
 metadata/_custom_type_script = "uid://du724smqstcfc"
 
@@ -37,9 +37,11 @@ metadata/_custom_type_script = "uid://bmylglyshe6wd"
 script = ExtResource("8_6b5yi")
 ClassName = "Axe Thrower"
 BaseHP = 180
-ClassTextureFront = ExtResource("5_2lbbq")
+ClassTextureFront = ExtResource("5_wjhir")
 ClassTextureBack = ExtResource("4_hoord")
 AttacksPerPosition = Array[Object]([SubResource("Resource_ncstq"), SubResource("Resource_fpcew"), SubResource("Resource_hqaj3")])
-BaseAttackDamage = 15
+BaseAttackDamage = 20
+BaseSpeed = 2
+ArmorType = 1
 Requirements = Array[Object]([SubResource("Resource_hs6x5")])
 metadata/_custom_type_script = "uid://1pbhreu2codn"

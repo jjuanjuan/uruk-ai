@@ -17,6 +17,9 @@ public partial class CharacterClass : Resource
 	[Export]
 	int BaseSpeed = 1;
 	[Export]
+	CombatConfig.ArmorType ArmorType;
+
+	[Export]
 	Godot.Collections.Array<ClassRequirements> Requirements;
 	[Export] int XPToNextLevel = 100;
 
@@ -27,6 +30,7 @@ public partial class CharacterClass : Resource
 	public AttackPerPosition GetAttackPerPosition(int Row) { return AttacksPerPosition[Row]; }
 	public int GetBaseAttackDamage() { return BaseAttackDamage; }
 	public int GetBaseSpeed() { return BaseSpeed; }
+	public CombatConfig.ArmorType GetArmorType() { return ArmorType; }
 	public Godot.Collections.Array<ClassRequirements> GetRequirements() { return Requirements; }
 	public int GetXPToNextLevel() { return XPToNextLevel; }
 }
