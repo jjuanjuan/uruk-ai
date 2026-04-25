@@ -13,6 +13,9 @@ public partial class GameManager : Node
     public Godot.Collections.Array<OrcInstance> AllOrcs = new();
 
     [Signal] public delegate void PartiesChangedEventHandler();
+    [Signal] public delegate void SelectedOrcChangedEventHandler(OrcInstance orc);
+
+    public OrcInstance SelectedOrc { get; private set; }
 
     // SINGLETON
     public static GameManager I { get; private set; }
@@ -66,6 +69,17 @@ public partial class GameManager : Node
     public int NextInt(int min, int max)
     {
         return rng.RandiRange(min, max);
+    }
+
+    public void SelectOrc(OrcInstance orc)
+    {
+        SelectedOrc = orc;
+        EmitSignal(SignalName.SelectedOrcChanged, orc);
+    }
+    public void ClearSelection()
+    {
+        SelectedOrc = null;
+        EmitSignal(SignalName.SelectedOrcChanged, (OrcInstance)null);
     }
 
     public OrcInstance GenerateOrc()

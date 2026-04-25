@@ -4,8 +4,8 @@ using System.Collections.Generic;
 public partial class UIClassTree : Control
 {
     [Export] public PackedScene ClassNodeScene;
+
     Godot.Collections.Array<CharacterClass> AllClasses = new();
-    [Export] public OrcInstance Orc;
 
     Control nodesLayer;
     Dictionary<CharacterClass, int> classDepth = new();
@@ -16,12 +16,23 @@ public partial class UIClassTree : Control
 
     public override void _Ready()
     {
+        if (GameManager.I.SelectedOrc == null)
+        {
+            CloseTree();
+            return;
+        }
         nodesLayer = GetNode<Control>("NodesParent");
         GetNode<Button>("CloseButton").Pressed += CloseTree;
         LoadAllClasses();
         Build();
+        GameManager.I.SelectedOrcChanged += OnOrcSelected;
     }
-
+    
+    public override void _ExitTree()
+    {
+        if (GameManager.I != null)
+            GameManager.I.SelectedOrcChanged -= OnOrcSelected;
+    }
     void CloseTree()
     {
         QueueFree(); // destruye la UI
@@ -44,7 +55,7 @@ public partial class UIClassTree : Control
                 var cc = list[i];
 
                 var node = ClassNodeScene.Instantiate<UIClassNode>();
-                node.Setup(cc, Orc);
+                node.Setup(cc, GameManager.I.SelectedOrc);
 
                 node.Position = new Vector2(
                     column * X_SPACING,
@@ -168,5 +179,11 @@ public partial class UIClassTree : Control
         }
     }
 
+    void OnOrcSelected(OrcInstance orc)
+    {
+        if (orc == null)
+            return;
 
+        Build(); // refresh?
+    }
 }

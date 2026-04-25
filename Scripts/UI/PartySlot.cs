@@ -18,6 +18,7 @@ public partial class PartySlot : PanelContainer
     StyleBoxFlat normalStyle;
     StyleBoxFlat highlightValid;
     StyleBoxFlat highlightInvalid;
+    StyleBoxFlat selectedStyle;
     int BorderWidthAll;
 
     public override void _Ready()
@@ -27,6 +28,14 @@ public partial class PartySlot : PanelContainer
         UpdateVisual();
 
         UIParty?.LayoutSlots();
+
+        GameManager.I.SelectedOrcChanged += OnSelectedChanged;
+    }
+
+    public override void _ExitTree()
+    {
+        if (GameManager.I != null)
+            GameManager.I.SelectedOrcChanged -= OnSelectedChanged;
     }
 
     public void UpdateVisual()
@@ -62,6 +71,17 @@ public partial class PartySlot : PanelContainer
         {
             BgColor = normalStyle.BgColor.Lerp(new Color(0.6f, 0.2f, 0.2f), 0.5f),
         };
+
+        // seleccionado
+        selectedStyle = new StyleBoxFlat
+        {
+            BgColor = new Color(0.2f, 0.6f, 1f, 0.25f),
+            BorderColor = new Color(0.2f, 0.6f, 1f),
+            BorderWidthTop = 2,
+            BorderWidthBottom = 2,
+            BorderWidthLeft = 2,
+            BorderWidthRight = 2
+        };
     }
 
     void ApplyNormal() => AddThemeStyleboxOverride("panel", normalStyle);
@@ -77,6 +97,8 @@ public partial class PartySlot : PanelContainer
         {
             CharImg.Visible = false;
             CharName.Visible = false;
+            UpdateVisual();
+            ApplyNormal();
             return;
         }
 
@@ -85,8 +107,15 @@ public partial class PartySlot : PanelContainer
 
         CharImg.Visible = true;
         CharName.Visible = true;
+
+        UpdateVisual();
+
+        if (GameManager.I.SelectedOrc == orc)
+            AddThemeStyleboxOverride("panel", selectedStyle);
+        else
+            ApplyNormal();
     }
-    
+
     // DRAG START
     public override Variant _GetDragData(Vector2 atPosition)
     {
@@ -219,6 +248,10 @@ public partial class PartySlot : PanelContainer
 
     public override void _Process(double delta)
     {
+        // no sobreescribir el highlight de selected
+        if (GameManager.I.SelectedOrc == Orc)
+            return;
+
         if (!DragState.IsDragging || DragState.Data == null)
         {
             ApplyNormal();
@@ -277,5 +310,26 @@ public partial class PartySlot : PanelContainer
     {
         Vector2 pos = UIParty.GetVisualPosition(Row, Column);
         Position = pos;
+    }
+
+    // Select orc
+    public override void _GuiInput(InputEvent @event)
+    {
+        if (Orc == null)
+            return;
+
+        if (@event is InputEventMouseButton mb &&
+            mb.Pressed &&
+            mb.ButtonIndex == MouseButton.Left)
+        {
+            GameManager.I.SelectOrc(Orc);
+        }
+    }
+    void OnSelectedChanged(OrcInstance selected)
+    {
+        if (Orc != null && selected == Orc)
+            AddThemeStyleboxOverride("panel", selectedStyle);
+        else
+            ApplyNormal();
     }
 }

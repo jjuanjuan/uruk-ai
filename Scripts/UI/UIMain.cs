@@ -4,7 +4,6 @@ public partial class UIMain : Control
 {
     [Export] public PackedScene CombatScene;
     [Export] public PackedScene ClassTreeScene;
-    [Export] public OrcInstance OrcForTree;
     [Export] public UIOrcPool PoolUI;
 
     CharacterParty PlayerParty => GameManager.I.Team1;
@@ -34,7 +33,6 @@ public partial class UIMain : Control
 
         var tree = ClassTreeScene.Instantiate<UIClassTree>();
         tree.Name = "UIClassTree";
-        tree.Orc = OrcForTree;
 
         AddChild(tree);
     }
