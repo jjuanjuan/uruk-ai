@@ -8,6 +8,11 @@ public partial class UIParty : Control
     [Export] public Control BoardRoot;
     [Export] public Node2D UnitsRoot;
 
+    public override void _Ready()
+    {
+        GD.Print($"UIParty using Party ID: {Party?.GetInstanceId()}");
+    }
+
     public void Setup(CharacterParty party)
     {
         Party = party;
@@ -51,41 +56,24 @@ public partial class UIParty : Control
 
     public void Refresh()
     {
-        if (Party == null || UnitsRoot == null)
+        if (Party == null || UnitsRoot == null || BoardRoot == null)
             return;
 
         foreach (var orc in Party.GetAllOrcs())
         {
-            if (orc == null)
-                continue;
+            if (orc == null) continue;
 
-            if (!orc.IsInsideTree())
-            {
-                UnitsRoot.AddChild(orc);
-            }
+            // esto reemplaza TODO el manejo manual
+            orc.Reparent(UnitsRoot);
 
-            if (!IsInstanceValid(orc))
-                continue;
-
-            if (orc.GetParent() != UnitsRoot)
-            {
-                if (orc.GetParent() != null)
-                {
-                    orc.GetParent().RemoveChild(orc);
-                }
-
-                UnitsRoot.AddChild(orc);
-            }
-
-            orc.Visible = true;
-            orc.ZIndex = 100;
-
-            orc.Position = GetVisualPosition(
+            var uiPos = GetVisualPosition(
                 orc.PartyPosition.Row,
                 orc.PartyPosition.Column
             );
 
-            GD.Print($"{orc.GetFirstName()} parent: {orc.GetParent()} insideTree: {orc.IsInsideTree()}");
+            var global = BoardRoot.GetGlobalTransform().Origin + uiPos;
+
+            orc.GlobalPosition = global;
         }
     }
 

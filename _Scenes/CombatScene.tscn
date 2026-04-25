@@ -66,8 +66,8 @@ offset_bottom = 280.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_i5gep")
 script = ExtResource("1_dk7xb")
 SlotScene = ExtResource("2_qyew6")
-BoardRoot = NodePath("MarginContainer/Board")
-UnitsRoot = NodePath("")
+BoardRoot = NodePath("BoardContainer/Board")
+UnitsRoot = NodePath("UnitsBoard")
 
 [node name="RichTextLabel" type="RichTextLabel" parent="Party 1/UI Team 1" unique_id=1962562087]
 layout_mode = 1
@@ -77,88 +77,54 @@ offset_bottom = 9.0
 theme_override_font_sizes/normal_font_size = 12
 text = "Team 1"
 
-[node name="MarginContainer" type="MarginContainer" parent="Party 1/UI Team 1" unique_id=1034666343]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-theme_override_constants/margin_left = 30
-theme_override_constants/margin_top = 10
-theme_override_constants/margin_right = 30
-theme_override_constants/margin_bottom = 10
+[node name="BoardContainer" type="Control" parent="Party 1/UI Team 1" unique_id=110947695]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
 
-[node name="Board" type="Control" parent="Party 1/UI Team 1/MarginContainer" unique_id=799307257]
-layout_mode = 2
+[node name="Board" type="Control" parent="Party 1/UI Team 1/BoardContainer" unique_id=799307257]
+anchors_preset = 0
+offset_left = 30.0
+offset_top = 10.0
+offset_right = 226.0
+offset_bottom = 246.0
 mouse_filter = 2
 
-[node name="MarginContainer2" type="MarginContainer" parent="Party 1/UI Team 1" unique_id=961159833]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-theme_override_constants/margin_left = 30
-theme_override_constants/margin_top = 10
-theme_override_constants/margin_right = 30
-theme_override_constants/margin_bottom = 10
-
-[node name="UnitsBoard" type="Node2D" parent="Party 1/UI Team 1/MarginContainer2" unique_id=702834802]
+[node name="UnitsBoard" type="Node2D" parent="Party 1/UI Team 1" unique_id=702834802]
 
 [node name="Party 2" type="Node" parent="." unique_id=892035149]
 script = ExtResource("3_3g8y2")
 
-[node name="UI Team 2" type="Panel" parent="Party 2" unique_id=2091300972 node_paths=PackedStringArray("BoardRoot", "UnitsRoot")]
-offset_left = 440.0
+[node name="UI Team 2" type="Panel" parent="Party 2" unique_id=142432499 node_paths=PackedStringArray("BoardRoot", "UnitsRoot")]
+offset_left = 424.0
 offset_top = 24.0
-offset_right = 696.0
+offset_right = 680.0
 offset_bottom = 280.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_i5gep")
 script = ExtResource("1_dk7xb")
 SlotScene = ExtResource("2_qyew6")
-BoardRoot = NodePath("MarginContainer/Board")
-UnitsRoot = NodePath("")
+BoardRoot = NodePath("BoardContainer/Board")
+UnitsRoot = NodePath("UnitsBoard")
 
-[node name="RichTextLabel" type="RichTextLabel" parent="Party 2/UI Team 2" unique_id=75273864]
+[node name="RichTextLabel" type="RichTextLabel" parent="Party 2/UI Team 2" unique_id=1029720363]
 layout_mode = 1
 offset_top = -20.0
 offset_right = 107.0
 offset_bottom = 9.0
 theme_override_font_sizes/normal_font_size = 12
-text = "Team 2"
+text = "Team 1"
 
-[node name="MarginContainer" type="MarginContainer" parent="Party 2/UI Team 2" unique_id=1728604774]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-theme_override_constants/margin_left = 30
-theme_override_constants/margin_top = 10
-theme_override_constants/margin_right = 30
-theme_override_constants/margin_bottom = 10
+[node name="BoardContainer" type="Control" parent="Party 2/UI Team 2" unique_id=841939945]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
 
-[node name="Board" type="Control" parent="Party 2/UI Team 2/MarginContainer" unique_id=1971772024]
-layout_mode = 2
+[node name="Board" type="Control" parent="Party 2/UI Team 2/BoardContainer" unique_id=271805893]
+anchors_preset = 0
+offset_left = 30.0
+offset_top = 10.0
+offset_right = 226.0
+offset_bottom = 246.0
 mouse_filter = 2
 
-[node name="MarginContainer2" type="MarginContainer" parent="Party 2/UI Team 2" unique_id=472594570]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-theme_override_constants/margin_left = 30
-theme_override_constants/margin_top = 10
-theme_override_constants/margin_right = 30
-theme_override_constants/margin_bottom = 10
-
-[node name="UnitsBoard" type="Node2D" parent="Party 2/UI Team 2/MarginContainer2" unique_id=1282781566]
+[node name="UnitsBoard" type="Node2D" parent="Party 2/UI Team 2" unique_id=419107242]
