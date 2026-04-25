@@ -5,8 +5,8 @@ using System.Linq;
 
 public partial class CombatManager : Node
 {
-    [Export] public CharacterParty Team1;
-    [Export] public CharacterParty Team2;
+    public CharacterParty Team1;
+    public CharacterParty Team2;
     [Export] public UICombatScene UI;
     [Export] CombatConfig CombatConfig;
 
@@ -21,7 +21,7 @@ public partial class CombatManager : Node
         UnitActing,
         Resolving,
         WaitingAttackInterval,
-        CheckVictory,
+        CheckEnd,
         Ended
     }
 
@@ -50,9 +50,9 @@ public partial class CombatManager : Node
     {
         return row switch
         {
-            0 => RowType.Front,
+            0 => RowType.Back,
             1 => RowType.Middle,
-            _ => RowType.Back
+            _ => RowType.Front
         };
     }
     //
@@ -61,6 +61,8 @@ public partial class CombatManager : Node
     {
         state = newState;
         stateTimer = 0f;
+
+        GD.Print("Combat " + state.ToString());
 
         EmitSignal(SignalName.CombatStateChanged);
     }
@@ -123,8 +125,8 @@ public partial class CombatManager : Node
                 UpdateResolving();
                 break;
 
-            case CombatState.CheckVictory:
-                UpdateCheckVictory();
+            case CombatState.CheckEnd:
+                UpdateCheckEnd();
                 break;
 
             case CombatState.Ended:
@@ -141,11 +143,11 @@ public partial class CombatManager : Node
             UnitState = new Dictionary<OrcInstance, CombatUnitState>(),
         };
 
-        InitUnitState();
         SetState(CombatState.WaitingForStart);
     }
     public void StartCombat()
     {
+        InitUnitState();
         if (state == CombatState.WaitingForStart)
             SetState(CombatState.WaitingForStartDelay);
     }
@@ -154,11 +156,24 @@ public partial class CombatManager : Node
     {
         combatContext.UnitState.Clear();
 
+        var print = "<<Turn 0>>";
+        print += "\nTeam 1: ";
+
         foreach (var o in combatContext.Team1.GetAllLivingOrcs())
+        {
             AddUnit(o);
+            print += o.GetCustomName() + ", ";
+        }
+
+        print += "\nTeam 2: ";
 
         foreach (var o in combatContext.Team2.GetAllLivingOrcs())
+        {
             AddUnit(o);
+            print += o.GetCustomName() + ", ";
+        }
+
+        UI?.AddLog(print);
     }
 
     private void AddUnit(OrcInstance o)
@@ -213,6 +228,8 @@ public partial class CombatManager : Node
         {
             var orc = turnOrder[currentIndex++];
 
+            GD.Print($"{orc.GetCustomName()}'s turn");
+
             if (orc == null) continue;
             if (!orc.IsAlive) continue;
 
@@ -229,14 +246,14 @@ public partial class CombatManager : Node
             return;
         }
 
-        SetState(CombatState.CheckVictory);
+        SetState(CombatState.CheckEnd);
     }
 
     private void EnterUnitActing()
     {
         if (currentUnit == null)
         {
-            SetState(CombatState.CheckVictory);
+            SetState(CombatState.CheckEnd);
             return;
         }
 
@@ -265,6 +282,12 @@ public partial class CombatManager : Node
         {
             ApplyDamage(attacker, t, action);
         }
+
+        foreach (var d in targets)
+        {
+            if (!d.IsAlive)
+                UI?.AddLog($"{d.GetCustomName()} dies!!");
+        }
     }
     private void UpdateResolving()
     {
@@ -273,25 +296,45 @@ public partial class CombatManager : Node
         SetState(CombatState.WaitingForUnit);
     }
 
-    private void UpdateCheckVictory()
+    private void UpdateCheckEnd()
     {
         if (Team1.IsDefeated() || Team2.IsDefeated())
         {
-            SetState(CombatState.Ended);
-            GD.Print("Combat finished");
+            EndCombat();
             return;
         }
 
-        NextTurn();
+        bool anyActionsLeft = combatContext.UnitState
+            .Values
+            .Any(u => u.Orc != null && u.Orc.IsAlive && u.RemainingActions > 0);
+
+        if (anyActionsLeft)
+        {
+            NextTurn();
+            return;
+        }
+        else
+        {
+            EndCombat();
+            return;
+        }
     }
 
-    private void NextTurn()
+    void NextTurn()
     {
         turnNumber++;
+        UI?.AddLog($"<<Turno {turnNumber}>>");
 
         foreach (var kv in combatContext.UnitState) { kv.Value.HasActedThisTurn = false; }
 
         SetState(CombatState.BuildTurnOrder);
+    }
+
+    void EndCombat()
+    {
+        SetState(CombatState.Ended);
+        UI?.AddLog($"<<COMBAT END>>");
+        // TODO: poner quién ganó
     }
 
     /////////////////////////////////////////

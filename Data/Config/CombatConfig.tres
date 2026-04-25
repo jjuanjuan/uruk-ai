@@ -5,4 +5,5 @@
 [resource]
 script = ExtResource("1_ssdf7")
 Multipliers = PackedFloat32Array(1, 1, 1.5, 1, 1.5, 1.5, 1, 0.75, 1, 1, 1, 1.5, 0.75, 1, 1, 1, 1, 1, -1, 1.5, 1, 1, 1, 0.5, -1, 1, 1, 1.5, 1, 1.5)
+CombatStartDelay = 2.0
 metadata/_custom_type_script = "uid://coo8uc8ekdax1"

@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Collections.Generic;
 
 public partial class UICombatScene : Control
 {
@@ -11,6 +12,8 @@ public partial class UICombatScene : Control
     [Export] Button StartButton;
     [Export] RichTextLabel Log;
     [Export] RichTextLabel CurrentUnitLabel;
+
+    List<string> logs = new();
 
     public override void _Ready()
     {
@@ -44,6 +47,7 @@ public partial class UICombatScene : Control
     private void OnStartPressed()
     {
         CombatManager.StartCombat();
+        Log.Text = "";
     }
 
     private void OnCombatUpdated()
@@ -61,11 +65,13 @@ public partial class UICombatScene : Control
         }
 
         CurrentUnitLabel.Text =
-            $"{unit.GetCustomName()} ({unit.CharacterClass.GetClassName()})";
+            $"Turno de {unit.GetCustomName()} ({unit.CharacterClass.GetClassName()})";
     }
 
     public void AddLog(string text)
     {
-        Log.AddText(text + "\n");
+        logs.Insert(0, text); // nuevo arriba
+
+        Log.Text = string.Join("\n", logs);
     }
 }

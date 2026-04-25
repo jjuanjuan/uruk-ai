@@ -130,9 +130,7 @@ public partial class CharacterParty : Node
     {
         var list = new List<OrcInstance>();
         foreach (var kv in origin)
-        {
             if (kv.Key.IsAlive) list.Add(kv.Key);
-        }
 
         return list;
     }
