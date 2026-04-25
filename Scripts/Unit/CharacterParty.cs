@@ -6,7 +6,7 @@ public partial class CharacterParty : Node
     public const int ROWS = 3;
     public const int COLUMNS = 5;
 
-    private Dictionary<Orc, PartyPosition> origin = new();
+    private Dictionary<OrcInstance, PartyPosition> origin = new();
 
     [Export] public int MaxUnits = 6;
 
@@ -15,7 +15,7 @@ public partial class CharacterParty : Node
 
     public int CurrentUnits => origin.Count;
 
-    public Orc GetOrc(int row, int col)
+    public OrcInstance GetOrc(int row, int col)
     {
         foreach (var kv in origin)
         {
@@ -25,7 +25,7 @@ public partial class CharacterParty : Node
         return null;
     }
 
-    public bool CanPlaceOrc(int row, int col, Orc movingOrc = null)
+    public bool CanPlaceOrc(int row, int col, OrcInstance movingOrc = null)
     {
         if (!IsValidPosition(row, col))
             return false;
@@ -45,7 +45,7 @@ public partial class CharacterParty : Node
         return true;
     }
 
-    public bool PlaceOrc(Orc orc, int row, int col)
+    public bool PlaceOrc(OrcInstance orc, int row, int col)
     {
         if (orc == null) return false;
 
@@ -54,7 +54,7 @@ public partial class CharacterParty : Node
 
         origin[orc] = new PartyPosition(row, col);
         orc.PartyPosition = new PartyPosition(row, col);
-        GD.Print($"Placed {orc.GetFirstName()} in {row},{col}");
+        GD.Print($"Placed {orc.GetCustomName()} in {row},{col}");
         EmitAllSignals();
         return true;
     }
@@ -122,13 +122,13 @@ public partial class CharacterParty : Node
                col >= 0 && col < COLUMNS;
     }
 
-    public List<Orc> GetAllOrcs()
+    public List<OrcInstance> GetAllOrcs()
     {
-        return new List<Orc>(origin.Keys);
+        return new List<OrcInstance>(origin.Keys);
     }
-    public List<Orc> GetAllLivingOrcs()
+    public List<OrcInstance> GetAllLivingOrcs()
     {
-        var list = new List<Orc>();
+        var list = new List<OrcInstance>();
         foreach (var kv in origin)
         {
             if (kv.Key.IsAlive) list.Add(kv.Key);
@@ -142,7 +142,7 @@ public partial class CharacterParty : Node
         return GetAllLivingOrcs().Count <= 0;
     }
 
-    public bool IsMember(Orc orc)
+    public bool IsMember(OrcInstance orc)
     {
         return origin.ContainsKey(orc);
     }

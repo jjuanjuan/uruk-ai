@@ -10,7 +10,7 @@ public partial class UIOrcPool : Control
         MouseFilter = MouseFilterEnum.Stop; // sin esto puede no detectar drop
     }
 
-    public void SetOrcs(Godot.Collections.Array<Orc> orcs)
+    public void SetOrcs(Godot.Collections.Array<OrcInstance> orcs)
     {
         // limpiar
         foreach (Node child in list.GetChildren())
@@ -39,7 +39,7 @@ public partial class UIOrcPool : Control
     {
         var dict = (Godot.Collections.Dictionary)data;
 
-        var orc = dict["orc"].As<Orc>();
+        var orc = dict["orc"].As<OrcInstance>();
         string source = dict["source"].AsString();
 
         if (source == "party")

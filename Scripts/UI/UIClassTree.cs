@@ -5,7 +5,7 @@ public partial class UIClassTree : Control
 {
     [Export] public PackedScene ClassNodeScene;
     Godot.Collections.Array<CharacterClass> AllClasses = new();
-    [Export] public Orc Orc;
+    [Export] public OrcInstance Orc;
 
     Control nodesLayer;
     Dictionary<CharacterClass, int> classDepth = new();

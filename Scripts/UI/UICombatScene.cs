@@ -52,7 +52,7 @@ public partial class UICombatScene : Control
         Team2UI.Refresh();
     }
 
-    private void OnUnitChanged(Orc unit)
+    private void OnUnitChanged(OrcInstance unit)
     {
         if (unit == null)
         {
@@ -61,7 +61,7 @@ public partial class UICombatScene : Control
         }
 
         CurrentUnitLabel.Text =
-            $"{unit.GetFirstName()} ({unit.GetCharacterClass().GetClassName()})";
+            $"{unit.GetCustomName()} ({unit.CharacterClass.GetClassName()})";
     }
 
     public void AddLog(string text)

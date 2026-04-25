@@ -29,9 +29,9 @@ public partial class CombatManager : Node
     float stateTimer = 0f;
     CombatContext combatContext;
 
-    List<Orc> turnOrder = new();
+    List<OrcInstance> turnOrder = new();
     int currentIndex = 0;
-    Orc currentUnit;
+    OrcInstance currentUnit;
     int turnNumber = 0;
     AttackAction pendingAction;
 
@@ -44,7 +44,7 @@ public partial class CombatManager : Node
 
     // SIGNALS
     [Signal] public delegate void CombatStateChangedEventHandler();
-    [Signal] public delegate void UnitChangedEventHandler(Orc unit);
+    [Signal] public delegate void UnitChangedEventHandler(OrcInstance unit);
 
     private RowType GetRow(int row)
     {
@@ -138,7 +138,7 @@ public partial class CombatManager : Node
         {
             Team1 = Team1,
             Team2 = Team2,
-            UnitState = new Dictionary<Orc, CombatUnitState>(),
+            UnitState = new Dictionary<OrcInstance, CombatUnitState>(),
         };
 
         InitUnitState();
@@ -161,14 +161,14 @@ public partial class CombatManager : Node
             AddUnit(o);
     }
 
-    private void AddUnit(Orc o)
+    private void AddUnit(OrcInstance o)
     {
         if (o == null) return;
 
         combatContext.UnitState[o] = new CombatUnitState
         {
             Orc = o,
-            RemainingActions = o.GetCharacterClass().GetAttackPerPosition(o.PartyPosition.Row).Amount,
+            RemainingActions = o.CharacterClass.GetAttackPerPosition(o.PartyPosition.Row).Amount,
             HasActedThisTurn = false
         };
     }
@@ -178,18 +178,18 @@ public partial class CombatManager : Node
         turnOrder.Clear();
         currentIndex = 0;
 
-        var all = new List<Orc>(combatContext.UnitState.Keys);
+        var all = new List<OrcInstance>(combatContext.UnitState.Keys);
 
-        var groups = new Dictionary<int, List<Orc>>();
+        var groups = new Dictionary<int, List<OrcInstance>>();
 
         foreach (var orc in all)
         {
             if (orc == null) continue;
 
-            int speed = orc.GetCharacterClass().GetBaseSpeed();
+            int speed = orc.CharacterClass.GetBaseSpeed();
 
             if (!groups.ContainsKey(speed))
-                groups[speed] = new List<Orc>();
+                groups[speed] = new List<OrcInstance>();
 
             groups[speed].Add(orc);
         }
@@ -247,19 +247,19 @@ public partial class CombatManager : Node
             SetState(CombatState.WaitingAttackDelay);
         }
     }
-    AttackAction GetActionByRow(Orc orc)
+    AttackAction GetActionByRow(OrcInstance orc)
     {
-        return orc.GetCharacterClass()
+        return orc.CharacterClass
                   .GetAttackPerPosition(orc.PartyPosition.Row)
                   .AttackAction;
     }
-    private void ExecuteAttack(Orc attacker, AttackAction action)
+    private void ExecuteAttack(OrcInstance attacker, AttackAction action)
     {
         var enemies = combatContext.GetEnemies(attacker);
         var targets = ResolveTargets(attacker, enemies, action.Target);
 
-        string names = string.Join(", ", targets.Select(t => t.GetFirstName()));
-        UI?.AddLog($"{attacker.GetFirstName()} hits {names}");
+        string names = string.Join(", ", targets.Select(t => t.GetCustomName()));
+        UI?.AddLog($"{attacker.GetCustomName()} hits {names}");
 
         foreach (var t in targets)
         {
@@ -296,15 +296,15 @@ public partial class CombatManager : Node
 
     /////////////////////////////////////////
     // TARGETING
-    List<Orc> ResolveTargets(
-        Orc attacker,
-        List<Orc> enemies,
+    List<OrcInstance> ResolveTargets(
+        OrcInstance attacker,
+        List<OrcInstance> enemies,
         AttackAction.AttackActionTarget targetType)
     {
         if (enemies == null || enemies.Count == 0)
-            return new List<Orc>();
+            return new List<OrcInstance>();
 
-        Orc anchor;
+        OrcInstance anchor;
 
         switch (targetType)
         {
@@ -314,13 +314,13 @@ public partial class CombatManager : Node
 
             case AttackAction.AttackActionTarget.AnySingle:
             case AttackAction.AttackActionTarget.RandomSingle:
-                anchor = enemies[GameManager.I.NextInt(0, enemies.Count)];
-                return new List<Orc> { anchor };
+                anchor = enemies[GameManager.I.NextInt(0, enemies.Count - 1)];
+                return new List<OrcInstance> { anchor };
 
             case AttackAction.AttackActionTarget.CloseSingle:
             default:
                 anchor = GetClosestEnemy(enemies, attacker.PartyPosition);
-                return new List<Orc> { anchor };
+                return new List<OrcInstance> { anchor };
 
             // --------------------------
             // COLUMN TARGETING
@@ -331,7 +331,7 @@ public partial class CombatManager : Node
                 return GetEnemyColumn(anchor, enemies);
 
             case AttackAction.AttackActionTarget.AnyColumn:
-                anchor = enemies[GameManager.I.NextInt(0, enemies.Count)];
+                anchor = enemies[GameManager.I.NextInt(0, enemies.Count - 1)];
                 return GetEnemyColumn(anchor, enemies);
 
             // --------------------------
@@ -347,7 +347,7 @@ public partial class CombatManager : Node
                 return GetEnemyRow(anchor, enemies);
 
             case AttackAction.AttackActionTarget.AnyRow:
-                anchor = enemies[GameManager.I.NextInt(0, enemies.Count)];
+                anchor = enemies[GameManager.I.NextInt(0, enemies.Count - 1)];
                 return GetEnemyRow(anchor, enemies);
 
             // --------------------------
@@ -359,19 +359,19 @@ public partial class CombatManager : Node
         }
     }
 
-    List<Orc> GetEnemyColumn(Orc anchor, List<Orc> enemies)
+    List<OrcInstance> GetEnemyColumn(OrcInstance anchor, List<OrcInstance> enemies)
     {
         return enemies.FindAll(e =>
             e.PartyPosition.Column == anchor.PartyPosition.Column);
     }
-    List<Orc> GetEnemyRow(Orc anchor, List<Orc> enemies)
+    List<OrcInstance> GetEnemyRow(OrcInstance anchor, List<OrcInstance> enemies)
     {
         return enemies.FindAll(e =>
             e.PartyPosition.Row == anchor.PartyPosition.Row);
     }
-    Orc GetClosestEnemy(List<Orc> enemies, PartyPosition pos)
+    OrcInstance GetClosestEnemy(List<OrcInstance> enemies, PartyPosition pos)
     {
-        Orc best = null;
+        OrcInstance best = null;
         int bestDist = int.MaxValue;
 
         foreach (var e in enemies)
@@ -388,9 +388,9 @@ public partial class CombatManager : Node
 
         return best;
     }
-    Orc GetFarthestEnemy(List<Orc> enemies, PartyPosition pos)
+    OrcInstance GetFarthestEnemy(List<OrcInstance> enemies, PartyPosition pos)
     {
-        Orc best = null;
+        OrcInstance best = null;
         int bestDist = -1;
 
         foreach (var e in enemies)
@@ -410,16 +410,16 @@ public partial class CombatManager : Node
     // TARGETING
     /////////////////////////////////////////
 
-    private void ApplyDamage(Orc attacker, Orc target, AttackAction action)
+    private void ApplyDamage(OrcInstance attacker, OrcInstance target, AttackAction action)
     {
-        int baseDamage = attacker.GetCharacterClass().GetBaseAttackDamage();
+        int baseDamage = attacker.CharacterClass.GetBaseAttackDamage();
         double multiplier = action.BaseDamageMultiplier;
         int finalDamage = (int)(baseDamage * multiplier);
 
         target.TakeDamage(finalDamage);
     }
 
-    private void Shuffle(List<Orc> list)
+    private void Shuffle(List<OrcInstance> list)
     {
         for (int i = list.Count - 1; i > 0; i--)
         {
@@ -433,9 +433,9 @@ public class CombatContext
 {
     public CharacterParty Team1;
     public CharacterParty Team2;
-    public Dictionary<Orc, CombatUnitState> UnitState;
+    public Dictionary<OrcInstance, CombatUnitState> UnitState;
 
-    public List<Orc> GetEnemies(Orc source)
+    public List<OrcInstance> GetEnemies(OrcInstance source)
     {
         if (Team1.IsMember(source))
             return Team2.GetAllLivingOrcs();
@@ -443,7 +443,7 @@ public class CombatContext
         return Team1.GetAllLivingOrcs();
     }
 
-    public List<Orc> GetAllies(Orc source)
+    public List<OrcInstance> GetAllies(OrcInstance source)
     {
         if (Team1.IsMember(source))
             return Team1.GetAllLivingOrcs();
@@ -454,7 +454,7 @@ public class CombatContext
 
 public class CombatUnitState
 {
-    public Orc Orc;
+    public OrcInstance Orc;
     public int RemainingActions = 1;
     public bool HasActedThisTurn = false;
 }

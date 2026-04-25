@@ -1,12 +1,12 @@
 [gd_resource type="Resource" script_class="CharacterClass" format=3 uid="uid://cry0fyf1u8o8v"]
 
 [ext_resource type="Resource" uid="uid://nwnecenxibir" path="res://Data/AttackActions/Basic Slash.tres" id="1_a40h8"]
-[ext_resource type="Script" uid="uid://du724smqstcfc" path="res://Scripts/AttackPerPosition.cs" id="2_0fro6"]
+[ext_resource type="Script" uid="uid://du724smqstcfc" path="res://Scripts/Combat/AttackPerPosition.cs" id="2_0fro6"]
 [ext_resource type="Texture2D" uid="uid://de5j0u588upr7" path="res://Art/Placeholders/0_militia_back.png" id="3_dhmcj"]
 [ext_resource type="Texture2D" uid="uid://3geatbyu0jce" path="res://Art/Placeholders/2_knight_front.png" id="4_v5yg6"]
 [ext_resource type="Resource" uid="uid://qsh7t800l3tc" path="res://Data/CharacterClasses/1_Bladesmith.tres" id="5_qtf6c"]
-[ext_resource type="Script" uid="uid://bmylglyshe6wd" path="res://Scripts/ClassRequirements.cs" id="6_61jg2"]
-[ext_resource type="Script" uid="uid://1pbhreu2codn" path="res://Scripts/CharacterClass.cs" id="7_1d8tv"]
+[ext_resource type="Script" uid="uid://bmylglyshe6wd" path="res://Scripts/Unit/ClassRequirements.cs" id="6_61jg2"]
+[ext_resource type="Script" uid="uid://1pbhreu2codn" path="res://Scripts/Unit/CharacterClass.cs" id="7_1d8tv"]
 
 [sub_resource type="Resource" id="Resource_ncstq"]
 script = ExtResource("2_0fro6")

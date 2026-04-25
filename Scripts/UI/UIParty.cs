@@ -6,12 +6,6 @@ public partial class UIParty : Control
 
     [Export] public PackedScene SlotScene;
     [Export] public Control BoardRoot;
-    [Export] public Node2D UnitsRoot;
-
-    public override void _Ready()
-    {
-        GD.Print($"UIParty using Party ID: {Party?.GetInstanceId()}");
-    }
 
     public void Setup(CharacterParty party)
     {
@@ -56,27 +50,16 @@ public partial class UIParty : Control
 
     public void Refresh()
     {
-        if (Party == null || UnitsRoot == null || BoardRoot == null)
+        if (Party == null || BoardRoot == null)
             return;
 
-        foreach (var orc in Party.GetAllOrcs())
+        foreach (PartySlot slot in BoardRoot.GetChildren())
         {
-            if (orc == null) continue;
-
-            // esto reemplaza TODO el manejo manual
-            orc.Reparent(UnitsRoot);
-
-            var uiPos = GetVisualPosition(
-                orc.PartyPosition.Row,
-                orc.PartyPosition.Column
-            );
-
-            var global = BoardRoot.GetGlobalTransform().Origin + uiPos;
-
-            orc.GlobalPosition = global;
+            var orc = Party.GetOrc(slot.Row, slot.Column);
+            slot.SetOrc(orc);
         }
     }
-
+    
     public Vector2 GetVisualPosition(int row, int col)
     {
         float width = BoardRoot.Size.X;

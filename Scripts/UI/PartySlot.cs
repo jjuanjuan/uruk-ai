@@ -10,7 +10,7 @@ public partial class PartySlot : PanelContainer
     [Export]
     RichTextLabel CharName;
 
-    public Orc Orc;
+    public OrcInstance Orc;
     public CharacterParty Party;
     public UIParty UIParty;
 
@@ -27,8 +27,6 @@ public partial class PartySlot : PanelContainer
         UpdateVisual();
 
         UIParty?.LayoutSlots();
-
-        GD.Print($"Slot {Row},{Column} Party is NULL? {Party == null}");
     }
 
     public void UpdateVisual()
@@ -41,7 +39,7 @@ public partial class PartySlot : PanelContainer
         else
         {
             CharImg.Visible = true;
-            CharName.Text = Orc.GetFirstName();
+            CharName.Text = Orc.GetCustomName();
             CharName.Visible = true;
         }
     }
@@ -71,23 +69,24 @@ public partial class PartySlot : PanelContainer
     void ApplyInvalid() => AddThemeStyleboxOverride("panel", highlightInvalid);
 
 
-    public void SetOrc(Orc orc)
+    public void SetOrc(OrcInstance orc)
     {
         Orc = orc;
 
         if (orc == null)
         {
-            CharImg.Texture = null;
-            CharName.Text = "";
-            UpdateVisual();
+            CharImg.Visible = false;
+            CharName.Visible = false;
             return;
         }
 
-        CharImg.Texture = orc.GetCharacterClass().GetFrontTexture();
-        CharName.Text = orc.GetFirstName();
-        UpdateVisual();
-    }
+        CharImg.Texture = orc.CharacterClass.GetFrontTexture();
+        CharName.Text = orc.GetCustomName();
 
+        CharImg.Visible = true;
+        CharName.Visible = true;
+    }
+    
     // DRAG START
     public override Variant _GetDragData(Vector2 atPosition)
     {
@@ -141,7 +140,7 @@ public partial class PartySlot : PanelContainer
             return false;
         }
 
-        var orc = dict["orc"].As<Orc>();
+        var orc = dict["orc"].As<OrcInstance>();
         if (orc == null)
         {
             ApplyInvalid();
@@ -184,7 +183,7 @@ public partial class PartySlot : PanelContainer
     {
         var dict = (Godot.Collections.Dictionary)data;
 
-        var orc = dict["orc"].As<Orc>();
+        var orc = dict["orc"].As<OrcInstance>();
         string source = dict["source"].AsString();
 
         if (source == "pool")
@@ -242,7 +241,7 @@ public partial class PartySlot : PanelContainer
         if (!dict.ContainsKey("orc"))
             return;
 
-        var orc = dict["orc"].As<Orc>();
+        var orc = dict["orc"].As<OrcInstance>();
         if (orc == null)
             return;
 

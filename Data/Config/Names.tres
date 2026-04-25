@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="NamePool" format=3 uid="uid://c4718ueqpr5c"]
+
+[ext_resource type="Script" uid="uid://drv4uo2shov8u" path="res://Scripts/Unit/NamePool.cs" id="1_tps82"]
+
+[resource]
+script = ExtResource("1_tps82")
+Names = Array[String](["Pedro", "Marquitos", "Big Ben", "Tronchatoro", "Poteto", "Lucrecia", "Martínez", "Bobardo", "Lucarda", "Potranca", "Paual", "Koal", "Lola", "Moma", "Monga", "Conchita", "Rocco", "Alberto", "Ruperta", "Dinga", "Xuxa", "Jibón", "Zzaz", "Valerio", "Lupus", "Tut", "Amogus", "Dada", "Septus", "Feff"])
+metadata/_custom_type_script = "uid://drv4uo2shov8u"

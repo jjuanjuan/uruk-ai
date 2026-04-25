@@ -7,14 +7,14 @@ public partial class PoolItem : PanelContainer
     [Export]
     RichTextLabel label;
 
-    public Orc Orc;
+    public OrcInstance Orc;
 
-    public void Setup(Orc orc)
+    public void Setup(OrcInstance orc)
     {
         Orc = orc;
 
-        icon.Texture = orc.GetCharacterClass().GetFrontTexture();
-        label.Text = orc.GetFirstName();
+        icon.Texture = orc.CharacterClass.GetFrontTexture();
+        label.Text = orc.GetCustomName();
     }
 
     // DRAG START

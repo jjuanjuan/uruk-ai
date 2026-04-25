@@ -4,7 +4,7 @@ public partial class UIMain : Control
 {
     [Export] public PackedScene CombatScene;
     [Export] public PackedScene ClassTreeScene;
-    [Export] public Orc OrcForTree;
+    [Export] public OrcInstance OrcForTree;
     [Export] public UIOrcPool PoolUI;
 
     CharacterParty PlayerParty => GameManager.I.Team1;
@@ -14,25 +14,13 @@ public partial class UIMain : Control
     {
         GetNode<Button>("OpenClassTreeButton").Pressed += OpenClassTree;
         GetNode<Button>("OpenCombatButton").Pressed += OpenCombat;
+        GetNode<Button>("GenerateOrcButton").Pressed += GenerateOrc;
 
-        foreach (var node in GetTree().GetNodesInGroup("orcs"))
-        {
-            if (node is Orc orc)
-                GameManager.I.AllOrcs.Add(orc);
-        }
-
-        PlayerParty.PartyChanged += RefreshAll;
-        EnemyParty.PartyChanged += RefreshAll;
         GameManager.I.PartiesChanged += RefreshPool;
 
         RefreshPool();
-        RefreshAll();
     }
 
-    void RefreshAll()
-    {
-        PoolUI.SetOrcs(GameManager.I.GetAvailableOrcs());
-    }
     void RefreshPool()
     {
         PoolUI.SetOrcs(GameManager.I.GetAvailableOrcs());
@@ -56,5 +44,9 @@ public partial class UIMain : Control
         combat.Name = "UICombatScene";
 
         AddChild(combat);
+    }
+    void GenerateOrc()
+    {
+        GameManager.I.GenerateOrc();
     }
 }

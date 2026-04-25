@@ -8,7 +8,7 @@ public partial class UIClassNode : Button
     [Export] RichTextLabel reqLabel;
 
     public CharacterClass Class;
-    Orc Orc;
+    OrcInstance Orc;
 
     public override void _Ready()
     {
@@ -20,7 +20,7 @@ public partial class UIClassNode : Button
         Orc.ChangeClass(Class);
     }
 
-    public void Setup(CharacterClass cc, Orc orc)
+    public void Setup(CharacterClass cc, OrcInstance orc)
     {
         Class = cc;
         Orc = orc;
@@ -50,8 +50,6 @@ public partial class UIClassNode : Button
 
         foreach (var r in reqs)
         {
-            var progress = Orc.GetProgress(r.RequiredClass);
-
             sb.AppendLine($"{r.RequiredClass.GetClassName()} level {r.RequiredLevel}");
         }
 
