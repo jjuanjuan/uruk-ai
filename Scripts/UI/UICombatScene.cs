@@ -4,6 +4,10 @@ using System.Collections.Generic;
 
 public partial class UICombatScene : Control
 {
+    // mostrar números de daño
+    // mostrar barras de vida
+    // hacer victoria
+
     [Export] public CombatManager CombatManager;
 
     [Export] public UIParty Team1UI;
@@ -12,6 +16,8 @@ public partial class UICombatScene : Control
     [Export] Button StartButton;
     [Export] RichTextLabel Log;
     [Export] RichTextLabel CurrentUnitLabel;
+
+    [Export] CombatAdvantageBar AdvantageBar;
 
     List<string> logs = new();
 
@@ -73,5 +79,16 @@ public partial class UICombatScene : Control
         logs.Insert(0, text); // nuevo arriba
 
         Log.Text = string.Join("\n", logs);
+    }
+
+    public void ShowDamageText(OrcInstance unit, float value)
+    {
+        GD.Print($"{unit.GetCustomName()} took {value} damage");
+        // TODO: poner textito en UI
+    }
+
+    public void SetAdvantageBar(float value)
+    {
+        AdvantageBar.SetValue(value);
     }
 }

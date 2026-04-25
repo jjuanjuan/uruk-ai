@@ -8,7 +8,6 @@ public partial class CombatManager : Node
     public CharacterParty Team1;
     public CharacterParty Team2;
     [Export] public UICombatScene UI;
-    [Export] CombatConfig CombatConfig;
 
     public enum CombatState
     {
@@ -82,7 +81,7 @@ public partial class CombatManager : Node
 
             case CombatState.WaitingForStartDelay:
                 {
-                    if (stateTimer >= CombatConfig.CombatStartDelay)
+                    if (stateTimer >= GameManager.I.CombatConfig.CombatStartDelay)
                         SetState(CombatState.BuildTurnOrder);
                     break;
                 }
@@ -97,7 +96,7 @@ public partial class CombatManager : Node
 
             case CombatState.WaitingAttackDelay:
                 {
-                    if (stateTimer < CombatConfig.AttackDelayWhenUI) return;
+                    if (stateTimer < GameManager.I.CombatConfig.AttackDelayWhenUI) return;
 
                     ExecuteAttack(currentUnit, pendingAction);
                     pendingAction = null;
@@ -105,13 +104,15 @@ public partial class CombatManager : Node
                     combatContext.UnitState[currentUnit].RemainingActions--;
                     combatContext.UnitState[currentUnit].HasActedThisTurn = true;
 
+                    UI?.SetAdvantageBar(combatContext.CalculateAdvantage());
+
                     SetState(CombatState.WaitingAttackInterval);
                     break;
                 }
 
             case CombatState.WaitingAttackInterval:
                 {
-                    if (stateTimer < CombatConfig.AttackInterval)
+                    if (stateTimer < GameManager.I.CombatConfig.AttackInterval)
                         return;
 
                     SetState(CombatState.Resolving);
@@ -141,8 +142,11 @@ public partial class CombatManager : Node
             Team1 = Team1,
             Team2 = Team2,
             UnitState = new Dictionary<OrcInstance, CombatUnitState>(),
+            Score1 = 0,
+            Score2 = 0,
         };
 
+        UI?.SetAdvantageBar(.5f);
         SetState(CombatState.WaitingForStart);
     }
     public void StartCombat()
@@ -286,7 +290,10 @@ public partial class CombatManager : Node
         foreach (var d in targets)
         {
             if (!d.IsAlive)
+            {
                 UI?.AddLog($"{d.GetCustomName()} dies!!");
+                GiveKillScore(attacker);
+            }
         }
     }
     private void UpdateResolving()
@@ -460,6 +467,21 @@ public partial class CombatManager : Node
         int finalDamage = (int)(baseDamage * multiplier);
 
         target.TakeDamage(finalDamage);
+        UI?.ShowDamageText(target, finalDamage);
+        GiveScore(attacker, finalDamage);
+    }
+
+    void GiveScore(OrcInstance attacker, int score)
+    {
+        var team = combatContext.GetTeam(attacker);
+        if (team == combatContext.Team1) combatContext.Score1 += score;
+        else if (team == combatContext.Team2) combatContext.Score2 += score;
+    }
+    void GiveKillScore(OrcInstance attacker)
+    {
+        var team = combatContext.GetTeam(attacker);
+        if (team == combatContext.Team1) combatContext.Kills1++;
+        else if (team == combatContext.Team2) combatContext.Kills2++;
     }
 
     private void Shuffle(List<OrcInstance> list)
@@ -477,6 +499,10 @@ public class CombatContext
     public CharacterParty Team1;
     public CharacterParty Team2;
     public Dictionary<OrcInstance, CombatUnitState> UnitState;
+    public int Score1 = 0;
+    public int Score2 = 0;
+    public int Kills1 = 0;
+    public int Kills2 = 0;
 
     public List<OrcInstance> GetEnemies(OrcInstance source)
     {
@@ -485,13 +511,27 @@ public class CombatContext
 
         return Team1.GetAllLivingOrcs();
     }
-
     public List<OrcInstance> GetAllies(OrcInstance source)
     {
         if (Team1.IsMember(source))
             return Team1.GetAllLivingOrcs();
 
         return Team2.GetAllLivingOrcs();
+    }
+    public CharacterParty GetTeam(OrcInstance source)
+    {
+        if (Team1.IsMember(source)) return Team1;
+        else return Team2;
+    }
+
+    public float CalculateAdvantage()
+    {
+        float tempScore1 = Score1 * (1f + GameManager.I.CombatConfig.ScoreMultiplierPerKill * Kills1);
+        float tempScore2 = Score2 * (1f + GameManager.I.CombatConfig.ScoreMultiplierPerKill * Kills2);
+        float advantage = tempScore1 / (tempScore1 + tempScore2);
+        GD.Print("Advantage " + advantage);
+
+        return advantage; // debería dar entre 0 y 1
     }
 }
 

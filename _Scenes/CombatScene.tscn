@@ -5,7 +5,7 @@
 [ext_resource type="Script" uid="uid://cgs2co0jxdffn" path="res://Scripts/Combat/CombatManager.cs" id="1_qyew6"]
 [ext_resource type="PackedScene" uid="uid://dn0of61i2vxkg" path="res://_Scenes/PartySlot.tscn" id="2_qyew6"]
 [ext_resource type="Script" uid="uid://dex1blf0jm6sh" path="res://Scripts/Unit/CharacterParty.cs" id="3_3g8y2"]
-[ext_resource type="Resource" uid="uid://b0atn5ms4si40" path="res://Data/Config/CombatConfig.tres" id="3_f6h1k"]
+[ext_resource type="Script" uid="uid://47etf6uct6hc" path="res://Scripts/UI/CombatAdvantageBar.cs" id="6_3g8y2"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_i5gep"]
 border_width_left = 2
@@ -13,7 +13,15 @@ border_width_top = 2
 border_width_right = 2
 border_width_bottom = 2
 
-[node name="CombatScene" type="Control" unique_id=1636238207 node_paths=PackedStringArray("CombatManager", "Team1UI", "Team2UI", "StartButton", "Log", "CurrentUnitLabel")]
+[sub_resource type="Theme" id="Theme_3g8y2"]
+
+[sub_resource type="ImageTexture" id="ImageTexture_3g8y2"]
+
+[sub_resource type="ImageTexture" id="ImageTexture_f6h1k"]
+
+[sub_resource type="ImageTexture" id="ImageTexture_cph6q"]
+
+[node name="CombatScene" type="Control" unique_id=1636238207 node_paths=PackedStringArray("CombatManager", "Team1UI", "Team2UI", "StartButton", "Log", "CurrentUnitLabel", "AdvantageBar")]
 layout_mode = 3
 anchors_preset = 0
 script = ExtResource("1_3mdtu")
@@ -23,11 +31,11 @@ Team2UI = NodePath("Team 2/UI Team 2")
 StartButton = NodePath("Button StartCombat")
 Log = NodePath("Combat log")
 CurrentUnitLabel = NodePath("Current unit")
+AdvantageBar = NodePath("AdvantageBar")
 
 [node name="CombatManager" type="Node" parent="." unique_id=1959779666 node_paths=PackedStringArray("UI")]
 script = ExtResource("1_qyew6")
 UI = NodePath("..")
-CombatConfig = ExtResource("3_f6h1k")
 
 [node name="Button StartCombat" type="Button" parent="." unique_id=831656138]
 layout_mode = 0
@@ -120,3 +128,21 @@ offset_top = 10.0
 offset_right = 226.0
 offset_bottom = 246.0
 mouse_filter = 2
+
+[node name="AdvantageBar" type="TextureProgressBar" parent="." unique_id=1093621206]
+layout_mode = 0
+offset_left = 800.0
+offset_top = 40.0
+offset_right = 805.0
+offset_bottom = 592.0
+theme = SubResource("Theme_3g8y2")
+max_value = 1.0
+step = 0.01
+value = 0.5
+fill_mode = 2
+texture_under = SubResource("ImageTexture_3g8y2")
+texture_over = SubResource("ImageTexture_f6h1k")
+texture_progress = SubResource("ImageTexture_cph6q")
+tint_over = Color(0.22174683, 0.2804779, 0.90146613, 1)
+tint_progress = Color(0, 0.5131468, 0.5131468, 1)
+script = ExtResource("6_3g8y2")

@@ -6,6 +6,7 @@ public partial class GameManager : Node
 {
     [Export] public NamePool OrcNames;
     [Export] public OrcTemplate OrcTemplate;
+    [Export] public CombatConfig CombatConfig;
 
     public CharacterParty Team1;
     public CharacterParty Team2;

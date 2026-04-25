@@ -3,8 +3,10 @@
 [ext_resource type="Script" uid="uid://c3v5vl6mk60ym" path="res://Scripts/GameManager.cs" id="1_it0l5"]
 [ext_resource type="Resource" uid="uid://c4718ueqpr5c" path="res://Data/Config/Names.tres" id="2_y73m8"]
 [ext_resource type="Resource" uid="uid://c024ksbq5fjtp" path="res://Data/Config/Orc Template.tres" id="3_dhsnp"]
+[ext_resource type="Resource" uid="uid://b0atn5ms4si40" path="res://Data/Config/CombatConfig.tres" id="4_gfro6"]
 
 [node name="GameManager" type="Node" unique_id=1773527289]
 script = ExtResource("1_it0l5")
 OrcNames = ExtResource("2_y73m8")
 OrcTemplate = ExtResource("3_dhsnp")
+CombatConfig = ExtResource("4_gfro6")
