@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-public partial class Orc : Node
+public partial class Orc : Node2D
 {
 	[Export]
 	string FirstName;
@@ -22,15 +22,22 @@ public partial class Orc : Node
 
 	int damage = 0;
 	bool alive => CurrentHP > 0;
-	public int CurrentHP { get => CharacterClass.GetBaseHP() - damage; }
+	public int CurrentHP { get => Mathf.Max(CharacterClass.GetBaseHP() - damage, 0); }
 	public bool IsAlive { get => alive; }
-	public PartyPosition Position;
+	public PartyPosition PartyPosition;
 
 	public override void _Ready()
 	{
 		nameLabel.Text = FirstName;
 		UpdateClass();
 		AddToGroup("orcs");
+
+		SetProcessInput(false);
+		SetProcessUnhandledInput(false);
+
+		nameLabel.MouseFilter = Control.MouseFilterEnum.Ignore;
+		classLabel.MouseFilter = Control.MouseFilterEnum.Ignore;
+		hpLabel.MouseFilter = Control.MouseFilterEnum.Ignore;
 	}
 
 	public override void _Process(double delta)
@@ -105,6 +112,15 @@ public partial class Orc : Node
 
 			GD.Print($"Subió a nivel {progress.Level} en {CharacterClass.GetClassName()}");
 		}
+	}
+
+	public void TakeDamage(int amount)
+	{
+		damage += amount;
+	}
+	public void Heal(int amount)
+	{
+		damage = Mathf.Max(damage - amount, 0);
 	}
 
 	public string GetFirstName() { return FirstName; }

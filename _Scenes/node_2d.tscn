@@ -10,13 +10,11 @@
 [ext_resource type="Resource" uid="uid://dq570np7agkmk" path="res://Data/CharacterClasses/2_Hoplite.tres" id="7_t3oft"]
 [ext_resource type="Resource" uid="uid://d0rashb28ycuo" path="res://Data/CharacterClasses/1_Lancer.tres" id="8_bddn3"]
 [ext_resource type="Resource" uid="uid://ckq2tps25fbrd" path="res://Data/CharacterClasses/3_Morgenstern.tres" id="8_re1oa"]
-[ext_resource type="Script" uid="uid://bkti6f1dxgf7i" path="res://Scripts/UI/UIParty.cs" id="9_q6n8c"]
-[ext_resource type="PackedScene" uid="uid://dn0of61i2vxkg" path="res://_Scenes/PartySlot.tscn" id="10_31cma"]
 [ext_resource type="Resource" uid="uid://gogb8s6l7npy" path="res://Data/CharacterClasses/0_Scout.tres" id="10_re1oa"]
-[ext_resource type="Script" uid="uid://dex1blf0jm6sh" path="res://Scripts/CharacterParty.cs" id="11_31cma"]
 [ext_resource type="Script" uid="uid://jw62aqdff52j" path="res://Scripts/UI/UIOrcPool.cs" id="11_g5s02"]
 [ext_resource type="Resource" uid="uid://cg4wg58pgbr6l" path="res://Data/CharacterClasses/3_AxeThrower.tres" id="11_mcifo"]
 [ext_resource type="PackedScene" uid="uid://jh1ftys40xae" path="res://_Scenes/PoolItem.tscn" id="12_70ebp"]
+[ext_resource type="PackedScene" uid="uid://cgiw7nq0rr8g5" path="res://_Scenes/CombatScene.tscn" id="13_eu8p6"]
 
 [sub_resource type="Resource" id="Resource_q6n8c"]
 script = ExtResource("5_hgf3e")
@@ -36,12 +34,6 @@ CharacterClass = ExtResource("8_bddn3")
 Level = 5
 metadata/_custom_type_script = "uid://cq2rp0ntu4360"
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_70ebp"]
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_t3oft"]
 bg_color = Color(0.3491902, 0.3491902, 0.3491902, 0.90000004)
 border_width_left = 6
@@ -52,12 +44,7 @@ border_color = Color(0.6651851, 0.6651851, 0.6651851, 1)
 
 [node name="Node2D" type="Node2D" unique_id=1963946473]
 
-[node name="CharacterParty" type="Node" parent="." unique_id=1465183896]
-script = ExtResource("11_31cma")
-
-[node name="Orcs" type="Node" parent="." unique_id=1378121061]
-
-[node name="Orc" type="Node" parent="Orcs" unique_id=824183852 node_paths=PackedStringArray("Sprite2D", "nameLabel", "classLabel", "hpLabel")]
+[node name="Orc" type="Node2D" parent="." unique_id=1072378210 node_paths=PackedStringArray("Sprite2D", "nameLabel", "classLabel", "hpLabel")]
 script = ExtResource("2_b8jug")
 FirstName = "Pedro"
 CharacterClass = ExtResource("3_hbunu")
@@ -66,46 +53,45 @@ nameLabel = NodePath("Nombre")
 classLabel = NodePath("Clase")
 hpLabel = NodePath("HP")
 
-[node name="Sprite2D" type="Sprite2D" parent="Orcs/Orc" unique_id=1483923719]
-position = Vector2(589, 242)
+[node name="Sprite2D" type="Sprite2D" parent="Orc" unique_id=1483923719]
 texture = ExtResource("1_i8h54")
 
-[node name="Nombre" type="RichTextLabel" parent="Orcs/Orc" unique_id=1025877789]
+[node name="Nombre" type="RichTextLabel" parent="Orc" unique_id=1025877789]
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
 offset_left = -50.0
-offset_top = 144.0
+offset_top = 880.0
 offset_right = 150.0
-offset_bottom = 167.0
+offset_bottom = 903.0
 grow_horizontal = 2
 text = "Pedro"
 fit_content = true
 
-[node name="Clase" type="RichTextLabel" parent="Orcs/Orc" unique_id=521719060]
+[node name="Clase" type="RichTextLabel" parent="Orc" unique_id=521719060]
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
 offset_left = -47.0
-offset_top = 170.0
+offset_top = 906.0
 offset_right = 153.0
-offset_bottom = 193.0
+offset_bottom = 929.0
 grow_horizontal = 2
 text = "Pibe"
 fit_content = true
 
-[node name="HP" type="RichTextLabel" parent="Orcs/Orc" unique_id=2146310929]
+[node name="HP" type="RichTextLabel" parent="Orc" unique_id=2146310929]
 anchors_preset = -1
 anchor_left = 1.0
 anchor_right = 1.641
 anchor_bottom = 0.21900001
 offset_left = -552.0
-offset_top = 177.0
+offset_top = 913.0
 offset_right = -552.048
-offset_bottom = 185.984
+offset_bottom = 921.984
 text = "100"
 
-[node name="Orc2" type="Node" parent="Orcs" unique_id=1441869972 node_paths=PackedStringArray("Sprite2D", "nameLabel", "classLabel", "hpLabel")]
+[node name="Orc2" type="Node2D" parent="." unique_id=138552143 node_paths=PackedStringArray("Sprite2D", "nameLabel", "classLabel", "hpLabel")]
 script = ExtResource("2_b8jug")
 FirstName = "Marquitos"
 CharacterClass = ExtResource("4_i8h54")
@@ -115,46 +101,45 @@ classLabel = NodePath("Clase")
 hpLabel = NodePath("HP")
 ClassProgresses = Array[ExtResource("5_hgf3e")]([SubResource("Resource_q6n8c"), SubResource("Resource_31cma")])
 
-[node name="Sprite2D" type="Sprite2D" parent="Orcs/Orc2" unique_id=1363623075]
-position = Vector2(816, 227)
+[node name="Sprite2D" type="Sprite2D" parent="Orc2" unique_id=1363623075]
 texture = ExtResource("1_i8h54")
 
-[node name="Nombre" type="RichTextLabel" parent="Orcs/Orc2" unique_id=689228901]
+[node name="Nombre" type="RichTextLabel" parent="Orc2" unique_id=689228901]
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
 offset_left = 218.0
-offset_top = 137.0
+offset_top = 873.0
 offset_right = 418.0
-offset_bottom = 160.0
+offset_bottom = 896.0
 grow_horizontal = 2
 text = "Pedro"
 fit_content = true
 
-[node name="Clase" type="RichTextLabel" parent="Orcs/Orc2" unique_id=1823565588]
+[node name="Clase" type="RichTextLabel" parent="Orc2" unique_id=1823565588]
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
 offset_left = 220.0
-offset_top = 166.0
+offset_top = 902.0
 offset_right = 420.0
-offset_bottom = 189.0
+offset_bottom = 925.0
 grow_horizontal = 2
 text = "Pibe"
 fit_content = true
 
-[node name="HP" type="RichTextLabel" parent="Orcs/Orc2" unique_id=779290465]
+[node name="HP" type="RichTextLabel" parent="Orc2" unique_id=779290465]
 anchors_preset = -1
 anchor_left = 1.0
 anchor_right = 1.641
 anchor_bottom = 0.21900001
 offset_left = -267.0
-offset_top = 229.0
+offset_top = 965.0
 offset_right = -267.04797
-offset_bottom = 237.984
+offset_bottom = 973.984
 text = "100"
 
-[node name="Orc3" type="Node" parent="Orcs" unique_id=292204778 node_paths=PackedStringArray("Sprite2D", "nameLabel", "classLabel", "hpLabel")]
+[node name="Orc3" type="Node2D" parent="." unique_id=2137839818 node_paths=PackedStringArray("Sprite2D", "nameLabel", "classLabel", "hpLabel")]
 script = ExtResource("2_b8jug")
 FirstName = "Bobby"
 CharacterClass = ExtResource("8_re1oa")
@@ -164,46 +149,45 @@ classLabel = NodePath("Clase")
 hpLabel = NodePath("HP")
 ClassProgresses = Array[ExtResource("5_hgf3e")]([SubResource("Resource_q6n8c"), SubResource("Resource_re1oa"), SubResource("Resource_31cma")])
 
-[node name="Sprite2D" type="Sprite2D" parent="Orcs/Orc3" unique_id=371004701]
-position = Vector2(696, 299)
+[node name="Sprite2D" type="Sprite2D" parent="Orc3" unique_id=371004701]
 texture = ExtResource("1_i8h54")
 
-[node name="Nombre" type="RichTextLabel" parent="Orcs/Orc3" unique_id=588895556]
+[node name="Nombre" type="RichTextLabel" parent="Orc3" unique_id=588895556]
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
 offset_left = 98.0
-offset_top = 209.0
+offset_top = 945.0
 offset_right = 298.0
-offset_bottom = 232.0
+offset_bottom = 968.0
 grow_horizontal = 2
 text = "Pedro"
 fit_content = true
 
-[node name="Clase" type="RichTextLabel" parent="Orcs/Orc3" unique_id=441100709]
+[node name="Clase" type="RichTextLabel" parent="Orc3" unique_id=441100709]
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
 offset_left = 100.0
-offset_top = 238.0
+offset_top = 974.0
 offset_right = 300.0
-offset_bottom = 261.0
+offset_bottom = 997.0
 grow_horizontal = 2
 text = "Pibe"
 fit_content = true
 
-[node name="HP" type="RichTextLabel" parent="Orcs/Orc3" unique_id=1683869003]
+[node name="HP" type="RichTextLabel" parent="Orc3" unique_id=1683869003]
 anchors_preset = -1
 anchor_left = 1.0
 anchor_right = 1.641
 anchor_bottom = 0.21900001
 offset_left = -387.0
-offset_top = 301.0
+offset_top = 1037.0
 offset_right = -387.04797
-offset_bottom = 309.984
+offset_bottom = 1045.984
 text = "100"
 
-[node name="Orc4" type="Node" parent="Orcs" unique_id=530331823 node_paths=PackedStringArray("Sprite2D", "nameLabel", "classLabel", "hpLabel")]
+[node name="Orc4" type="Node2D" parent="." unique_id=1851532233 node_paths=PackedStringArray("Sprite2D", "nameLabel", "classLabel", "hpLabel")]
 script = ExtResource("2_b8jug")
 FirstName = "Adolphín"
 CharacterClass = ExtResource("7_t3oft")
@@ -213,46 +197,45 @@ classLabel = NodePath("Clase")
 hpLabel = NodePath("HP")
 ClassProgresses = Array[ExtResource("5_hgf3e")]([SubResource("Resource_q6n8c"), SubResource("Resource_re1oa"), SubResource("Resource_31cma")])
 
-[node name="Sprite2D" type="Sprite2D" parent="Orcs/Orc4" unique_id=648676733]
-position = Vector2(696, 131)
+[node name="Sprite2D" type="Sprite2D" parent="Orc4" unique_id=648676733]
 texture = ExtResource("1_i8h54")
 
-[node name="Nombre" type="RichTextLabel" parent="Orcs/Orc4" unique_id=1589190248]
+[node name="Nombre" type="RichTextLabel" parent="Orc4" unique_id=1589190248]
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
 offset_left = 98.0
-offset_top = 41.0
+offset_top = 777.0
 offset_right = 298.0
-offset_bottom = 64.0
+offset_bottom = 800.0
 grow_horizontal = 2
 text = "Pedro"
 fit_content = true
 
-[node name="Clase" type="RichTextLabel" parent="Orcs/Orc4" unique_id=637101465]
+[node name="Clase" type="RichTextLabel" parent="Orc4" unique_id=637101465]
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
 offset_left = 100.0
-offset_top = 70.0
+offset_top = 806.0
 offset_right = 300.0
-offset_bottom = 93.0
+offset_bottom = 829.0
 grow_horizontal = 2
 text = "Pibe"
 fit_content = true
 
-[node name="HP" type="RichTextLabel" parent="Orcs/Orc4" unique_id=1330742450]
+[node name="HP" type="RichTextLabel" parent="Orc4" unique_id=1330742450]
 anchors_preset = -1
 anchor_left = 1.0
 anchor_right = 1.641
 anchor_bottom = 0.21900001
 offset_left = -387.0
-offset_top = 133.0
+offset_top = 869.0
 offset_right = -387.04797
-offset_bottom = 141.984
+offset_bottom = 877.984
 text = "100"
 
-[node name="Orc5" type="Node" parent="Orcs" unique_id=381236377 node_paths=PackedStringArray("Sprite2D", "nameLabel", "classLabel", "hpLabel")]
+[node name="Orc5" type="Node2D" parent="." unique_id=1098084263 node_paths=PackedStringArray("Sprite2D", "nameLabel", "classLabel", "hpLabel")]
 script = ExtResource("2_b8jug")
 FirstName = "Robert"
 CharacterClass = ExtResource("8_bddn3")
@@ -262,46 +245,45 @@ classLabel = NodePath("Clase")
 hpLabel = NodePath("HP")
 ClassProgresses = Array[ExtResource("5_hgf3e")]([SubResource("Resource_q6n8c"), SubResource("Resource_re1oa"), SubResource("Resource_31cma")])
 
-[node name="Sprite2D" type="Sprite2D" parent="Orcs/Orc5" unique_id=104708567]
-position = Vector2(664, 187)
+[node name="Sprite2D" type="Sprite2D" parent="Orc5" unique_id=104708567]
 texture = ExtResource("1_i8h54")
 
-[node name="Nombre" type="RichTextLabel" parent="Orcs/Orc5" unique_id=1796691142]
+[node name="Nombre" type="RichTextLabel" parent="Orc5" unique_id=1796691142]
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
 offset_left = 66.0
-offset_top = 97.0
+offset_top = 833.0
 offset_right = 266.0
-offset_bottom = 120.0
+offset_bottom = 856.0
 grow_horizontal = 2
 text = "Roberto"
 fit_content = true
 
-[node name="Clase" type="RichTextLabel" parent="Orcs/Orc5" unique_id=441915233]
+[node name="Clase" type="RichTextLabel" parent="Orc5" unique_id=441915233]
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
 offset_left = 68.0
-offset_top = 126.0
+offset_top = 862.0
 offset_right = 268.0
-offset_bottom = 149.0
+offset_bottom = 885.0
 grow_horizontal = 2
 text = "Pibe"
 fit_content = true
 
-[node name="HP" type="RichTextLabel" parent="Orcs/Orc5" unique_id=1542017433]
+[node name="HP" type="RichTextLabel" parent="Orc5" unique_id=1542017433]
 anchors_preset = -1
 anchor_left = 1.0
 anchor_right = 1.641
 anchor_bottom = 0.21900001
 offset_left = -419.0
-offset_top = 189.0
+offset_top = 925.0
 offset_right = -419.04797
-offset_bottom = 197.984
+offset_bottom = 933.984
 text = "100"
 
-[node name="Orc6" type="Node" parent="Orcs" unique_id=1920088745 node_paths=PackedStringArray("Sprite2D", "nameLabel", "classLabel", "hpLabel")]
+[node name="Orc6" type="Node2D" parent="." unique_id=1255693812 node_paths=PackedStringArray("Sprite2D", "nameLabel", "classLabel", "hpLabel")]
 script = ExtResource("2_b8jug")
 FirstName = "Patricia"
 CharacterClass = ExtResource("10_re1oa")
@@ -311,46 +293,45 @@ classLabel = NodePath("Clase")
 hpLabel = NodePath("HP")
 ClassProgresses = Array[ExtResource("5_hgf3e")]([SubResource("Resource_q6n8c"), SubResource("Resource_re1oa"), SubResource("Resource_31cma")])
 
-[node name="Sprite2D" type="Sprite2D" parent="Orcs/Orc6" unique_id=959198086]
-position = Vector2(752, 243)
+[node name="Sprite2D" type="Sprite2D" parent="Orc6" unique_id=959198086]
 texture = ExtResource("1_i8h54")
 
-[node name="Nombre" type="RichTextLabel" parent="Orcs/Orc6" unique_id=518413418]
+[node name="Nombre" type="RichTextLabel" parent="Orc6" unique_id=518413418]
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
 offset_left = 154.0
-offset_top = 153.0
+offset_top = 889.0
 offset_right = 354.0
-offset_bottom = 176.0
+offset_bottom = 912.0
 grow_horizontal = 2
 text = "Roberto"
 fit_content = true
 
-[node name="Clase" type="RichTextLabel" parent="Orcs/Orc6" unique_id=1210178860]
+[node name="Clase" type="RichTextLabel" parent="Orc6" unique_id=1210178860]
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
 offset_left = 156.0
-offset_top = 182.0
+offset_top = 918.0
 offset_right = 356.0
-offset_bottom = 205.0
+offset_bottom = 941.0
 grow_horizontal = 2
 text = "Pibe"
 fit_content = true
 
-[node name="HP" type="RichTextLabel" parent="Orcs/Orc6" unique_id=994779605]
+[node name="HP" type="RichTextLabel" parent="Orc6" unique_id=994779605]
 anchors_preset = -1
 anchor_left = 1.0
 anchor_right = 1.641
 anchor_bottom = 0.21900001
 offset_left = -331.0
-offset_top = 245.0
+offset_top = 981.0
 offset_right = -331.04797
-offset_bottom = 253.984
+offset_bottom = 989.984
 text = "100"
 
-[node name="Orc7" type="Node" parent="Orcs" unique_id=1275941588 node_paths=PackedStringArray("Sprite2D", "nameLabel", "classLabel", "hpLabel")]
+[node name="Orc7" type="Node2D" parent="." unique_id=593852909 node_paths=PackedStringArray("Sprite2D", "nameLabel", "classLabel", "hpLabel")]
 script = ExtResource("2_b8jug")
 FirstName = "Loretta"
 CharacterClass = ExtResource("11_mcifo")
@@ -360,101 +341,72 @@ classLabel = NodePath("Clase")
 hpLabel = NodePath("HP")
 ClassProgresses = Array[ExtResource("5_hgf3e")]([SubResource("Resource_q6n8c"), SubResource("Resource_re1oa"), SubResource("Resource_31cma")])
 
-[node name="Sprite2D" type="Sprite2D" parent="Orcs/Orc7" unique_id=1433995137]
-position = Vector2(848, 331)
+[node name="Sprite2D" type="Sprite2D" parent="Orc7" unique_id=1433995137]
 texture = ExtResource("1_i8h54")
 
-[node name="Nombre" type="RichTextLabel" parent="Orcs/Orc7" unique_id=894864038]
+[node name="Nombre" type="RichTextLabel" parent="Orc7" unique_id=894864038]
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
 offset_left = 250.0
-offset_top = 241.0
+offset_top = 977.0
 offset_right = 450.0
-offset_bottom = 264.0
+offset_bottom = 1000.0
 grow_horizontal = 2
 text = "Roberto"
 fit_content = true
 
-[node name="Clase" type="RichTextLabel" parent="Orcs/Orc7" unique_id=545429053]
+[node name="Clase" type="RichTextLabel" parent="Orc7" unique_id=545429053]
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
 offset_left = 252.0
-offset_top = 270.0
+offset_top = 1006.0
 offset_right = 452.0
-offset_bottom = 293.0
+offset_bottom = 1029.0
 grow_horizontal = 2
 text = "Pibe"
 fit_content = true
 
-[node name="HP" type="RichTextLabel" parent="Orcs/Orc7" unique_id=573326692]
+[node name="HP" type="RichTextLabel" parent="Orc7" unique_id=573326692]
 anchors_preset = -1
 anchor_left = 1.0
 anchor_right = 1.641
 anchor_bottom = 0.21900001
 offset_left = -235.0
-offset_top = 333.0
+offset_top = 1069.0
 offset_right = -235.04797
-offset_bottom = 341.984
+offset_bottom = 1077.984
 text = "100"
 
-[node name="UI Main" type="Control" parent="." unique_id=219697555 node_paths=PackedStringArray("Party", "UIParty", "OrcForTree", "PoolUI")]
+[node name="UI Main" type="Control" parent="." unique_id=219697555 node_paths=PackedStringArray("OrcForTree", "PoolUI")]
 layout_mode = 3
 anchors_preset = 0
 offset_right = 1030.0
 offset_bottom = 647.0
 script = ExtResource("5_xtiqn")
-Party = NodePath("../CharacterParty")
-UIParty = NodePath("UI Party")
+CombatScene = ExtResource("13_eu8p6")
 ClassTreeScene = ExtResource("6_nnxkq")
-OrcForTree = NodePath("../Orcs/Orc2")
+OrcForTree = NodePath("")
 PoolUI = NodePath("UI Orc Pool")
 
 [node name="OpenClassTreeButton" type="Button" parent="UI Main" unique_id=675934931]
 layout_mode = 0
-offset_left = 515.0
-offset_top = 355.0
-offset_right = 745.0
-offset_bottom = 425.0
+offset_left = 17.0
+offset_top = 394.0
+offset_right = 247.0
+offset_bottom = 464.0
 text = "Open class tree"
 
-[node name="UI Party" type="Panel" parent="UI Main" unique_id=1193435840 node_paths=PackedStringArray("Party", "BoardRoot")]
-layout_mode = 1
-offset_left = 8.0
-offset_top = 24.0
-offset_right = 264.0
-offset_bottom = 280.0
-theme_override_styles/panel = SubResource("StyleBoxFlat_70ebp")
-script = ExtResource("9_q6n8c")
-SlotScene = ExtResource("10_31cma")
-Party = NodePath("../../CharacterParty")
-BoardRoot = NodePath("MarginContainer/Board")
+[node name="OpenCombatButton" type="Button" parent="UI Main" unique_id=1502428302]
+layout_mode = 0
+offset_left = 17.0
+offset_top = 484.0
+offset_right = 247.0
+offset_bottom = 554.0
+text = "Open COMBAT"
 
-[node name="RichTextLabel" type="RichTextLabel" parent="UI Main/UI Party" unique_id=628258243]
-layout_mode = 1
-offset_top = -20.0
-offset_right = 107.0
-offset_bottom = 9.0
-theme_override_font_sizes/normal_font_size = 12
-text = "Party"
-
-[node name="MarginContainer" type="MarginContainer" parent="UI Main/UI Party" unique_id=1793740066]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/margin_left = 30
-theme_override_constants/margin_top = 10
-theme_override_constants/margin_right = 30
-theme_override_constants/margin_bottom = 10
-
-[node name="Board" type="Control" parent="UI Main/UI Party/MarginContainer" unique_id=1949226388]
-layout_mode = 2
-
-[node name="UI Orc Pool" type="Panel" parent="UI Main" unique_id=1054518165 node_paths=PackedStringArray("list", "Party")]
+[node name="UI Orc Pool" type="Panel" parent="UI Main" unique_id=1054518165 node_paths=PackedStringArray("list")]
 layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
@@ -468,7 +420,6 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_t3oft")
 script = ExtResource("11_g5s02")
 PoolItemScene = ExtResource("12_70ebp")
 list = NodePath("MarginContainer/ScrollContainer/VBoxContainer")
-Party = NodePath("../../CharacterParty")
 
 [node name="RichTextLabel" type="RichTextLabel" parent="UI Main/UI Orc Pool" unique_id=1084854822]
 layout_mode = 1

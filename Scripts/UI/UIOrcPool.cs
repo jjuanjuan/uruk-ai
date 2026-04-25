@@ -4,12 +4,11 @@ public partial class UIOrcPool : Control
 {
     [Export] public PackedScene PoolItemScene;
     [Export] VBoxContainer list;
-    [Export] public CharacterParty Party;
 
-public override void _Ready()
-{
-    MouseFilter = MouseFilterEnum.Stop; // sin esto puede no detectar drop
-}
+    public override void _Ready()
+    {
+        MouseFilter = MouseFilterEnum.Stop; // sin esto puede no detectar drop
+    }
 
     public void SetOrcs(Godot.Collections.Array<Orc> orcs)
     {
@@ -45,10 +44,11 @@ public override void _Ready()
 
         if (source == "party")
         {
+            var fromParty = dict["from_party"].As<CharacterParty>();
             int fromRow = (int)dict["from_row"];
             int fromCol = (int)dict["from_col"];
 
-            Party.RemoveOrc(fromRow, fromCol); // 🔥 esto lo saca de la party
+            fromParty.RemoveOrc(fromRow, fromCol);
         }
     }
 }

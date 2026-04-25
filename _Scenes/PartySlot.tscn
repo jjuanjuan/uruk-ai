@@ -33,6 +33,8 @@ layout_mode = 2
 mouse_filter = 2
 
 [node name="CharImg" type="TextureRect" parent="MarginContainer/AspectRatioContainer/Control" unique_id=34993198]
+z_index = 1
+y_sort_enabled = true
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0

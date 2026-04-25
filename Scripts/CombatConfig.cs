@@ -30,4 +30,6 @@ public partial class CombatConfig : Resource
     public float CombatStartDelay = 4.0f;
     [Export]
     public float AttackInterval = 2.0f;
+    [Export]
+    public float AttackDelayWhenUI = 1.0f;
 }

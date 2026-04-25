@@ -5,6 +5,7 @@ public partial class CharacterParty : Node
 {
     public const int ROWS = 3;
     public const int COLUMNS = 5;
+
     private Dictionary<Orc, PartyPosition> origin = new();
 
     [Export] public int MaxUnits = 6;
@@ -14,19 +15,6 @@ public partial class CharacterParty : Node
 
     public int CurrentUnits => origin.Count;
 
-    public List<int> GetOccupiedColumns(int col)
-    {
-        var cols = new List<int> { col };
-
-        if (col - 1 >= 0)
-            cols.Add(col - 1);
-
-        if (col + 1 < COLUMNS)
-            cols.Add(col + 1);
-
-        return cols;
-    }
-
     public Orc GetOrc(int row, int col)
     {
         foreach (var kv in origin)
@@ -34,7 +22,6 @@ public partial class CharacterParty : Node
             if (kv.Value.Row == row && kv.Value.Column == col)
                 return kv.Key;
         }
-
         return null;
     }
 
@@ -46,109 +33,118 @@ public partial class CharacterParty : Node
         foreach (var kv in origin)
         {
             var other = kv.Key;
-
-            if (other == movingOrc)
-                continue;
+            if (other == movingOrc) continue;
 
             var pos = kv.Value;
+            if (pos.Row != row) continue;
 
-            if (pos.Row != row)
-                continue;
-
-            int otherCol = pos.Column;
-
-            // regla de adyacencia (NO ocupación)
-            if (Mathf.Abs(otherCol - col) <= 1)
+            if (Mathf.Abs(pos.Column - col) <= 1)
                 return false;
         }
 
         return true;
     }
+
     public bool PlaceOrc(Orc orc, int row, int col)
     {
-        if (orc == null)
-            return false;
-
-        if (CurrentUnits >= MaxUnits)
-            return false;
+        if (orc == null) return false;
 
         if (!CanPlaceOrc(row, col, orc))
             return false;
 
         origin[orc] = new PartyPosition(row, col);
-
-        EmitSignal(SignalName.PartyChanged);
+        orc.PartyPosition = new PartyPosition(row, col);
+        GD.Print($"Placed {orc.GetFirstName()} in {row},{col}");
+        EmitAllSignals();
         return true;
     }
 
     public bool MoveOrc(int fromRow, int fromCol, int toRow, int toCol)
     {
         var orc = GetOrc(fromRow, fromCol);
-        if (orc == null)
-            return false;
+        if (orc == null) return false;
 
         if (!CanPlaceOrc(toRow, toCol, orc))
             return false;
 
         origin[orc] = new PartyPosition(toRow, toCol);
+        orc.PartyPosition = new PartyPosition(toRow, toCol);
 
-        EmitSignal(SignalName.PartyChanged);
+        EmitAllSignals();
         return true;
     }
 
     public bool SwapOrc(int r1, int c1, int r2, int c2)
     {
-        var orcA = GetOrc(r1, c1);
-        var orcB = GetOrc(r2, c2);
+        var a = GetOrc(r1, c1);
+        var b = GetOrc(r2, c2);
 
-        if (orcA == null)
-            return false;
+        if (a == null) return false;
 
-        var posA = origin[orcA];
-
-        if (orcB == null)
-        {
+        if (b == null)
             return MoveOrc(r1, c1, r2, c2);
-        }
 
-        var posB = origin[orcB];
+        var posA = origin[a];
+        var posB = origin[b];
 
-        // validar ambos movimientos
-        if (!CanPlaceOrc(posB.Row, posB.Column, orcA))
-            return false;
+        if (!CanPlaceOrc(posB.Row, posB.Column, a)) return false;
+        if (!CanPlaceOrc(posA.Row, posA.Column, b)) return false;
 
-        if (!CanPlaceOrc(posA.Row, posA.Column, orcB))
-            return false;
+        origin[a] = posB;
+        origin[b] = posA;
 
-        origin[orcA] = posB;
-        origin[orcB] = posA;
+        a.PartyPosition = posB;
+        b.PartyPosition = posA;
 
-        EmitSignal(SignalName.PartyChanged);
+        EmitAllSignals();
         return true;
     }
 
     public void RemoveOrc(int row, int col)
     {
         var orc = GetOrc(row, col);
-        if (orc == null)
-            return;
+        if (orc == null) return;
 
         origin.Remove(orc);
 
-        EmitSignal(SignalName.PartyChanged);
+        EmitAllSignals();
     }
 
-    bool IsValidPosition(int row, int column)
+    void EmitAllSignals()
+    {
+        EmitSignal(SignalName.PartyChanged);
+        GameManager.I.EmitSignal(GameManager.SignalName.PartiesChanged);
+    }
+
+    bool IsValidPosition(int row, int col)
     {
         return row >= 0 && row < ROWS &&
-               column >= 0 && column < COLUMNS;
+               col >= 0 && col < COLUMNS;
     }
 
-    public enum RowType
+    public List<Orc> GetAllOrcs()
     {
-        Front = 0,
-        Middle = 1,
-        Back = 2
+        return new List<Orc>(origin.Keys);
+    }
+    public List<Orc> GetAllLivingOrcs()
+    {
+        var list = new List<Orc>();
+        foreach (var kv in origin)
+        {
+            if (kv.Key.IsAlive) list.Add(kv.Key);
+        }
+
+        return list;
+    }
+
+    public bool IsDefeated()
+    {
+        return GetAllLivingOrcs().Count <= 0;
+    }
+
+    public bool IsMember(Orc orc)
+    {
+        return origin.ContainsKey(orc);
     }
 }
 

@@ -2,62 +2,43 @@ using Godot;
 
 public partial class UIMain : Control
 {
-    [Export] public CharacterParty Party;
-    [Export] public UIParty UIParty;
+    [Export] public PackedScene CombatScene;
     [Export] public PackedScene ClassTreeScene;
     [Export] public Orc OrcForTree;
     [Export] public UIOrcPool PoolUI;
-    public Godot.Collections.Array<Orc> AllOrcs = new();
+
+    CharacterParty PlayerParty => GameManager.I.Team1;
+    CharacterParty EnemyParty => GameManager.I.Team2;
 
     public override void _Ready()
     {
         GetNode<Button>("OpenClassTreeButton").Pressed += OpenClassTree;
+        GetNode<Button>("OpenCombatButton").Pressed += OpenCombat;
 
         foreach (var node in GetTree().GetNodesInGroup("orcs"))
         {
             if (node is Orc orc)
-                AllOrcs.Add(orc);
+                GameManager.I.AllOrcs.Add(orc);
         }
 
-        Party.PartyChanged += RefreshAll;
+        PlayerParty.PartyChanged += RefreshAll;
+        EnemyParty.PartyChanged += RefreshAll;
+        GameManager.I.PartiesChanged += RefreshPool;
 
-        // primer sync
-        CallDeferred(nameof(RefreshAll));
+        RefreshPool();
+        RefreshAll();
     }
 
     void RefreshAll()
     {
-        GD.Print("REFRESH");
-
-        // actualizar party
-        UIParty.Refresh();
-
-        // reconstruir pool
-        var available = new Godot.Collections.Array<Orc>();
-
-        foreach (var orc in AllOrcs)
-        {
-            if (!IsInParty(orc))
-                available.Add(orc);
-        }
-
-        PoolUI.SetOrcs(available);
+        PoolUI.SetOrcs(GameManager.I.GetAvailableOrcs());
     }
-
-    bool IsInParty(Orc orc)
+    void RefreshPool()
     {
-        for (int r = 0; r < CharacterParty.ROWS; r++)
-        {
-            for (int c = 0; c < CharacterParty.COLUMNS; c++)
-            {
-                if (Party.GetOrc(r, c) == orc)
-                    return true;
-            }
-        }
-
-        return false;
+        PoolUI.SetOrcs(GameManager.I.GetAvailableOrcs());
     }
 
+    // Buttons
     void OpenClassTree()
     {
         if (GetNodeOrNull<UIClassTree>("UIClassTree") != null)
@@ -69,18 +50,11 @@ public partial class UIMain : Control
 
         AddChild(tree);
     }
-
-    // TODO: generar un montón random
-    void CreateOrcs()
+    void OpenCombat()
     {
-        var orcs = new Godot.Collections.Array<Orc>();
+        var combat = CombatScene.Instantiate<UICombatScene>();
+        combat.Name = "UICombatScene";
 
-        for (int i = 0; i < 10; i++)
-        {
-            var orc = new Orc();
-            orcs.Add(orc);
-        }
-
-        PoolUI.SetOrcs(orcs);
+        AddChild(combat);
     }
 }

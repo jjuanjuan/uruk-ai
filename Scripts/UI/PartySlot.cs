@@ -27,6 +27,8 @@ public partial class PartySlot : PanelContainer
         UpdateVisual();
 
         UIParty?.LayoutSlots();
+
+        GD.Print($"Slot {Row},{Column} Party is NULL? {Party == null}");
     }
 
     public void UpdateVisual()
@@ -97,7 +99,8 @@ public partial class PartySlot : PanelContainer
             { "orc", Orc },
             { "source", "party" },
             { "from_row", Row },
-            { "from_col", Column }
+            { "from_col", Column },
+            { "from_party", Party }
         };
 
         DragState.IsDragging = true;
@@ -118,6 +121,12 @@ public partial class PartySlot : PanelContainer
 
     public override bool _CanDropData(Vector2 atPosition, Variant data)
     {
+        if (Party == null)
+        {
+            ApplyInvalid();
+            return false;
+        }
+
         if (data.VariantType != Variant.Type.Dictionary)
         {
             ApplyInvalid();
@@ -125,18 +134,30 @@ public partial class PartySlot : PanelContainer
         }
 
         var dict = (Godot.Collections.Dictionary)data;
-        string source = dict["source"].AsString();
+
+        if (!dict.ContainsKey("orc"))
+        {
+            ApplyInvalid();
+            return false;
+        }
+
         var orc = dict["orc"].As<Orc>();
+        if (orc == null)
+        {
+            ApplyInvalid();
+            return false;
+        }
 
         bool valid = true;
 
-        // válido si la celda está vacía y no tiene adyacentes en Column
         int start = Mathf.Max(0, Column - 1);
-        int end = Mathf.Min(4, Column + 1);
+        int end = Mathf.Min(CharacterParty.COLUMNS - 1, Column + 1);
 
         for (int c = start; c <= end; c++)
         {
-            if (Party.GetOrc(Row, c) != null && Party.GetOrc(Row, c) != orc)
+            var other = Party.GetOrc(Row, c);
+
+            if (other != null && other != orc)
             {
                 valid = false;
                 break;
@@ -164,12 +185,18 @@ public partial class PartySlot : PanelContainer
         {
             int fromRow = (int)dict["from_row"];
             int fromCol = (int)dict["from_col"];
+            var fromParty = dict["from_party"].As<CharacterParty>();
 
-            Party.SwapOrc(fromRow, fromCol, Row, Column);
+            if (fromParty == Party)
+            {
+                Party.SwapOrc(fromRow, fromCol, Row, Column);
+            }
+            else
+            {
+                fromParty.RemoveOrc(fromRow, fromCol);
+                Party.PlaceOrc(orc, Row, Column);
+            }
         }
-
-        ApplyNormal();
-        UpdateVisual();
     }
 
     public override void _Notification(int what)
@@ -183,7 +210,7 @@ public partial class PartySlot : PanelContainer
 
     public override void _Process(double delta)
     {
-        if (!DragState.IsDragging)
+        if (!DragState.IsDragging || DragState.Data == null)
         {
             ApplyNormal();
             return;
@@ -193,20 +220,32 @@ public partial class PartySlot : PanelContainer
 
     void EvaluateHighlight()
     {
+        if (Party == null)
+            return;
+
         if (DragState.Data == null)
             return;
 
-        var dict = DragState.Data;
+        if (DragState.Data is not Godot.Collections.Dictionary dict)
+            return;
+
+        if (!dict.ContainsKey("orc"))
+            return;
+
         var orc = dict["orc"].As<Orc>();
+        if (orc == null)
+            return;
+
         bool valid = true;
 
-        // válido si la celda está vacía y no tiene adyacentes en Column
         int start = Mathf.Max(0, Column - 1);
-        int end = Mathf.Min(4, Column + 1);
+        int end = Mathf.Min(CharacterParty.COLUMNS - 1, Column + 1);
 
         for (int c = start; c <= end; c++)
         {
-            if (Party.GetOrc(Row, c) != null && Party.GetOrc(Row, c) != orc)
+            var other = Party.GetOrc(Row, c);
+
+            if (other != null && other != orc)
             {
                 valid = false;
                 break;

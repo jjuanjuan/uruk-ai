@@ -15,6 +15,10 @@ run/main_scene="uid://bte5gvthbexir"
 config/features=PackedStringArray("4.6", "C#", "GL Compatibility")
 config/icon="res://icon.svg"
 
+[autoload]
+
+GameManager="*uid://c3v5vl6mk60ym"
+
 [dotnet]
 
 project/assembly_name="urukAI"
