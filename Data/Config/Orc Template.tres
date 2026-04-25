@@ -1,11 +1,14 @@
 [gd_resource type="Resource" script_class="OrcTemplate" format=3 uid="uid://c024ksbq5fjtp"]
 
-[ext_resource type="Resource" uid="uid://gogb8s6l7npy" path="res://Data/CharacterClasses/0_Scout.tres" id="1_o3vtb"]
 [ext_resource type="Script" uid="uid://dbqerfupo2uot" path="res://Scripts/Unit/OrcTemplate.cs" id="1_sm56y"]
 [ext_resource type="Resource" uid="uid://c7rktj3ymrup" path="res://Data/CharacterClasses/0_Militia.tres" id="2_eyntb"]
+[ext_resource type="Resource" uid="uid://cg4wg58pgbr6l" path="res://Data/CharacterClasses/3_AxeThrower.tres" id="3_5yqo0"]
 [ext_resource type="Resource" uid="uid://d0rashb28ycuo" path="res://Data/CharacterClasses/1_Lancer.tres" id="3_ky6dn"]
+[ext_resource type="Resource" uid="uid://dq570np7agkmk" path="res://Data/CharacterClasses/2_Hoplite.tres" id="4_7k35s"]
+[ext_resource type="Resource" uid="uid://c4y6v7ox6s0ai" path="res://Data/CharacterClasses/2_Rogue.tres" id="5_3me6e"]
+[ext_resource type="Resource" uid="uid://ckq2tps25fbrd" path="res://Data/CharacterClasses/3_Morgenstern.tres" id="6_jjswt"]
 
 [resource]
 script = ExtResource("1_sm56y")
-BaseClasses = Array[Object]([ExtResource("1_o3vtb"), ExtResource("2_eyntb"), ExtResource("3_ky6dn")])
+BaseClasses = Array[Object]([ExtResource("2_eyntb"), ExtResource("3_ky6dn"), ExtResource("3_5yqo0"), ExtResource("4_7k35s"), ExtResource("5_3me6e"), ExtResource("6_jjswt")])
 metadata/_custom_type_script = "uid://dbqerfupo2uot"
