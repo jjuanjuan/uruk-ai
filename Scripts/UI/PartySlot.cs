@@ -13,6 +13,7 @@ public partial class PartySlot : PanelContainer
     public OrcInstance Orc;
     public CharacterParty Party;
     public UIParty UIParty;
+    public bool IsFront;
 
     // changing style when dragging
     StyleBoxFlat normalStyle;
@@ -103,6 +104,8 @@ public partial class PartySlot : PanelContainer
         }
 
         CharImg.Texture = orc.CharacterClass.GetFrontTexture();
+        CharImg.FlipV = !IsFront; // TODO: reemplazar con imagenes back
+        //CharImg.Texture = orc.CharacterClass.GetBackTexture();
         CharName.Text = orc.GetCustomName();
 
         CharImg.Visible = true;

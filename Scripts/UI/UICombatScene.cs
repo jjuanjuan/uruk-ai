@@ -37,8 +37,8 @@ public partial class UICombatScene : Control
         Team1UI.SetParty(GameManager.I.Team1);
         Team2UI.SetParty(GameManager.I.Team2);
 
-        Team1UI.Setup(GameManager.I.Team1);
-        Team2UI.Setup(GameManager.I.Team2);
+        Team1UI.Setup(GameManager.I.Team1, true);
+        Team2UI.Setup(GameManager.I.Team2, false);
 
         Team1UI.Refresh();
         Team2UI.Refresh();

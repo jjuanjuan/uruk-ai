@@ -6,10 +6,12 @@ public partial class UIParty : Control
 
     [Export] public PackedScene SlotScene;
     [Export] public Control BoardRoot;
+    public bool IsFront;
 
-    public void Setup(CharacterParty party)
+    public void Setup(CharacterParty party, bool front)
     {
         Party = party;
+        IsFront = front;
 
         BuildGrid();
         LayoutSlots();
@@ -59,20 +61,25 @@ public partial class UIParty : Control
             slot.SetOrc(orc);
         }
     }
-    
+
     public Vector2 GetVisualPosition(int row, int col)
     {
         float width = BoardRoot.Size.X;
         float height = BoardRoot.Size.Y;
 
-        float[] xMap = [0.00f, 0.25f, 0.5f, 0.75f, 1.00f];
+        float cellW = width / CharacterParty.COLUMNS;
+        float cellH = height / CharacterParty.ROWS;
 
-        float x = xMap[col] * width;
-        float y = row * (height / CharacterParty.ROWS);
+        int visualRow = IsFront
+            ? (CharacterParty.ROWS - 1 - row)
+            : row;
+
+        float x = col * cellW;
+        float y = visualRow * cellH;
 
         return new Vector2(x, y);
     }
-
+    
     public void LayoutSlots()
     {
         float width = BoardRoot.Size.X;
@@ -83,9 +90,15 @@ public partial class UIParty : Control
 
         foreach (PartySlot slot in BoardRoot.GetChildren())
         {
+            slot.IsFront = IsFront;
+
+            int visualRow = IsFront
+                ? (CharacterParty.ROWS - 1 - slot.Row)
+                : slot.Row;
+
             slot.Position = new Vector2(
                 slot.Column * cellW,
-                slot.Row * cellH
+                visualRow * cellH
             );
 
             slot.Size = new Vector2(cellW, cellH);
