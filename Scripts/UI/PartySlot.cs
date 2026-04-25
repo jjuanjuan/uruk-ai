@@ -148,8 +148,18 @@ public partial class PartySlot : PanelContainer
             return false;
         }
 
+        // límite de unidades
+        string source = dict["source"].AsString();
+
+        if (source == "pool" && Party.CurrentUnits >= Party.MaxUnits)
+        {
+            ApplyInvalid();
+            return false;
+        }
+
         bool valid = true;
 
+        // adyacencia
         int start = Mathf.Max(0, Column - 1);
         int end = Mathf.Min(CharacterParty.COLUMNS - 1, Column + 1);
 
@@ -235,6 +245,14 @@ public partial class PartySlot : PanelContainer
         var orc = dict["orc"].As<Orc>();
         if (orc == null)
             return;
+
+        string source = dict["source"].AsString();
+
+        if (source == "pool" && Party.CurrentUnits >= Party.MaxUnits)
+        {
+            ApplyInvalid();
+            return;
+        }
 
         bool valid = true;
 
