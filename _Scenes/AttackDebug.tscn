@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://bady36ssuw2qw"]
+
+[node name="AttackDebug" type="Control" unique_id=484702840]
+layout_mode = 3
+anchors_preset = 0
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=476889902]
+layout_mode = 0
+offset_right = 20.0
+offset_bottom = 20.0
+color = Color(0, 0, 0, 1)
+
+[node name="ColorRect2" type="ColorRect" parent="." unique_id=1516331271]
+layout_mode = 0
+offset_left = 4.0
+offset_top = 4.0
+offset_right = 16.0
+offset_bottom = 16.0

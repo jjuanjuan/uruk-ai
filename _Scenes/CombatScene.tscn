@@ -5,6 +5,7 @@
 [ext_resource type="Script" uid="uid://cgs2co0jxdffn" path="res://Scripts/Combat/CombatManager.cs" id="1_qyew6"]
 [ext_resource type="PackedScene" uid="uid://dn0of61i2vxkg" path="res://_Scenes/PartySlot.tscn" id="2_qyew6"]
 [ext_resource type="Script" uid="uid://dex1blf0jm6sh" path="res://Scripts/Unit/CharacterParty.cs" id="3_3g8y2"]
+[ext_resource type="PackedScene" uid="uid://bady36ssuw2qw" path="res://_Scenes/AttackDebug.tscn" id="3_cph6q"]
 [ext_resource type="Script" uid="uid://47etf6uct6hc" path="res://Scripts/UI/CombatAdvantageBar.cs" id="6_3g8y2"]
 [ext_resource type="PackedScene" uid="uid://ciauu588bs6od" path="res://_Scenes/DamagePopup.tscn" id="6_f6h1k"]
 
@@ -34,9 +35,17 @@ Log = NodePath("Combat log")
 CurrentUnitLabel = NodePath("Current unit")
 AdvantageBar = NodePath("AdvantageBar")
 
-[node name="CombatManager" type="Node" parent="." unique_id=1959779666 node_paths=PackedStringArray("UI")]
+[node name="CombatManager" type="Node" parent="." unique_id=1959779666 node_paths=PackedStringArray("UI", "VFXLayer")]
 script = ExtResource("1_qyew6")
 UI = NodePath("..")
+AttackDebugScene = ExtResource("3_cph6q")
+VFXLayer = NodePath("../VFX Layer")
+
+[node name="VFX Layer" type="Control" parent="." unique_id=1413209788]
+z_index = 1000
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
 
 [node name="Button StartCombat" type="Button" parent="." unique_id=831656138]
 layout_mode = 0

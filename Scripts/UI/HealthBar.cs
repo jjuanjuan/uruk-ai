@@ -11,10 +11,10 @@ public partial class HealthBar : Control
     {
         var size = Size;
 
-        float midY = size.Y * Value;
+        float midX = size.X * Value;
 
-        DrawRect(new Rect2(0, 0, size.X, midY), EmptyColor);
-        DrawRect(new Rect2(0, midY, size.X, size.Y - midY), HealthyColor);
+        DrawRect(new Rect2(0, 0, midX, size.Y), EmptyColor);
+        DrawRect(new Rect2(0, midX, size.X - midX, size.Y), HealthyColor);
     }
 
     public void SetValue(float v)

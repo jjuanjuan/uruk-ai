@@ -9,7 +9,12 @@ public partial class CombatManager : Node
 
     public CharacterParty Team1;
     public CharacterParty Team2;
+
     [Export] public UICombatScene UI;
+    [Export] float AttackFlightDuration = 0.5f; // TODO: mover esto a cada ataque individual
+    [Export] PackedScene AttackDebugScene;
+    [Export] Control VFXLayer;
+
 
     public enum CombatState
     {
@@ -98,17 +103,22 @@ public partial class CombatManager : Node
 
             case CombatState.WaitingAttackDelay:
                 {
-                    if (stateTimer < GameManager.I.CombatConfig.AttackDelayWhenUI) return;
+                    if (stateTimer < GameManager.I.CombatConfig.AttackDelayWhenUI)
+                        return;
 
-                    ExecuteAttack(currentUnit, pendingAction);
+                    var enemies = combatContext.GetEnemies(currentUnit);
+                    var targets = ResolveTargets(currentUnit, enemies, pendingAction.Target);
+
+                    var actionSnapshot = pendingAction;
+                    var attackerSnapshot = currentUnit;
+
+                    SpawnAttackDebug(targets, attackerSnapshot, actionSnapshot);
+
                     pendingAction = null;
 
-                    combatContext.UnitState[currentUnit].RemainingActions--;
-                    combatContext.UnitState[currentUnit].HasActedThisTurn = true;
+                    SetState(CombatState.WaitingAttackInterval);
 
                     UI?.SetAdvantageBar(combatContext.CalculateAdvantage());
-
-                    SetState(CombatState.WaitingAttackInterval);
                     break;
                 }
 
@@ -297,6 +307,65 @@ public partial class CombatManager : Node
                 GiveKillScore(attacker);
             }
         }
+    }
+    void SpawnAttackDebug(List<OrcInstance> targets, OrcInstance attacker, AttackAction attackAction)
+    {
+        var cube = AttackDebugScene.Instantiate<Control>();
+        VFXLayer.AddChild(cube);
+
+        Vector2 start = Vector2.Zero;
+
+        if (combatContext.GetTeam(attacker) == Team1)
+        {
+            PartySlot slot = UI?.Team1UI.GetSlot(attacker);
+            start = slot.GlobalPosition;
+        }
+        else if (combatContext.GetTeam(attacker) == Team2)
+        {
+            PartySlot slot = UI?.Team2UI.GetSlot(attacker);
+            start = slot.GlobalPosition;
+        }
+
+        CharacterParty enemyTeam = combatContext.GetTeam(targets[0]);
+
+        Vector2 end = GetTargetCenter(targets, enemyTeam);
+
+        cube.GlobalPosition = start;
+
+        var tween = cube.CreateTween();
+
+        tween.TweenProperty(cube, "global_position", end, AttackFlightDuration)
+            .SetTrans(Tween.TransitionType.Quad)
+            .SetEase(Tween.EaseType.Out);
+
+        tween.TweenCallback(Callable.From(() =>
+        {
+            cube.QueueFree();
+
+            if (attackAction == null || attacker == null)
+                return;
+
+            ExecuteAttack(attacker, attackAction);
+        }));
+    }
+    Vector2 GetTargetCenter(List<OrcInstance> targets, CharacterParty team)
+    {
+        Vector2 sum = Vector2.Zero;
+
+        foreach (var target in targets)
+        {
+            if (team == Team1)
+            {
+                PartySlot slot = UI?.Team1UI.GetSlot(target);
+                sum += slot.GlobalPosition;
+            }
+            else if (team == Team2)
+            {
+                PartySlot slot = UI?.Team2UI.GetSlot(target);
+                sum += slot.GlobalPosition;
+            }
+        }
+        return sum / targets.Count;
     }
     private void UpdateResolving()
     {

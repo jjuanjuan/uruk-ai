@@ -52,12 +52,14 @@ public partial class PartySlot : PanelContainer
         {
             CharImg.Visible = false;
             CharName.Visible = false;
+            HPBar.Visible = false;
         }
         else
         {
             CharImg.Visible = true;
             CharName.Text = Orc.GetCustomName();
             CharName.Visible = true;
+            HPBar.Visible = true;
             HPBar.SetValue(Orc.CurrentHPPercentile);
         }
     }
@@ -338,7 +340,7 @@ public partial class PartySlot : PanelContainer
             Callable.From<float>(value =>
             {
                 if (HPBar != null)
-                    HPBar.SetValue(value * 100f);
+                    HPBar.SetValue(value);
             }),
             fromNormalized,
             toNormalized,
