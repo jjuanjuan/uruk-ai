@@ -323,7 +323,7 @@ public partial class CombatManager : Node
         Vector2 start = attackerSlot.GlobalPosition;
 
         CharacterParty enemyTeam = combatContext.GetParty(enemyTeamId);
-        Vector2 end = GetTargetCenter(targets, enemyTeam);
+        Vector2 end = GetTargetCenter(targets);
 
         cube.GlobalPosition = start;
 
@@ -343,15 +343,14 @@ public partial class CombatManager : Node
             ExecuteAttack(attacker, attackAction);
         }));
     }
-    Vector2 GetTargetCenter(List<OrcInstance> targets, CharacterParty team)
+    Vector2 GetTargetCenter(List<OrcInstance> targets)
     {
         Vector2 sum = Vector2.Zero;
+        var teamId = combatContext.GetTeamId(targets[0]);
 
         foreach (var target in targets)
         {
-            var teamId = combatContext.GetTeamId(target);
             var slot = combatContext.GetUI(teamId, UI).GetSlot(target);
-
             sum += slot.GlobalPosition;
         }
         return sum / targets.Count;
@@ -404,7 +403,7 @@ public partial class CombatManager : Node
         // TODO: poner quién ganó
     }
 
-    /////////////////////////////////////////
+    /////////////////////////////////////////////////////////////////
     // TARGETING
     List<OrcInstance> ResolveTargets(
         OrcInstance attacker,
@@ -528,7 +527,7 @@ public partial class CombatManager : Node
         return best;
     }
     // TARGETING
-    /////////////////////////////////////////
+    /////////////////////////////////////////////////////////////////
 
     private void ApplyDamage(OrcInstance attacker, OrcInstance target, AttackAction action)
     {
