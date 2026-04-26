@@ -492,7 +492,7 @@ public partial class CombatManager : Node
                 .GetUI(combatContext.GetTeamId(e), UI)
                 .GetSlot(e);
 
-            float d = attackerSlot.GlobalPosition.DistanceTo(enemySlot.GlobalPosition);
+            float d = attackerSlot.GlobalPosition.DistanceSquaredTo(enemySlot.GlobalPosition);
 
             if (d < bestDist)
             {
@@ -516,7 +516,7 @@ public partial class CombatManager : Node
                 .GetUI(combatContext.GetTeamId(e), UI)
                 .GetSlot(e);
 
-            float d = attackerSlot.GlobalPosition.DistanceTo(enemySlot.GlobalPosition);
+            float d = attackerSlot.GlobalPosition.DistanceSquaredTo(enemySlot.GlobalPosition);
 
             if (d > bestDist)
             {
