@@ -313,21 +313,16 @@ public partial class CombatManager : Node
         var cube = AttackDebugScene.Instantiate<Control>();
         VFXLayer.AddChild(cube);
 
-        Vector2 start = Vector2.Zero;
+        var attackerTeamId = combatContext.GetTeamId(attacker);
+        var enemyTeamId = combatContext.GetTeamId(targets[0]);
 
-        if (combatContext.GetTeam(attacker) == Team1)
-        {
-            PartySlot slot = UI?.Team1UI.GetSlot(attacker);
-            start = slot.GlobalPosition;
-        }
-        else if (combatContext.GetTeam(attacker) == Team2)
-        {
-            PartySlot slot = UI?.Team2UI.GetSlot(attacker);
-            start = slot.GlobalPosition;
-        }
+        var attackerSlot = combatContext
+            .GetUI(attackerTeamId, UI)
+            .GetSlot(attacker);
 
-        CharacterParty enemyTeam = combatContext.GetTeam(targets[0]);
+        Vector2 start = attackerSlot.GlobalPosition;
 
+        CharacterParty enemyTeam = combatContext.GetParty(enemyTeamId);
         Vector2 end = GetTargetCenter(targets, enemyTeam);
 
         cube.GlobalPosition = start;
@@ -354,16 +349,10 @@ public partial class CombatManager : Node
 
         foreach (var target in targets)
         {
-            if (team == Team1)
-            {
-                PartySlot slot = UI?.Team1UI.GetSlot(target);
-                sum += slot.GlobalPosition;
-            }
-            else if (team == Team2)
-            {
-                PartySlot slot = UI?.Team2UI.GetSlot(target);
-                sum += slot.GlobalPosition;
-            }
+            var teamId = combatContext.GetTeamId(target);
+            var slot = combatContext.GetUI(teamId, UI).GetSlot(target);
+
+            sum += slot.GlobalPosition;
         }
         return sum / targets.Count;
     }
@@ -440,7 +429,7 @@ public partial class CombatManager : Node
 
             case AttackAction.AttackActionTarget.CloseSingle:
             default:
-                anchor = GetClosestEnemy(enemies, attacker.PartyPosition);
+                anchor = GetClosestEnemy(enemies, attacker);
                 return new List<OrcInstance> { anchor };
 
             // --------------------------
@@ -448,7 +437,7 @@ public partial class CombatManager : Node
             // --------------------------
 
             case AttackAction.AttackActionTarget.CloseColumn:
-                anchor = GetClosestEnemy(enemies, attacker.PartyPosition);
+                anchor = GetClosestEnemy(enemies, attacker);
                 return GetEnemyColumn(anchor, enemies);
 
             case AttackAction.AttackActionTarget.AnyColumn:
@@ -460,11 +449,11 @@ public partial class CombatManager : Node
             // --------------------------
 
             case AttackAction.AttackActionTarget.CloseRow:
-                anchor = GetClosestEnemy(enemies, attacker.PartyPosition);
+                anchor = GetClosestEnemy(enemies, attacker);
                 return GetEnemyRow(anchor, enemies);
 
             case AttackAction.AttackActionTarget.FarRow:
-                anchor = GetFarthestEnemy(enemies, attacker.PartyPosition);
+                anchor = GetFarthestEnemy(enemies, attacker);
                 return GetEnemyRow(anchor, enemies);
 
             case AttackAction.AttackActionTarget.AnyRow:
@@ -490,15 +479,21 @@ public partial class CombatManager : Node
         return enemies.FindAll(e =>
             e.PartyPosition.Row == anchor.PartyPosition.Row);
     }
-    OrcInstance GetClosestEnemy(List<OrcInstance> enemies, PartyPosition pos)
+    OrcInstance GetClosestEnemy(List<OrcInstance> enemies, OrcInstance attacker)
     {
         OrcInstance best = null;
-        int bestDist = int.MaxValue;
+        float bestDist = float.MaxValue;
+        var attackerSlot = combatContext
+            .GetUI(combatContext.GetTeamId(attacker), UI)
+            .GetSlot(attacker);
 
         foreach (var e in enemies)
         {
-            int d = Mathf.Abs(e.PartyPosition.Row - pos.Row)
-                  + Mathf.Abs(e.PartyPosition.Column - pos.Column);
+            var enemySlot = combatContext
+                .GetUI(combatContext.GetTeamId(e), UI)
+                .GetSlot(e);
+
+            float d = attackerSlot.GlobalPosition.DistanceTo(enemySlot.GlobalPosition);
 
             if (d < bestDist)
             {
@@ -509,15 +504,21 @@ public partial class CombatManager : Node
 
         return best;
     }
-    OrcInstance GetFarthestEnemy(List<OrcInstance> enemies, PartyPosition pos)
+    OrcInstance GetFarthestEnemy(List<OrcInstance> enemies, OrcInstance attacker)
     {
         OrcInstance best = null;
-        int bestDist = -1;
+        float bestDist = float.MinValue;
+        var attackerSlot = combatContext
+            .GetUI(combatContext.GetTeamId(attacker), UI)
+            .GetSlot(attacker);
 
         foreach (var e in enemies)
         {
-            int d = Mathf.Abs(e.PartyPosition.Row - pos.Row)
-                  + Mathf.Abs(e.PartyPosition.Column - pos.Column);
+            var enemySlot = combatContext
+                .GetUI(combatContext.GetTeamId(e), UI)
+                .GetSlot(e);
+
+            float d = attackerSlot.GlobalPosition.DistanceTo(enemySlot.GlobalPosition);
 
             if (d > bestDist)
             {
@@ -541,40 +542,31 @@ public partial class CombatManager : Node
 
         target.TakeDamage(finalDamage);
 
-        var team = combatContext.GetTeam(target);
-        if (team == Team1)
-        {
-            UI?.Team1UI.ShowDamageText(target, finalDamage);
-            PartySlot slot = UI?.Team1UI.GetSlot(target);
-            slot?.UpdateHPBarAnimated(target, oldHP, target.CurrentHP);
-            slot?.PlayHitShake(finalDamage);
-            slot?.PlayHitSquash(finalDamage);
-            if (!target.IsAlive) slot?.PlayDeathFade();
-        }
-        else if (team == Team2)
-        {
-            UI?.Team2UI.ShowDamageText(target, finalDamage);
-            PartySlot slot = UI?.Team2UI.GetSlot(target);
-            slot?.UpdateHPBarAnimated(target, oldHP, target.CurrentHP);
-            slot?.PlayHitShake(finalDamage);
-            slot?.PlayHitSquash(finalDamage);
-            if (!target.IsAlive) slot?.PlayDeathFade();
-        }
+        var teamId = combatContext.GetTeamId(target);
+        var ui = combatContext.GetUI(teamId, UI);
+        var slot = ui.GetSlot(target);
+
+        ui.ShowDamageText(target, finalDamage);
+
+        slot?.UpdateHPBarAnimated(target, oldHP, target.CurrentHP);
+        slot?.PlayHitShake(finalDamage);
+        slot?.PlayHitSquash(finalDamage);
+
+        if (!target.IsAlive)
+            slot?.PlayDeathFade();
 
         GiveScore(attacker, finalDamage);
     }
 
     void GiveScore(OrcInstance attacker, int score)
     {
-        var team = combatContext.GetTeam(attacker);
-        if (team == combatContext.Team1) combatContext.Score1 += score;
-        else if (team == combatContext.Team2) combatContext.Score2 += score;
+        var teamId = combatContext.GetTeamId(attacker);
+        combatContext.AddScore(teamId, score);
     }
     void GiveKillScore(OrcInstance attacker)
     {
-        var team = combatContext.GetTeam(attacker);
-        if (team == combatContext.Team1) combatContext.Kills1++;
-        else if (team == combatContext.Team2) combatContext.Kills2++;
+        var teamId = combatContext.GetTeamId(attacker);
+        combatContext.AddKill(teamId);
     }
 
     private void Shuffle(List<OrcInstance> list)
@@ -596,6 +588,11 @@ public class CombatContext
     public int Score2 = 0;
     public int Kills1 = 0;
     public int Kills2 = 0;
+    public enum TeamId
+    {
+        Team1,
+        Team2
+    }
 
     public List<OrcInstance> GetEnemies(OrcInstance source)
     {
@@ -611,12 +608,29 @@ public class CombatContext
 
         return Team2.GetAllLivingOrcs();
     }
-    public CharacterParty GetTeam(OrcInstance source)
+    public TeamId GetTeamId(OrcInstance source)
     {
-        if (Team1.IsMember(source)) return Team1;
-        else return Team2;
+        return Team1.IsMember(source) ? TeamId.Team1 : TeamId.Team2;
+    }
+    public CharacterParty GetParty(TeamId teamId)
+    {
+        return teamId == TeamId.Team1 ? Team1 : Team2;
+    }
+    public UIParty GetUI(TeamId teamId, UICombatScene ui)
+    {
+        return teamId == TeamId.Team1 ? ui.Team1UI : ui.Team2UI;
     }
 
+    public void AddScore(TeamId team, int score)
+    {
+        if (team == TeamId.Team1) Score1 += score;
+        else Score2 += score;
+    }
+    public void AddKill(TeamId team)
+    {
+        if (team == TeamId.Team1) Kills1++;
+        else Kills2++;
+    }
     public float CalculateAdvantage()
     {
         float tempScore1 = Score1 * (1f + GameManager.I.CombatConfig.ScoreMultiplierPerKill * Kills1);
