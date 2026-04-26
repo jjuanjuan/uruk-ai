@@ -468,10 +468,30 @@ public partial class CombatManager : Node
         double multiplier = action.BaseDamageMultiplier;
         int finalDamage = (int)(baseDamage * multiplier);
 
+        float oldHP = target.CurrentHP;
+
         target.TakeDamage(finalDamage);
+
         var team = combatContext.GetTeam(target);
-        if (team == Team1) UI?.Team1UI.ShowDamageText(target, finalDamage);
-        else if (team == Team2) UI?.Team2UI.ShowDamageText(target, finalDamage);
+        if (team == Team1)
+        {
+            UI?.Team1UI.ShowDamageText(target, finalDamage);
+            PartySlot slot = UI?.Team1UI.GetSlot(target);
+            slot?.UpdateHPBarAnimated(target, oldHP, target.CurrentHP);
+            slot?.PlayHitShake(finalDamage);
+            slot?.PlayHitSquash(finalDamage);
+            if (!target.IsAlive) slot?.PlayDeathFade();
+        }
+        else if (team == Team2)
+        {
+            UI?.Team2UI.ShowDamageText(target, finalDamage);
+            PartySlot slot = UI?.Team2UI.GetSlot(target);
+            slot?.UpdateHPBarAnimated(target, oldHP, target.CurrentHP);
+            slot?.PlayHitShake(finalDamage);
+            slot?.PlayHitSquash(finalDamage);
+            if (!target.IsAlive) slot?.PlayDeathFade();
+        }
+
         GiveScore(attacker, finalDamage);
     }
 

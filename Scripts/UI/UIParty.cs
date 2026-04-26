@@ -129,11 +129,6 @@ public partial class UIParty : Control
         TopLayer.AddChild(popup);
 
         popup.GlobalPosition = slot.GlobalPosition;
-        popup.GlobalPosition += new Vector2(
-            GameManager.I.NextFloat(-10, 10),
-            GameManager.I.NextFloat(-5, 5)
-        );
-
         popup.Setup(value);
     }
 

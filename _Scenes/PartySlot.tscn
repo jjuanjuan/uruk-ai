@@ -2,11 +2,12 @@
 
 [ext_resource type="Script" uid="uid://5781d3mwk2dl" path="res://Scripts/UI/PartySlot.cs" id="1_54qfb"]
 [ext_resource type="Texture2D" uid="uid://3geatbyu0jce" path="res://Art/Placeholders/2_knight_front.png" id="2_8yise"]
+[ext_resource type="Script" uid="uid://bqpqwbfis0yul" path="res://Scripts/UI/HealthBar.cs" id="3_7mel0"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8yise"]
 bg_color = Color(0, 0, 0, 0.5)
 
-[node name="PartySlot" type="PanelContainer" unique_id=32862197 node_paths=PackedStringArray("CharImg", "CharName")]
+[node name="PartySlot" type="PanelContainer" unique_id=32862197 node_paths=PackedStringArray("CharImg", "CharName", "HPBar", "ContentParent")]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -15,6 +16,11 @@ grow_vertical = 2
 script = ExtResource("1_54qfb")
 CharImg = NodePath("MarginContainer/AspectRatioContainer/Control/CharImg")
 CharName = NodePath("MarginContainer/AspectRatioContainer/Control/CharName")
+HPBar = NodePath("MarginContainer/AspectRatioContainer/Control/HP Bar")
+ContentParent = NodePath("MarginContainer/AspectRatioContainer/Control")
+ShakeDuration = 1.0
+ShakeIntensity = Vector2(5, 20)
+SquashDuration = 0.15
 
 [node name="MarginContainer" type="MarginContainer" parent="." unique_id=1598539679]
 layout_mode = 2
@@ -63,3 +69,18 @@ fit_content = true
 scroll_active = false
 horizontal_alignment = 1
 vertical_alignment = 2
+
+[node name="HP Bar" type="TextureProgressBar" parent="MarginContainer/AspectRatioContainer/Control" unique_id=1757951918]
+z_index = 2
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -42.0
+offset_bottom = -633.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+max_value = 1.0
+step = 0.05
+script = ExtResource("3_7mel0")

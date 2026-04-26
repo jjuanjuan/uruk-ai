@@ -5,10 +5,17 @@ public partial class PartySlot : PanelContainer
     [Export] public int Row;
     [Export] public int Column;
 
-    [Export]
-    TextureRect CharImg;
-    [Export]
-    RichTextLabel CharName;
+    [Export] TextureRect CharImg;
+    [Export] RichTextLabel CharName;
+    [Export] HealthBar HPBar;
+
+    [Export] Control ContentParent; // uso este para sacudir y otros efectos
+
+    [Export] float ShakeDuration = 0.6f;
+    [Export] Vector2 ShakeIntensity = new Vector2(2f, 10f);
+    [Export] float SquashDuration = 0.3f;
+    [Export] Vector2 SquashIntensity = new Vector2(1f, 2f);
+    [Export] float DeathAnimationDuration = 1.5f;
 
     public OrcInstance Orc;
     public CharacterParty Party;
@@ -51,6 +58,7 @@ public partial class PartySlot : PanelContainer
             CharImg.Visible = true;
             CharName.Text = Orc.GetCustomName();
             CharName.Visible = true;
+            HPBar.SetValue(Orc.CurrentHPPercentile);
         }
     }
 
@@ -314,6 +322,106 @@ public partial class PartySlot : PanelContainer
         Vector2 pos = UIParty.GetVisualPosition(Row, Column);
         Position = pos;
     }
+
+    // ANIMATIONS ///////////////////////////////////////////////////////////////
+    public void UpdateHPBarAnimated(OrcInstance orc, float from, float to)
+    {
+        float max = orc.MaxHP;
+
+        float fromNormalized = from / max;
+        float toNormalized = to / max;
+
+        // 1. barra HP
+        var hpTween = CreateTween();
+
+        hpTween.TweenMethod(
+            Callable.From<float>(value =>
+            {
+                if (HPBar != null)
+                    HPBar.SetValue(value * 100f);
+            }),
+            fromNormalized,
+            toNormalized,
+            0.35f
+        )
+        .SetTrans(Tween.TransitionType.Quad)
+        .SetEase(Tween.EaseType.Out);
+
+        // 2. flash separado (NO mezclar con el otro tween)
+        var flashTween = CreateTween();
+
+        if (HPBar != null)
+        {
+            HPBar.Modulate = Colors.Red;
+
+            flashTween.TweenProperty(
+                HPBar,
+                "modulate",
+                Colors.White,
+                0.25f
+            )
+            .SetTrans(Tween.TransitionType.Quad)
+            .SetEase(Tween.EaseType.Out);
+        }
+    }
+    public void PlayHitShake(int damage)
+    {
+        float intensity = Mathf.Clamp(damage * 0.1f, ShakeIntensity.X, ShakeIntensity.Y);
+        var tween = CreateTween();
+
+        Vector2 original = ContentParent.Position;
+
+        tween.TweenMethod(
+            Callable.From<float>(t =>
+            {
+                float x = GameManager.I.NextFloat(-intensity, intensity);
+                float y = GameManager.I.NextFloat(-intensity, intensity);
+
+                ContentParent.Position = original + new Vector2(x, y);
+            }),
+            0f,
+            ShakeDuration,
+            ShakeDuration / 6f
+        );
+
+        tween.TweenCallback(Callable.From(() =>
+        {
+            ContentParent.Position = original;
+        }));
+    }
+    public void PlayHitSquash(int damage)
+    {
+        float intensity = Mathf.Clamp(damage / 50f, SquashIntensity.X, SquashIntensity.Y);
+
+        ContentParent.Scale = Vector2.One;
+
+        var tween = CreateTween();
+
+        tween.TweenProperty(ContentParent, "scale", new Vector2(1.15f * intensity, 0.85f), SquashDuration * 0.3f)
+            .SetTrans(Tween.TransitionType.Quad)
+            .SetEase(Tween.EaseType.Out);
+        tween.TweenProperty(ContentParent, "scale", new Vector2(.95f * intensity, 1.05f), SquashDuration * 0.3f)
+            .SetTrans(Tween.TransitionType.Quad)
+            .SetEase(Tween.EaseType.Out);
+        tween.TweenProperty(ContentParent, "scale", Vector2.One, SquashDuration * 0.4f)
+            .SetTrans(Tween.TransitionType.Quad)
+            .SetEase(Tween.EaseType.Out);
+    }
+    public void PlayDeathFade()
+    {
+        var tween = CreateTween();
+
+        // fade general del contenido
+        tween.TweenProperty(CharImg, "modulate:a", 0f, DeathAnimationDuration)
+            .SetTrans(Tween.TransitionType.Quad)
+            .SetEase(Tween.EaseType.Out);
+
+        tween.Finished += () =>
+        {
+            ContentParent.Modulate = new Color(1, 1, 1, 0);
+        };
+    }
+    ////////////////////////////////////////////////////////////////////////
 
     // Select orc
     public override void _GuiInput(InputEvent @event)

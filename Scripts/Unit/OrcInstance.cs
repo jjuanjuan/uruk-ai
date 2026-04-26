@@ -12,7 +12,9 @@ public partial class OrcInstance : Resource
     [Export] public Godot.Collections.Array<ClassProgress> ClassProgresses = new();
 
     public int Damage = 0;
-    public int CurrentHP => Mathf.Max(Template.BaseHP + CharacterClass.GetBaseHP() - Damage, 0);
+    public int MaxHP => Template.BaseHP + CharacterClass.GetBaseHP();
+    public int CurrentHP => Mathf.Max(MaxHP - Damage, 0);
+    public float CurrentHPPercentile => CurrentHP / (float)MaxHP;
     public bool IsAlive => CurrentHP > 0;
 
     public PartyPosition PartyPosition;

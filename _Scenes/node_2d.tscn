@@ -16,7 +16,7 @@ border_color = Color(0.6651851, 0.6651851, 0.6651851, 1)
 
 [node name="Node2D" type="Node2D" unique_id=1963946473]
 
-[node name="UI Main" type="Control" parent="." unique_id=219697555]
+[node name="UI Main" type="Control" parent="." unique_id=219697555 node_paths=PackedStringArray("PoolUI")]
 layout_mode = 3
 anchors_preset = 0
 offset_right = 1030.0
@@ -24,6 +24,7 @@ offset_bottom = 647.0
 script = ExtResource("5_xtiqn")
 CombatScene = ExtResource("13_eu8p6")
 ClassTreeScene = ExtResource("6_nnxkq")
+PoolUI = NodePath("UI Orc Pool")
 
 [node name="OpenClassTreeButton" type="Button" parent="UI Main" unique_id=675934931]
 layout_mode = 0

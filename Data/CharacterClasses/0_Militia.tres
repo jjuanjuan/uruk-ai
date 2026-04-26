@@ -25,6 +25,7 @@ metadata/_custom_type_script = "uid://du724smqstcfc"
 [resource]
 script = ExtResource("5_wu0ou")
 ClassName = "Militia"
+BaseHP = 10
 ClassTextureFront = ExtResource("3_kq20t")
 ClassTextureBack = ExtResource("3_tq6mj")
 AttacksPerPosition = Array[Object]([SubResource("Resource_tq6mj"), SubResource("Resource_fvaiu"), SubResource("Resource_ooqhg")])
