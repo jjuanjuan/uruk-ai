@@ -117,8 +117,6 @@ public partial class CombatManager : Node
                     pendingAction = null;
 
                     SetState(CombatState.WaitingAttackInterval);
-
-                    UI?.SetAdvantageBar(combatContext.CalculateAdvantage());
                     break;
                 }
 
@@ -307,6 +305,8 @@ public partial class CombatManager : Node
                 GiveKillScore(attacker);
             }
         }
+
+        UI?.SetAdvantageBar(combatContext.CalculateAdvantage());
     }
     void SpawnAttackDebug(List<OrcInstance> targets, OrcInstance attacker, AttackAction attackAction)
     {
@@ -501,7 +501,6 @@ public partial class CombatManager : Node
                 best = e;
             }
         }
-
         return best;
     }
     OrcInstance GetFarthestEnemy(List<OrcInstance> enemies, OrcInstance attacker)
@@ -526,7 +525,6 @@ public partial class CombatManager : Node
                 best = e;
             }
         }
-
         return best;
     }
     // TARGETING
