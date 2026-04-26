@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://dn0of61i2vxkg" path="res://_Scenes/PartySlot.tscn" id="2_qyew6"]
 [ext_resource type="Script" uid="uid://dex1blf0jm6sh" path="res://Scripts/Unit/CharacterParty.cs" id="3_3g8y2"]
 [ext_resource type="Script" uid="uid://47etf6uct6hc" path="res://Scripts/UI/CombatAdvantageBar.cs" id="6_3g8y2"]
+[ext_resource type="PackedScene" uid="uid://ciauu588bs6od" path="res://_Scenes/DamagePopup.tscn" id="6_f6h1k"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_i5gep"]
 border_width_left = 2
@@ -64,7 +65,7 @@ text = "Current unit"
 [node name="Team 1" type="Node" parent="." unique_id=479715104]
 script = ExtResource("3_3g8y2")
 
-[node name="UI Team 1" type="Panel" parent="Team 1" unique_id=1966276297 node_paths=PackedStringArray("BoardRoot")]
+[node name="UI Team 1" type="Panel" parent="Team 1" unique_id=1966276297 node_paths=PackedStringArray("BoardRoot", "TopLayer")]
 offset_left = 544.0
 offset_top = 40.0
 offset_right = 800.0
@@ -73,6 +74,8 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_i5gep")
 script = ExtResource("1_dk7xb")
 SlotScene = ExtResource("2_qyew6")
 BoardRoot = NodePath("BoardContainer/Board")
+TopLayer = NodePath("TopLayer")
+DamagePopupScene = ExtResource("6_f6h1k")
 
 [node name="RichTextLabel" type="RichTextLabel" parent="Team 1/UI Team 1" unique_id=1962562087]
 layout_mode = 1
@@ -95,10 +98,19 @@ offset_right = 226.0
 offset_bottom = 246.0
 mouse_filter = 2
 
+[node name="TopLayer" type="Control" parent="Team 1/UI Team 1" unique_id=72288825]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
 [node name="Team 2" type="Node" parent="." unique_id=892035149]
 script = ExtResource("3_3g8y2")
 
-[node name="UI Team 2" type="Panel" parent="Team 2" unique_id=142432499 node_paths=PackedStringArray("BoardRoot")]
+[node name="UI Team 2" type="Panel" parent="Team 2" unique_id=142432499 node_paths=PackedStringArray("BoardRoot", "TopLayer")]
 offset_left = 544.0
 offset_top = 336.0
 offset_right = 800.0
@@ -107,6 +119,8 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_i5gep")
 script = ExtResource("1_dk7xb")
 SlotScene = ExtResource("2_qyew6")
 BoardRoot = NodePath("BoardContainer/Board")
+TopLayer = NodePath("TopLayer2")
+DamagePopupScene = ExtResource("6_f6h1k")
 
 [node name="RichTextLabel" type="RichTextLabel" parent="Team 2/UI Team 2" unique_id=1029720363]
 layout_mode = 1
@@ -127,6 +141,15 @@ offset_left = 30.0
 offset_top = 10.0
 offset_right = 226.0
 offset_bottom = 246.0
+mouse_filter = 2
+
+[node name="TopLayer2" type="Control" parent="Team 2/UI Team 2" unique_id=187421267]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 mouse_filter = 2
 
 [node name="AdvantageBar" type="TextureProgressBar" parent="." unique_id=1093621206]

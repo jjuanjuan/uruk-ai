@@ -1,0 +1,29 @@
+[gd_scene format=3 uid="uid://ciauu588bs6od"]
+
+[ext_resource type="Script" uid="uid://bbmtk6uvcafdx" path="res://Scripts/UI/DamageText.cs" id="1_hosrd"]
+
+[node name="DamagePopup" type="Control" unique_id=599760912 node_paths=PackedStringArray("Label")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_hosrd")
+Label = NodePath("RichTextLabel")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="." unique_id=209136950]
+z_index = 200
+layout_mode = 0
+offset_left = -31.0
+offset_top = -26.0
+offset_right = 32.0
+offset_bottom = 23.0
+mouse_filter = 2
+bbcode_enabled = true
+text = "100"
+fit_content = true
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1

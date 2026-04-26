@@ -5,8 +5,6 @@ using System.Collections.Generic;
 public partial class UICombatScene : Control
 {
     // mostrar números de daño
-    // mostrar barras de vida
-    // hacer victoria
 
     [Export] public CombatManager CombatManager;
 
@@ -79,12 +77,6 @@ public partial class UICombatScene : Control
         logs.Insert(0, text); // nuevo arriba
 
         Log.Text = string.Join("\n", logs);
-    }
-
-    public void ShowDamageText(OrcInstance unit, float value)
-    {
-        GD.Print($"{unit.GetCustomName()} took {value} damage");
-        // TODO: poner textito en UI
     }
 
     public void SetAdvantageBar(float value)

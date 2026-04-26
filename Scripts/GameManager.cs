@@ -67,11 +67,6 @@ public partial class GameManager : Node
         return available;
     }
 
-    public int NextInt(int min, int max)
-    {
-        return rng.RandiRange(min, max);
-    }
-
     public void SelectOrc(OrcInstance orc)
     {
         SelectedOrc = orc;
@@ -128,5 +123,15 @@ public partial class GameManager : Node
     CharacterClass GetRandomClass()
     {
         return OrcTemplate.BaseClasses[NextInt(0, OrcTemplate.BaseClasses.Length - 1)];
+    }
+
+    // UTILITY
+    public int NextInt(int min, int max)
+    {
+        return rng.RandiRange(min, max);
+    }
+    public float NextFloat(float min, float max)
+    {
+        return rng.RandfRange(min, max);
     }
 }

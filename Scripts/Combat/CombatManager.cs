@@ -5,6 +5,8 @@ using System.Linq;
 
 public partial class CombatManager : Node
 {
+    // hacer victoria
+
     public CharacterParty Team1;
     public CharacterParty Team2;
     [Export] public UICombatScene UI;
@@ -467,7 +469,9 @@ public partial class CombatManager : Node
         int finalDamage = (int)(baseDamage * multiplier);
 
         target.TakeDamage(finalDamage);
-        UI?.ShowDamageText(target, finalDamage);
+        var team = combatContext.GetTeam(target);
+        if (team == Team1) UI?.Team1UI.ShowDamageText(target, finalDamage);
+        else if (team == Team2) UI?.Team2UI.ShowDamageText(target, finalDamage);
         GiveScore(attacker, finalDamage);
     }
 

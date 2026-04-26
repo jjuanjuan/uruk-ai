@@ -6,6 +6,9 @@ public partial class UIParty : Control
 
     [Export] public PackedScene SlotScene;
     [Export] public Control BoardRoot;
+    [Export] Control TopLayer;
+    [Export] PackedScene DamagePopupScene;
+
     public bool IsFront;
 
     public void Setup(CharacterParty party, bool front)
@@ -79,7 +82,7 @@ public partial class UIParty : Control
 
         return new Vector2(x, y);
     }
-    
+
     public void LayoutSlots()
     {
         float width = BoardRoot.Size.X;
@@ -104,4 +107,34 @@ public partial class UIParty : Control
             slot.Size = new Vector2(cellW, cellH);
         }
     }
+
+    public PartySlot GetSlot(OrcInstance unit)
+    {
+        foreach (PartySlot slot in BoardRoot.GetChildren())
+        {
+            if (slot.Orc == unit) return slot;
+        }
+        return null;
+    }
+
+    public void ShowDamageText(OrcInstance unit, float value)
+    {
+        GD.Print($"{unit.GetCustomName()} took {value} damage");
+
+        var slot = GetSlot(unit);
+        if (slot == null) return;
+
+        var popup = DamagePopupScene.Instantiate<DamageText>();
+
+        TopLayer.AddChild(popup);
+
+        popup.GlobalPosition = slot.GlobalPosition;
+        popup.GlobalPosition += new Vector2(
+            GameManager.I.NextFloat(-10, 10),
+            GameManager.I.NextFloat(-5, 5)
+        );
+
+        popup.Setup(value);
+    }
+
 }

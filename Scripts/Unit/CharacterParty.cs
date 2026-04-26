@@ -10,8 +10,7 @@ public partial class CharacterParty : Node
 
     [Export] public int MaxUnits = 6;
 
-    [Signal]
-    public delegate void PartyChangedEventHandler();
+    [Signal] public delegate void PartyChangedEventHandler();
 
     public int CurrentUnits => origin.Count;
 
