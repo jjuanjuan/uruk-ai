@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cdfaj616w25ji"
-path="res://.godot/imported/2_rogue_front.png-18f24f59973c91fe663431a4401b6c3e.ctex"
+uid="uid://bsnq7wkb1qyl6"
+path="res://.godot/imported/free_anim_autotile_0.png-84fdc04e5b90b371720788132868ad36.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Art/Placeholders/2_rogue_front.png"
-dest_files=["res://.godot/imported/2_rogue_front.png-18f24f59973c91fe663431a4401b6c3e.ctex"]
+source_file="res://Art/Placeholders/Map/free_anim_autotile_0.png"
+dest_files=["res://.godot/imported/free_anim_autotile_0.png-84fdc04e5b90b371720788132868ad36.ctex"]
 
 [params]
 

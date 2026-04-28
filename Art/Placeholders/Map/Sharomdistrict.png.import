@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bml1cm8pckgle"
-path="res://.godot/imported/0_scout_front.png-529fa0f8864739603ed8afadb6a85ddf.ctex"
+uid="uid://deuhs14tmvfad"
+path="res://.godot/imported/Sharomdistrict.png-187b9d76a7a60e2aa38a5b59b17faeb4.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Art/Placeholders/0_scout_front.png"
-dest_files=["res://.godot/imported/0_scout_front.png-529fa0f8864739603ed8afadb6a85ddf.ctex"]
+source_file="res://Art/Placeholders/Map/Sharomdistrict.png"
+dest_files=["res://.godot/imported/Sharomdistrict.png-187b9d76a7a60e2aa38a5b59b17faeb4.ctex"]
 
 [params]
 

@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://dn0of61i2vxkg"]
 
 [ext_resource type="Script" uid="uid://5781d3mwk2dl" path="res://Scripts/UI/PartySlot.cs" id="1_54qfb"]
-[ext_resource type="Texture2D" uid="uid://3geatbyu0jce" path="res://Art/Placeholders/2_knight_front.png" id="2_8yise"]
+[ext_resource type="Texture2D" uid="uid://3geatbyu0jce" path="res://Art/Placeholders/Units/2_knight_front.png" id="2_8yise"]
 [ext_resource type="Script" uid="uid://bqpqwbfis0yul" path="res://Scripts/UI/HealthBar.cs" id="3_7mel0"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8yise"]

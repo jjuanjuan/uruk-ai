@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cws3fd2g1sjue"
-path="res://.godot/imported/2_chicoteador_front.png-dc4df53401f502daf60dd04f276c9253.ctex"
+uid="uid://di4i02jwagt71"
+path="res://.godot/imported/free_autotile_0.png-cc667e3d8e05bf571b1c15ab7c25cd48.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Art/Placeholders/2_chicoteador_front.png"
-dest_files=["res://.godot/imported/2_chicoteador_front.png-dc4df53401f502daf60dd04f276c9253.ctex"]
+source_file="res://Art/Placeholders/Map/free_autotile_0.png"
+dest_files=["res://.godot/imported/free_autotile_0.png-cc667e3d8e05bf571b1c15ab7c25cd48.ctex"]
 
 [params]
 

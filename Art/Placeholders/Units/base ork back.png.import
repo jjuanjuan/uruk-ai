@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bqarmelnfjwy1"
-path="res://.godot/imported/0_militia_front2.png-4ca859c7a65b00e1a65a4ec08b15c8f4.ctex"
+uid="uid://cyhthy5iuoirq"
+path="res://.godot/imported/base ork back.png-84897da5b16ada3ff317e9a2508c3d66.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Art/Placeholders/0_militia_front2.png"
-dest_files=["res://.godot/imported/0_militia_front2.png-4ca859c7a65b00e1a65a4ec08b15c8f4.ctex"]
+source_file="res://Art/Placeholders/Units/base ork back.png"
+dest_files=["res://.godot/imported/base ork back.png-84897da5b16ada3ff317e9a2508c3d66.ctex"]
 
 [params]
 

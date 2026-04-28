@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cyp873npp1tpu"
-path="res://.godot/imported/1_bludgeoner_front.png-1ef2320c8cc22f44cb7b2ed47d6b7841.ctex"
+uid="uid://b60b2c527tf7m"
+path="res://.godot/imported/3_axethrower_front.png-772e933971749672ee94844119185cac.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Art/Placeholders/1_bludgeoner_front.png"
-dest_files=["res://.godot/imported/1_bludgeoner_front.png-1ef2320c8cc22f44cb7b2ed47d6b7841.ctex"]
+source_file="res://Art/Placeholders/Units/3_axethrower_front.png"
+dest_files=["res://.godot/imported/3_axethrower_front.png-772e933971749672ee94844119185cac.ctex"]
 
 [params]
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d16kcku6f2bb3"
-path="res://.godot/imported/0_militia_front.png-e68a4a42768add558c328e531ceeb397.ctex"
+uid="uid://bdkxo1rkscm4l"
+path="res://.godot/imported/2_javelin_front.png-3cdfd05d201d510c5fe328c0c67f2a0f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Art/Placeholders/0_militia_front.png"
-dest_files=["res://.godot/imported/0_militia_front.png-e68a4a42768add558c328e531ceeb397.ctex"]
+source_file="res://Art/Placeholders/Units/2_javelin_front.png"
+dest_files=["res://.godot/imported/2_javelin_front.png-3cdfd05d201d510c5fe328c0c67f2a0f.ctex"]
 
 [params]
 

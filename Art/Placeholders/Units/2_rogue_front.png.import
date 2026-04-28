@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bdkxo1rkscm4l"
-path="res://.godot/imported/2_javelin_front.png-43aa3fb7c7a7f5d68ae90e4cd993ad96.ctex"
+uid="uid://cdfaj616w25ji"
+path="res://.godot/imported/2_rogue_front.png-9a2acf668b861b2ad4b6cbdc10f19ea5.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Art/Placeholders/2_javelin_front.png"
-dest_files=["res://.godot/imported/2_javelin_front.png-43aa3fb7c7a7f5d68ae90e4cd993ad96.ctex"]
+source_file="res://Art/Placeholders/Units/2_rogue_front.png"
+dest_files=["res://.godot/imported/2_rogue_front.png-9a2acf668b861b2ad4b6cbdc10f19ea5.ctex"]
 
 [params]
 

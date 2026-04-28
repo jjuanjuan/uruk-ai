@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cmxlrapox4n0u"
-path="res://.godot/imported/3_morgenstern_front.png-43fdc9a39ceb1bb37cc762b1fbdea9e3.ctex"
+uid="uid://b73mp0bd3p2jo"
+path="res://.godot/imported/free_autotile_26.png-4670c0bd46b4f4d9f89b5491bf81b683.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Art/Placeholders/3_morgenstern_front.png"
-dest_files=["res://.godot/imported/3_morgenstern_front.png-43fdc9a39ceb1bb37cc762b1fbdea9e3.ctex"]
+source_file="res://Art/Placeholders/Map/free_autotile_26.png"
+dest_files=["res://.godot/imported/free_autotile_26.png-4670c0bd46b4f4d9f89b5491bf81b683.ctex"]
 
 [params]
 

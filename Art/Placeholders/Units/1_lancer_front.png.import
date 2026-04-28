@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c76bfxwbynew8"
-path="res://.godot/imported/1_bladesmith_front.png-165e05b9655e1749e0226c3cd278f163.ctex"
+uid="uid://d3hh1phe5julb"
+path="res://.godot/imported/1_lancer_front.png-34d80b6015ca09086340daca5d01c98e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Art/Placeholders/1_bladesmith_front.png"
-dest_files=["res://.godot/imported/1_bladesmith_front.png-165e05b9655e1749e0226c3cd278f163.ctex"]
+source_file="res://Art/Placeholders/Units/1_lancer_front.png"
+dest_files=["res://.godot/imported/1_lancer_front.png-34d80b6015ca09086340daca5d01c98e.ctex"]
 
 [params]
 

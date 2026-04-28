@@ -4,8 +4,8 @@
 [ext_resource type="Script" uid="uid://du724smqstcfc" path="res://Scripts/Combat/AttackPerPosition.cs" id="2_jakd5"]
 [ext_resource type="Script" uid="uid://1pbhreu2codn" path="res://Scripts/Unit/CharacterClass.cs" id="3_fmxnv"]
 [ext_resource type="Resource" uid="uid://d0vr5cfpj2204" path="res://Data/AttackActions/Whip Strike.tres" id="3_sjlno"]
-[ext_resource type="Texture2D" uid="uid://de5j0u588upr7" path="res://Art/Placeholders/0_militia_back.png" id="4_sjlno"]
-[ext_resource type="Texture2D" uid="uid://cws3fd2g1sjue" path="res://Art/Placeholders/2_chicoteador_front.png" id="5_pmgdi"]
+[ext_resource type="Texture2D" uid="uid://de5j0u588upr7" path="res://Art/Placeholders/Units/0_militia_back.png" id="4_sjlno"]
+[ext_resource type="Texture2D" uid="uid://cws3fd2g1sjue" path="res://Art/Placeholders/Units/2_chicoteador_front.png" id="5_pmgdi"]
 [ext_resource type="Resource" uid="uid://dsywmpxgobhst" path="res://Data/CharacterClasses/1_Bludgeoner.tres" id="6_k4t0i"]
 [ext_resource type="Script" uid="uid://bmylglyshe6wd" path="res://Scripts/Unit/ClassRequirements.cs" id="7_e2e8x"]
 

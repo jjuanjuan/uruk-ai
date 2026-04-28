@@ -2,8 +2,8 @@
 
 [ext_resource type="Resource" uid="uid://casgtele230c8" path="res://Data/AttackActions/Stone Throw.tres" id="1_dleju"]
 [ext_resource type="Script" uid="uid://du724smqstcfc" path="res://Scripts/Combat/AttackPerPosition.cs" id="2_t8wiw"]
-[ext_resource type="Texture2D" uid="uid://de5j0u588upr7" path="res://Art/Placeholders/0_militia_back.png" id="3_1ceef"]
-[ext_resource type="Texture2D" uid="uid://bml1cm8pckgle" path="res://Art/Placeholders/0_scout_front.png" id="4_t8wiw"]
+[ext_resource type="Texture2D" uid="uid://de5j0u588upr7" path="res://Art/Placeholders/Units/0_militia_back.png" id="3_1ceef"]
+[ext_resource type="Texture2D" uid="uid://bml1cm8pckgle" path="res://Art/Placeholders/Units/0_scout_front.png" id="4_t8wiw"]
 [ext_resource type="Script" uid="uid://1pbhreu2codn" path="res://Scripts/Unit/CharacterClass.cs" id="5_ta6ok"]
 
 [sub_resource type="Resource" id="Resource_tq6mj"]

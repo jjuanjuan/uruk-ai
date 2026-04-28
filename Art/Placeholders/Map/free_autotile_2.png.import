@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b60b2c527tf7m"
-path="res://.godot/imported/3_axethrower_front.png-105333032d760819775cc518a02c5cce.ctex"
+uid="uid://dkpoo1nw21o76"
+path="res://.godot/imported/free_autotile_2.png-8db0a0c2a758749ec6f034e4843fe0b0.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Art/Placeholders/3_axethrower_front.png"
-dest_files=["res://.godot/imported/3_axethrower_front.png-105333032d760819775cc518a02c5cce.ctex"]
+source_file="res://Art/Placeholders/Map/free_autotile_2.png"
+dest_files=["res://.godot/imported/free_autotile_2.png-8db0a0c2a758749ec6f034e4843fe0b0.ctex"]
 
 [params]
 

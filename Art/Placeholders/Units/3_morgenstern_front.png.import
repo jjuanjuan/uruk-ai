@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://jmsks4hxw7as"
-path="res://.godot/imported/2_hoplite_front.png-51c2481bc1bffc62986bdfc19b01a385.ctex"
+uid="uid://cmxlrapox4n0u"
+path="res://.godot/imported/3_morgenstern_front.png-27366fad1ea97db40a05c09c191ab54c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Art/Placeholders/2_hoplite_front.png"
-dest_files=["res://.godot/imported/2_hoplite_front.png-51c2481bc1bffc62986bdfc19b01a385.ctex"]
+source_file="res://Art/Placeholders/Units/3_morgenstern_front.png"
+dest_files=["res://.godot/imported/3_morgenstern_front.png-27366fad1ea97db40a05c09c191ab54c.ctex"]
 
 [params]
 

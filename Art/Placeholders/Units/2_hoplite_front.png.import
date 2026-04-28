@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d3hh1phe5julb"
-path="res://.godot/imported/1_lancer_front.png-48e7fee334d35bdd1a45122c845c3eb6.ctex"
+uid="uid://jmsks4hxw7as"
+path="res://.godot/imported/2_hoplite_front.png-2083a2460cf396586ccad9bad41bc59e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Art/Placeholders/1_lancer_front.png"
-dest_files=["res://.godot/imported/1_lancer_front.png-48e7fee334d35bdd1a45122c845c3eb6.ctex"]
+source_file="res://Art/Placeholders/Units/2_hoplite_front.png"
+dest_files=["res://.godot/imported/2_hoplite_front.png-2083a2460cf396586ccad9bad41bc59e.ctex"]
 
 [params]
 

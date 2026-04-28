@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://jh1ftys40xae"]
 
 [ext_resource type="Script" uid="uid://bp5ip3qv54ejt" path="res://Scripts/UI/PoolItem.cs" id="1_vi3u1"]
-[ext_resource type="Texture2D" uid="uid://3geatbyu0jce" path="res://Art/Placeholders/2_knight_front.png" id="2_685wl"]
+[ext_resource type="Texture2D" uid="uid://3geatbyu0jce" path="res://Art/Placeholders/Units/2_knight_front.png" id="2_685wl"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1ywp0"]
 bg_color = Color(0, 0, 0, 0.25)
