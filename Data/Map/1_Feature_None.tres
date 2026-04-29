@@ -1,0 +1,33 @@
+[gd_resource type="Resource" script_class="TerrainFeatureData" format=3 uid="uid://cphxnq3m50vn4"]
+
+[ext_resource type="Script" uid="uid://b86pgl5m886un" path="res://Scripts/Map/MovementCostEntry.cs" id="1_tporg"]
+[ext_resource type="Script" uid="uid://dd76sq47qon58" path="res://Scripts/Map/TerrainFeatureData.cs" id="1_yhhjr"]
+
+[sub_resource type="Resource" id="Resource_ihonx"]
+script = ExtResource("1_tporg")
+metadata/_custom_type_script = "uid://b86pgl5m886un"
+
+[sub_resource type="Resource" id="Resource_j3vxt"]
+script = ExtResource("1_tporg")
+Type = 1
+metadata/_custom_type_script = "uid://b86pgl5m886un"
+
+[sub_resource type="Resource" id="Resource_dgjko"]
+script = ExtResource("1_tporg")
+Type = 2
+metadata/_custom_type_script = "uid://b86pgl5m886un"
+
+[sub_resource type="Resource" id="Resource_sjfea"]
+script = ExtResource("1_tporg")
+Type = 3
+metadata/_custom_type_script = "uid://b86pgl5m886un"
+
+[sub_resource type="Resource" id="Resource_1aypl"]
+script = ExtResource("1_tporg")
+Type = 4
+metadata/_custom_type_script = "uid://b86pgl5m886un"
+
+[resource]
+script = ExtResource("1_yhhjr")
+MovementModifier = Array[Object]([SubResource("Resource_ihonx"), SubResource("Resource_j3vxt"), SubResource("Resource_dgjko"), SubResource("Resource_sjfea"), SubResource("Resource_1aypl")])
+metadata/_custom_type_script = "uid://dd76sq47qon58"

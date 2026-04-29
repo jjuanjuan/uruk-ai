@@ -19,7 +19,7 @@ public partial class CharacterClass : Resource
 	[Export]
 	CombatConfig.ArmorType ArmorType;
 	[Export]
-	MovementType MovementType;
+	public MovementType MovementType;
 
 	[Export]
 	Godot.Collections.Array<ClassRequirements> Requirements;
@@ -33,7 +33,6 @@ public partial class CharacterClass : Resource
 	public int GetBaseAttackDamage() { return BaseAttackDamage; }
 	public int GetBaseSpeed() { return BaseSpeed; }
 	public CombatConfig.ArmorType GetArmorType() { return ArmorType; }
-	public MovementType GetMovementType() { return MovementType; }
 	public Godot.Collections.Array<ClassRequirements> GetRequirements() { return Requirements; }
 	public int GetXPToNextLevel() { return XPToNextLevel; }
 }
@@ -43,5 +42,6 @@ public enum MovementType
 	Ground,
 	Water,
 	Flying,
-	Mountain
+	Mountain,
+	Woods
 }

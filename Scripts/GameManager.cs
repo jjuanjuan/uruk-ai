@@ -7,7 +7,8 @@ public partial class GameManager : Node
     [Export] public NamePool OrcNames;
     [Export] public OrcTemplate OrcTemplate;
     [Export] public CombatConfig CombatConfig;
-
+    [Export] public GameDatabase Database;
+    
     public CharacterParty Team1;
     public CharacterParty Team2;
     public RandomNumberGenerator rng = new RandomNumberGenerator();

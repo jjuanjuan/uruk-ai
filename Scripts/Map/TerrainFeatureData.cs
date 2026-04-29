@@ -8,7 +8,7 @@ public partial class TerrainFeatureData : Resource
     [Export] public TerrainFeatureType Type;
     [Export] public bool Walkable = true;
     [Export] public bool BlocksVision = false;
-    [Export] public Godot.Collections.Array<MovementCostEntry> MovementModifiers;
+    [Export] public Godot.Collections.Array<MovementCostEntry> MovementModifier;
     int DefaultCost = 0;
 
     private Dictionary<MovementType, int> _movementCostMap;
@@ -17,10 +17,10 @@ public partial class TerrainFeatureData : Resource
     {
         _movementCostMap = new Dictionary<MovementType, int>();
 
-        if (MovementModifiers == null)
+        if (MovementModifier == null)
             return;
 
-        foreach (var entry in MovementModifiers)
+        foreach (var entry in MovementModifier)
             _movementCostMap[entry.Type] = entry.Cost;
     }
 

@@ -1,0 +1,39 @@
+[gd_resource type="Resource" script_class="TerrainData" format=3 uid="uid://c516dth0gve7h"]
+
+[ext_resource type="Script" uid="uid://b86pgl5m886un" path="res://Scripts/Map/MovementCostEntry.cs" id="1_iamfh"]
+[ext_resource type="Script" uid="uid://bogsb11qmty7s" path="res://Scripts/Map/TerrainData.cs" id="2_sgym6"]
+
+[sub_resource type="Resource" id="Resource_1y4ic"]
+script = ExtResource("1_iamfh")
+Cost = 2
+metadata/_custom_type_script = "uid://b86pgl5m886un"
+
+[sub_resource type="Resource" id="Resource_bd33d"]
+script = ExtResource("1_iamfh")
+Type = 1
+Cost = 8
+metadata/_custom_type_script = "uid://b86pgl5m886un"
+
+[sub_resource type="Resource" id="Resource_m5jat"]
+script = ExtResource("1_iamfh")
+Type = 2
+Cost = 1
+metadata/_custom_type_script = "uid://b86pgl5m886un"
+
+[sub_resource type="Resource" id="Resource_158b0"]
+script = ExtResource("1_iamfh")
+Type = 3
+Cost = 4
+metadata/_custom_type_script = "uid://b86pgl5m886un"
+
+[sub_resource type="Resource" id="Resource_fxhmu"]
+script = ExtResource("1_iamfh")
+Type = 4
+Cost = 4
+metadata/_custom_type_script = "uid://b86pgl5m886un"
+
+[resource]
+script = ExtResource("2_sgym6")
+Type = 1
+MovementCosts = Array[Object]([SubResource("Resource_1y4ic"), SubResource("Resource_bd33d"), SubResource("Resource_m5jat"), SubResource("Resource_158b0"), SubResource("Resource_fxhmu")])
+metadata/_custom_type_script = "uid://bogsb11qmty7s"

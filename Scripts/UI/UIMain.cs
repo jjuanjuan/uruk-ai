@@ -14,6 +14,7 @@ public partial class UIMain : Control
         GetNode<Button>("OpenClassTreeButton").Pressed += OpenClassTree;
         GetNode<Button>("OpenCombatButton").Pressed += OpenCombat;
         GetNode<Button>("GenerateOrcButton").Pressed += GenerateOrc;
+        GetNode<Button>("GenerateMapUnitButton").Pressed += GenerateMapUnit;
 
         GameManager.I.PartiesChanged += RefreshPool;
 
@@ -46,5 +47,29 @@ public partial class UIMain : Control
     void GenerateOrc()
     {
         GameManager.I.GenerateOrc();
+    }
+    void GenerateMapUnit()
+    {
+        var spawner = GetSpawner();
+
+        if (spawner == null)
+        {
+            GD.PrintErr("Spawner not found");
+            return;
+        }
+
+        var orc = GameManager.I.GenerateOrc();
+
+        var party = new CharacterParty();
+        party.PlaceOrc(orc, 0, 0);
+        party.SetLeader(orc);
+
+        var unit = spawner.Spawn(new Vector2I(5, 5), party);
+
+        unit.MoveTo(new Vector2I(10, 8));
+    }
+    UnitSpawner GetSpawner()
+    {
+        return GetTree().GetFirstNodeInGroup("unit_spawner") as UnitSpawner;
     }
 }

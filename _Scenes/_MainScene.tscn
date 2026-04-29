@@ -1,0 +1,22 @@
+[gd_scene format=3 uid="uid://cir2kq78r6sd7"]
+
+[ext_resource type="Script" uid="uid://l3dil5epsy7c" path="res://Scripts/Main.cs" id="1_xmy83"]
+[ext_resource type="PackedScene" uid="uid://cuciuhnh46ndy" path="res://_Scenes/MapScene.tscn" id="2_5tps5"]
+[ext_resource type="PackedScene" uid="uid://bte5gvthbexir" path="res://_Scenes/UIMain.tscn" id="3_bga6n"]
+
+[node name="MainScene" type="Node" unique_id=142890190 node_paths=PackedStringArray("MapRoot", "UIRoot")]
+script = ExtResource("1_xmy83")
+MapScene = ExtResource("2_5tps5")
+UIMainScene = ExtResource("3_bga6n")
+MapRoot = NodePath("Map Root")
+UIRoot = NodePath("UI Root")
+
+[node name="Map Root" type="Node2D" parent="." unique_id=2033270552]
+
+[node name="UI Root" type="Control" parent="." unique_id=1960073147]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2

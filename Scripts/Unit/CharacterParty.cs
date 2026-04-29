@@ -122,9 +122,10 @@ public partial class CharacterParty : Node
                col >= 0 && col < COLUMNS;
     }
 
-    public void SetLeader()
+    public void SetLeader(OrcInstance orc)
     {
-        // TODO: Code
+        Leader = orc;
+        EmitAllSignals();
     }
     public OrcInstance GetLeader()
     {

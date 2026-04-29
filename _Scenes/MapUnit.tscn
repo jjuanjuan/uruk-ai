@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://c60h875ben6gy"]
+
+[ext_resource type="Script" uid="uid://biln4ykpqja10" path="res://Scripts/Unit/MapUnit.cs" id="1_h4k78"]
+[ext_resource type="Texture2D" uid="uid://bib73y474e4y" path="res://Art/Placeholders/Units/base ork front.png" id="1_ucu7w"]
+
+[node name="MapUnit" type="Node2D" unique_id=1325167516 node_paths=PackedStringArray("LeaderTexture")]
+script = ExtResource("1_h4k78")
+LeaderTexture = NodePath("TextureRect")
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=826299163]
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("1_ucu7w")

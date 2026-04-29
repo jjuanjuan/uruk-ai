@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="BuildingData" format=3 uid="uid://pm4x1iefvd8r"]
+
+[ext_resource type="Script" uid="uid://deeob3e3ng2f" path="res://Scripts/Map/BuildingData.cs" id="1_mi2xg"]
+
+[resource]
+script = ExtResource("1_mi2xg")
+HealPerTick = 0.0
+metadata/_custom_type_script = "uid://deeob3e3ng2f"

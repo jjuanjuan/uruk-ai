@@ -4,9 +4,28 @@
 [ext_resource type="Resource" uid="uid://c4718ueqpr5c" path="res://Data/Config/Names.tres" id="2_y73m8"]
 [ext_resource type="Resource" uid="uid://c024ksbq5fjtp" path="res://Data/Config/Orc Template.tres" id="3_dhsnp"]
 [ext_resource type="Resource" uid="uid://b0atn5ms4si40" path="res://Data/Config/CombatConfig.tres" id="4_gfro6"]
+[ext_resource type="Script" uid="uid://bixw7yd650vm0" path="res://Scripts/GameDatabase.cs" id="5_ry6g7"]
+[ext_resource type="Resource" uid="uid://c516dth0gve7h" path="res://Data/Map/0_Terrain_Grass.tres" id="6_hbeuu"]
+[ext_resource type="Resource" uid="uid://c1qwlxhmw8d3i" path="res://Data/Map/0_Terrain_Water.tres" id="7_ylgt0"]
+[ext_resource type="Resource" uid="uid://cphxnq3m50vn4" path="res://Data/Map/1_Feature_None.tres" id="8_iwb5n"]
+[ext_resource type="Resource" uid="uid://cstx76t370nnf" path="res://Data/Map/0_Terrain_None.tres" id="8_ylgt0"]
+[ext_resource type="Resource" uid="uid://dcq0cdhdmbxj3" path="res://Data/Map/1_Feature_Road.tres" id="9_4tf01"]
+[ext_resource type="Resource" uid="uid://cej5wjej75apx" path="res://Data/Map/1_Feature_Woods.tres" id="10_llit0"]
+[ext_resource type="Resource" uid="uid://dnn0miljp7vv7" path="res://Data/Map/1_Feature_Mountain.tres" id="11_6kutf"]
+[ext_resource type="Resource" uid="uid://pm4x1iefvd8r" path="res://Data/Map/2_Building_None.tres" id="12_m1gw5"]
+[ext_resource type="Resource" uid="uid://3rrhymooj0q2" path="res://Data/Map/2_Building_Town.tres" id="13_6475n"]
+[ext_resource type="Resource" uid="uid://bpt78w40pclik" path="res://Data/Map/2_Building_Shop.tres" id="14_g03sp"]
+[ext_resource type="Resource" uid="uid://7fywd1o3qhny" path="res://Data/Map/2_Building_Fort.tres" id="15_6mg3k"]
 
-[node name="GameManager" type="Node" unique_id=1773527289]
+[node name="GameManager" type="Node" unique_id=1773527289 node_paths=PackedStringArray("Database")]
 script = ExtResource("1_it0l5")
 OrcNames = ExtResource("2_y73m8")
 OrcTemplate = ExtResource("3_dhsnp")
 CombatConfig = ExtResource("4_gfro6")
+Database = NodePath("GameDatabase")
+
+[node name="GameDatabase" type="Node" parent="." unique_id=2023417525]
+script = ExtResource("5_ry6g7")
+TerrainList = Array[Object]([ExtResource("6_hbeuu"), ExtResource("7_ylgt0"), ExtResource("8_ylgt0")])
+FeatureList = Array[Object]([ExtResource("9_4tf01"), ExtResource("11_6kutf"), ExtResource("10_llit0"), ExtResource("8_iwb5n")])
+BuildingList = Array[Object]([ExtResource("13_6475n"), ExtResource("14_g03sp"), ExtResource("15_6mg3k"), ExtResource("12_m1gw5")])
