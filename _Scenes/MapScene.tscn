@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://d0t7ct8pnww3a" path="res://Scripts/Map/MapManager.cs" id="1_swtpd"]
 [ext_resource type="Texture2D" uid="uid://djmb5acxi6uv1" path="res://Art/Placeholders/Map/kenny_grass.png" id="2_85am5"]
 [ext_resource type="PackedScene" uid="uid://c60h875ben6gy" path="res://_Scenes/MapUnit.tscn" id="2_k1nlb"]
+[ext_resource type="Script" uid="uid://bw142b24gqfio" path="res://Scripts/Map/MapInputController.cs" id="2_swtpd"]
 [ext_resource type="Texture2D" uid="uid://ot6jds40deno" path="res://Art/Placeholders/Map/kenny_wa'ah.png" id="3_v28rj"]
 [ext_resource type="Texture2D" uid="uid://cwwtiiv47673t" path="res://Art/Placeholders/Map/free_autotile_7.png" id="4_wicve"]
 [ext_resource type="Texture2D" uid="uid://dbwafpjr5doga" path="res://Art/Placeholders/Map/kenny_trees.png" id="5_wicve"]
@@ -366,10 +367,14 @@ TerrainLayer = NodePath("Tilemaps/Layer Terrain")
 FeatureLayer = NodePath("Tilemaps/Layer Features")
 BuildingLayer = NodePath("Tilemaps/Layer Buildings")
 
+[node name="MapInputController" type="Node2D" parent="." unique_id=995066931]
+script = ExtResource("2_swtpd")
+
 [node name="TextureRect" type="TextureRect" parent="." unique_id=709540240]
 visible = false
 offset_right = 3201.0
 offset_bottom = 3201.0
+mouse_filter = 2
 texture = ExtResource("6_v28rj")
 
 [node name="Tilemaps" type="Node2D" parent="." unique_id=758345293]

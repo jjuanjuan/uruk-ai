@@ -3,11 +3,21 @@
 [ext_resource type="Script" uid="uid://biln4ykpqja10" path="res://Scripts/Unit/MapUnit.cs" id="1_h4k78"]
 [ext_resource type="Texture2D" uid="uid://bib73y474e4y" path="res://Art/Placeholders/Units/base ork front.png" id="1_ucu7w"]
 
-[node name="MapUnit" type="Node2D" unique_id=1325167516 node_paths=PackedStringArray("LeaderTexture")]
+[sub_resource type="CircleShape2D" id="CircleShape2D_h4k78"]
+radius = 32.0
+
+[node name="MapUnit" type="Area2D" unique_id=1281034803 node_paths=PackedStringArray("LeaderTexture")]
 script = ExtResource("1_h4k78")
 LeaderTexture = NodePath("TextureRect")
 
 [node name="TextureRect" type="TextureRect" parent="." unique_id=826299163]
-offset_right = 40.0
-offset_bottom = 40.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 texture = ExtResource("1_ucu7w")
+stretch_mode = 5
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1989646899]
+shape = SubResource("CircleShape2D_h4k78")

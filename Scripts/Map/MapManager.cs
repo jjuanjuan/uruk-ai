@@ -222,8 +222,6 @@ public partial class MapManager : Node
 
         Vector2I atlas = BuildingLayer.GetCellAtlasCoords(pos);
 
-        GD.Print($"[BUILDING] pos={pos} source={sourceId} atlas={atlas}");
-
         var source = BuildingLayer.TileSet.GetSource(sourceId) as TileSetAtlasSource;
 
         if (source == null)

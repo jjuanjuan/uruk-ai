@@ -1,7 +1,7 @@
 using Godot;
 using System.Collections.Generic;
 
-public partial class MapUnit : Node2D
+public partial class MapUnit : Area2D
 {
     [Export] public CharacterParty Party;
     [Export] public float BaseSpeed = 120f; // px/seg
@@ -13,11 +13,21 @@ public partial class MapUnit : Node2D
     private List<Vector2> _pathWorld = new();
     private int _pathIndex = 0;
     private bool _moving = false;
-
+    private bool _selected = false;
     private float _currentSpeed;
 
     public MovementType MovementType =>
         Party?.GetLeader()?.CharacterClass?.MovementType ?? MovementType.Ground;
+
+    public override void _Ready()
+    {
+        AddToGroup("map_unit");
+
+        _map = GetTree().GetFirstNodeInGroup("map_manager") as MapManager;
+
+        if (_map == null)
+            GD.PrintErr("MapManager not found!");
+    }
 
     public void Init()
     {
@@ -29,6 +39,21 @@ public partial class MapUnit : Node2D
         _currentSpeed = BaseSpeed;
 
         LeaderTexture.Texture = Party.GetLeader().CharacterClass.GetFrontTexture();
+    }
+
+    public override void _InputEvent(Viewport viewport, InputEvent @event, int shapeIdx)
+    {
+        if (@event is not InputEventMouseButton mb || !mb.Pressed)
+            return;
+
+        if (mb.ButtonIndex == MouseButton.Left)
+        {
+            Select();
+        }
+        else if (mb.ButtonIndex == MouseButton.Right)
+        {
+            IssueMoveCommand();
+        }
     }
 
     public override void _PhysicsProcess(double delta)
@@ -172,5 +197,32 @@ public partial class MapUnit : Node2D
     void OnPathFinished()
     {
         GD.Print($"Arrived at {GridPosition}");
+    }
+
+    // SELECTION
+    void Select()
+    {
+        SelectionManager.I.Select(this);
+    }
+    void IssueMoveCommand()
+    {
+        if (SelectionManager.I.Selected != this)
+            return;
+
+        Vector2 mouseWorld = GetGlobalMousePosition();
+
+        Vector2I grid = new Vector2I(
+            Mathf.FloorToInt(mouseWorld.X / 64),
+            Mathf.FloorToInt(mouseWorld.Y / 64)
+        );
+
+        MoveTo(grid);
+    }
+
+    // For feedback
+    public void SetSelected(bool value)
+    {
+        _selected = value;
+        Modulate = value ? Colors.Yellow : Colors.White;
     }
 }
