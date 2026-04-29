@@ -9,6 +9,7 @@ public partial class CharacterParty : Node
     private Dictionary<OrcInstance, PartyPosition> origin = new();
 
     [Export] public int MaxUnits = 6;
+    [Export] OrcInstance Leader;
 
     [Signal] public delegate void PartyChangedEventHandler();
 
@@ -121,6 +122,21 @@ public partial class CharacterParty : Node
                col >= 0 && col < COLUMNS;
     }
 
+    public void SetLeader()
+    {
+        // TODO: Code
+    }
+    public OrcInstance GetLeader()
+    {
+        if (Leader != null && Leader.IsAlive)
+            return Leader;
+
+        // fallback automático
+        foreach (var orc in GetAllLivingOrcs())
+            return orc;
+
+        return null;
+    }
     public List<OrcInstance> GetAllOrcs()
     {
         return new List<OrcInstance>(origin.Keys);
