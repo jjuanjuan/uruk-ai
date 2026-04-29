@@ -470,8 +470,14 @@ public partial class CombatManager : Node
 
     List<OrcInstance> GetEnemyColumn(OrcInstance anchor, List<OrcInstance> enemies)
     {
+        int col = anchor.PartyPosition.Column;
+
+        int min = Mathf.Max(0, col - 1);
+        int max = Mathf.Min(CharacterParty.COLUMNS - 1, col + 1);
+
         return enemies.FindAll(e =>
-            e.PartyPosition.Column == anchor.PartyPosition.Column);
+            e.PartyPosition.Column >= min &&
+            e.PartyPosition.Column <= max);
     }
     List<OrcInstance> GetEnemyRow(OrcInstance anchor, List<OrcInstance> enemies)
     {

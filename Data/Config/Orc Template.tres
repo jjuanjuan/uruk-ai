@@ -1,14 +1,24 @@
 [gd_resource type="Resource" script_class="OrcTemplate" format=3 uid="uid://c024ksbq5fjtp"]
 
 [ext_resource type="Script" uid="uid://dbqerfupo2uot" path="res://Scripts/Unit/OrcTemplate.cs" id="1_sm56y"]
+[ext_resource type="Resource" uid="uid://gogb8s6l7npy" path="res://Data/CharacterClasses/0_Scout.tres" id="2_72mds"]
 [ext_resource type="Resource" uid="uid://c7rktj3ymrup" path="res://Data/CharacterClasses/0_Militia.tres" id="2_eyntb"]
 [ext_resource type="Resource" uid="uid://cg4wg58pgbr6l" path="res://Data/CharacterClasses/3_AxeThrower.tres" id="3_5yqo0"]
+[ext_resource type="Resource" uid="uid://qsh7t800l3tc" path="res://Data/CharacterClasses/1_Bladesmith.tres" id="3_fmdy7"]
 [ext_resource type="Resource" uid="uid://d0rashb28ycuo" path="res://Data/CharacterClasses/1_Lancer.tres" id="3_ky6dn"]
 [ext_resource type="Resource" uid="uid://dq570np7agkmk" path="res://Data/CharacterClasses/2_Hoplite.tres" id="4_7k35s"]
+[ext_resource type="Resource" uid="uid://dsywmpxgobhst" path="res://Data/CharacterClasses/1_Bludgeoner.tres" id="4_s2q0r"]
 [ext_resource type="Resource" uid="uid://c4y6v7ox6s0ai" path="res://Data/CharacterClasses/2_Rogue.tres" id="5_3me6e"]
+[ext_resource type="Resource" uid="uid://bgcytl2hmpbiy" path="res://Data/CharacterClasses/2_Chicoteador.tres" id="6_jhkxy"]
 [ext_resource type="Resource" uid="uid://ckq2tps25fbrd" path="res://Data/CharacterClasses/3_Morgenstern.tres" id="6_jjswt"]
+[ext_resource type="Resource" uid="uid://bn71ukjld3gxd" path="res://Data/CharacterClasses/2_Javelin.tres" id="8_4u470"]
+[ext_resource type="Resource" uid="uid://cry0fyf1u8o8v" path="res://Data/CharacterClasses/2_Legionnaire.tres" id="9_otu04"]
+[ext_resource type="Resource" uid="uid://cf8qa6gk5twwa" path="res://Data/CharacterClasses/2_WildOne.tres" id="11_xitr7"]
+[ext_resource type="Resource" uid="uid://ce6exe4327m40" path="res://Data/CharacterClasses/3_Cataphract.tres" id="13_wqynm"]
+[ext_resource type="Resource" uid="uid://cpqn3u03t1iv8" path="res://Data/CharacterClasses/3_Samurai.tres" id="15_snyh8"]
+[ext_resource type="Resource" uid="uid://drgell8yjnncv" path="res://Data/CharacterClasses/3_Trident.tres" id="16_i82go"]
 
 [resource]
 script = ExtResource("1_sm56y")
-BaseClasses = Array[Object]([ExtResource("2_eyntb"), ExtResource("3_ky6dn"), ExtResource("3_5yqo0"), ExtResource("4_7k35s"), ExtResource("5_3me6e"), ExtResource("6_jjswt")])
+BaseClasses = Array[Object]([ExtResource("2_eyntb"), ExtResource("2_72mds"), ExtResource("3_fmdy7"), ExtResource("4_s2q0r"), ExtResource("3_ky6dn"), ExtResource("6_jhkxy"), ExtResource("4_7k35s"), ExtResource("8_4u470"), ExtResource("9_otu04"), ExtResource("5_3me6e"), ExtResource("11_xitr7"), ExtResource("3_5yqo0"), ExtResource("13_wqynm"), ExtResource("6_jjswt"), ExtResource("15_snyh8"), ExtResource("16_i82go")])
 metadata/_custom_type_script = "uid://dbqerfupo2uot"

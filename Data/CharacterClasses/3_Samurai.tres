@@ -1,0 +1,45 @@
+[gd_resource type="Resource" script_class="CharacterClass" format=3 uid="uid://cpqn3u03t1iv8"]
+
+[ext_resource type="Resource" uid="uid://nwnecenxibir" path="res://Data/AttackActions/Basic Slash.tres" id="1_gf6no"]
+[ext_resource type="Script" uid="uid://du724smqstcfc" path="res://Scripts/Combat/AttackPerPosition.cs" id="2_of7dv"]
+[ext_resource type="Resource" uid="uid://cdgubtmkihgw8" path="res://Data/AttackActions/Iannuki.tres" id="3_gf6no"]
+[ext_resource type="Texture2D" uid="uid://de5j0u588upr7" path="res://Art/Placeholders/Units/0_militia_back.png" id="4_kglnk"]
+[ext_resource type="Texture2D" uid="uid://bafqkcurk5b1k" path="res://Art/Placeholders/Units/3_samurai_front.png" id="5_of7dv"]
+[ext_resource type="Resource" uid="uid://cry0fyf1u8o8v" path="res://Data/CharacterClasses/2_Legionnaire.tres" id="6_6t37u"]
+[ext_resource type="Script" uid="uid://bmylglyshe6wd" path="res://Scripts/Unit/ClassRequirements.cs" id="7_x826j"]
+[ext_resource type="Script" uid="uid://1pbhreu2codn" path="res://Scripts/Unit/CharacterClass.cs" id="8_llu1y"]
+
+[sub_resource type="Resource" id="Resource_ncstq"]
+script = ExtResource("2_of7dv")
+AttackAction = ExtResource("1_gf6no")
+Amount = 3
+metadata/_custom_type_script = "uid://du724smqstcfc"
+
+[sub_resource type="Resource" id="Resource_fpcew"]
+script = ExtResource("2_of7dv")
+AttackAction = ExtResource("1_gf6no")
+Amount = 2
+metadata/_custom_type_script = "uid://du724smqstcfc"
+
+[sub_resource type="Resource" id="Resource_hqaj3"]
+script = ExtResource("2_of7dv")
+AttackAction = ExtResource("3_gf6no")
+metadata/_custom_type_script = "uid://du724smqstcfc"
+
+[sub_resource type="Resource" id="Resource_hs6x5"]
+script = ExtResource("7_x826j")
+RequiredClass = ExtResource("6_6t37u")
+RequiredLevel = 5
+metadata/_custom_type_script = "uid://bmylglyshe6wd"
+
+[resource]
+script = ExtResource("8_llu1y")
+ClassName = "Samurai"
+BaseHP = 250
+ClassTextureFront = ExtResource("5_of7dv")
+ClassTextureBack = ExtResource("4_kglnk")
+AttacksPerPosition = Array[Object]([SubResource("Resource_ncstq"), SubResource("Resource_fpcew"), SubResource("Resource_hqaj3")])
+BaseAttackDamage = 25
+ArmorType = 1
+Requirements = Array[Object]([SubResource("Resource_hs6x5")])
+metadata/_custom_type_script = "uid://1pbhreu2codn"
