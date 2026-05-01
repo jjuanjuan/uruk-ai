@@ -76,19 +76,19 @@ public partial class MapManager : Node
                 var pos = kv.Key;
                 int id = kv.Value;
 
-                var cell = GetCell(pos);
-
-                // protección extra
-                if (cell.TerrainData == null)
+                foreach (var dir in Directions)
                 {
-                    astar.SetPointDisabled(id, true);
-                    continue;
+                    var neighborPos = pos + dir;
+
+                    if (!_pointIds.ContainsKey(neighborPos))
+                        continue;
+
+                    int neighborId = _pointIds[neighborPos];
+
+                    if (!astar.ArePointsConnected(id, neighborId))
+                        astar.ConnectPoints(id, neighborId);
                 }
-
-                float weight = GetCellCost(cell, type);
-                astar.SetPointWeightScale(id, weight);
             }
-
             // Pesos
             foreach (var kv in _pointIds)
             {

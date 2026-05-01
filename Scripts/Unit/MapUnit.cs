@@ -116,7 +116,7 @@ public partial class MapUnit : Area2D
     public void MoveTo(Vector2I targetGrid)
     {
         GD.Print("Map: ", _map);
-        GD.Print("GridPosition: ", GridPosition);
+        GD.Print($"FROM {GridPosition} TO {targetGrid}");
         GD.Print("MovementType: ", MovementType);
 
         if (_map == null)
@@ -130,7 +130,27 @@ public partial class MapUnit : Area2D
             }
         }
 
+        GD.Print($"MoveTo called");
+        GD.Print($"From: {GridPosition}, To: {targetGrid}");
+
+        for (int x = targetGrid.X - 1; x <= targetGrid.X + 1; x++)
+        {
+            for (int y = targetGrid.Y - 1; y <= targetGrid.Y + 1; y++)
+            {
+                var cell = _map.GetCell(new Vector2I(x, y));
+                GD.Print($"Cell {x},{y}: {cell}");
+            }
+        }
+
         var gridPath = _map.GetPath(GridPosition, targetGrid, MovementType);
+
+        GD.Print($"Path size: {gridPath.Count}");
+
+        if (gridPath.Count > 0)
+        {
+            foreach (var p in gridPath)
+                GD.Print($"  step: {p}");
+        }
 
         _pathWorld.Clear();
 
