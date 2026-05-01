@@ -1,5 +1,6 @@
-using System.Collections.Generic;
 using Godot;
+using System;
+using System.Collections.Generic;
 
 [GlobalClass]
 public partial class TerrainData : Resource
@@ -14,6 +15,9 @@ public partial class TerrainData : Resource
     public void BuildCache()
     {
         _movementCostMap = new Dictionary<MovementType, int>();
+
+        foreach (MovementType mt in Enum.GetValues(typeof(MovementType)))
+            _movementCostMap[mt] = DefaultCost;
 
         if (MovementCosts == null)
             return;

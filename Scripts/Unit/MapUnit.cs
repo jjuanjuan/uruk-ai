@@ -16,8 +16,7 @@ public partial class MapUnit : Area2D
     private bool _selected = false;
     private float _currentSpeed;
 
-    public MovementType MovementType =>
-        Party.GetLeader().CharacterClass.MovementType;
+    public MovementType MovementType => Party.GetLeader().CharacterClass.MovementType;
 
     public override void _Ready()
     {
@@ -86,7 +85,7 @@ public partial class MapUnit : Area2D
         // terreno actual
         var cell = _map.GetCell(_map.WorldToGrid(Position));
 
-        // seguridad: no caminar sobre bloqueado
+        // no caminar sobre bloqueado
         if (cell.TerrainData == null || !cell.TerrainData.Walkable)
         {
             _moving = false;
@@ -94,10 +93,7 @@ public partial class MapUnit : Area2D
         }
 
         float targetSpeed = GetSpeed(cell);
-
-        // suavizado (inercia ligera tipo Ogre Battle)
-        _currentSpeed = Mathf.Lerp(_currentSpeed, targetSpeed, 0.15f);
-
+        _currentSpeed = targetSpeed;
         float step = _currentSpeed * (float)delta;
 
         // evitar overshoot
@@ -115,8 +111,6 @@ public partial class MapUnit : Area2D
     // ---------------------------------------
     public void MoveTo(Vector2I targetGrid)
     {
-        GD.Print("Map: ", _map);
-        GD.Print($"FROM {GridPosition} TO {targetGrid}");
         GD.Print("MovementType: ", MovementType);
 
         if (_map == null)
@@ -130,29 +124,12 @@ public partial class MapUnit : Area2D
             }
         }
 
-        GD.Print($"MoveTo called");
-        GD.Print($"From: {GridPosition}, To: {targetGrid}");
         targetGrid = _map.ClampToMap(targetGrid);
-
-        for (int x = targetGrid.X - 1; x <= targetGrid.X + 1; x++)
-        {
-            for (int y = targetGrid.Y - 1; y <= targetGrid.Y + 1; y++)
-            {
-                var cell = _map.GetCell(new Vector2I(x, y));
-                GD.Print($"Cell {x},{y}: {cell}");
-            }
-        }
 
         var gridPath = _map.GetPath(GridPosition, targetGrid, MovementType);
         //gridPath = _map.SmoothPath(gridPath); no me copó este smooth
 
         GD.Print($"Path size: {gridPath.Count}");
-
-        if (gridPath.Count > 0)
-        {
-            foreach (var p in gridPath)
-                GD.Print($"  step: {p}");
-        }
 
         _pathWorld.Clear();
 
@@ -183,19 +160,18 @@ public partial class MapUnit : Area2D
         float cost = cell.TerrainData.GetCost(MovementType);
 
         if (cell.FeatureData != null)
-            foreach (var feature in cell.FeatureData.MovementModifier)
-            {
-                cost += feature.Cost;
-            }
-
-        cost = Mathf.Max(0.1f, cost);
+        {
+            cost += cell.FeatureData.GetCost(MovementType);
+        }
+        
+        cost = Mathf.Max(0.5f, cost);
 
         return BaseSpeed / cost;
     }
     // ---------------------------------------
     void OnPathFinished()
     {
-        GD.Print($"Arrived at {GridPosition}");
+        //GD.Print($"Arrived at {GridPosition}");
     }
 
     // SELECTION

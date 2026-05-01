@@ -63,7 +63,7 @@ public partial class MapInputController : Node2D
 
 		Vector2I grid = WorldToGrid(mouseWorld);
 
-		GD.Print($"Move to {grid}");
+		//GD.Print($"Move to {grid}");
 
 		_selectedUnit.MoveTo(grid);
 	}

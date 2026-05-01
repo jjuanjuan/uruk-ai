@@ -17,6 +17,9 @@ public partial class TerrainFeatureData : Resource
     {
         _movementCostMap = new Dictionary<MovementType, int>();
 
+        foreach (MovementType mt in Enum.GetValues(typeof(MovementType)))
+            _movementCostMap[mt] = DefaultCost;
+
         if (MovementModifier == null)
             return;
 

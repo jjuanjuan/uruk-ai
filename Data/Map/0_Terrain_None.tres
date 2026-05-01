@@ -29,7 +29,7 @@ metadata/_custom_type_script = "uid://b86pgl5m886un"
 [sub_resource type="Resource" id="Resource_fxhmu"]
 script = ExtResource("1_6kxxj")
 Type = 4
-Cost = 4
+Cost = 1
 metadata/_custom_type_script = "uid://b86pgl5m886un"
 
 [resource]

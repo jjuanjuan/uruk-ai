@@ -8,6 +8,7 @@ radius = 32.0
 
 [node name="MapUnit" type="Area2D" unique_id=1281034803 node_paths=PackedStringArray("LeaderTexture")]
 script = ExtResource("1_h4k78")
+BaseSpeed = 15.0
 LeaderTexture = NodePath("TextureRect")
 
 [node name="TextureRect" type="TextureRect" parent="." unique_id=826299163]

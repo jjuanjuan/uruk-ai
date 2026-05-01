@@ -5,30 +5,31 @@
 
 [sub_resource type="Resource" id="Resource_ihonx"]
 script = ExtResource("1_3gxpy")
-Cost = 2
+Cost = 7
 metadata/_custom_type_script = "uid://b86pgl5m886un"
 
 [sub_resource type="Resource" id="Resource_j3vxt"]
 script = ExtResource("1_3gxpy")
 Type = 1
-Cost = 2
+Cost = 10
 metadata/_custom_type_script = "uid://b86pgl5m886un"
 
 [sub_resource type="Resource" id="Resource_dgjko"]
 script = ExtResource("1_3gxpy")
 Type = 2
+Cost = 7
 metadata/_custom_type_script = "uid://b86pgl5m886un"
 
 [sub_resource type="Resource" id="Resource_sjfea"]
 script = ExtResource("1_3gxpy")
 Type = 3
-Cost = 2
+Cost = 7
 metadata/_custom_type_script = "uid://b86pgl5m886un"
 
 [sub_resource type="Resource" id="Resource_1aypl"]
 script = ExtResource("1_3gxpy")
 Type = 4
-Cost = -2
+Cost = -5
 metadata/_custom_type_script = "uid://b86pgl5m886un"
 
 [resource]
