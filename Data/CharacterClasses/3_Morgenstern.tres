@@ -43,5 +43,6 @@ AttacksPerPosition = Array[Object]([SubResource("Resource_ncstq"), SubResource("
 BaseAttackDamage = 25
 BaseSpeed = 0
 ArmorType = 2
+MovementType = 3
 Requirements = Array[Object]([SubResource("Resource_hs6x5")])
 metadata/_custom_type_script = "uid://1pbhreu2codn"

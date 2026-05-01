@@ -275,7 +275,7 @@ public partial class MapManager : Node
     }
 
     // ---------------------------------------
-    // TILEMAP READERS (SAFE)
+    // TILEMAP READERS
     // ---------------------------------------
 
     TerrainType GetTerrainType(Vector2I pos)
@@ -367,5 +367,16 @@ public partial class MapManager : Node
     {
         BuildGrid();
         BuildAllAStars();
+    }
+
+    // GETS
+    public Rect2 GetWorldBounds()
+    {
+        var rect = TerrainLayer.GetUsedRect();
+
+        Vector2 topLeft = TerrainLayer.MapToLocal(rect.Position);
+        Vector2 bottomRight = TerrainLayer.MapToLocal(rect.Position + rect.Size);
+
+        return new Rect2(topLeft, bottomRight - topLeft);
     }
 }

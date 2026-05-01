@@ -41,5 +41,6 @@ ClassTextureBack = ExtResource("3_ng4m8")
 AttacksPerPosition = Array[Object]([SubResource("Resource_ncstq"), SubResource("Resource_fpcew"), SubResource("Resource_hqaj3")])
 BaseAttackDamage = 25
 ArmorType = 1
+MovementType = 3
 Requirements = Array[Object]([SubResource("Resource_rbfhh")])
 metadata/_custom_type_script = "uid://1pbhreu2codn"

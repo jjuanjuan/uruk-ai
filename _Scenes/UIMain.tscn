@@ -14,20 +14,13 @@ border_width_right = 6
 border_width_bottom = 6
 border_color = Color(0.6651851, 0.6651851, 0.6651851, 1)
 
-[node name="UI Main" type="Control" unique_id=257275985 node_paths=PackedStringArray("PoolUI")]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+[node name="UI Main" type="CanvasLayer" unique_id=464530899 node_paths=PackedStringArray("PoolUI")]
 script = ExtResource("1_husyh")
 CombatScene = ExtResource("2_eavit")
 ClassTreeScene = ExtResource("3_epl5v")
 PoolUI = NodePath("UI Orc Pool")
 
 [node name="OpenClassTreeButton" type="Button" parent="." unique_id=675934931]
-layout_mode = 0
 offset_left = 17.0
 offset_top = 394.0
 offset_right = 247.0
@@ -36,7 +29,6 @@ scale = Vector2(0.59665895, 0.6000012)
 text = "Open class tree"
 
 [node name="OpenCombatButton" type="Button" parent="." unique_id=1502428302]
-layout_mode = 0
 offset_left = 16.0
 offset_top = 445.0
 offset_right = 246.0
@@ -45,7 +37,6 @@ scale = Vector2(0.59665895, 0.6000012)
 text = "Open COMBAT"
 
 [node name="GenerateOrcButton" type="Button" parent="." unique_id=443345402]
-layout_mode = 0
 offset_left = 16.00003
 offset_top = 492.0
 offset_right = 246.00003
@@ -54,7 +45,6 @@ scale = Vector2(0.59665895, 0.6000012)
 text = "Generate Orc"
 
 [node name="GenerateMapUnitButton" type="Button" parent="." unique_id=1888601964]
-layout_mode = 0
 offset_left = 15.0
 offset_top = 540.0
 offset_right = 245.0
@@ -63,7 +53,6 @@ scale = Vector2(0.59665895, 0.6000012)
 text = "Generate Map Unit"
 
 [node name="UI Orc Pool" type="Panel" parent="." unique_id=1054518165 node_paths=PackedStringArray("list")]
-layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
