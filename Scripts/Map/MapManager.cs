@@ -7,18 +7,21 @@ public partial class MapManager : Node
     [Export] public TileMapLayer TerrainLayer;
     [Export] public TileMapLayer FeatureLayer;
     [Export] public TileMapLayer BuildingLayer;
+    [Export] public CameraController CameraController;
 
-    private Dictionary<MovementType, AStar2D> _astarCache = new();
+    Dictionary<MovementType, AStar2D> _astarCache = new();
+
+    Rect2I _usedRect;
 
     // Grid
-    private Dictionary<Vector2I, int> _pointIds = new();
-    private Dictionary<int, Vector2I> _idToPos = new();
+    Dictionary<Vector2I, int> _pointIds = new();
+    Dictionary<int, Vector2I> _idToPos = new();
 
     const int TILE_SIZE = 64;
     const int HALF_TILE = TILE_SIZE / 2;
 
-    private int _width;
-    private int _height;
+    int _width;
+    int _height;
 
     static readonly Vector2I[] Directions8 = new[]
     {
@@ -58,6 +61,8 @@ public partial class MapManager : Node
         BuildAllAStars();
 
         AddToGroup("map_manager");
+
+        CameraController.Init();
     }
 
     // ---------------------------------------
@@ -76,6 +81,7 @@ public partial class MapManager : Node
             _idToPos[id] = pos;
             id++;
         }
+        _usedRect = TerrainLayer.GetUsedRect();
     }
 
     // ---------------------------------------
@@ -251,11 +257,14 @@ public partial class MapManager : Node
     {
         var terrain = GetTerrainType(pos);
 
-        // esto ahora casi no debería pasar
+        // esto pasa si tocás fuera del mapa
         if (terrain == TerrainType.None)
         {
-            GD.PrintErr($"Invalid terrain at {pos}");
-            return default; // struct vacío
+            GD.Print($"Invalid terrain at {pos}");
+            // encontrar el tile más cercano
+            pos = ClampToMap(pos);
+            GD.Print($"New {pos}");
+            terrain = GetTerrainType(pos);
         }
 
         var feature = GetFeatureType(pos);
@@ -272,6 +281,19 @@ public partial class MapManager : Node
             FeatureData = GameManager.I.Database.GetTerrainFeature(feature),
             BuildingData = GameManager.I.Database.GetBuilding(building)
         };
+    }
+
+    public Vector2I ClampToMap(Vector2I pos)
+    {
+        int x = Mathf.Clamp(pos.X,
+            _usedRect.Position.X,
+            _usedRect.End.X - 1);
+
+        int y = Mathf.Clamp(pos.Y,
+            _usedRect.Position.Y,
+            _usedRect.End.Y - 1);
+
+        return new Vector2I(x, y);
     }
 
     // ---------------------------------------
@@ -369,13 +391,11 @@ public partial class MapManager : Node
         BuildAllAStars();
     }
 
-    // GETS
+    // BOUNDS
     public Rect2 GetWorldBounds()
     {
-        var rect = TerrainLayer.GetUsedRect();
-
-        Vector2 topLeft = TerrainLayer.MapToLocal(rect.Position);
-        Vector2 bottomRight = TerrainLayer.MapToLocal(rect.Position + rect.Size);
+        Vector2 topLeft = TerrainLayer.MapToLocal(_usedRect.Position);
+        Vector2 bottomRight = TerrainLayer.MapToLocal(_usedRect.Position + _usedRect.Size);
 
         return new Rect2(topLeft, bottomRight - topLeft);
     }

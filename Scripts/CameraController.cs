@@ -9,14 +9,17 @@ public partial class CameraController : Camera2D
     [Export] public MapManager Map;
 
     Rect2 bounds;
+    bool IsInit;
 
-    public override void _Ready()
+    public void Init()
     {
         bounds = Map.GetWorldBounds();
+        IsInit = true;
     }
 
     public override void _Process(double delta)
     {
+        if (!IsInit) return;
         HandleMovement((float)delta);
     }
 

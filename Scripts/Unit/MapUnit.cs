@@ -132,6 +132,7 @@ public partial class MapUnit : Area2D
 
         GD.Print($"MoveTo called");
         GD.Print($"From: {GridPosition}, To: {targetGrid}");
+        targetGrid = _map.ClampToMap(targetGrid);
 
         for (int x = targetGrid.X - 1; x <= targetGrid.X + 1; x++)
         {
