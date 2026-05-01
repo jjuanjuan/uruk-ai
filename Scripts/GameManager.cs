@@ -9,6 +9,7 @@ public partial class GameManager : Node
     [Export] public CombatConfig CombatConfig;
     [Export] public GameDatabase Database;
     
+    public MapManager MapManager;
     public CharacterParty Team1;
     public CharacterParty Team2;
     public RandomNumberGenerator rng = new RandomNumberGenerator();

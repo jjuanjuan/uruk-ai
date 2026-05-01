@@ -362,12 +362,12 @@ custom_data_layer_0/name = "building_type"
 custom_data_layer_0/type = 2
 sources/0 = SubResource("TileSetAtlasSource_638v7")
 
-[node name="MapScene" type="Node2D" unique_id=1940939050 node_paths=PackedStringArray("TerrainLayer", "FeatureLayer", "BuildingLayer", "CameraController")]
+[node name="MapScene" type="Node2D" unique_id=1940939050 node_paths=PackedStringArray("TerrainLayer", "FeatureLayer", "BuildingLayer", "MapCamera")]
 script = ExtResource("1_swtpd")
 TerrainLayer = NodePath("Tilemaps/Layer Terrain")
 FeatureLayer = NodePath("Tilemaps/Layer Features")
 BuildingLayer = NodePath("Tilemaps/Layer Buildings")
-CameraController = NodePath("Camera2D")
+MapCamera = NodePath("Camera2D")
 
 [node name="MapInputController" type="Node2D" parent="." unique_id=995066931]
 script = ExtResource("2_swtpd")

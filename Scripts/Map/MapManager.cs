@@ -7,7 +7,7 @@ public partial class MapManager : Node
     [Export] public TileMapLayer TerrainLayer;
     [Export] public TileMapLayer FeatureLayer;
     [Export] public TileMapLayer BuildingLayer;
-    [Export] public CameraController CameraController;
+    [Export] public CameraController MapCamera;
 
     Dictionary<MovementType, AStar2D> _astarCache = new();
 
@@ -57,12 +57,20 @@ public partial class MapManager : Node
     // ---------------------------------------
     public override void _Ready()
     {
+        GameManager.I.MapManager = this;
+
         BuildGrid();
         BuildAllAStars();
 
         AddToGroup("map_manager");
 
-        CameraController.Init();
+        MapCamera.Init();
+    }
+
+    public override void _ExitTree()
+    {
+        if (GameManager.I.MapManager == this)
+            GameManager.I.MapManager = null;
     }
 
     // ---------------------------------------

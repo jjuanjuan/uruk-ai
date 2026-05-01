@@ -64,9 +64,10 @@ public partial class UIMain : CanvasLayer
 		party.PlaceOrc(orc, 0, 0);
 		party.SetLeader(orc);
 
-		var unit = spawner.Spawn(new Vector2I(5, 5), party);
+		Vector2 worldPos = GameManager.I.MapManager.MapCamera.GlobalPosition;
+		Vector2I gridPos = GameManager.I.MapManager.WorldToGrid(worldPos);
 
-		unit.MoveTo(new Vector2I(10, 8));
+		var unit = spawner.Spawn(gridPos, party);
 	}
 	UnitSpawner GetSpawner()
 	{
