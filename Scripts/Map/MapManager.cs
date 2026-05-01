@@ -15,16 +15,40 @@ public partial class MapManager : Node
     private Dictionary<Vector2I, int> _pointIds = new();
     private Dictionary<int, Vector2I> _idToPos = new();
 
+    const int TILE_SIZE = 64;
+    const int HALF_TILE = TILE_SIZE / 2;
+
     private int _width;
     private int _height;
 
-    static readonly Vector2I[] Directions = new[]
+    static readonly Vector2I[] Directions8 = new[]
     {
-        Vector2I.Up,
-        Vector2I.Down,
-        Vector2I.Left,
-        Vector2I.Right
+        new Vector2I(0, -1),
+        new Vector2I(0,  1),
+        new Vector2I(-1, 0),
+        new Vector2I(1,  0),
+
+        new Vector2I(-1, -1),
+        new Vector2I(1, -1),
+        new Vector2I(-1, 1),
+        new Vector2I(1,  1),
     };
+
+    public Vector2 GridToWorld(Vector2I grid)
+    {
+        return new Vector2(
+            grid.X * TILE_SIZE + HALF_TILE,
+            grid.Y * TILE_SIZE + HALF_TILE
+        );
+    }
+
+    public Vector2I WorldToGrid(Vector2 world)
+    {
+        return new Vector2I(
+            Mathf.FloorToInt(world.X / TILE_SIZE),
+            Mathf.FloorToInt(world.Y / TILE_SIZE)
+        );
+    }
 
     // ---------------------------------------
     // INIT
@@ -76,14 +100,30 @@ public partial class MapManager : Node
                 var pos = kv.Key;
                 int id = kv.Value;
 
-                foreach (var dir in Directions)
+                foreach (var dir in Directions8)
                 {
                     var neighborPos = pos + dir;
 
                     if (!_pointIds.ContainsKey(neighborPos))
                         continue;
 
-                    int neighborId = _pointIds[neighborPos];
+                    int neighborId = _pointIds[neighborPos]; // ← FALTABA ESTO
+
+                    var cell = GetCell(pos);
+                    var neighbor = GetCell(neighborPos);
+
+                    if (!cell.TerrainData.Walkable || !neighbor.TerrainData.Walkable)
+                        continue;
+
+                    // evitar corner cutting
+                    if (dir.X != 0 && dir.Y != 0)
+                    {
+                        var side1 = GetCell(pos + new Vector2I(dir.X, 0));
+                        var side2 = GetCell(pos + new Vector2I(0, dir.Y));
+
+                        if (!side1.TerrainData.Walkable || !side2.TerrainData.Walkable)
+                            continue;
+                    }
 
                     if (!astar.ArePointsConnected(id, neighborId))
                         astar.ConnectPoints(id, neighborId);
@@ -129,6 +169,57 @@ public partial class MapManager : Node
         return path;
     }
 
+    List<Vector2I> SmoothPath(List<Vector2I> path)
+    {
+        if (path.Count <= 2)
+            return path;
+
+        var result = new List<Vector2I>();
+        int current = 0;
+
+        result.Add(path[current]);
+
+        while (current < path.Count - 1)
+        {
+            int next = path.Count - 1;
+
+            for (int i = path.Count - 1; i > current; i--)
+            {
+                if (HasLineOfSight(path[current], path[i]))
+                {
+                    next = i;
+                    break;
+                }
+            }
+
+            result.Add(path[next]);
+            current = next;
+        }
+
+        return result;
+    }
+
+    bool HasLineOfSight(Vector2I a, Vector2I b)
+    {
+        Vector2 start = GridToWorld(a);
+        Vector2 end = GridToWorld(b);
+
+        Vector2 dir = (end - start).Normalized();
+        float dist = start.DistanceTo(end);
+
+        float step = 16f; // resolución
+
+        for (float t = 0; t < dist; t += step)
+        {
+            Vector2 p = start + dir * t;
+            var cell = GetCell(WorldToGrid(p));
+
+            if (cell.TerrainData == null || !cell.TerrainData.Walkable)
+                return false;
+        }
+
+        return true;
+    }
     // ---------------------------------------
     // COST
     // ---------------------------------------

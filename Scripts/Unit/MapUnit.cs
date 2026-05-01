@@ -33,8 +33,8 @@ public partial class MapUnit : Area2D
     {
         _map = GetTree().GetFirstNodeInGroup("map_manager") as MapManager;
 
-        GridPosition = WorldToGrid(Position);
-        Position = GridToWorld(GridPosition);
+        GridPosition = _map.WorldToGrid(Position);
+        Position = _map.GridToWorld(GridPosition);
 
         _currentSpeed = BaseSpeed;
 
@@ -84,7 +84,7 @@ public partial class MapUnit : Area2D
         Vector2 dir = toTarget / dist;
 
         // terreno actual
-        var cell = _map.GetCell(WorldToGrid(Position));
+        var cell = _map.GetCell(_map.WorldToGrid(Position));
 
         // seguridad: no caminar sobre bloqueado
         if (cell.TerrainData == null || !cell.TerrainData.Walkable)
@@ -107,7 +107,7 @@ public partial class MapUnit : Area2D
         Position += dir * step;
 
         // actualizar grid lógico
-        GridPosition = WorldToGrid(Position);
+        GridPosition = _map.WorldToGrid(Position);
     }
 
     // ---------------------------------------
@@ -161,7 +161,7 @@ public partial class MapUnit : Area2D
         }
 
         foreach (var p in gridPath)
-            _pathWorld.Add(GridToWorld(p));
+            _pathWorld.Add(_map.GridToWorld(p));
 
         _pathIndex = 0;
         _moving = true;
@@ -190,29 +190,6 @@ public partial class MapUnit : Area2D
 
         return BaseSpeed / cost;
     }
-
-    // ---------------------------------------
-    // GRID <-> WORLD
-    // ---------------------------------------
-    const int TILE_SIZE = 64;
-    const int HALF_TILE = TILE_SIZE / 2;
-
-    Vector2 GridToWorld(Vector2I grid)
-    {
-        return new Vector2(
-            grid.X * TILE_SIZE + HALF_TILE,
-            grid.Y * TILE_SIZE + HALF_TILE
-        );
-    }
-
-    Vector2I WorldToGrid(Vector2 world)
-    {
-        return new Vector2I(
-            Mathf.FloorToInt(world.X / TILE_SIZE),
-            Mathf.FloorToInt(world.Y / TILE_SIZE)
-        );
-    }
-
     // ---------------------------------------
     void OnPathFinished()
     {
