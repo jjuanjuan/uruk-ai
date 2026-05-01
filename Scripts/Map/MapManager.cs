@@ -8,7 +8,6 @@ public partial class MapManager : Node
     [Export] public TileMapLayer FeatureLayer;
     [Export] public TileMapLayer BuildingLayer;
 
-    // Cache de A*
     private Dictionary<MovementType, AStar2D> _astarCache = new();
 
     // Grid
@@ -107,7 +106,7 @@ public partial class MapManager : Node
                     if (!_pointIds.ContainsKey(neighborPos))
                         continue;
 
-                    int neighborId = _pointIds[neighborPos]; // ← FALTABA ESTO
+                    int neighborId = _pointIds[neighborPos];
 
                     var cell = GetCell(pos);
                     var neighbor = GetCell(neighborPos);
@@ -169,7 +168,8 @@ public partial class MapManager : Node
         return path;
     }
 
-    List<Vector2I> SmoothPath(List<Vector2I> path)
+    // no me copó este Smooth, no lo uso //
+    public List<Vector2I> SmoothPath(List<Vector2I> path)
     {
         if (path.Count <= 2)
             return path;

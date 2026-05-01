@@ -17,7 +17,7 @@ public partial class MapUnit : Area2D
     private float _currentSpeed;
 
     public MovementType MovementType =>
-        Party?.GetLeader()?.CharacterClass?.MovementType ?? MovementType.Ground;
+        Party.GetLeader().CharacterClass.MovementType;
 
     public override void _Ready()
     {
@@ -143,6 +143,7 @@ public partial class MapUnit : Area2D
         }
 
         var gridPath = _map.GetPath(GridPosition, targetGrid, MovementType);
+        //gridPath = _map.SmoothPath(gridPath); no me copó este smooth
 
         GD.Print($"Path size: {gridPath.Count}");
 
