@@ -35,7 +35,7 @@ metadata/_custom_type_script = "uid://bmylglyshe6wd"
 [resource]
 script = ExtResource("7_a0yx5")
 ClassName = "Wild One"
-BaseHP = 180
+BaseHP = 80
 ClassTextureFront = ExtResource("5_pkgga")
 ClassTextureBack = ExtResource("3_ng4m8")
 AttacksPerPosition = Array[Object]([SubResource("Resource_ncstq"), SubResource("Resource_fpcew"), SubResource("Resource_hqaj3")])

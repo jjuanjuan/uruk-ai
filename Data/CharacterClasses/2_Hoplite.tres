@@ -35,7 +35,6 @@ metadata/_custom_type_script = "uid://bmylglyshe6wd"
 [resource]
 script = ExtResource("8_fixa0")
 ClassName = "Hoplite"
-BaseHP = 200
 ClassTextureFront = ExtResource("5_div7i")
 ClassTextureBack = ExtResource("4_68x02")
 AttacksPerPosition = Array[Object]([SubResource("Resource_ncstq"), SubResource("Resource_fpcew"), SubResource("Resource_hqaj3")])

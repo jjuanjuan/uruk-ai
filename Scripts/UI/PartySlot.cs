@@ -7,6 +7,7 @@ public partial class PartySlot : PanelContainer
 
     [Export] TextureRect CharImg;
     [Export] RichTextLabel CharName;
+    [Export] TextureRect FlashSprite;
     [Export] ColorRect HPBarParent;
     [Export] ColorRect HPFlashOverlay;
     [Export] HealthBar HPBar;
@@ -19,8 +20,8 @@ public partial class PartySlot : PanelContainer
     [Export] Vector2 SquashIntensity = new Vector2(1f, 2f);
     [Export] float DeathAnimationDuration = 1.5f;
     [Export] float HPTweenDuration = 1.0f;
-    [Export] float HPFlashDuration = .25f;
-    [Export] Color HPFlashColor = new Color(0f, 0f, 0f, 1f);
+    [Export] float HitFlashDuration = .25f;
+    [Export] Color HitFlashColor = new Color(0f, 0f, 0f, 1f);
 
     public OrcInstance Orc;
     public CharacterParty Party;
@@ -369,13 +370,13 @@ public partial class PartySlot : PanelContainer
         if (HPBar != null)
         {
             HPFlashOverlay.Visible = true;
-            HPFlashOverlay.Modulate = HPFlashColor;
+            HPFlashOverlay.Modulate = HitFlashColor;
 
             flashTween.TweenProperty(
                 HPFlashOverlay,
                 "modulate:a",
                 0f,
-                HPFlashDuration
+                HitFlashDuration
             );
         }
     }
@@ -421,6 +422,39 @@ public partial class PartySlot : PanelContainer
         tween.TweenProperty(ContentParent, "scale", Vector2.One, SquashDuration * 0.4f)
             .SetTrans(Tween.TransitionType.Quad)
             .SetEase(Tween.EaseType.Out);
+    }
+    public void PlayHitFlash()
+    {
+        if (FlashSprite == null || CharImg.Texture == null)
+            return;
+
+        FlashSprite.Texture = CharImg.Texture;
+        FlashSprite.FlipV = CharImg.FlipV;
+
+        FlashSprite.Visible = true;
+
+        FlashSprite.Material = new CanvasItemMaterial
+        {
+            BlendMode = CanvasItemMaterial.BlendModeEnum.Add
+        };
+
+        FlashSprite.Modulate = HitFlashColor;
+
+        var tween = CreateTween();
+
+        tween.TweenProperty(
+            FlashSprite,
+            "modulate:a",
+            0f,
+            HitFlashDuration
+        )
+        .SetTrans(Tween.TransitionType.Quad)
+        .SetEase(Tween.EaseType.Out);
+
+        tween.TweenCallback(Callable.From(() =>
+        {
+            FlashSprite.Visible = false;
+        }));
     }
     public void PlayDeathFade()
     {

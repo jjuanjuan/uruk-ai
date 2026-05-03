@@ -34,7 +34,7 @@ metadata/_custom_type_script = "uid://bmylglyshe6wd"
 [resource]
 script = ExtResource("3_ywtj5")
 ClassName = "Bladesmith"
-BaseHP = 150
+BaseHP = 50
 ClassTextureFront = ExtResource("4_dppkv")
 ClassTextureBack = ExtResource("3_3jc0v")
 AttacksPerPosition = Array[Object]([SubResource("Resource_ncstq"), SubResource("Resource_fpcew"), SubResource("Resource_hqaj3")])

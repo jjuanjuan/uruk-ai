@@ -36,7 +36,7 @@ metadata/_custom_type_script = "uid://bmylglyshe6wd"
 [resource]
 script = ExtResource("7_2nf1q")
 ClassName = "Rogue"
-BaseHP = 150
+BaseHP = 60
 ClassTextureFront = ExtResource("4_gqpa1")
 ClassTextureBack = ExtResource("3_htiid")
 AttacksPerPosition = Array[Object]([SubResource("Resource_ncstq"), SubResource("Resource_fpcew"), SubResource("Resource_hqaj3")])

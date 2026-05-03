@@ -34,7 +34,7 @@ metadata/_custom_type_script = "uid://bmylglyshe6wd"
 [resource]
 script = ExtResource("1_uo8t1")
 ClassName = "Bludgeoner"
-BaseHP = 150
+BaseHP = 50
 ClassTextureFront = ExtResource("4_fpcew")
 ClassTextureBack = ExtResource("3_ncstq")
 AttacksPerPosition = Array[Object]([SubResource("Resource_ncstq"), SubResource("Resource_fpcew"), SubResource("Resource_hqaj3")])

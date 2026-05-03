@@ -35,7 +35,6 @@ metadata/_custom_type_script = "uid://bmylglyshe6wd"
 [resource]
 script = ExtResource("8_3adcl")
 ClassName = "Trident"
-BaseHP = 250
 ClassTextureFront = ExtResource("4_6vckn")
 ClassTextureBack = ExtResource("4_scv6j")
 AttacksPerPosition = Array[Object]([SubResource("Resource_ncstq"), SubResource("Resource_fpcew"), SubResource("Resource_hqaj3")])

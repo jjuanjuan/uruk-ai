@@ -15,7 +15,6 @@ public partial class CombatManager : Node
     [Export] PackedScene AttackDebugScene;
     [Export] Control VFXLayer;
 
-
     public enum CombatState
     {
         Init,
@@ -62,6 +61,16 @@ public partial class CombatManager : Node
         };
     }
     //
+
+    public override void _Ready()
+    {
+        GameManager.I.CombatManager = this;
+    }
+    public override void _ExitTree()
+    {
+        if (GameManager.I.CombatManager == this)
+            GameManager.I.CombatManager = null;
+    }
 
     private void SetState(CombatState newState)
     {
@@ -144,7 +153,7 @@ public partial class CombatManager : Node
                 break;
 
             case CombatState.Resolving:
-                UpdateResolving();
+                SetState(CombatState.WaitingForUnit);
                 break;
 
             case CombatState.CheckEnd:
@@ -366,12 +375,6 @@ public partial class CombatManager : Node
         }
         return sum / targets.Count;
     }
-    private void UpdateResolving()
-    {
-        // placeholder para animaciones / VFX
-
-        SetState(CombatState.WaitingForUnit);
-    }
 
     private void UpdateCheckEnd()
     {
@@ -565,6 +568,7 @@ public partial class CombatManager : Node
         slot?.UpdateHPBarAnimated(target, oldHP, target.CurrentHP);
         slot?.PlayHitShake(finalDamage);
         slot?.PlayHitSquash(finalDamage);
+        slot?.PlayHitFlash();
 
         if (!target.IsAlive)
             slot?.PlayDeathFade();

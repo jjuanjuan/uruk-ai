@@ -36,7 +36,7 @@ metadata/_custom_type_script = "uid://bmylglyshe6wd"
 [resource]
 script = ExtResource("8_opsst")
 ClassName = "Cataphract"
-BaseHP = 250
+BaseHP = 120
 ClassTextureFront = ExtResource("4_e1rcd")
 ClassTextureBack = ExtResource("4_tf282")
 AttacksPerPosition = Array[Object]([SubResource("Resource_ncstq"), SubResource("Resource_fpcew"), SubResource("Resource_hqaj3")])
