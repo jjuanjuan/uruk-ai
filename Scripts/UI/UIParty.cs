@@ -132,4 +132,11 @@ public partial class UIParty : Control
         popup.Setup(value);
     }
 
+    public void SetNamesVisible(bool visible)
+    {
+        foreach (PartySlot slot in BoardRoot.GetChildren())
+        {
+            slot.SetNameVisible(visible);
+        }
+    }
 }

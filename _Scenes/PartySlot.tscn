@@ -7,21 +7,23 @@
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8yise"]
 bg_color = Color(0, 0, 0, 0.5)
 
-[node name="PartySlot" type="PanelContainer" unique_id=32862197 node_paths=PackedStringArray("CharImg", "CharName", "HPBar", "ContentParent")]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+[node name="PartySlot" type="PanelContainer" unique_id=32862197 node_paths=PackedStringArray("CharImg", "CharName", "HPBarParent", "HPFlashOverlay", "HPBar", "ContentParent")]
+offset_right = 10.0
+offset_bottom = 20.0
 script = ExtResource("1_54qfb")
-CharImg = NodePath("MarginContainer/AspectRatioContainer/Control/CharImg")
-CharName = NodePath("MarginContainer/AspectRatioContainer/Control/CharName")
-HPBar = NodePath("MarginContainer/AspectRatioContainer/Control/HP Bar")
-ContentParent = NodePath("MarginContainer/AspectRatioContainer/Control")
+CharImg = NodePath("MarginContainer/Control/CharImg")
+CharName = NodePath("MarginContainer/Control/CharImg/CharName")
+HPBarParent = NodePath("MarginContainer/Control/HP Bar parent")
+HPFlashOverlay = NodePath("MarginContainer/Control/HP Bar parent/HP Bar/Flash overlay")
+HPBar = NodePath("MarginContainer/Control/HP Bar parent/HP Bar")
+ContentParent = NodePath("MarginContainer/Control")
 ShakeDuration = 1.0
 ShakeIntensity = Vector2(5, 20)
 SquashDuration = 0.15
 DeathAnimationDuration = 1.1
+HPTweenDuration = 0.5
+HPFlashDuration = 0.17
+HPFlashColor = Color(1, 1, 1, 0.90000004)
 
 [node name="MarginContainer" type="MarginContainer" parent="." unique_id=1598539679]
 layout_mode = 2
@@ -31,37 +33,65 @@ theme_override_constants/margin_top = 5
 theme_override_constants/margin_right = 5
 theme_override_constants/margin_bottom = 15
 
-[node name="AspectRatioContainer" type="AspectRatioContainer" parent="MarginContainer" unique_id=1347756159]
+[node name="Control" type="Control" parent="MarginContainer" unique_id=1006174726]
 layout_mode = 2
 mouse_filter = 2
 
-[node name="Control" type="Control" parent="MarginContainer/AspectRatioContainer" unique_id=1006174726]
-layout_mode = 2
-mouse_filter = 2
-
-[node name="CharImg" type="TextureRect" parent="MarginContainer/AspectRatioContainer/Control" unique_id=34993198]
-z_index = 1
-y_sort_enabled = true
+[node name="HP Bar parent" type="ColorRect" parent="MarginContainer/Control" unique_id=349579198]
+custom_minimum_size = Vector2(2, 2)
 layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+offset_left = -30.0
+offset_top = 5.0
+offset_right = -19.0
+offset_bottom = 69.0
+mouse_filter = 2
+color = Color(0, 0, 0, 1)
+
+[node name="HP Bar" type="TextureProgressBar" parent="MarginContainer/Control/HP Bar parent" unique_id=1757951918]
+z_index = 1
+custom_minimum_size = Vector2(2, 2)
+layout_mode = 1
+offset_left = 2.0
+offset_top = 2.0
+offset_right = 9.0
+offset_bottom = 62.0
+mouse_filter = 2
+max_value = 1.0
+step = 0.05
+script = ExtResource("3_7mel0")
+DamageColor = Color(0.48775607, 1.0287948e-06, 3.3691526e-07, 1)
+HealthyColor = Color(0.19966345, 0.41822335, 0, 1)
+
+[node name="Flash overlay" type="ColorRect" parent="MarginContainer/Control/HP Bar parent/HP Bar" unique_id=2077018479]
+visible = false
+custom_minimum_size = Vector2(2, 2)
+layout_mode = 1
+offset_right = 7.0
+offset_bottom = 60.0
+mouse_filter = 2
+
+[node name="CharImg" type="TextureRect" parent="MarginContainer/Control" unique_id=34993198]
+z_index = 2
+layout_mode = 1
+offset_left = -40.0
+offset_top = -20.0
+offset_right = 72.0
+offset_bottom = 92.0
 size_flags_vertical = 3
 mouse_filter = 2
 texture = ExtResource("2_8yise")
-stretch_mode = 6
+expand_mode = 2
+stretch_mode = 5
 
-[node name="CharName" type="RichTextLabel" parent="MarginContainer/AspectRatioContainer/Control" unique_id=843140937]
+[node name="CharName" type="RichTextLabel" parent="MarginContainer/Control/CharImg" unique_id=1873711256]
+visible = false
+z_index = 1
+custom_minimum_size = Vector2(40, 10)
 layout_mode = 1
-anchors_preset = 12
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_top = -14.0
-grow_horizontal = 2
-grow_vertical = 0
+offset_left = 10.0
+offset_top = 11.0
+offset_right = 90.0
+offset_bottom = 25.0
 mouse_filter = 2
 theme_override_font_sizes/normal_font_size = 10
 theme_override_styles/normal = SubResource("StyleBoxFlat_8yise")
@@ -69,19 +99,4 @@ text = "Boris"
 fit_content = true
 scroll_active = false
 horizontal_alignment = 1
-vertical_alignment = 2
-
-[node name="HP Bar" type="TextureProgressBar" parent="MarginContainer/AspectRatioContainer/Control" unique_id=1757951918]
-z_index = 2
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_top = -4.0
-offset_bottom = -523.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-max_value = 1.0
-step = 0.05
-script = ExtResource("3_7mel0")
+vertical_alignment = 1

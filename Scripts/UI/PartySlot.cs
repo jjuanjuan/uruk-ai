@@ -7,6 +7,8 @@ public partial class PartySlot : PanelContainer
 
     [Export] TextureRect CharImg;
     [Export] RichTextLabel CharName;
+    [Export] ColorRect HPBarParent;
+    [Export] ColorRect HPFlashOverlay;
     [Export] HealthBar HPBar;
 
     [Export] Control ContentParent; // uso este para sacudir y otros efectos
@@ -16,6 +18,9 @@ public partial class PartySlot : PanelContainer
     [Export] float SquashDuration = 0.3f;
     [Export] Vector2 SquashIntensity = new Vector2(1f, 2f);
     [Export] float DeathAnimationDuration = 1.5f;
+    [Export] float HPTweenDuration = 1.0f;
+    [Export] float HPFlashDuration = .25f;
+    [Export] Color HPFlashColor = new Color(0f, 0f, 0f, 1f);
 
     public OrcInstance Orc;
     public CharacterParty Party;
@@ -28,6 +33,7 @@ public partial class PartySlot : PanelContainer
     StyleBoxFlat highlightInvalid;
     StyleBoxFlat selectedStyle;
     int BorderWidthAll;
+    bool nameVisible = true;
 
     public override void _Ready()
     {
@@ -51,17 +57,35 @@ public partial class PartySlot : PanelContainer
         if (Orc == null)
         {
             CharImg.Visible = false;
-            CharName.Visible = false;
-            HPBar.Visible = false;
+            UpdateNameVisibility();
+            HPBarParent.Visible = false;
         }
         else
         {
+            CharImg.Texture = Orc.CharacterClass.GetFrontTexture();
+            CharImg.FlipV = !IsFront; // TODO: reemplazar con imagenes back
+            //CharImg.Texture = orc.CharacterClass.GetBackTexture();
             CharImg.Visible = true;
             CharName.Text = Orc.GetCustomName();
-            CharName.Visible = true;
-            HPBar.Visible = true;
+            UpdateNameVisibility();
+            HPBarParent.Visible = true;
             HPBar.SetValue(Orc.CurrentHPPercentile);
         }
+    }
+    public void SetNameVisible(bool visible)
+    {
+        nameVisible = visible;
+        UpdateNameVisibility();
+    }
+    void UpdateNameVisibility()
+    {
+        if (CharName == null)
+            return;
+
+        if (Orc != null)
+            CharName.Visible = Orc.IsAlive && nameVisible;
+        else
+            CharName.Visible = nameVisible;
     }
 
     void BuildStyles()
@@ -106,20 +130,10 @@ public partial class PartySlot : PanelContainer
 
         if (orc == null)
         {
-            CharImg.Visible = false;
-            CharName.Visible = false;
             UpdateVisual();
             ApplyNormal();
             return;
         }
-
-        CharImg.Texture = orc.CharacterClass.GetFrontTexture();
-        CharImg.FlipV = !IsFront; // TODO: reemplazar con imagenes back
-        //CharImg.Texture = orc.CharacterClass.GetBackTexture();
-        CharName.Text = orc.GetCustomName();
-
-        CharImg.Visible = true;
-        CharName.Visible = true;
 
         UpdateVisual();
 
@@ -344,26 +358,25 @@ public partial class PartySlot : PanelContainer
             }),
             fromNormalized,
             toNormalized,
-            0.35f
+            HPTweenDuration
         )
         .SetTrans(Tween.TransitionType.Quad)
         .SetEase(Tween.EaseType.Out);
 
-        // 2. flash separado (NO mezclar con el otro tween)
+        // 2. barra HP flash (NO mezclar con el otro tween)
         var flashTween = CreateTween();
 
         if (HPBar != null)
         {
-            HPBar.Modulate = Colors.Red;
+            HPFlashOverlay.Visible = true;
+            HPFlashOverlay.Modulate = HPFlashColor;
 
             flashTween.TweenProperty(
-                HPBar,
-                "modulate",
-                Colors.White,
-                0.25f
-            )
-            .SetTrans(Tween.TransitionType.Quad)
-            .SetEase(Tween.EaseType.Out);
+                HPFlashOverlay,
+                "modulate:a",
+                0f,
+                HPFlashDuration
+            );
         }
     }
     public void PlayHitShake(int damage)

@@ -70,6 +70,17 @@ public partial class CombatManager : Node
 
         GD.Print("Combat " + state.ToString());
 
+        if (state == CombatState.WaitingForStartDelay)
+        {
+            UI.Team1UI.SetNamesVisible(false);
+            UI.Team2UI.SetNamesVisible(false);
+        }
+        else if (state == CombatState.Ended)
+        {
+            UI.Team1UI.SetNamesVisible(true);
+            UI.Team2UI.SetNamesVisible(true);
+        }
+
         EmitSignal(SignalName.CombatStateChanged);
     }
 
