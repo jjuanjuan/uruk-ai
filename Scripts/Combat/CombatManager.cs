@@ -227,7 +227,11 @@ public partial class CombatManager : Node
         turnOrder.Clear();
         currentIndex = 0;
 
-        var all = new List<OrcInstance>(combatContext.UnitState.Keys);
+        // solo orcos vivos que tengan acciones
+        var all = combatContext.UnitState
+            .Where(kv => kv.Value.Orc.IsAlive && kv.Value.RemainingActions > 0)
+            .Select(kv => kv.Key)
+            .ToList();
 
         var groups = new Dictionary<int, List<OrcInstance>>();
 
@@ -327,6 +331,9 @@ public partial class CombatManager : Node
         }
 
         UI?.SetAdvantageBar(combatContext.CalculateAdvantage());
+
+        var state = combatContext.UnitState[attacker];
+        state.RemainingActions--;
     }
     void SpawnAttackDebug(List<OrcInstance> targets, OrcInstance attacker, AttackAction attackAction)
     {
