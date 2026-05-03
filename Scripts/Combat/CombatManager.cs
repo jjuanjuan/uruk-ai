@@ -421,7 +421,21 @@ public partial class CombatManager : Node
     {
         SetState(CombatState.Ended);
         UI?.AddLog($"<<COMBAT END>>");
-        // TODO: poner quién ganó
+        if (combatContext.CalculateAdvantage() > 0.5f)
+        {
+            UI?.AddLog("<<TEAM 1 WINS!>>");
+            GD.Print("<<TEAM 1 WINS!>>");
+        }
+        else if (combatContext.CalculateAdvantage() < 0.5f)
+        {
+            UI?.AddLog("<<TEAM 2 WINS!>>");
+            GD.Print("<<TEAM 2 WINS!>>");
+        }
+        else
+        {
+            UI?.AddLog("<<COMBAT IS TIED!!>>");
+            GD.Print("<<COMBAT IS TIED!!>>");
+        }
     }
 
     /////////////////////////////////////////////////////////////////
@@ -661,7 +675,6 @@ public class CombatContext
         float tempScore1 = Score1 * (1f + GameManager.I.CombatConfig.ScoreMultiplierPerKill * Kills1);
         float tempScore2 = Score2 * (1f + GameManager.I.CombatConfig.ScoreMultiplierPerKill * Kills2);
         float advantage = tempScore1 / (tempScore1 + tempScore2);
-        GD.Print("Advantage " + advantage);
 
         return advantage; // debería dar entre 0 y 1
     }
