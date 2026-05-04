@@ -626,3 +626,11 @@ public class CombatUnitState
     public int RemainingActions = 1;
     public bool HasActedThisTurn = false;
 }
+
+public enum EncounterType
+{
+    None,
+    A_Ambushes_B,
+    B_Ambushes_A,
+    Equal
+}

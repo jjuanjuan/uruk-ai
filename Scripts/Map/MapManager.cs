@@ -105,7 +105,25 @@ public partial class MapManager : Node
                 // condición de encuentro
                 if (AreUnitsColliding(a, b))
                 {
-                    StartCombat(a, b);
+                    bool aSeesB = a.CanSee(b);
+                    bool bSeesA = b.CanSee(a);
+
+                    if (aSeesB && !bSeesA)
+                    {
+                        GD.Print("A ambushes B");
+                        StartCombat(a, b, EncounterType.A_Ambushes_B);
+                    }
+                    else if (!aSeesB && bSeesA)
+                    {
+                        GD.Print("B ambushes A");
+                        StartCombat(b, a, EncounterType.B_Ambushes_A);
+                    }
+                    else
+                    {
+                        GD.Print("Normal combat");
+                        StartCombat(a, b, EncounterType.Equal);
+                    }
+
                     return;
                 }
             }
@@ -115,28 +133,47 @@ public partial class MapManager : Node
     {
         return a.GlobalPosition.DistanceTo(b.GlobalPosition) < GameManager.I.CombatConfig.CombatTriggerDistance;
     }
-    void StartCombat(MapUnit frontUnit, MapUnit backUnit)
+
+    void StartCombat(MapUnit aUnit, MapUnit bUnit, EncounterType type)
     {
         paused = true;
 
-        GD.Print($"Combat: {frontUnit.Name} vs {backUnit.Name}");
+        GD.Print($"Combat: {aUnit.Name} vs {bUnit.Name}");
 
-        // 1. detener unidades
-        frontUnit.Stop();
-        backUnit.Stop();
+        aUnit.Stop();
+        bUnit.Stop();
 
-        // 2. instanciar UI
         var combatScene = GameManager.I.CombatScene.Instantiate<UICombatScene>();
         var uiRoot = GetTree().GetFirstNodeInGroup("ui_root");
         uiRoot.AddChild(combatScene);
 
-        // 3. pasar parties
-        combatScene.Setup(frontUnit.Party, backUnit.Party);
+        CharacterParty front;
+        CharacterParty back;
+
+        switch (type)
+        {
+            case EncounterType.A_Ambushes_B:
+                front = aUnit.Party;
+                back = bUnit.Party;
+                break;
+
+            case EncounterType.B_Ambushes_A:
+                front = bUnit.Party;
+                back = aUnit.Party;
+                break;
+
+            default: // Equal
+                front = aUnit.Party;
+                back = bUnit.Party;
+                break;
+        }
+
+        combatScene.Setup(front, back);
 
         // 4. escuchar fin
         combatScene.CombatFinished += () =>
         {
-            OnCombatFinished(frontUnit, backUnit);
+            OnCombatFinished(aUnit, bUnit);
         };
     }
 

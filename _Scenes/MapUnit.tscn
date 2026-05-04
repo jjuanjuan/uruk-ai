@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://biln4ykpqja10" path="res://Scripts/Unit/MapUnit.cs" id="1_h4k78"]
 [ext_resource type="Texture2D" uid="uid://bib73y474e4y" path="res://Art/Placeholders/Units/base ork front.png" id="1_ucu7w"]
+[ext_resource type="Script" uid="uid://dnxxw7rotwwny" path="res://Scripts/Map/VisionCone.cs" id="3_ll66f"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_h4k78"]
 radius = 32.0
@@ -10,6 +11,9 @@ radius = 32.0
 script = ExtResource("1_h4k78")
 BaseSpeed = 20.0
 LeaderTexture = NodePath("TextureRect")
+
+[node name="VisionCone" type="Node2D" parent="." unique_id=2147004035]
+script = ExtResource("3_ll66f")
 
 [node name="TextureRect" type="TextureRect" parent="." unique_id=826299163]
 anchors_preset = 15

@@ -26,6 +26,7 @@ public partial class CombatConfig : Resource
     [Export]
     public float[] Multipliers = new float[30]; // 6 x 5
 
+    // Combat
     [Export]
     public float CombatStartDelay = 4.0f;
     [Export]
@@ -34,8 +35,12 @@ public partial class CombatConfig : Resource
     public float AttackDelayWhenUI = 1.0f;
     [Export]
     public float ScoreMultiplierPerKill = .1f;    
+    
+    // Map
     [Export]
-    public float CombatNoticeDistance = 30f;    
+    public float CombatNoticeDistance = 120f;    
     [Export]
-    public float CombatTriggerDistance = 20f;    
+    public float CombatTriggerDistance = 40f;    
+    [Export]
+    public float CombatNoticeAngle = 15f;    
 }

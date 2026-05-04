@@ -5,7 +5,7 @@ public partial class MapUnit : Area2D
 {
     [Export] public float BaseSpeed = 120f; // px/seg
     [Export] public TextureRect LeaderTexture;
-    
+
     public CharacterParty Party;
     public Team Team => Party?.Team;
     public Vector2I GridPosition { get; private set; }
@@ -16,6 +16,7 @@ public partial class MapUnit : Area2D
     bool _moving = false;
     bool _selected = false;
     float _currentSpeed;
+    Vector2 _forward = Vector2.Down;
 
     public MovementType MovementType => Party.GetLeader().CharacterClass.MovementType;
 
@@ -27,6 +28,11 @@ public partial class MapUnit : Area2D
 
         if (_map == null)
             GD.PrintErr("MapManager not found!");
+
+        var cone = GetNode<VisionCone>("VisionCone");
+
+        cone.Angle = GameManager.I.CombatConfig.CombatNoticeAngle;
+        cone.Distance = GameManager.I.CombatConfig.CombatNoticeDistance;
     }
 
     public void Init()
@@ -86,6 +92,8 @@ public partial class MapUnit : Area2D
         }
 
         Vector2 dir = toTarget / dist;
+        if (dir.Length() > 0.01f)
+            _forward = dir;
 
         // terreno actual
         var cell = _map.GetCell(_map.WorldToGrid(Position));
@@ -205,4 +213,29 @@ public partial class MapUnit : Area2D
         _selected = value;
         Modulate = value ? Colors.Yellow : Colors.White;
     }
+
+    // DIRECTION AND SEEING
+    public bool CanSee(MapUnit other)
+    {
+        float maxDistance = GameManager.I.CombatConfig.CombatNoticeDistance;
+        float angle = GameManager.I.CombatConfig.CombatNoticeAngle;
+
+        Vector2 toOther = other.GlobalPosition - GlobalPosition;
+        float dist = toOther.Length();
+
+        if (dist > maxDistance)
+            return false;
+
+        toOther = toOther.Normalized();
+
+        float dot = GetForward().Dot(toOther);
+        float cosHalfFov = Mathf.Cos(Mathf.DegToRad(angle * 0.5f));
+
+        return dot > cosHalfFov;
+    }
+    public Vector2 GetForward()
+    {
+        return _forward;
+    }
+
 }
