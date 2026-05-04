@@ -7,18 +7,25 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_h4k78"]
 radius = 32.0
 
-[node name="MapUnit" type="Area2D" unique_id=1281034803 node_paths=PackedStringArray("LeaderTexture")]
+[node name="MapUnit" type="Area2D" unique_id=1281034803 node_paths=PackedStringArray("LeaderTexture", "VisionCone")]
 script = ExtResource("1_h4k78")
 BaseSpeed = 20.0
-LeaderTexture = NodePath("TextureRect")
+LeaderTexture = NodePath("Pivot/TextureRect")
+VisionCone = NodePath("Pivot/VisionCone")
 
-[node name="VisionCone" type="Node2D" parent="." unique_id=2147004035]
+[node name="Pivot" type="Node2D" parent="." unique_id=1396853662]
+
+[node name="VisionCone" type="Node2D" parent="Pivot" unique_id=2147004035]
 script = ExtResource("3_ll66f")
 
-[node name="TextureRect" type="TextureRect" parent="." unique_id=826299163]
+[node name="TextureRect" type="TextureRect" parent="Pivot" unique_id=826299163]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = -32.0
+offset_top = -32.0
+offset_right = 32.0
+offset_bottom = 32.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("1_ucu7w")

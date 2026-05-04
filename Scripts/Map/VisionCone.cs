@@ -6,12 +6,7 @@ public partial class VisionCone : Node2D
     public float Distance = 120f;
     public float Angle = 90f;
 
-    MapUnit owner;
-
-    public override void _Ready()
-    {
-        owner = GetParent<MapUnit>();
-    }
+    public MapUnit ParentUnit;
 
     public override void _Process(double delta)
     {
@@ -20,13 +15,13 @@ public partial class VisionCone : Node2D
 
     public override void _Draw()
     {
-        if (owner == null)
+        if (ParentUnit == null)
             return;
 
         int steps = 24;
         float half = Mathf.DegToRad(Angle * 0.5f);
 
-        Vector2 forward = owner.GetForward();
+        Vector2 forward = Vector2.Right;
 
         Vector2 prev = forward.Rotated(-half) * Distance;
 

@@ -5,6 +5,7 @@ public partial class MapUnit : Area2D
 {
     [Export] public float BaseSpeed = 120f; // px/seg
     [Export] public TextureRect LeaderTexture;
+    [Export] public VisionCone VisionCone;
 
     public CharacterParty Party;
     public Team Team => Party?.Team;
@@ -16,7 +17,6 @@ public partial class MapUnit : Area2D
     bool _moving = false;
     bool _selected = false;
     float _currentSpeed;
-    Vector2 _forward = Vector2.Down;
 
     public MovementType MovementType => Party.GetLeader().CharacterClass.MovementType;
 
@@ -29,10 +29,9 @@ public partial class MapUnit : Area2D
         if (_map == null)
             GD.PrintErr("MapManager not found!");
 
-        var cone = GetNode<VisionCone>("VisionCone");
-
-        cone.Angle = GameManager.I.CombatConfig.CombatNoticeAngle;
-        cone.Distance = GameManager.I.CombatConfig.CombatNoticeDistance;
+        VisionCone.Angle = GameManager.I.CombatConfig.CombatNoticeAngle;
+        VisionCone.Distance = GameManager.I.CombatConfig.CombatNoticeDistance;
+        VisionCone.ParentUnit = this;
     }
 
     public void Init()
@@ -93,7 +92,9 @@ public partial class MapUnit : Area2D
 
         Vector2 dir = toTarget / dist;
         if (dir.Length() > 0.01f)
-            _forward = dir;
+        {
+            Rotation = dir.Angle();
+        }
 
         // terreno actual
         var cell = _map.GetCell(_map.WorldToGrid(Position));
@@ -235,7 +236,6 @@ public partial class MapUnit : Area2D
     }
     public Vector2 GetForward()
     {
-        return _forward;
+        return Transform.X.Normalized();
     }
-
 }
