@@ -147,9 +147,9 @@ public partial class CharacterParty : Node
     }
     ///////////////////////////////////////
     /// Estados
-    public bool IsDefeated()
+    public bool HasLivingOrcs()
     {
-        return GetAllLivingOrcs().Count <= 0;
+        return GetAllLivingOrcs().Count > 0;
     }
     public bool IsMember(OrcInstance orc)
     {

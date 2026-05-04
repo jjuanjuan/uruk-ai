@@ -4,10 +4,6 @@ using System.Collections.Generic;
 
 public partial class UICombatScene : Control
 {
-    // mostrar números de daño
-
-    [Export] public CombatManager CombatManager;
-
     [Export] public UIParty Team1UI;
     [Export] public UIParty Team2UI;
 
@@ -17,11 +13,15 @@ public partial class UICombatScene : Control
 
     [Export] CombatAdvantageBar AdvantageBar;
 
+    public CombatManager CombatManager;
+
     List<string> logs = new();
+
+    [Signal] public delegate void CombatFinishedEventHandler();
 
     public override void _Ready()
     {
-        StartButton.Pressed += OnStartPressed;
+        CombatManager = GetNode<CombatManager>("CombatManager");
 
         CombatManager.Connect(
             CombatManager.SignalName.CombatStateChanged,
@@ -34,32 +34,30 @@ public partial class UICombatScene : Control
         );
 
         CombatManager.Connect(
-            "CombatLogEvent",
+            "CombatLog",
             new Callable(this, nameof(AddLog))
         );
-    }
 
-    public void Setup(CharacterParty partyFront, CharacterParty partyBack)
-    {
-        // configurar CombatManager
-        CombatManager.PartyFront = partyFront;
-        CombatManager.PartyBack = partyBack;
-
-        // configurar UI
-        Team1UI.SetParty(partyFront);
-        Team2UI.SetParty(partyBack);
-
-        Team1UI.Setup(partyFront, true);
-        Team2UI.Setup(partyBack, false);
+        CombatManager.Connect(
+            CombatManager.SignalName.CombatStateChanged,
+            new Callable(this, nameof(OnCombatStateChanged))
+        );
 
         Team1UI.Refresh();
         Team2UI.Refresh();
     }
 
-    private void OnStartPressed()
+    public void Setup(CharacterParty partyA, CharacterParty partyB)
     {
-        CombatManager.StartCombat();
         Log.Text = "";
+
+        CombatManager.StartCombat(partyA, partyB);
+
+        Team1UI.SetParty(partyA);
+        Team2UI.SetParty(partyB);
+
+        Team1UI.Refresh();
+        Team2UI.Refresh();
     }
 
     private void OnCombatUpdated()
@@ -78,6 +76,25 @@ public partial class UICombatScene : Control
 
         CurrentUnitLabel.Text =
             $"Turno de {unit.GetCustomName()} ({unit.CharacterClass.GetClassName()})";
+    }
+
+    void OnCombatStateChanged()
+    {
+        //TODO: cambiar a animación para cerrar
+        /*
+        if (CombatManager.CurrentState == CombatManager.CombatState.Ended)
+        {
+            EmitSignal(SignalName.CombatFinished);
+
+            // cerrar UI : TODO: cambiar a animación para cerrar
+            QueueFree();
+        }
+        */
+    }
+    void OnCombatFinished()
+    {
+        // cerrar UI : TODO: cambiar a animación para cerrar
+        QueueFree();
     }
 
     public void AddLog(string text)

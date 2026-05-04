@@ -4,6 +4,7 @@
 [ext_resource type="Resource" uid="uid://c4718ueqpr5c" path="res://Data/Config/Names.tres" id="2_y73m8"]
 [ext_resource type="Resource" uid="uid://c024ksbq5fjtp" path="res://Data/Config/Orc Template.tres" id="3_dhsnp"]
 [ext_resource type="Resource" uid="uid://b0atn5ms4si40" path="res://Data/Config/CombatConfig.tres" id="4_gfro6"]
+[ext_resource type="PackedScene" uid="uid://cgiw7nq0rr8g5" path="res://_Scenes/CombatScene.tscn" id="5_iwb5n"]
 [ext_resource type="Script" uid="uid://bixw7yd650vm0" path="res://Scripts/GameDatabase.cs" id="5_ry6g7"]
 [ext_resource type="Resource" uid="uid://c516dth0gve7h" path="res://Data/Map/0_Terrain_Grass.tres" id="6_hbeuu"]
 [ext_resource type="Resource" uid="uid://c1qwlxhmw8d3i" path="res://Data/Map/0_Terrain_Water.tres" id="7_ylgt0"]
@@ -23,6 +24,7 @@ OrcNames = ExtResource("2_y73m8")
 OrcTemplate = ExtResource("3_dhsnp")
 CombatConfig = ExtResource("4_gfro6")
 Database = NodePath("GameDatabase")
+CombatScene = ExtResource("5_iwb5n")
 
 [node name="GameDatabase" type="Node" parent="." unique_id=2023417525]
 script = ExtResource("5_ry6g7")

@@ -8,6 +8,7 @@ public partial class GameManager : Node
     [Export] public OrcTemplate OrcTemplate;
     [Export] public CombatConfig CombatConfig;
     [Export] public GameDatabase Database;
+	[Export] public PackedScene CombatScene;
 
     public MapManager MapManager;
     public CombatManager CombatManager;

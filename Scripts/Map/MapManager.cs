@@ -23,6 +23,7 @@ public partial class MapManager : Node
 
     int _width;
     int _height;
+    bool paused = false;
 
     static readonly Vector2I[] Directions8 = new[]
     {
@@ -72,6 +73,96 @@ public partial class MapManager : Node
     {
         if (GameManager.I.MapManager == this)
             GameManager.I.MapManager = null;
+    }
+
+    // ---------------------------------------
+    // CHECK FOR ENCOUNTERS
+    // ---------------------------------------
+    public override void _Process(double delta)
+    {
+        CheckEncounters();
+    }
+
+    void CheckEncounters()
+    {
+        if (paused)
+            return;
+
+        for (int i = 0; i < Units.Count; i++)
+        {
+            var a = Units[i];
+            if (a == null || a.Party == null) continue;
+
+            for (int j = i + 1; j < Units.Count; j++)
+            {
+                var b = Units[j];
+                if (b == null || b.Party == null) continue;
+
+                // mismo team → ignorar
+                if (a.Team == b.Team)
+                    continue;
+
+                // condición de encuentro
+                if (AreUnitsColliding(a, b))
+                {
+                    StartCombat(a, b);
+                    return;
+                }
+            }
+        }
+    }
+    bool AreUnitsColliding(MapUnit a, MapUnit b)
+    {
+        return a.GlobalPosition.DistanceTo(b.GlobalPosition) < GameManager.I.CombatConfig.CombatTriggerDistance;
+    }
+    void StartCombat(MapUnit frontUnit, MapUnit backUnit)
+    {
+        paused = true;
+
+        GD.Print($"Combat: {frontUnit.Name} vs {backUnit.Name}");
+
+        // 1. detener unidades
+        frontUnit.Stop();
+        backUnit.Stop();
+
+        // 2. instanciar UI
+        var combatScene = GameManager.I.CombatScene.Instantiate<UICombatScene>();
+        var uiRoot = GetTree().GetFirstNodeInGroup("ui_root");
+        uiRoot.AddChild(combatScene);
+
+        // 3. pasar parties
+        combatScene.Setup(frontUnit.Party, backUnit.Party);
+
+        // 4. escuchar fin
+        combatScene.CombatFinished += () =>
+        {
+            OnCombatFinished(frontUnit, backUnit);
+        };
+    }
+
+    void OnCombatFinished(MapUnit a, MapUnit b)
+    {
+        paused = false;
+
+        if (!a.Party.HasLivingOrcs())
+        {
+            Units.Remove(a);
+            a.QueueFree();
+        }
+        else
+        {
+            // TODO: push losing unit
+        }
+
+        if (!b.Party.HasLivingOrcs())
+        {
+            Units.Remove(b);
+            b.QueueFree();
+        }
+        else
+        {
+            // TODO: push losing unit
+        }
     }
 
     // ---------------------------------------

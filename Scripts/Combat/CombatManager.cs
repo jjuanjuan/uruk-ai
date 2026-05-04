@@ -59,6 +59,7 @@ public partial class CombatManager : Node
         bool died
     );
 
+    [Signal] public delegate void CombatFinishedEventHandler();
     [Signal] public delegate void CombatLogEventHandler(string text);
 
     // =========================
@@ -151,15 +152,18 @@ public partial class CombatManager : Node
 
         InitUnitState();
 
-        EmitSignal("CombatLogEvent", "<<COMBAT START>>");
+        EmitSignal("CombatLog", "<<COMBAT START>>");
 
         SetState(CombatState.WaitingForStart);
     }
 
-    public void StartCombat()
+    public void StartCombat(CharacterParty partyFront, CharacterParty partyBack)
     {
-        if (state == CombatState.WaitingForStart)
-            SetState(CombatState.WaitingForStartDelay);
+        PartyFront = partyFront;
+        PartyBack = partyBack;
+
+        InitCombat();
+        SetState(CombatState.WaitingForStartDelay);
     }
 
     void InitUnitState()
@@ -329,10 +333,9 @@ public partial class CombatManager : Node
     // =========================================================
     // END
     // =========================================================
-
     void UpdateCheckEnd()
     {
-        if (PartyFront.IsDefeated() || PartyBack.IsDefeated())
+        if (PartyFront.HasLivingOrcs() || PartyBack.HasLivingOrcs())
         {
             EndCombat();
             return;
@@ -356,7 +359,7 @@ public partial class CombatManager : Node
     {
         turnNumber++;
 
-        EmitSignal("CombatLogEvent", $"<<TURN {turnNumber}>>");
+        EmitSignal("CombatLog", $"<<TURN {turnNumber}>>");
 
         foreach (var kv in combatContext.UnitState)
             kv.Value.HasActedThisTurn = false;
@@ -366,22 +369,23 @@ public partial class CombatManager : Node
 
     void EndCombat()
     {
-        EmitSignal("CombatLogEvent", "<<COMBAT END>>");
+        EmitSignal("CombatLog", "<<COMBAT END>>");
 
         float adv = combatContext.CalculateAdvantage();
 
         if (adv > 0.5f)
-            EmitSignal("CombatLogEvent", "<<TEAM 1 WINS>>");
+            EmitSignal("CombatLog", "<<TEAM 1 WINS>>");
         else if (adv < 0.5f)
-            EmitSignal("CombatLogEvent", "<<TEAM 2 WINS>>");
+            EmitSignal("CombatLog", "<<TEAM 2 WINS>>");
         else
-            EmitSignal("CombatLogEvent", "<<DRAW>>");
+            EmitSignal("CombatLog", "<<DRAW>>");
+
+        EmitSignal(SignalName.CombatFinished);
 
         SetState(CombatState.Ended);
     }
-
     // =========================================================
-    // TARGETING (tu lógica completa)
+    // TARGETING
     // =========================================================
 
     AttackAction GetActionByRow(OrcInstance orc)

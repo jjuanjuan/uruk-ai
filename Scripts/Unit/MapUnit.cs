@@ -5,8 +5,8 @@ public partial class MapUnit : Area2D
 {
     [Export] public float BaseSpeed = 120f; // px/seg
     [Export] public TextureRect LeaderTexture;
-    [Export] public CharacterParty Party;
-
+    
+    public CharacterParty Party;
     public Team Team => Party?.Team;
     public Vector2I GridPosition { get; private set; }
 

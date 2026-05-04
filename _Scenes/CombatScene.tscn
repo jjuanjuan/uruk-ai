@@ -22,11 +22,10 @@ border_width_bottom = 2
 
 [sub_resource type="ImageTexture" id="ImageTexture_cph6q"]
 
-[node name="CombatScene" type="Control" unique_id=1636238207 node_paths=PackedStringArray("CombatManager", "Team1UI", "Team2UI", "StartButton", "Log", "CurrentUnitLabel", "AdvantageBar")]
+[node name="CombatScene" type="Control" unique_id=1636238207 node_paths=PackedStringArray("Team1UI", "Team2UI", "StartButton", "Log", "CurrentUnitLabel", "AdvantageBar")]
 layout_mode = 3
 anchors_preset = 0
 script = ExtResource("1_3mdtu")
-CombatManager = NodePath("CombatManager")
 Team1UI = NodePath("Team 1/UI Team 1")
 Team2UI = NodePath("Team 2/UI Team 2")
 StartButton = NodePath("Button StartCombat")

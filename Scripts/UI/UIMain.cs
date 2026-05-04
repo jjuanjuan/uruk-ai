@@ -2,14 +2,14 @@ using Godot;
 
 public partial class UIMain : CanvasLayer
 {
-	[Export] public PackedScene CombatScene;
 	[Export] public PackedScene ClassTreeScene;
 	[Export] public UIOrcPool PoolUI;
 
 	public override void _Ready()
 	{
+        AddToGroup("ui_root");
+
 		GetNode<Button>("OpenClassTreeButton").Pressed += OpenClassTree;
-		GetNode<Button>("OpenCombatButton").Pressed += OpenCombat;
 		GetNode<Button>("GenerateOrcButton").Pressed += GenerateOrc;
 		GetNode<Button>("GenerateMapUnitPlayerButton").Pressed += GenerateMapUnitPlayer;
 		GetNode<Button>("GenerateMapUnitEnemyButton").Pressed += GenerateMapUnitEnemy;
@@ -34,15 +34,6 @@ public partial class UIMain : CanvasLayer
 		tree.Name = "UIClassTree";
 
 		AddChild(tree);
-	}
-	void OpenCombat()
-	{
-		var combat = CombatScene.Instantiate<UICombatScene>();
-		combat.Name = "UICombatScene";
-
-		AddChild(combat);
-
-		//combat.Setup(partyA, partyB);
 	}
 	void GenerateOrc()
 	{

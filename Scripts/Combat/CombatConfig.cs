@@ -34,4 +34,8 @@ public partial class CombatConfig : Resource
     public float AttackDelayWhenUI = 1.0f;
     [Export]
     public float ScoreMultiplierPerKill = .1f;    
+    [Export]
+    public float CombatNoticeDistance = 30f;    
+    [Export]
+    public float CombatTriggerDistance = 20f;    
 }
