@@ -6,15 +6,13 @@ public partial class UIMain : CanvasLayer
 	[Export] public PackedScene ClassTreeScene;
 	[Export] public UIOrcPool PoolUI;
 
-	CharacterParty PlayerParty => GameManager.I.Team1;
-	CharacterParty EnemyParty => GameManager.I.Team2;
-
 	public override void _Ready()
 	{
 		GetNode<Button>("OpenClassTreeButton").Pressed += OpenClassTree;
 		GetNode<Button>("OpenCombatButton").Pressed += OpenCombat;
 		GetNode<Button>("GenerateOrcButton").Pressed += GenerateOrc;
-		GetNode<Button>("GenerateMapUnitButton").Pressed += GenerateMapUnit;
+		GetNode<Button>("GenerateMapUnitPlayerButton").Pressed += GenerateMapUnitPlayer;
+		GetNode<Button>("GenerateMapUnitEnemyButton").Pressed += GenerateMapUnitEnemy;
 
 		GameManager.I.PartiesChanged += RefreshPool;
 
@@ -43,12 +41,24 @@ public partial class UIMain : CanvasLayer
 		combat.Name = "UICombatScene";
 
 		AddChild(combat);
+
+		//combat.Setup(partyA, partyB);
 	}
 	void GenerateOrc()
 	{
 		GameManager.I.GenerateOrc();
 	}
-	void GenerateMapUnit()
+	void CreatePartyPlayer()
+	{
+		GameManager.I.PlayerPartyPool.CreateParty();
+	}
+
+	void CreatePartyEnemy()
+	{
+		GameManager.I.EnemyPartyPool.CreateParty();
+	}
+	// TODO: hacer esto de manera no idiota
+	void GenerateMapUnitPlayer()
 	{
 		var spawner = GetSpawner();
 
@@ -58,16 +68,78 @@ public partial class UIMain : CanvasLayer
 			return;
 		}
 
-		var orc = GameManager.I.GenerateOrc();
+		var gm = GameManager.I;
 
-		var party = new CharacterParty();
-		party.PlaceOrc(orc, 0, 0);
-		party.SetLeader(orc);
+		// elegir team (ejemplo: player)
+		var pool = gm.PlayerPartyPool;
 
-		Vector2 worldPos = GameManager.I.MapManager.MapCamera.GlobalPosition;
-		Vector2I gridPos = GameManager.I.MapManager.WorldToGrid(worldPos);
+		// 1. obtener party disponible
+		var party = pool.GetFirstAvailable();
+
+		if (party == null)
+		{
+			GD.Print("No hay parties disponibles, creando una nueva");
+
+			party = pool.CreateParty();
+		}
+
+		// 2. si está vacía, meterle algo
+		if (party.GetAllOrcs().Count == 0)
+		{
+			var orc = gm.GenerateOrc();
+			party.PlaceOrc(orc, 0, 0);
+			party.SetLeader(orc);
+		}
+
+		// 3. spawn
+		Vector2 worldPos = gm.MapManager.MapCamera.GlobalPosition;
+		Vector2I gridPos = gm.MapManager.WorldToGrid(worldPos);
 
 		var unit = spawner.Spawn(gridPos, party);
+
+		gm.MapManager.RegisterUnit(unit);
+	}
+	// TODO: hacer esto de manera no idiota
+	void GenerateMapUnitEnemy()
+	{
+		var spawner = GetSpawner();
+
+		if (spawner == null)
+		{
+			GD.PrintErr("Spawner not found");
+			return;
+		}
+
+		var gm = GameManager.I;
+
+		// elegir team (ahora enemy (esto es lo idiota))
+		var pool = gm.EnemyPartyPool;
+
+		// 1. obtener party disponible
+		var party = pool.GetFirstAvailable();
+
+		if (party == null)
+		{
+			GD.Print("No hay parties disponibles, creando una nueva");
+
+			party = pool.CreateParty();
+		}
+
+		// 2. si está vacía, meterle algo
+		if (party.GetAllOrcs().Count == 0)
+		{
+			var orc = gm.GenerateOrc();
+			party.PlaceOrc(orc, 0, 0);
+			party.SetLeader(orc);
+		}
+
+		// 3. spawn
+		Vector2 worldPos = gm.MapManager.MapCamera.GlobalPosition;
+		Vector2I gridPos = gm.MapManager.WorldToGrid(worldPos);
+
+		var unit = spawner.Spawn(gridPos, party);
+
+		gm.MapManager.RegisterUnit(unit);
 	}
 	UnitSpawner GetSpawner()
 	{

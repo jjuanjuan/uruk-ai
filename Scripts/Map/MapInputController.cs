@@ -58,16 +58,12 @@ public partial class MapInputController : Node2D
 	// ---------------------------------------
 	void MoveSelectedUnit(Vector2 mouseWorld)
 	{
-		if (_selectedUnit == null)
+		if (_selectedUnit.Team?.Id != TeamId.Player)
 			return;
-
+			
 		Vector2I grid = WorldToGrid(mouseWorld);
-
-		//GD.Print($"Move to {grid}");
-
 		_selectedUnit.MoveTo(grid);
 	}
-
 	// ---------------------------------------
 	// DETECCIÓN REAL (NO GRID)
 	// ---------------------------------------

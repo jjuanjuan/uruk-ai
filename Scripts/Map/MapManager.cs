@@ -9,6 +9,7 @@ public partial class MapManager : Node
     [Export] public TileMapLayer BuildingLayer;
     [Export] public CameraController MapCamera;
 
+    public List<MapUnit> Units = new();
     Dictionary<MovementType, AStar2D> _astarCache = new();
 
     Rect2I _usedRect;
@@ -366,7 +367,7 @@ public partial class MapManager : Node
     }
 
     // ---------------------------------------
-    // DYNAMIC UPDATE (IMPORTANTE)
+    // DYNAMIC UPDATE
     // ---------------------------------------
     public void UpdateCell(Vector2I pos)
     {
@@ -399,12 +400,46 @@ public partial class MapManager : Node
         BuildAllAStars();
     }
 
+    // ---------------------------------------
     // BOUNDS
+    // ---------------------------------------
     public Rect2 GetWorldBounds()
     {
         Vector2 topLeft = TerrainLayer.MapToLocal(_usedRect.Position);
         Vector2 bottomRight = TerrainLayer.MapToLocal(_usedRect.Position + _usedRect.Size);
 
         return new Rect2(topLeft, bottomRight - topLeft);
+    }
+
+    // ---------------------------------------
+    // UNITS
+    // ---------------------------------------
+    public void RegisterUnit(MapUnit unit)
+    {
+        if (!Units.Contains(unit))
+            Units.Add(unit);
+    }
+
+    public void UnregisterUnit(MapUnit unit)
+    {
+        Units.Remove(unit);
+    }
+
+    public List<MapUnit> GetUnitsByTeam(TeamId teamId)
+    {
+        return Units.FindAll(u =>
+            u.Party != null &&
+            u.Party.Team != null &&
+            u.Party.Team.Id == teamId
+        );
+    }
+
+    public List<MapUnit> GetEnemyUnits(TeamId teamId)
+    {
+        return Units.FindAll(u =>
+            u.Party != null &&
+            u.Party.Team != null &&
+            u.Party.Team.Id != teamId
+        );
     }
 }

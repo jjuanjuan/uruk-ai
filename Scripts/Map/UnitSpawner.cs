@@ -38,7 +38,7 @@ public partial class UnitSpawner : Node
         UnitsContainer.AddChild(unit);
 
         unit.Position = GridToWorld(gridPos);
-        unit.Party = party;
+        unit.Setup(party);
         unit.Init();
 
         return unit;

@@ -33,16 +33,24 @@ public partial class UICombatScene : Control
             new Callable(this, nameof(OnUnitChanged))
         );
 
-        CombatManager.UI = this;
+        CombatManager.Connect(
+            "CombatLogEvent",
+            new Callable(this, nameof(AddLog))
+        );
+    }
 
-        CombatManager.Team1 = GameManager.I.Team1;
-        CombatManager.Team2 = GameManager.I.Team2;
+    public void Setup(CharacterParty partyFront, CharacterParty partyBack)
+    {
+        // configurar CombatManager
+        CombatManager.PartyFront = partyFront;
+        CombatManager.PartyBack = partyBack;
 
-        Team1UI.SetParty(GameManager.I.Team1);
-        Team2UI.SetParty(GameManager.I.Team2);
+        // configurar UI
+        Team1UI.SetParty(partyFront);
+        Team2UI.SetParty(partyBack);
 
-        Team1UI.Setup(GameManager.I.Team1, true);
-        Team2UI.Setup(GameManager.I.Team2, false);
+        Team1UI.Setup(partyFront, true);
+        Team2UI.Setup(partyBack, false);
 
         Team1UI.Refresh();
         Team2UI.Refresh();

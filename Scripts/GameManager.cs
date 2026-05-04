@@ -8,13 +8,20 @@ public partial class GameManager : Node
     [Export] public OrcTemplate OrcTemplate;
     [Export] public CombatConfig CombatConfig;
     [Export] public GameDatabase Database;
-    
+
     public MapManager MapManager;
     public CombatManager CombatManager;
-    public CharacterParty Team1;
-    public CharacterParty Team2;
+
+    public List<CharacterParty> Parties = new();
+    public CharacterPartyPool PlayerPartyPool;
+    public CharacterPartyPool EnemyPartyPool;
+
     public RandomNumberGenerator rng = new RandomNumberGenerator();
     public Godot.Collections.Array<OrcInstance> AllOrcs = new();
+
+    // TEAMS
+    public Team PlayerTeam;
+    public Team EnemyTeam;
 
     [Signal] public delegate void PartiesChangedEventHandler();
     [Signal] public delegate void SelectedOrcChangedEventHandler(OrcInstance orc);
@@ -23,6 +30,7 @@ public partial class GameManager : Node
 
     // SINGLETON
     public static GameManager I { get; private set; }
+
     public override void _EnterTree()
     {
         I = this;
@@ -32,16 +40,66 @@ public partial class GameManager : Node
     {
         rng.Randomize();
 
-        Team1 = new CharacterParty();
-        Team1.Name = "Team 1";
-        AddChild(Team1);
+        CreateTeams();
+        CreatePools();
+        CreateInitialParties();
+    }
 
-        Team2 = new CharacterParty();
-        Team2.Name = "Team 2";
-        AddChild(Team2);
+    // =====================================================
+    // TEAMS
+    // =====================================================
+    void CreateTeams()
+    {
+        PlayerTeam = new Team
+        {
+            Id = TeamId.Player,
+            Name = "Player",
+            Color = new Color(0.2f, 0.6f, 1f)
+        };
 
-        Team1.PartyChanged += OnPartyChanged;
-        Team2.PartyChanged += OnPartyChanged;
+        EnemyTeam = new Team
+        {
+            Id = TeamId.Enemy,
+            Name = "Enemy",
+            Color = new Color(1f, 0.3f, 0.3f)
+        };
+    }
+    void CreatePools()
+    {
+        PlayerPartyPool = new CharacterPartyPool();
+        AddChild(PlayerPartyPool);
+        PlayerPartyPool.Setup(PlayerTeam);
+
+        EnemyPartyPool = new CharacterPartyPool();
+        AddChild(EnemyPartyPool);
+        EnemyPartyPool.Setup(EnemyTeam);
+    }
+    // =====================================================
+    // PARTIES
+    // =====================================================
+    void CreateInitialParties()
+    {
+        CreateParty(PlayerTeam, "Player Party");
+        CreateParty(EnemyTeam, "Enemy Party");
+    }
+
+    public CharacterParty CreateParty(Team team, string name = "Party")
+    {
+        var party = new CharacterParty
+        {
+            Name = name,
+        };
+
+        party.SetTeam(team);
+
+        AddChild(party);
+        Parties.Add(party);
+
+        party.PartyChanged += OnPartyChanged;
+
+        EmitSignal(SignalName.PartiesChanged);
+
+        return party;
     }
 
     void OnPartyChanged()
@@ -49,38 +107,19 @@ public partial class GameManager : Node
         EmitSignal(SignalName.PartiesChanged);
     }
 
-    public bool IsInParty(OrcInstance orc, CharacterParty party)
+    public List<CharacterParty> GetPartiesByTeam(TeamId teamId)
     {
-        return party.IsMember(orc);
+        return Parties.FindAll(p => p.Team != null && p.Team.Id == teamId);
     }
 
-    public Godot.Collections.Array<OrcInstance> GetAvailableOrcs()
+    public CharacterParty GetFirstParty(TeamId teamId)
     {
-        var available = new Godot.Collections.Array<OrcInstance>();
-
-        foreach (var orc in AllOrcs)
-        {
-            if (!Team1.IsMember(orc) &&
-                !Team2.IsMember(orc))
-            {
-                available.Add(orc);
-            }
-        }
-
-        return available;
+        return Parties.Find(p => p.Team != null && p.Team.Id == teamId);
     }
 
-    public void SelectOrc(OrcInstance orc)
-    {
-        SelectedOrc = orc;
-        EmitSignal(SignalName.SelectedOrcChanged, orc);
-    }
-    public void ClearSelection()
-    {
-        SelectedOrc = null;
-        EmitSignal(SignalName.SelectedOrcChanged, (OrcInstance)null);
-    }
-
+    // =====================================================
+    // ORCS
+    // =====================================================
     public OrcInstance GenerateOrc()
     {
         var instance = new OrcInstance
@@ -91,11 +130,55 @@ public partial class GameManager : Node
         };
 
         AllOrcs.Add(instance);
+
         EmitSignal(SignalName.PartiesChanged);
+
         GD.Print($"Generated: {instance.CustomName} the {instance.CharacterClass.GetClassName()}");
+
         return instance;
     }
 
+    public Godot.Collections.Array<OrcInstance> GetAvailableOrcs()
+    {
+        var available = new Godot.Collections.Array<OrcInstance>();
+
+        foreach (var orc in AllOrcs)
+        {
+            if (!IsOrcInAnyParty(orc))
+                available.Add(orc);
+        }
+
+        return available;
+    }
+
+    public bool IsOrcInAnyParty(OrcInstance orc)
+    {
+        foreach (var party in Parties)
+        {
+            if (party.IsMember(orc))
+                return true;
+        }
+        return false;
+    }
+
+    // =====================================================
+    // SELECTION
+    // =====================================================
+    public void SelectOrc(OrcInstance orc)
+    {
+        SelectedOrc = orc;
+        EmitSignal(SignalName.SelectedOrcChanged, orc);
+    }
+
+    public void ClearSelection()
+    {
+        SelectedOrc = null;
+        EmitSignal(SignalName.SelectedOrcChanged, (OrcInstance)null);
+    }
+
+    // =====================================================
+    // UTILS
+    // =====================================================
     string GetRandomName()
     {
         if (OrcNames == null || OrcNames.Names.Count == 0)
@@ -123,16 +206,19 @@ public partial class GameManager : Node
         int index = rng.RandiRange(0, available.Count - 1);
         return available[index];
     }
+
     CharacterClass GetRandomClass()
     {
-        return OrcTemplate.BaseClasses[NextInt(0, OrcTemplate.BaseClasses.Length - 1)];
+        return OrcTemplate.BaseClasses[
+            NextInt(0, OrcTemplate.BaseClasses.Length - 1)
+        ];
     }
 
-    // UTILITY
     public int NextInt(int min, int max)
     {
         return rng.RandiRange(min, max);
     }
+
     public float NextFloat(float min, float max)
     {
         return rng.RandfRange(min, max);

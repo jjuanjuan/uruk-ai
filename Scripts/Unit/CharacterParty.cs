@@ -10,21 +10,13 @@ public partial class CharacterParty : Node
 
     [Export] public int MaxUnits = 6;
     [Export] OrcInstance Leader;
+    public Team Team { get; private set; }
 
     [Signal] public delegate void PartyChangedEventHandler();
 
     public int CurrentUnits => origin.Count;
 
-    public OrcInstance GetOrc(int row, int col)
-    {
-        foreach (var kv in origin)
-        {
-            if (kv.Value.Row == row && kv.Value.Column == col)
-                return kv.Key;
-        }
-        return null;
-    }
-
+    // Moving orcs in la pary //
     public bool CanPlaceOrc(int row, int col, OrcInstance movingOrc = null)
     {
         if (!IsValidPosition(row, col))
@@ -44,7 +36,6 @@ public partial class CharacterParty : Node
 
         return true;
     }
-
     public bool PlaceOrc(OrcInstance orc, int row, int col)
     {
         if (orc == null) return false;
@@ -58,7 +49,6 @@ public partial class CharacterParty : Node
         EmitAllSignals();
         return true;
     }
-
     public bool MoveOrc(int fromRow, int fromCol, int toRow, int toCol)
     {
         var orc = GetOrc(fromRow, fromCol);
@@ -73,7 +63,6 @@ public partial class CharacterParty : Node
         EmitAllSignals();
         return true;
     }
-
     public bool SwapOrc(int r1, int c1, int r2, int c2)
     {
         var a = GetOrc(r1, c1);
@@ -99,7 +88,6 @@ public partial class CharacterParty : Node
         EmitAllSignals();
         return true;
     }
-
     public void RemoveOrc(int row, int col)
     {
         var orc = GetOrc(row, col);
@@ -109,19 +97,17 @@ public partial class CharacterParty : Node
 
         EmitAllSignals();
     }
-
-    void EmitAllSignals()
-    {
-        EmitSignal(SignalName.PartyChanged);
-        GameManager.I.EmitSignal(GameManager.SignalName.PartiesChanged);
-    }
-
     bool IsValidPosition(int row, int col)
     {
         return row >= 0 && row < ROWS &&
                col >= 0 && col < COLUMNS;
     }
-
+    ///////////////////////////////////////////////////////////
+    /// Getters y Setters
+    public void SetTeam(Team team)
+    {
+        Team = team;
+    }
     public void SetLeader(OrcInstance orc)
     {
         Leader = orc;
@@ -138,6 +124,15 @@ public partial class CharacterParty : Node
 
         return null;
     }
+    public OrcInstance GetOrc(int row, int col)
+    {
+        foreach (var kv in origin)
+        {
+            if (kv.Value.Row == row && kv.Value.Column == col)
+                return kv.Key;
+        }
+        return null;
+    }
     public List<OrcInstance> GetAllOrcs()
     {
         return new List<OrcInstance>(origin.Keys);
@@ -150,15 +145,23 @@ public partial class CharacterParty : Node
 
         return list;
     }
-
+    ///////////////////////////////////////
+    /// Estados
     public bool IsDefeated()
     {
         return GetAllLivingOrcs().Count <= 0;
     }
-
     public bool IsMember(OrcInstance orc)
     {
         return origin.ContainsKey(orc);
+    }
+
+    ///////////////////////////////////////
+    /// 
+    void EmitAllSignals()
+    {
+        EmitSignal(SignalName.PartyChanged);
+        GameManager.I.EmitSignal(GameManager.SignalName.PartiesChanged);
     }
 }
 

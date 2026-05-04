@@ -3,18 +3,19 @@ using System.Collections.Generic;
 
 public partial class MapUnit : Area2D
 {
-    [Export] public CharacterParty Party;
     [Export] public float BaseSpeed = 120f; // px/seg
     [Export] public TextureRect LeaderTexture;
+    [Export] public CharacterParty Party;
 
+    public Team Team => Party?.Team;
     public Vector2I GridPosition { get; private set; }
 
-    private MapManager _map;
-    private List<Vector2> _pathWorld = new();
-    private int _pathIndex = 0;
-    private bool _moving = false;
-    private bool _selected = false;
-    private float _currentSpeed;
+    MapManager _map;
+    List<Vector2> _pathWorld = new();
+    int _pathIndex = 0;
+    bool _moving = false;
+    bool _selected = false;
+    float _currentSpeed;
 
     public MovementType MovementType => Party.GetLeader().CharacterClass.MovementType;
 
@@ -38,6 +39,10 @@ public partial class MapUnit : Area2D
         _currentSpeed = BaseSpeed;
 
         LeaderTexture.Texture = Party.GetLeader().CharacterClass.GetFrontTexture();
+    }
+    public void Setup(CharacterParty party)
+    {
+        Party = party;
     }
 
     public override void _InputEvent(Viewport viewport, InputEvent @event, int shapeIdx)
@@ -163,7 +168,7 @@ public partial class MapUnit : Area2D
         {
             cost += cell.FeatureData.GetCost(MovementType);
         }
-        
+
         cost = Mathf.Max(0.5f, cost);
 
         return BaseSpeed / cost;
