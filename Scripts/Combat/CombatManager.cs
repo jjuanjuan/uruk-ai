@@ -320,7 +320,7 @@ public partial class CombatManager : Node
     AttackAction GetActionByRow(OrcInstance orc)
     {
         GD.Print(orc.CharacterClass.GetClassName() + " attacks with " +
-        
+
                     orc.CharacterClass
                           .GetAttackPerPosition(orc.PartyPosition.Row)
                           .AttackAction.AttackName);
@@ -409,17 +409,15 @@ public partial class CombatManager : Node
     // =========================================================
     void UpdateCheckEnd()
     {
-        if (PartyFront.HasLivingOrcs() || PartyBack.HasLivingOrcs())
+        // termina solo si alguno murió completamente
+        if (!PartyFront.HasLivingOrcs() || !PartyBack.HasLivingOrcs())
         {
             EndCombat();
             return;
         }
 
-        bool anyActionsLeft = combatContext.UnitState
-            .Values
-            .Any(u => u.Orc.IsAlive && u.RemainingActions > 0);
-
-        if (anyActionsLeft)
+        // si quedan acciones → siguiente turno
+        if (combatContext.HasActionsLeft())
         {
             NextTurn();
         }
@@ -428,7 +426,7 @@ public partial class CombatManager : Node
             EndCombat();
         }
     }
-
+    
     void NextTurn()
     {
         turnNumber++;
