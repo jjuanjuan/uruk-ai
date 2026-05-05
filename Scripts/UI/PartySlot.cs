@@ -64,7 +64,7 @@ public partial class PartySlot : PanelContainer
         else
         {
             CharImg.Texture = Orc.CharacterClass.GetFrontTexture();
-            CharImg.FlipV = !IsFront; // TODO: reemplazar con imagenes back
+            CharImg.FlipH = !IsFront; // TODO: reemplazar con imagenes back
             //CharImg.Texture = orc.CharacterClass.GetBackTexture();
             CharImg.Visible = true;
             CharName.Text = Orc.GetCustomName();
@@ -429,7 +429,7 @@ public partial class PartySlot : PanelContainer
             return;
 
         FlashSprite.Texture = CharImg.Texture;
-        FlashSprite.FlipV = CharImg.FlipV;
+        FlashSprite.FlipH = CharImg.FlipH;
 
         FlashSprite.Visible = true;
 
