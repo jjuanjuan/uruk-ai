@@ -2,9 +2,7 @@
 
 [ext_resource type="Script" uid="uid://bp5ip3qv54ejt" path="res://Scripts/UI/PoolItem.cs" id="1_vi3u1"]
 [ext_resource type="Texture2D" uid="uid://3geatbyu0jce" path="res://Art/Placeholders/Units/2_knight_front.png" id="2_685wl"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1ywp0"]
-bg_color = Color(0, 0, 0, 0.25)
+[ext_resource type="FontFile" uid="uid://dd6yoetodmb25" path="res://Art/Fonts/PixgamerRegular-OVD6A.ttf" id="3_1ywp0"]
 
 [node name="PoolItem" type="PanelContainer" unique_id=1735390392 node_paths=PackedStringArray("icon", "label")]
 custom_minimum_size = Vector2(100, 100)
@@ -52,8 +50,13 @@ anchor_right = 1.0
 offset_bottom = 17.0
 grow_horizontal = 2
 mouse_filter = 2
-theme_override_font_sizes/normal_font_size = 12
-theme_override_styles/normal = SubResource("StyleBoxFlat_1ywp0")
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.5)
+theme_override_constants/shadow_outline_size = 4
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 1
+theme_override_constants/outline_size = 4
+theme_override_fonts/normal_font = ExtResource("3_1ywp0")
+theme_override_font_sizes/normal_font_size = 20
 text = "Boris"
 fit_content = true
 vertical_alignment = 2

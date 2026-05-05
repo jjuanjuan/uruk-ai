@@ -1,0 +1,25 @@
+[remap]
+
+importer="font_data_image"
+type="FontFile"
+uid="uid://btaix4kj5pr71"
+path="res://.godot/imported/librequake.webp-d5a741c1c1fdaed62d10f0fda38b980a.fontdata"
+
+[deps]
+
+source_file="res://Art/Fonts/librequake.webp"
+dest_files=["res://.godot/imported/librequake.webp-d5a741c1c1fdaed62d10f0fda38b980a.fontdata"]
+
+[params]
+
+character_ranges=PackedStringArray("0-127")
+kerning_pairs=PackedStringArray()
+columns=16
+rows=8
+image_margin=Rect2i(0, 0, 0, 0)
+character_margin=Rect2i(0, 0, 0, 0)
+ascent=0
+descent=0
+fallbacks=[]
+compress=false
+scaling_mode=2

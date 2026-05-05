@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://bady36ssuw2qw" path="res://_Scenes/AttackDebug.tscn" id="3_f6h1k"]
 [ext_resource type="Script" uid="uid://47etf6uct6hc" path="res://Scripts/UI/CombatAdvantageBar.cs" id="6_3g8y2"]
 [ext_resource type="PackedScene" uid="uid://ciauu588bs6od" path="res://_Scenes/DamagePopup.tscn" id="6_f6h1k"]
+[ext_resource type="FontFile" uid="uid://dd6yoetodmb25" path="res://Art/Fonts/PixgamerRegular-OVD6A.ttf" id="7_cph6q"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_i5gep"]
 border_width_left = 2
@@ -31,7 +32,7 @@ Team2UI = NodePath("Team 2/UI Team 2")
 StartCombatButton = NodePath("Button StartCombat")
 Log = NodePath("Combat log")
 CurrentUnitLabel = NodePath("Current unit")
-AdvantageBar = NodePath("AdvantageBar")
+AdvantageBar = NodePath("AdvantageBar border/AdvantageBar")
 
 [node name="CombatManager" type="Node" parent="." unique_id=1959779666 node_paths=PackedStringArray("UI", "VFXLayer")]
 script = ExtResource("1_qyew6")
@@ -59,6 +60,14 @@ offset_left = 9.0
 offset_top = 28.0
 offset_right = 482.0
 offset_bottom = 277.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.5)
+theme_override_constants/shadow_outline_size = 4
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 1
+theme_override_constants/outline_size = 4
+theme_override_fonts/normal_font = ExtResource("7_cph6q")
+theme_override_font_sizes/normal_font_size = 24
 text = "Log"
 
 [node name="Current unit" type="RichTextLabel" parent="." unique_id=1281169272]
@@ -67,6 +76,14 @@ offset_left = 5.0
 offset_top = 3.0
 offset_right = 477.0
 offset_bottom = 31.0
+theme_override_colors/default_color = Color(1, 0.38260242, 0.4072413, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.5)
+theme_override_constants/shadow_outline_size = 4
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 1
+theme_override_constants/outline_size = 4
+theme_override_fonts/normal_font = ExtResource("7_cph6q")
+theme_override_font_sizes/normal_font_size = 24
 text = "Current unit"
 
 [node name="Team 1" type="Node" parent="." unique_id=479715104]
@@ -85,10 +102,17 @@ DamagePopupScene = ExtResource("6_f6h1k")
 
 [node name="RichTextLabel" type="RichTextLabel" parent="Team 1/UI Team 1" unique_id=1962562087]
 layout_mode = 1
-offset_top = -20.0
+offset_top = -25.0
 offset_right = 107.0
-offset_bottom = 9.0
-theme_override_font_sizes/normal_font_size = 12
+offset_bottom = 4.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.5)
+theme_override_constants/shadow_outline_size = 4
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 1
+theme_override_constants/outline_size = 4
+theme_override_fonts/normal_font = ExtResource("7_cph6q")
+theme_override_font_sizes/normal_font_size = 24
 text = "Team 1"
 
 [node name="BoardContainer" type="Control" parent="Team 1/UI Team 1" unique_id=110947695]
@@ -129,10 +153,17 @@ DamagePopupScene = ExtResource("6_f6h1k")
 
 [node name="RichTextLabel" type="RichTextLabel" parent="Team 2/UI Team 2" unique_id=1029720363]
 layout_mode = 1
-offset_top = -20.0
+offset_top = -25.0
 offset_right = 107.0
-offset_bottom = 9.0
-theme_override_font_sizes/normal_font_size = 12
+offset_bottom = 4.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.5)
+theme_override_constants/shadow_outline_size = 4
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 1
+theme_override_constants/outline_size = 4
+theme_override_fonts/normal_font = ExtResource("7_cph6q")
+theme_override_font_sizes/normal_font_size = 24
 text = "Team 2"
 
 [node name="BoardContainer" type="Control" parent="Team 2/UI Team 2" unique_id=841939945]
@@ -157,12 +188,20 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="AdvantageBar" type="TextureProgressBar" parent="." unique_id=1093621206]
+[node name="AdvantageBar border" type="ColorRect" parent="." unique_id=351850008]
 layout_mode = 0
 offset_left = 800.0
 offset_top = 40.0
-offset_right = 805.0
+offset_right = 811.0
 offset_bottom = 592.0
+color = Color(0, 0, 0, 1)
+
+[node name="AdvantageBar" type="TextureProgressBar" parent="AdvantageBar border" unique_id=1093621206]
+layout_mode = 0
+offset_left = 2.0
+offset_top = 2.0
+offset_right = 9.0
+offset_bottom = 550.0
 theme = SubResource("Theme_3g8y2")
 max_value = 1.0
 step = 0.01
@@ -174,3 +213,14 @@ texture_progress = SubResource("ImageTexture_cph6q")
 tint_over = Color(0.22174683, 0.2804779, 0.90146613, 1)
 tint_progress = Color(0, 0.5131468, 0.5131468, 1)
 script = ExtResource("6_3g8y2")
+
+[node name="AdvantageBar midpoint" type="ColorRect" parent="AdvantageBar border" unique_id=1449848116]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -2.0
+offset_right = 11.0
+offset_bottom = 2.0
+grow_vertical = 2
+color = Color(0, 0, 0, 0.5)

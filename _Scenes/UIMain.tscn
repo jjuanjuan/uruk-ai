@@ -1,7 +1,6 @@
 [gd_scene format=3 uid="uid://bte5gvthbexir"]
 
 [ext_resource type="Script" uid="uid://qae3crcpu528" path="res://Scripts/UI/UIMain.cs" id="1_husyh"]
-[ext_resource type="PackedScene" uid="uid://cgiw7nq0rr8g5" path="res://_Scenes/CombatScene.tscn" id="2_eavit"]
 [ext_resource type="PackedScene" uid="uid://c5ug66lr4e0cx" path="res://_Scenes/ClassTree.tscn" id="3_epl5v"]
 [ext_resource type="Script" uid="uid://jw62aqdff52j" path="res://Scripts/UI/UIOrcPool.cs" id="4_ub50i"]
 [ext_resource type="PackedScene" uid="uid://jh1ftys40xae" path="res://_Scenes/PoolItem.tscn" id="5_w1mdg"]
@@ -16,7 +15,6 @@ border_color = Color(0.6651851, 0.6651851, 0.6651851, 1)
 
 [node name="UI Main" type="CanvasLayer" unique_id=464530899 node_paths=PackedStringArray("PoolUI")]
 script = ExtResource("1_husyh")
-CombatScene = ExtResource("2_eavit")
 ClassTreeScene = ExtResource("3_epl5v")
 PoolUI = NodePath("UI Orc Pool")
 
@@ -27,14 +25,6 @@ offset_right = 247.0
 offset_bottom = 464.0
 scale = Vector2(0.59665895, 0.6000012)
 text = "Open class tree"
-
-[node name="OpenCombatButton" type="Button" parent="." unique_id=1502428302]
-offset_left = 16.0
-offset_top = 445.0
-offset_right = 246.0
-offset_bottom = 515.0
-scale = Vector2(0.59665895, 0.6000012)
-text = "Open COMBAT"
 
 [node name="GenerateOrcButton" type="Button" parent="." unique_id=443345402]
 offset_left = 16.00003
