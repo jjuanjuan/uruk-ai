@@ -4,6 +4,7 @@
 
 [resource]
 script = ExtResource("1_lme5e")
+AttackName = "Whip Column"
 BaseDamageMultiplier = 0.75
 AttackType = 0
 Target = 3

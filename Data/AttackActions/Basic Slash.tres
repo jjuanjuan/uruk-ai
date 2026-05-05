@@ -4,4 +4,5 @@
 
 [resource]
 script = ExtResource("1_t24nn")
+AttackName = "Slash"
 metadata/_custom_type_script = "uid://8p18r81fnngn"

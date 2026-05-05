@@ -4,6 +4,7 @@
 
 [resource]
 script = ExtResource("1_bc6hg")
+AttackName = "Row Slash"
 BaseDamageMultiplier = 0.75
 Target = 5
 metadata/_custom_type_script = "uid://8p18r81fnngn"

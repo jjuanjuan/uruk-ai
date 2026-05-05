@@ -2,7 +2,7 @@
 
 [ext_resource type="Resource" uid="uid://nwnecenxibir" path="res://Data/AttackActions/Basic Slash.tres" id="1_gf6no"]
 [ext_resource type="Script" uid="uid://du724smqstcfc" path="res://Scripts/Combat/AttackPerPosition.cs" id="2_of7dv"]
-[ext_resource type="Resource" uid="uid://cdgubtmkihgw8" path="res://Data/AttackActions/Iannuki.tres" id="3_gf6no"]
+[ext_resource type="Resource" uid="uid://cdgubtmkihgw8" path="res://Data/AttackActions/Samurai Ult.tres" id="3_gf6no"]
 [ext_resource type="Texture2D" uid="uid://de5j0u588upr7" path="res://Art/Placeholders/Units/0_militia_back.png" id="4_kglnk"]
 [ext_resource type="Texture2D" uid="uid://bafqkcurk5b1k" path="res://Art/Placeholders/Units/3_samurai_front.png" id="5_of7dv"]
 [ext_resource type="Resource" uid="uid://cry0fyf1u8o8v" path="res://Data/CharacterClasses/2_Legionnaire.tres" id="6_6t37u"]

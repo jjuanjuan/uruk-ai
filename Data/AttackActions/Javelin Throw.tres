@@ -4,6 +4,7 @@
 
 [resource]
 script = ExtResource("1_jqgkw")
+AttackName = "Javelin throw"
 AttackType = 2
 Target = 1
 metadata/_custom_type_script = "uid://8p18r81fnngn"

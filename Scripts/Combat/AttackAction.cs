@@ -5,6 +5,8 @@ using System;
 public partial class AttackAction : Resource
 {
     [Export]
+    public string AttackName = "ATTACK NAME HERE";
+    [Export]
     public double BaseDamageMultiplier = 1.0;
     [Export]
     CombatConfig.AttackType AttackType = CombatConfig.AttackType.Slash;

@@ -319,6 +319,12 @@ public partial class CombatManager : Node
     }
     AttackAction GetActionByRow(OrcInstance orc)
     {
+        GD.Print(orc.CharacterClass.GetClassName() + " attacks with " +
+        
+                    orc.CharacterClass
+                          .GetAttackPerPosition(orc.PartyPosition.Row)
+                          .AttackAction.AttackName);
+
         return orc.CharacterClass
                   .GetAttackPerPosition(orc.PartyPosition.Row)
                   .AttackAction;

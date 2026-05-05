@@ -4,6 +4,7 @@
 
 [resource]
 script = ExtResource("1_eb7e7")
+AttackName = "Trident"
 BaseDamageMultiplier = 0.75
 AttackType = 2
 Target = 3

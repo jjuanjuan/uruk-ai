@@ -4,6 +4,7 @@
 
 [resource]
 script = ExtResource("1_olw28")
+AttackName = "Knife throw"
 BaseDamageMultiplier = 0.75
 AttackType = 2
 Target = 1

@@ -4,6 +4,7 @@
 
 [resource]
 script = ExtResource("1_iad48")
+AttackName = "Row Smash"
 BaseDamageMultiplier = 0.75
 AttackType = 0
 Target = 5
