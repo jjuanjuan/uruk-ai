@@ -111,4 +111,8 @@ public partial class UICombatScene : Control
     {
         AdvantageBar.SetValue(value);
     }
+    public void AnimateAdvantageBar(float value)
+    {
+        AdvantageBar.UpdateBarAnimated(value);
+    }
 }

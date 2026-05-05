@@ -6,6 +6,7 @@ public partial class CombatAdvantageBar : Control
 
     [Export] public Color TeamAColor = Colors.Blue;
     [Export] public Color TeamBColor = Colors.Red;
+    [Export] public float TweenDuration = 1.5f;
 
     public override void _Draw()
     {
@@ -21,5 +22,22 @@ public partial class CombatAdvantageBar : Control
     {
         Value = Mathf.Clamp(v, 0, 1);
         QueueRedraw();
+    }
+
+    public void UpdateBarAnimated(float to)
+    {
+        float fromNormalized = Value;
+        float toNormalized = to;
+
+        var tween = CreateTween();
+
+        tween.TweenMethod(
+            Callable.From<float>(SetValue),
+            fromNormalized,
+            toNormalized,
+            TweenDuration
+        )
+        .SetTrans(Tween.TransitionType.Quad)
+        .SetEase(Tween.EaseType.Out);
     }
 }

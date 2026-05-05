@@ -213,14 +213,16 @@ texture_progress = SubResource("ImageTexture_cph6q")
 tint_over = Color(0.22174683, 0.2804779, 0.90146613, 1)
 tint_progress = Color(0, 0.5131468, 0.5131468, 1)
 script = ExtResource("6_3g8y2")
+TeamAColor = Color(0.31982023, 0.5272513, 1, 1)
+TeamBColor = Color(1, 0.5336117, 0.4686132, 1)
 
 [node name="AdvantageBar midpoint" type="ColorRect" parent="AdvantageBar border" unique_id=1449848116]
 layout_mode = 1
 anchors_preset = 4
 anchor_top = 0.5
 anchor_bottom = 0.5
-offset_top = -2.0
+offset_top = -1.0
 offset_right = 11.0
-offset_bottom = 2.0
+offset_bottom = 1.0
 grow_vertical = 2
-color = Color(0, 0, 0, 0.5)
+color = Color(0, 0, 0, 1)

@@ -351,7 +351,7 @@ public partial class CombatManager : Node
             }
         }
 
-        UI?.SetAdvantageBar(combatContext.CalculateAdvantage());
+        UI?.AnimateAdvantageBar(combatContext.CalculateAdvantage());
 
         var state = combatContext.UnitState[attacker];
         state.RemainingActions--;
