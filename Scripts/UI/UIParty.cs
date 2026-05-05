@@ -37,6 +37,9 @@ public partial class UIParty : Control
 
     void BuildGrid()
     {
+        foreach (Node child in BoardRoot.GetChildren())
+            child.QueueFree();
+
         for (int r = 0; r < CharacterParty.ROWS; r++)
         {
             for (int c = 0; c < CharacterParty.COLUMNS; c++)
@@ -52,7 +55,7 @@ public partial class UIParty : Control
             }
         }
     }
-
+    
     public void Refresh()
     {
         if (Party == null || BoardRoot == null)
