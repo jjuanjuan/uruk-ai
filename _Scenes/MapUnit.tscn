@@ -4,10 +4,13 @@
 [ext_resource type="Texture2D" uid="uid://bib73y474e4y" path="res://Art/Placeholders/Units/base ork front.png" id="1_ucu7w"]
 [ext_resource type="Script" uid="uid://dnxxw7rotwwny" path="res://Scripts/Map/VisionCone.cs" id="3_ll66f"]
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ll66f"]
+
 [sub_resource type="CircleShape2D" id="CircleShape2D_h4k78"]
 radius = 32.0
 
 [node name="MapUnit" type="Area2D" unique_id=1281034803 node_paths=PackedStringArray("LeaderTexture", "VisionCone")]
+collision_mask = 0
 script = ExtResource("1_h4k78")
 BaseSpeed = 20.0
 LeaderTexture = NodePath("Pivot/TextureRect")
@@ -15,8 +18,18 @@ VisionCone = NodePath("Pivot/VisionCone")
 
 [node name="Pivot" type="Node2D" parent="." unique_id=1396853662]
 
-[node name="VisionCone" type="Node2D" parent="Pivot" unique_id=2147004035]
+[node name="VisionCone" type="Area2D" parent="Pivot" unique_id=2113516034 node_paths=PackedStringArray("ParentUnit", "Polygon")]
+z_index = 1
+material = SubResource("ShaderMaterial_ll66f")
+collision_layer = 2
 script = ExtResource("3_ll66f")
+ParentUnit = NodePath("../..")
+Polygon = NodePath("CollisionPolygon2D")
+ColorFill = Color(1, 0, 0, 0.30800003)
+FadeSpeed = 2.0
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Pivot/VisionCone" unique_id=473912381]
+polygon = PackedVector2Array(0, 0, 0, 0, 0, 0)
 
 [node name="TextureRect" type="TextureRect" parent="Pivot" unique_id=826299163]
 anchors_preset = 15

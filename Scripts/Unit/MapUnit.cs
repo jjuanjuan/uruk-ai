@@ -218,21 +218,7 @@ public partial class MapUnit : Area2D
     // DIRECTION AND SEEING
     public bool CanSee(MapUnit other)
     {
-        float maxDistance = GameManager.I.CombatConfig.CombatNoticeDistance;
-        float angle = GameManager.I.CombatConfig.CombatNoticeAngle;
-
-        Vector2 toOther = other.GlobalPosition - GlobalPosition;
-        float dist = toOther.Length();
-
-        if (dist > maxDistance)
-            return false;
-
-        toOther = toOther.Normalized();
-
-        float dot = GetForward().Dot(toOther);
-        float cosHalfFov = Mathf.Cos(Mathf.DegToRad(angle * 0.5f));
-
-        return dot > cosHalfFov;
+        return VisionCone.CanSee(other);
     }
     public Vector2 GetForward()
     {
