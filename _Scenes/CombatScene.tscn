@@ -4,6 +4,7 @@
 [ext_resource type="Script" uid="uid://bkti6f1dxgf7i" path="res://Scripts/UI/UIParty.cs" id="1_dk7xb"]
 [ext_resource type="Script" uid="uid://cgs2co0jxdffn" path="res://Scripts/Combat/CombatManager.cs" id="1_qyew6"]
 [ext_resource type="PackedScene" uid="uid://dn0of61i2vxkg" path="res://_Scenes/PartySlot.tscn" id="2_qyew6"]
+[ext_resource type="PackedScene" uid="uid://bady36ssuw2qw" path="res://_Scenes/AttackDebug.tscn" id="3_f6h1k"]
 [ext_resource type="Script" uid="uid://47etf6uct6hc" path="res://Scripts/UI/CombatAdvantageBar.cs" id="6_3g8y2"]
 [ext_resource type="PackedScene" uid="uid://ciauu588bs6od" path="res://_Scenes/DamagePopup.tscn" id="6_f6h1k"]
 
@@ -21,18 +22,22 @@ border_width_bottom = 2
 
 [sub_resource type="ImageTexture" id="ImageTexture_cph6q"]
 
-[node name="CombatScene" type="Control" unique_id=1636238207 node_paths=PackedStringArray("Team1UI", "Team2UI", "Log", "CurrentUnitLabel", "AdvantageBar")]
+[node name="CombatScene" type="Control" unique_id=1636238207 node_paths=PackedStringArray("Team1UI", "Team2UI", "StartCombatButton", "Log", "CurrentUnitLabel", "AdvantageBar")]
 layout_mode = 3
 anchors_preset = 0
 script = ExtResource("1_3mdtu")
 Team1UI = NodePath("Team 1/UI Team 1")
 Team2UI = NodePath("Team 2/UI Team 2")
+StartCombatButton = NodePath("Button StartCombat")
 Log = NodePath("Combat log")
 CurrentUnitLabel = NodePath("Current unit")
 AdvantageBar = NodePath("AdvantageBar")
 
-[node name="CombatManager" type="Node" parent="." unique_id=1959779666]
+[node name="CombatManager" type="Node" parent="." unique_id=1959779666 node_paths=PackedStringArray("UI", "VFXLayer")]
 script = ExtResource("1_qyew6")
+UI = NodePath("..")
+AttackDebugScene = ExtResource("3_f6h1k")
+VFXLayer = NodePath("../VFX Layer")
 
 [node name="VFX Layer" type="Control" parent="." unique_id=1413209788]
 z_index = 1000

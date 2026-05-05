@@ -8,17 +8,20 @@ public partial class CombatManager : Node
     public CharacterParty PartyFront;
     public CharacterParty PartyBack;
 
-    [Export] public float AttackFlightDuration = 0.5f;
+    [Export] public UICombatScene UI;
+    [Export] float AttackFlightDuration = 0.5f; // TODO: mover esto a cada ataque individual
+    [Export] PackedScene AttackDebugScene;
+    [Export] Control VFXLayer;
 
     public enum CombatState
     {
         Init,
-        WaitingForStart,
         WaitingForStartDelay,
+        WaitingForStart,
         BuildTurnOrder,
         WaitingForUnit,
-        UnitActing,
         WaitingAttackDelay,
+        UnitActing,
         Resolving,
         WaitingAttackInterval,
         CheckEnd,
@@ -46,10 +49,10 @@ public partial class CombatManager : Node
 
     [Signal]
     public delegate void AttackStartedEventHandler(
-        OrcInstance attacker,
-        Godot.Collections.Array<OrcInstance> targets,
-        AttackAction action
-    );
+    OrcInstance attacker,
+    Godot.Collections.Array<OrcInstance> targets,
+    AttackAction action
+);
 
     [Signal]
     public delegate void DamageAppliedEventHandler(
@@ -68,7 +71,6 @@ public partial class CombatManager : Node
     {
         GameManager.I.CombatManager = this;
     }
-
     public override void _ExitTree()
     {
         if (GameManager.I.CombatManager == this)
@@ -79,6 +81,19 @@ public partial class CombatManager : Node
     {
         state = newState;
         stateTimer = 0f;
+
+        GD.Print("Combat " + state.ToString());
+
+        if (state == CombatState.WaitingForStartDelay)
+        {
+            UI.Team1UI.SetNamesVisible(false);
+            UI.Team2UI.SetNamesVisible(false);
+        }
+        else if (state == CombatState.Ended)
+        {
+            UI.Team1UI.SetNamesVisible(true);
+            UI.Team2UI.SetNamesVisible(true);
+        }
 
         EmitSignal(SignalName.CombatStateChanged);
     }
@@ -97,9 +112,11 @@ public partial class CombatManager : Node
                 break;
 
             case CombatState.WaitingForStartDelay:
-                if (stateTimer >= GameManager.I.CombatConfig.CombatStartDelay)
-                    SetState(CombatState.BuildTurnOrder);
-                break;
+                {
+                    if (stateTimer >= GameManager.I.CombatConfig.CombatStartDelay)
+                        SetState(CombatState.BuildTurnOrder);
+                    break;
+                }
 
             case CombatState.BuildTurnOrder:
                 BuildTurnOrder();
@@ -109,17 +126,35 @@ public partial class CombatManager : Node
                 UpdateWaitingForUnit();
                 break;
 
-            case CombatState.UnitActing:
-                break;
-
             case CombatState.WaitingAttackDelay:
-                if (stateTimer >= GameManager.I.CombatConfig.AttackDelayWhenUI)
-                    StartAttack();
-                break;
+                {
+                    if (stateTimer < GameManager.I.CombatConfig.AttackDelayWhenUI)
+                        return;
+
+                    var enemies = combatContext.GetEnemies(currentUnit);
+                    var targets = ResolveTargets(currentUnit, enemies, pendingAction.Target);
+
+                    var actionSnapshot = pendingAction;
+                    var attackerSnapshot = currentUnit;
+
+                    SpawnAttackDebug(targets, attackerSnapshot, actionSnapshot);
+
+                    pendingAction = null;
+
+                    SetState(CombatState.WaitingAttackInterval);
+                    break;
+                }
 
             case CombatState.WaitingAttackInterval:
-                if (stateTimer >= GameManager.I.CombatConfig.AttackInterval)
-                    ResolveAttack();
+                {
+                    if (stateTimer < GameManager.I.CombatConfig.AttackInterval)
+                        return;
+
+                    SetState(CombatState.Resolving);
+                    break;
+                }
+
+            case CombatState.UnitActing:
                 break;
 
             case CombatState.Resolving:
@@ -135,50 +170,61 @@ public partial class CombatManager : Node
         }
     }
 
-    // =========================================================
-    // INIT
-    // =========================================================
-
     void InitCombat()
     {
+        UI?.SetAdvantageBar(.5f);
+        SetState(CombatState.WaitingForStart);
+    }
+    public void StartCombat()
+    {
+        if (state == CombatState.WaitingForStart)
+            SetState(CombatState.WaitingForStartDelay);
+    }
+    public void SetupCombat(CharacterParty partyFront, CharacterParty partyBack)
+    {
+        PartyFront = partyFront;
+        PartyBack = partyBack;
+
         combatContext = new CombatContext
         {
             Team1 = PartyFront,
             Team2 = PartyBack,
             UnitState = new Dictionary<OrcInstance, CombatUnitState>(),
             Score1 = 0,
-            Score2 = 0
+            Score2 = 0,
         };
 
         InitUnitState();
-
-        EmitSignal("CombatLog", "<<COMBAT START>>");
-
-        SetState(CombatState.WaitingForStart);
-    }
-
-    public void StartCombat(CharacterParty partyFront, CharacterParty partyBack)
-    {
-        PartyFront = partyFront;
-        PartyBack = partyBack;
-
-        InitCombat();
-        SetState(CombatState.WaitingForStartDelay);
     }
 
     void InitUnitState()
     {
         combatContext.UnitState.Clear();
 
+        var print = "<<Turn 0>>";
+        print += "\nTeam 1: ";
+
         foreach (var o in PartyFront.GetAllLivingOrcs())
+        {
             AddUnit(o);
+            print += o.GetCustomName() + ", ";
+        }
+
+        print += "\nTeam 2: ";
 
         foreach (var o in PartyBack.GetAllLivingOrcs())
+        {
             AddUnit(o);
+            print += o.GetCustomName() + ", ";
+        }
+
+        UI?.AddLog(print);
     }
 
     void AddUnit(OrcInstance o)
     {
+        if (o == null) return;
+
         combatContext.UnitState[o] = new CombatUnitState
         {
             Orc = o,
@@ -199,6 +245,7 @@ public partial class CombatManager : Node
         turnOrder.Clear();
         currentIndex = 0;
 
+        // solo orcos vivos que tengan acciones
         var all = combatContext.UnitState
             .Where(kv => kv.Value.Orc.IsAlive && kv.Value.RemainingActions > 0)
             .Select(kv => kv.Key)
@@ -208,6 +255,8 @@ public partial class CombatManager : Node
 
         foreach (var orc in all)
         {
+            if (orc == null) continue;
+
             int speed = orc.CharacterClass.GetBaseSpeed();
 
             if (!groups.ContainsKey(speed))
@@ -245,89 +294,108 @@ public partial class CombatManager : Node
             currentUnit = orc;
 
             EmitSignal(SignalName.UnitChanged, currentUnit);
-
-            pendingAction = GetActionByRow(currentUnit);
-
-            SetState(CombatState.WaitingAttackDelay);
+            SetState(CombatState.UnitActing);
+            EnterUnitActing();
             return;
         }
 
         SetState(CombatState.CheckEnd);
     }
 
-    // =========================================================
-    // ATTACK FLOW
-    // =========================================================
-
-    void StartAttack()
+    private void EnterUnitActing()
     {
-        if (currentUnit == null || pendingAction == null)
+        if (currentUnit == null)
         {
             SetState(CombatState.CheckEnd);
             return;
         }
 
-        var enemies = combatContext.GetEnemies(currentUnit);
-        var targets = ResolveTargets(currentUnit, enemies, pendingAction.Target);
+        if (pendingAction == null)
+        {
+            pendingAction = GetActionByRow(currentUnit);
 
-        EmitSignal(
-            SignalName.AttackStarted,
-            currentUnit,
-            new Godot.Collections.Array<OrcInstance>(targets),
-            pendingAction
-        );
-
-        SetState(CombatState.WaitingAttackInterval);
+            SetState(CombatState.WaitingAttackDelay);
+        }
     }
-
-    void ResolveAttack()
+    AttackAction GetActionByRow(OrcInstance orc)
     {
-        if (currentUnit == null || pendingAction == null)
-        {
-            SetState(CombatState.CheckEnd);
-            return;
-        }
+        return orc.CharacterClass
+                  .GetAttackPerPosition(orc.PartyPosition.Row)
+                  .AttackAction;
+    }
+    private void ExecuteAttack(OrcInstance attacker, AttackAction action)
+    {
+        var enemies = combatContext.GetEnemies(attacker);
+        var targets = ResolveTargets(attacker, enemies, action.Target);
 
-        var enemies = combatContext.GetEnemies(currentUnit);
-        var targets = ResolveTargets(currentUnit, enemies, pendingAction.Target);
+        string names = string.Join(", ", targets.Select(t => t.GetCustomName()));
+        UI?.AddLog($"{attacker.GetCustomName()} hits {names}");
 
         foreach (var t in targets)
         {
-            ApplyDamage(currentUnit, t, pendingAction);
+            ApplyDamage(attacker, t, action);
         }
 
-        combatContext.UnitState[currentUnit].RemainingActions--;
+        foreach (var d in targets)
+        {
+            if (!d.IsAlive)
+            {
+                UI?.AddLog($"{d.GetCustomName()} dies!!");
+                GiveKillScore(attacker);
+            }
+        }
 
-        pendingAction = null;
+        UI?.SetAdvantageBar(combatContext.CalculateAdvantage());
 
-        SetState(CombatState.Resolving);
+        var state = combatContext.UnitState[attacker];
+        state.RemainingActions--;
     }
-
-    // =========================================================
-    // DAMAGE
-    // =========================================================
-
-    void ApplyDamage(OrcInstance attacker, OrcInstance target, AttackAction action)
+    void SpawnAttackDebug(List<OrcInstance> targets, OrcInstance attacker, AttackAction attackAction)
     {
-        int baseDamage = attacker.CharacterClass.GetBaseAttackDamage();
-        int finalDamage = (int)(baseDamage * action.BaseDamageMultiplier);
+        var cube = AttackDebugScene.Instantiate<Control>();
+        VFXLayer.AddChild(cube);
 
-        target.TakeDamage(finalDamage);
+        var attackerTeamId = combatContext.GetTeamId(attacker);
+        var enemyTeamId = combatContext.GetTeamId(targets[0]);
 
-        bool died = !target.IsAlive;
+        var attackerSlot = combatContext
+            .GetUI(attackerTeamId, UI)
+            .GetSlot(attacker);
 
-        EmitSignal(
-            SignalName.DamageApplied,
-            attacker,
-            target,
-            finalDamage,
-            died
-        );
+        Vector2 start = attackerSlot.GlobalPosition;
 
-        GiveScore(attacker, finalDamage);
+        CharacterParty enemyTeam = combatContext.GetParty(enemyTeamId);
+        Vector2 end = GetTargetCenter(targets);
 
-        if (died)
-            GiveKillScore(attacker);
+        cube.GlobalPosition = start;
+
+        var tween = cube.CreateTween();
+
+        tween.TweenProperty(cube, "global_position", end, AttackFlightDuration)
+            .SetTrans(Tween.TransitionType.Quad)
+            .SetEase(Tween.EaseType.Out);
+
+        tween.TweenCallback(Callable.From(() =>
+        {
+            cube.QueueFree();
+
+            if (attackAction == null || attacker == null)
+                return;
+
+            ExecuteAttack(attacker, attackAction);
+        }));
+    }
+    Vector2 GetTargetCenter(List<OrcInstance> targets)
+    {
+        Vector2 sum = Vector2.Zero;
+        var teamId = combatContext.GetTeamId(targets[0]);
+
+        foreach (var target in targets)
+        {
+            var slot = combatContext.GetUI(teamId, UI).GetSlot(target);
+            sum += slot.GlobalPosition;
+        }
+        return sum / targets.Count;
     }
 
     // =========================================================
@@ -358,8 +426,7 @@ public partial class CombatManager : Node
     void NextTurn()
     {
         turnNumber++;
-
-        EmitSignal("CombatLog", $"<<TURN {turnNumber}>>");
+        UI?.AddLog($"<<Turno {turnNumber}>>");
 
         foreach (var kv in combatContext.UnitState)
             kv.Value.HasActedThisTurn = false;
@@ -369,32 +436,32 @@ public partial class CombatManager : Node
 
     void EndCombat()
     {
-        EmitSignal("CombatLog", "<<COMBAT END>>");
-
-        float adv = combatContext.CalculateAdvantage();
-
-        if (adv > 0.5f)
-            EmitSignal("CombatLog", "<<TEAM 1 WINS>>");
-        else if (adv < 0.5f)
-            EmitSignal("CombatLog", "<<TEAM 2 WINS>>");
+        SetState(CombatState.Ended);
+        UI?.AddLog($"<<COMBAT END>>");
+        if (combatContext.CalculateAdvantage() > 0.5f)
+        {
+            UI?.AddLog("<<TEAM 1 WINS!>>");
+            GD.Print("<<TEAM 1 WINS!>>");
+        }
+        else if (combatContext.CalculateAdvantage() < 0.5f)
+        {
+            UI?.AddLog("<<TEAM 2 WINS!>>");
+            GD.Print("<<TEAM 2 WINS!>>");
+        }
         else
-            EmitSignal("CombatLog", "<<DRAW>>");
+        {
+            UI?.AddLog("<<COMBAT IS TIED!!>>");
+            GD.Print("<<COMBAT IS TIED!!>>");
+        }
 
         EmitSignal(SignalName.CombatFinished);
 
         SetState(CombatState.Ended);
     }
+
     // =========================================================
     // TARGETING
     // =========================================================
-
-    AttackAction GetActionByRow(OrcInstance orc)
-    {
-        return orc.CharacterClass
-            .GetAttackPerPosition(orc.PartyPosition.Row)
-            .AttackAction;
-    }
-
     List<OrcInstance> ResolveTargets(
         OrcInstance attacker,
         List<OrcInstance> enemies,
@@ -407,14 +474,23 @@ public partial class CombatManager : Node
 
         switch (targetType)
         {
+            // --------------------------
+            // SINGLE TARGET
+            // --------------------------
+
+            case AttackAction.AttackActionTarget.AnySingle:
             case AttackAction.AttackActionTarget.RandomSingle:
                 anchor = enemies[GameManager.I.NextInt(0, enemies.Count - 1)];
-                return new() { anchor };
+                return new List<OrcInstance> { anchor };
 
             case AttackAction.AttackActionTarget.CloseSingle:
             default:
                 anchor = GetClosestEnemy(enemies, attacker);
-                return new() { anchor };
+                return new List<OrcInstance> { anchor };
+
+            // --------------------------
+            // COLUMN TARGETING
+            // --------------------------
 
             case AttackAction.AttackActionTarget.CloseColumn:
                 anchor = GetClosestEnemy(enemies, attacker);
@@ -423,6 +499,10 @@ public partial class CombatManager : Node
             case AttackAction.AttackActionTarget.AnyColumn:
                 anchor = enemies[GameManager.I.NextInt(0, enemies.Count - 1)];
                 return GetEnemyColumn(anchor, enemies);
+
+            // --------------------------
+            // ROW TARGETING
+            // --------------------------
 
             case AttackAction.AttackActionTarget.CloseRow:
                 anchor = GetClosestEnemy(enemies, attacker);
@@ -435,6 +515,10 @@ public partial class CombatManager : Node
             case AttackAction.AttackActionTarget.AnyRow:
                 anchor = enemies[GameManager.I.NextInt(0, enemies.Count - 1)];
                 return GetEnemyRow(anchor, enemies);
+
+            // --------------------------
+            // GLOBAL
+            // --------------------------
 
             case AttackAction.AttackActionTarget.AllEnemies:
                 return enemies;
@@ -452,43 +536,93 @@ public partial class CombatManager : Node
             e.PartyPosition.Column >= min &&
             e.PartyPosition.Column <= max);
     }
-
     List<OrcInstance> GetEnemyRow(OrcInstance anchor, List<OrcInstance> enemies)
     {
         return enemies.FindAll(e =>
             e.PartyPosition.Row == anchor.PartyPosition.Row);
     }
-
     OrcInstance GetClosestEnemy(List<OrcInstance> enemies, OrcInstance attacker)
     {
-        return enemies
-            .OrderBy(e => Distance(attacker, e))
-            .First();
-    }
+        OrcInstance best = null;
+        float bestDist = float.MaxValue;
+        var attackerSlot = combatContext
+            .GetUI(combatContext.GetTeamId(attacker), UI)
+            .GetSlot(attacker);
 
+        foreach (var e in enemies)
+        {
+            var enemySlot = combatContext
+                .GetUI(combatContext.GetTeamId(e), UI)
+                .GetSlot(e);
+
+            float d = attackerSlot.GlobalPosition.DistanceSquaredTo(enemySlot.GlobalPosition);
+
+            if (d < bestDist)
+            {
+                bestDist = d;
+                best = e;
+            }
+        }
+        return best;
+    }
     OrcInstance GetFarthestEnemy(List<OrcInstance> enemies, OrcInstance attacker)
     {
-        return enemies
-            .OrderByDescending(e => Distance(attacker, e))
-            .First();
-    }
+        OrcInstance best = null;
+        float bestDist = float.MinValue;
+        var attackerSlot = combatContext
+            .GetUI(combatContext.GetTeamId(attacker), UI)
+            .GetSlot(attacker);
 
-    float Distance(OrcInstance a, OrcInstance b)
+        foreach (var e in enemies)
+        {
+            var enemySlot = combatContext
+                .GetUI(combatContext.GetTeamId(e), UI)
+                .GetSlot(e);
+
+            float d = attackerSlot.GlobalPosition.DistanceSquaredTo(enemySlot.GlobalPosition);
+
+            if (d > bestDist)
+            {
+                bestDist = d;
+                best = e;
+            }
+        }
+        return best;
+    }
+    /////////////////////////////////////////////////////////////////
+
+    private void ApplyDamage(OrcInstance attacker, OrcInstance target, AttackAction action)
     {
-        return Mathf.Abs(a.PartyPosition.Row - b.PartyPosition.Row)
-             + Mathf.Abs(a.PartyPosition.Column - b.PartyPosition.Column);
-    }
+        int baseDamage = attacker.CharacterClass.GetBaseAttackDamage();
+        double multiplier = action.BaseDamageMultiplier;
+        int finalDamage = (int)(baseDamage * multiplier);
 
-    // =========================================================
-    // UTILS
-    // =========================================================
+        float oldHP = target.CurrentHP;
+
+        target.TakeDamage(finalDamage);
+
+        var teamId = combatContext.GetTeamId(target);
+        var ui = combatContext.GetUI(teamId, UI);
+        var slot = ui.GetSlot(target);
+
+        ui.ShowDamageText(target, finalDamage);
+
+        slot?.UpdateHPBarAnimated(target, oldHP, target.CurrentHP);
+        slot?.PlayHitShake(finalDamage);
+        slot?.PlayHitSquash(finalDamage);
+        slot?.PlayHitFlash();
+
+        if (!target.IsAlive)
+            slot?.PlayDeathFade();
+
+        GiveScore(attacker, finalDamage);
+    }
 
     void GiveScore(OrcInstance attacker, int score)
     {
         var teamId = combatContext.GetTeamId(attacker);
         combatContext.AddScore(teamId, score);
     }
-
     void GiveKillScore(OrcInstance attacker)
     {
         var teamId = combatContext.GetTeamId(attacker);
@@ -535,15 +669,17 @@ public class CombatContext
         GD.PrintErr("Orc not found in any team");
         return TeamId.Team1; // fallback defensivo
     }
-
     public CharacterParty GetParty(TeamId id)
     {
         return id == TeamId.Team1 ? Team1 : Team2;
     }
-
     public CharacterParty GetPartyOf(OrcInstance orc)
     {
         return GetParty(GetTeamId(orc));
+    }
+    public UIParty GetUI(TeamId teamId, UICombatScene ui)
+    {
+        return TeamId.Team1 == teamId ? ui.Team1UI : ui.Team2UI;
     }
 
     // =====================================
@@ -586,20 +722,10 @@ public class CombatContext
     // SCORE
     // =====================================
 
-    public void AddScore(OrcInstance orc, int score)
-    {
-        AddScore(GetTeamId(orc), score);
-    }
-
     public void AddScore(TeamId team, int score)
     {
         if (team == TeamId.Team1) Score1 += score;
         else Score2 += score;
-    }
-
-    public void AddKill(OrcInstance orc)
-    {
-        AddKill(GetTeamId(orc));
     }
 
     public void AddKill(TeamId team)
@@ -632,5 +758,5 @@ public enum EncounterType
     None,
     A_Ambushes_B,
     B_Ambushes_A,
-    Equal
+    Equal,
 }

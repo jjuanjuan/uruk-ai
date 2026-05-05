@@ -7,6 +7,8 @@ public partial class UICombatScene : Control
     [Export] public UIParty Team1UI;
     [Export] public UIParty Team2UI;
 
+    [Export] Button StartCombatButton;
+
     [Export] RichTextLabel Log;
     [Export] RichTextLabel CurrentUnitLabel;
 
@@ -44,13 +46,15 @@ public partial class UICombatScene : Control
 
         Team1UI.Refresh();
         Team2UI.Refresh();
+
+        StartCombatButton.Pressed += CombatManager.StartCombat;
     }
 
     public void Setup(CharacterParty partyA, CharacterParty partyB)
     {
         Log.Text = "";
 
-        CombatManager.StartCombat(partyA, partyB);
+        CombatManager.SetupCombat(partyA, partyB);
 
         Team1UI.Setup(partyA, true);
         Team2UI.Setup(partyB, false);
