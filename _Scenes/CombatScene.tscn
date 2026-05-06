@@ -25,7 +25,11 @@ border_width_bottom = 2
 
 [node name="CombatScene" type="Control" unique_id=1636238207 node_paths=PackedStringArray("Team1UI", "Team2UI", "StartCombatButton", "Log", "CurrentUnitLabel", "AdvantageBar", "ResultPanel", "ResultText")]
 layout_mode = 3
-anchors_preset = 0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 script = ExtResource("1_3mdtu")
 Team1UI = NodePath("Team 1/UI Team 1")
 Team2UI = NodePath("Team 2/UI Team 2")
@@ -35,6 +39,15 @@ CurrentUnitLabel = NodePath("Current unit")
 AdvantageBar = NodePath("AdvantageBar border/AdvantageBar")
 ResultPanel = NodePath("Result Panel")
 ResultText = NodePath("Result Panel/Background/RichTextLabel")
+
+[node name="Combat Background" type="ColorRect" parent="." unique_id=869027361]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.5)
 
 [node name="CombatManager" type="Node" parent="." unique_id=1959779666 node_paths=PackedStringArray("UI", "VFXLayer")]
 script = ExtResource("1_qyew6")
@@ -233,9 +246,11 @@ color = Color(0, 0, 0, 1)
 visible = false
 z_index = 100
 layout_mode = 1
-anchors_preset = 0
-offset_right = 1154.0
-offset_bottom = 651.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="Background" type="ColorRect" parent="Result Panel" unique_id=210277316]
 layout_mode = 1
