@@ -6,6 +6,10 @@ public partial class MapUnit : Area2D
     [Export] public float BaseSpeed = 120f; // px/seg
     [Export] public TextureRect LeaderTexture;
     [Export] public VisionCone VisionCone;
+    [Export] public Color SelectedColor = Colors.Yellow;
+    [Export] public float ShakeIntensity = 10f;
+
+    [Export] Node2D VisualPivot;
 
     public CharacterParty Party;
     public Team Team => Party?.Team;
@@ -21,6 +25,7 @@ public partial class MapUnit : Area2D
     public MovementType MovementType => Party.GetLeader().CharacterClass.MovementType;
 
     [Signal] public delegate void PushFinishedEventHandler();
+    [Signal] public delegate void DeathFinishedEventHandler();
 
     public override void _Ready()
     {
@@ -55,6 +60,9 @@ public partial class MapUnit : Area2D
     public override void _InputEvent(Viewport viewport, InputEvent @event, int shapeIdx)
     {
         if (@event is not InputEventMouseButton mb || !mb.Pressed)
+            return;
+
+        if (GameManager.I.MapManager.IsPaused)
             return;
 
         if (mb.ButtonIndex == MouseButton.Left)
@@ -170,7 +178,9 @@ public partial class MapUnit : Area2D
 
     public void PushTo(Vector2 target)
     {
-        _moving = false; // cortar cualquier path activo
+        _moving = false;
+
+        PlayShake();
 
         var tween = CreateTween();
 
@@ -183,6 +193,57 @@ public partial class MapUnit : Area2D
             GridPosition = _map.WorldToGrid(GlobalPosition);
             EmitSignal(SignalName.PushFinished);
         }));
+    }
+    public void PlayDeathAndDestroy()
+    {
+        _moving = false;
+
+        PlayShake();
+
+        var tween = CreateTween();
+
+        tween.TweenProperty(this, "modulate:a", 0f, GameManager.I.CombatConfig.LoserPushTime);
+
+        tween.TweenCallback(Callable.From(() =>
+        {
+            EmitSignal(SignalName.DeathFinished);
+            SetProcessInput(false);
+            SetPhysicsProcess(false);
+            SetProcess(false);
+            QueueFree();
+        }));
+    }
+    public void PlayShake()
+    {
+        Vector2 original = VisualPivot.Position;
+
+        int steps = 60;
+        float stepTime = GameManager.I.CombatConfig.LoserPushTime / steps;
+
+        var tween = CreateTween();
+
+        for (int i = 0; i < steps; i++)
+        {
+            float t = (float)i / (steps - 1);
+            float ease = 1f - Mathf.Pow(1f - t, 3); // cubic ease-out
+            float currentIntensity = ShakeIntensity * (1f - ease);
+
+            tween.TweenCallback(Callable.From(() =>
+            {
+                float x = GameManager.I.NextFloat(-currentIntensity, currentIntensity);
+                float y = GameManager.I.NextFloat(-currentIntensity, currentIntensity);
+
+                VisualPivot.Position = original + new Vector2(x, y);
+            }));
+
+            tween.TweenInterval(stepTime);
+        }
+
+        tween.TweenCallback(Callable.From(() =>
+        {
+            VisualPivot.Position = original;
+        }));
+
     }
 
     // ---------------------------------------
@@ -230,8 +291,11 @@ public partial class MapUnit : Area2D
     // For feedback
     public void SetSelected(bool value)
     {
+        if (!IsInstanceValid(this))
+            return;
+
         _selected = value;
-        Modulate = value ? Colors.Yellow : Colors.White;
+        Modulate = value ? SelectedColor : Colors.White;
     }
 
     // DIRECTION AND SEEING

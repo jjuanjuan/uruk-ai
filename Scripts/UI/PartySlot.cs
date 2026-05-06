@@ -383,22 +383,30 @@ public partial class PartySlot : PanelContainer
     public void PlayHitShake(int damage)
     {
         float intensity = Mathf.Clamp(damage * 0.1f, ShakeIntensity.X, ShakeIntensity.Y);
-        var tween = CreateTween();
 
         Vector2 original = ContentParent.Position;
 
-        tween.TweenMethod(
-            Callable.From<float>(t =>
+        int steps = 60;
+        float stepTime = ShakeDuration / steps;
+
+        var tween = CreateTween();
+
+        for (int i = 0; i < steps; i++)
+        {
+            float t = (float)i / (steps - 1);
+            float ease = 1f - Mathf.Pow(1f - t, 3); // cubic ease-out
+            float currentIntensity = intensity * (1f - ease);
+            
+            tween.TweenCallback(Callable.From(() =>
             {
-                float x = GameManager.I.NextFloat(-intensity, intensity);
-                float y = GameManager.I.NextFloat(-intensity, intensity);
+                float x = GameManager.I.NextFloat(-currentIntensity, currentIntensity);
+                float y = GameManager.I.NextFloat(-currentIntensity, currentIntensity);
 
                 ContentParent.Position = original + new Vector2(x, y);
-            }),
-            0f,
-            ShakeDuration,
-            ShakeDuration / 6f
-        );
+            }));
+
+            tween.TweenInterval(stepTime);
+        }
 
         tween.TweenCallback(Callable.From(() =>
         {

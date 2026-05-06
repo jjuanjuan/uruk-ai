@@ -25,7 +25,7 @@ public partial class MapManager : Node
     int _width;
     int _height;
 
-    bool paused = false;
+    public bool IsPaused = false;
 
     int _pendingPushes = 0;
     MapUnit combatUnitA;
@@ -94,7 +94,7 @@ public partial class MapManager : Node
 
     void CheckEncounters()
     {
-        if (paused)
+        if (IsPaused)
             return;
 
         for (int i = 0; i < Units.Count; i++)
@@ -145,7 +145,7 @@ public partial class MapManager : Node
 
     void StartCombat(MapUnit aUnit, MapUnit bUnit, EncounterType type)
     {
-        paused = true;
+        IsPaused = true;
 
         GD.Print($"Combat: {aUnit.Name} vs {bUnit.Name}");
 
@@ -207,10 +207,9 @@ public partial class MapManager : Node
 
     void OnResultFinished()
     {
-        GD.Print("Result finished → back to map");
-
         CombatScene.QueueFree();
 
+        // no debería nunca haber un empate donde se murieron todos en un equipo
         if (_lastCombatWasDraw)
         {
             PushBoth(combatUnitA, combatUnitB);
@@ -223,8 +222,14 @@ public partial class MapManager : Node
         if (!loser.Party.HasLivingOrcs())
         {
             Units.Remove(loser);
-            loser.QueueFree();
-            paused = false;
+
+            loser.Connect(
+                MapUnit.SignalName.DeathFinished,
+                new Callable(this, nameof(OnUnitDeathFinished)),
+                (uint)ConnectFlags.OneShot
+            );
+
+            loser.PlayDeathAndDestroy();
         }
         else
         {
@@ -232,6 +237,10 @@ public partial class MapManager : Node
         }
     }
 
+    void OnUnitDeathFinished()
+    {
+        IsPaused = false;
+    }
     // ---------------------------------------
     // GRID BUILD
     // ---------------------------------------
@@ -653,7 +662,7 @@ public partial class MapManager : Node
     {
         if (a == null || b == null)
         {
-            paused = false;
+            IsPaused = false;
             return;
         }
 
@@ -683,7 +692,7 @@ public partial class MapManager : Node
         if (_pendingPushes <= 0)
         {
             GD.Print("Both pushes finished → resume map");
-            paused = false;
+            IsPaused = false;
         }
     }
 
@@ -691,6 +700,6 @@ public partial class MapManager : Node
     {
         GD.Print("Push finished → resume map");
 
-        paused = false;
+        IsPaused = false;
     }
 }

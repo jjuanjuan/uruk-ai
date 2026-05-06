@@ -9,12 +9,13 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_h4k78"]
 radius = 32.0
 
-[node name="MapUnit" type="Area2D" unique_id=1281034803 node_paths=PackedStringArray("LeaderTexture", "VisionCone")]
+[node name="MapUnit" type="Area2D" unique_id=1281034803 node_paths=PackedStringArray("LeaderTexture", "VisionCone", "VisualPivot")]
 collision_mask = 0
 script = ExtResource("1_h4k78")
 BaseSpeed = 20.0
 LeaderTexture = NodePath("Pivot/TextureRect")
 VisionCone = NodePath("Pivot/VisionCone")
+VisualPivot = NodePath("Pivot")
 
 [node name="Pivot" type="Node2D" parent="." unique_id=1396853662]
 

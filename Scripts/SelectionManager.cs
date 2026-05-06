@@ -21,4 +21,12 @@ public partial class SelectionManager : Node
         if (Selected != null)
             Selected.SetSelected(true);
     }
+
+    public void ClearSelection()
+    {
+        if (Selected != null && IsInstanceValid(Selected))
+            Selected.SetSelected(false);
+
+        Selected = null;
+    }
 }
