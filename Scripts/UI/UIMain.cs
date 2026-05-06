@@ -3,28 +3,31 @@ using Godot;
 public partial class UIMain : CanvasLayer
 {
 	[Export] public PackedScene ClassTreeScene;
-	[Export] public UIOrcPool PoolUI;
+	[Export] public PackedScene UnitManagementScene;
 
 	public override void _Ready()
 	{
         AddToGroup("ui_root");
 
 		GetNode<Button>("OpenClassTreeButton").Pressed += OpenClassTree;
+		GetNode<Button>("OpenUnitManagementButton").Pressed += OpenUnitManagement;
 		GetNode<Button>("GenerateOrcButton").Pressed += GenerateOrc;
 		GetNode<Button>("GenerateMapUnitPlayerButton").Pressed += GenerateMapUnitPlayer;
 		GetNode<Button>("GenerateMapUnitEnemyButton").Pressed += GenerateMapUnitEnemy;
-
-		GameManager.I.PartiesChanged += RefreshPool;
-
-		RefreshPool();
 	}
 
-	void RefreshPool()
-	{
-		PoolUI.SetOrcs(GameManager.I.GetAvailableOrcs());
-	}
 
 	// Buttons
+	void OpenUnitManagement()
+	{
+		if (GetNodeOrNull<UIUnitManagement>("UnitManagement") != null)
+			return;
+
+		var scene = UnitManagementScene.Instantiate<UIUnitManagement>();
+		scene.Name = "UIUnitManagement";
+
+		AddChild(scene);
+	}
 	void OpenClassTree()
 	{
 		if (GetNodeOrNull<UIClassTree>("UIClassTree") != null)

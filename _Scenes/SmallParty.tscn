@@ -1,0 +1,30 @@
+[gd_scene format=3 uid="uid://cv8iaby88pfrn"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fnj3o"]
+bg_color = Color(0.4700758, 0.47007585, 0.47007567, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_blend = true
+shadow_color = Color(0, 0, 0, 0.5)
+shadow_size = 2
+shadow_offset = Vector2(1, 1)
+
+[node name="SmallParty" type="Panel" unique_id=742573588]
+offset_right = 128.0
+offset_bottom = 128.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_fnj3o")
+
+[node name="BoardContainer" type="Control" parent="." unique_id=489692257]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Board" type="Control" parent="BoardContainer" unique_id=460883598]
+anchors_preset = 0
+offset_left = 15.0
+offset_top = 5.0
+offset_right = 113.0
+offset_bottom = 123.0
+mouse_filter = 2

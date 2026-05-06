@@ -1,0 +1,125 @@
+[gd_scene format=3 uid="uid://j2bhyj5gf67q"]
+
+[ext_resource type="Script" uid="uid://jw62aqdff52j" path="res://Scripts/UI/UIOrcPool.cs" id="1_uthg3"]
+[ext_resource type="PackedScene" uid="uid://jh1ftys40xae" path="res://_Scenes/PoolItem.tscn" id="2_p5wqt"]
+[ext_resource type="FontFile" uid="uid://dd6yoetodmb25" path="res://Art/Fonts/PixgamerRegular-OVD6A.ttf" id="3_44ew6"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_eqnvv"]
+bg_color = Color(0.3491902, 0.3491902, 0.3491902, 0.90000004)
+border_width_left = 6
+border_width_top = 6
+border_width_right = 6
+border_width_bottom = 6
+border_color = Color(0.6651851, 0.6651851, 0.6651851, 1)
+
+[node name="UnitManagement" type="Control" unique_id=220139828]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Background" type="ColorRect" parent="." unique_id=1478789195]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.1584723, 0.15847233, 0.15847224, 1)
+
+[node name="UI Orc Pool" type="Panel" parent="." unique_id=592017298 node_paths=PackedStringArray("list")]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -168.0
+offset_top = 40.0
+offset_right = -18.0
+offset_bottom = 630.0
+grow_horizontal = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_eqnvv")
+script = ExtResource("1_uthg3")
+PoolItemScene = ExtResource("2_p5wqt")
+list = NodePath("MarginContainer/ScrollContainer/VBoxContainer")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="UI Orc Pool" unique_id=1031727981]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -150.0
+offset_top = -30.0
+offset_right = -5.0
+grow_horizontal = 0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.5)
+theme_override_constants/shadow_outline_size = 4
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 1
+theme_override_constants/outline_size = 4
+theme_override_fonts/normal_font = ExtResource("3_44ew6")
+theme_override_font_sizes/normal_font_size = 24
+text = "Pool"
+horizontal_alignment = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="UI Orc Pool" unique_id=83450202]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="ScrollContainer" type="ScrollContainer" parent="UI Orc Pool/MarginContainer" unique_id=146699934]
+layout_mode = 2
+horizontal_scroll_mode = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI Orc Pool/MarginContainer/ScrollContainer" unique_id=1368985311]
+layout_mode = 2
+
+[node name="UI Party Pool" type="Panel" parent="." unique_id=370364582]
+layout_mode = 1
+offset_left = 24.0
+offset_top = 40.0
+offset_right = 957.0
+offset_bottom = 630.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_eqnvv")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="UI Party Pool" unique_id=1766278948]
+layout_mode = 1
+offset_top = -30.0
+offset_right = 145.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.5)
+theme_override_constants/shadow_outline_size = 4
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 1
+theme_override_constants/outline_size = 4
+theme_override_fonts/normal_font = ExtResource("3_44ew6")
+theme_override_font_sizes/normal_font_size = 24
+text = "Parties"
+
+[node name="MarginContainer" type="MarginContainer" parent="UI Party Pool" unique_id=420290097]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="ScrollContainer" type="ScrollContainer" parent="UI Party Pool/MarginContainer" unique_id=223194810]
+layout_mode = 2
+horizontal_scroll_mode = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI Party Pool/MarginContainer/ScrollContainer" unique_id=23571972]
+layout_mode = 2

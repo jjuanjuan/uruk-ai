@@ -2,21 +2,10 @@
 
 [ext_resource type="Script" uid="uid://qae3crcpu528" path="res://Scripts/UI/UIMain.cs" id="1_husyh"]
 [ext_resource type="PackedScene" uid="uid://c5ug66lr4e0cx" path="res://_Scenes/ClassTree.tscn" id="3_epl5v"]
-[ext_resource type="Script" uid="uid://jw62aqdff52j" path="res://Scripts/UI/UIOrcPool.cs" id="4_ub50i"]
-[ext_resource type="PackedScene" uid="uid://jh1ftys40xae" path="res://_Scenes/PoolItem.tscn" id="5_w1mdg"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_t3oft"]
-bg_color = Color(0.3491902, 0.3491902, 0.3491902, 0.90000004)
-border_width_left = 6
-border_width_top = 6
-border_width_right = 6
-border_width_bottom = 6
-border_color = Color(0.6651851, 0.6651851, 0.6651851, 1)
-
-[node name="UI Main" type="CanvasLayer" unique_id=464530899 node_paths=PackedStringArray("PoolUI")]
+[node name="UI Main" type="CanvasLayer" unique_id=464530899]
 script = ExtResource("1_husyh")
 ClassTreeScene = ExtResource("3_epl5v")
-PoolUI = NodePath("UI Orc Pool")
 
 [node name="OpenClassTreeButton" type="Button" parent="." unique_id=675934931]
 offset_left = 17.0
@@ -25,6 +14,14 @@ offset_right = 247.0
 offset_bottom = 464.0
 scale = Vector2(0.59665895, 0.6000012)
 text = "Open class tree"
+
+[node name="OpenUnitManagementButton" type="Button" parent="." unique_id=1999183966]
+offset_left = 16.00003
+offset_top = 444.0
+offset_right = 246.00003
+offset_bottom = 514.0
+scale = Vector2(0.59665895, 0.6000012)
+text = "Open Unit Management"
 
 [node name="GenerateOrcButton" type="Button" parent="." unique_id=443345402]
 offset_left = 16.00003
@@ -49,50 +46,3 @@ offset_right = 410.0
 offset_bottom = 610.0
 scale = Vector2(0.59665895, 0.6000012)
 text = "Generate Enemy Unit"
-
-[node name="UI Orc Pool" type="Panel" parent="." unique_id=1054518165 node_paths=PackedStringArray("list")]
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -168.0
-offset_top = 24.0
-offset_right = -18.0
-offset_bottom = 636.0
-grow_horizontal = 0
-theme_override_styles/panel = SubResource("StyleBoxFlat_t3oft")
-script = ExtResource("4_ub50i")
-PoolItemScene = ExtResource("5_w1mdg")
-list = NodePath("MarginContainer/ScrollContainer/VBoxContainer")
-
-[node name="RichTextLabel" type="RichTextLabel" parent="UI Orc Pool" unique_id=1084854822]
-layout_mode = 1
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -150.0
-offset_top = -20.0
-offset_right = -5.0
-offset_bottom = 9.0
-grow_horizontal = 0
-theme_override_font_sizes/normal_font_size = 12
-text = "Pool"
-horizontal_alignment = 2
-
-[node name="MarginContainer" type="MarginContainer" parent="UI Orc Pool" unique_id=801072447]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/margin_left = 10
-theme_override_constants/margin_top = 10
-theme_override_constants/margin_right = 10
-theme_override_constants/margin_bottom = 10
-
-[node name="ScrollContainer" type="ScrollContainer" parent="UI Orc Pool/MarginContainer" unique_id=297753737]
-layout_mode = 2
-horizontal_scroll_mode = 0
-
-[node name="VBoxContainer" type="VBoxContainer" parent="UI Orc Pool/MarginContainer/ScrollContainer" unique_id=1864118992]
-layout_mode = 2
