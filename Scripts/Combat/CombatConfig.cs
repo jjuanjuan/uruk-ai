@@ -43,4 +43,8 @@ public partial class CombatConfig : Resource
     public float CombatTriggerDistance = 40f;    
     [Export]
     public float CombatNoticeAngle = 15f;    
+    [Export]
+    public float LoserPushDistance = 200f;
+    [Export]
+    public float LoserPushTime = 1f;
 }

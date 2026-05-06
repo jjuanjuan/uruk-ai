@@ -9,6 +9,7 @@ public partial class MapManager : Node
     [Export] public TileMapLayer BuildingLayer;
     [Export] public CameraController MapCamera;
 
+    public UICombatScene CombatScene;
     public List<MapUnit> Units = new();
     Dictionary<MovementType, AStar2D> _astarCache = new();
 
@@ -24,6 +25,9 @@ public partial class MapManager : Node
     int _width;
     int _height;
     bool paused = false;
+
+    MapUnit combatUnitA;
+    MapUnit combatUnitB;
 
     static readonly Vector2I[] Directions8 = new[]
     {
@@ -143,9 +147,12 @@ public partial class MapManager : Node
         aUnit.Stop();
         bUnit.Stop();
 
-        var combatScene = GameManager.I.CombatScene.Instantiate<UICombatScene>();
+        combatUnitA = aUnit;
+        combatUnitB = bUnit;
+
+        CombatScene = GameManager.I.CombatScene.Instantiate<UICombatScene>();
         var uiRoot = GetTree().GetFirstNodeInGroup("ui_root");
-        uiRoot.AddChild(combatScene);
+        uiRoot.AddChild(CombatScene);
 
         CharacterParty front;
         CharacterParty back;
@@ -153,52 +160,47 @@ public partial class MapManager : Node
         switch (type)
         {
             case EncounterType.A_Ambushes_B:
-                front = aUnit.Party;
-                back = bUnit.Party;
+                front = combatUnitA.Party;
+                back = combatUnitB.Party;
                 break;
 
             case EncounterType.B_Ambushes_A:
-                front = bUnit.Party;
-                back = aUnit.Party;
+                front = combatUnitB.Party;
+                back = combatUnitA.Party;
                 break;
 
             default: // Equal
-                front = aUnit.Party;
-                back = bUnit.Party;
+                front = combatUnitA.Party;
+                back = combatUnitB.Party;
                 break;
         }
 
-        combatScene.Setup(front, back);
+        CombatScene.Setup(front, back);
 
-        // 4. escuchar fin
-        combatScene.CombatFinished += () =>
-        {
-            OnCombatFinished(aUnit, bUnit);
-        };
+        CombatScene.CombatManager.Connect(
+            CombatManager.SignalName.CombatFinished,
+            new Callable(this, nameof(OnCombatFinished))
+        );
     }
 
-    void OnCombatFinished(MapUnit a, MapUnit b)
+    void OnCombatFinished(CharacterParty winnerParty, CharacterParty loserParty)
     {
-        paused = false;
+        GD.Print("On Combat finished");
 
-        if (!a.Party.HasLivingOrcs())
+        CombatScene.QueueFree();
+
+        var winner = GetUnitFromParty(winnerParty);
+        var loser = GetUnitFromParty(loserParty);
+
+        // destroy loser if all units were killed
+        if (!loserParty.HasLivingOrcs())
         {
-            Units.Remove(a);
-            a.QueueFree();
+            Units.Remove(loser);
+            loser.QueueFree();
         }
         else
         {
-            // TODO: push losing unit
-        }
-
-        if (!b.Party.HasLivingOrcs())
-        {
-            Units.Remove(b);
-            b.QueueFree();
-        }
-        else
-        {
-            // TODO: push losing unit
+            PushLoser(loser, winner.Position);
         }
     }
 
@@ -569,5 +571,31 @@ public partial class MapManager : Node
             u.Party.Team != null &&
             u.Party.Team.Id != teamId
         );
+    }
+
+    MapUnit GetUnitFromParty(CharacterParty party)
+    {
+        return Units.Find(u => u.Party == party);
+    }
+
+    void PushLoser(MapUnit loser, Vector2 lastAttackerPosition)
+    {
+        Vector2 pushDir = (loser.GlobalPosition - lastAttackerPosition).Normalized();
+        Vector2 target = loser.GlobalPosition + pushDir * GameManager.I.CombatConfig.LoserPushDistance;
+
+        loser.PushTo(target);
+
+        loser.Connect(
+            MapUnit.SignalName.PushFinished,
+            new Callable(this, nameof(OnPushFinished)),
+            (uint)ConnectFlags.OneShot
+        );
+    }
+
+    void OnPushFinished()
+    {
+        GD.Print("Push finished → resume map");
+
+        paused = false;
     }
 }

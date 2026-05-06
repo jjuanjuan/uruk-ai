@@ -62,7 +62,11 @@ public partial class CombatManager : Node
         bool died
     );
 
-    [Signal] public delegate void CombatFinishedEventHandler();
+    [Signal]
+    public delegate void CombatFinishedEventHandler(
+        CharacterParty winner,
+        CharacterParty loser
+    );
     [Signal] public delegate void CombatLogEventHandler(string text);
 
     // =========================
@@ -426,7 +430,7 @@ public partial class CombatManager : Node
             EndCombat();
         }
     }
-    
+
     void NextTurn()
     {
         turnNumber++;
@@ -442,23 +446,38 @@ public partial class CombatManager : Node
     {
         SetState(CombatState.Ended);
         UI?.AddLog($"<<COMBAT END>>");
-        if (combatContext.CalculateAdvantage() > 0.5f)
+
+        CharacterParty winner = null;
+        CharacterParty loser = null;
+
+        float adv = combatContext.CalculateAdvantage();
+
+        if (adv > 0.5f)
         {
+            winner = PartyFront;
+            loser = PartyBack;
             UI?.AddLog("<<TEAM 1 WINS!>>");
             GD.Print("<<TEAM 1 WINS!>>");
         }
-        else if (combatContext.CalculateAdvantage() < 0.5f)
+        else if (adv < 0.5f)
         {
+            winner = PartyBack;
+            loser = PartyFront;
             UI?.AddLog("<<TEAM 2 WINS!>>");
             GD.Print("<<TEAM 2 WINS!>>");
         }
         else
         {
+            // TODO: manejar empate?
+            /*
+            winner = PartyFront;
+            loser = PartyFront;
+            */
             UI?.AddLog("<<COMBAT IS TIED!!>>");
             GD.Print("<<COMBAT IS TIED!!>>");
         }
 
-        EmitSignal(SignalName.CombatFinished);
+        EmitSignal(SignalName.CombatFinished, winner, loser);
 
         SetState(CombatState.Ended);
     }

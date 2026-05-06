@@ -9,4 +9,5 @@ CombatStartDelay = 2.0
 CombatNoticeDistance = 150.0
 CombatTriggerDistance = 75.0
 CombatNoticeAngle = 90.0
+LoserPushDistance = 180.0
 metadata/_custom_type_script = "uid://coo8uc8ekdax1"

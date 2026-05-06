@@ -20,6 +20,8 @@ public partial class MapUnit : Area2D
 
     public MovementType MovementType => Party.GetLeader().CharacterClass.MovementType;
 
+    [Signal] public delegate void PushFinishedEventHandler();
+
     public override void _Ready()
     {
         AddToGroup("map_unit");
@@ -164,6 +166,23 @@ public partial class MapUnit : Area2D
     {
         _moving = false;
         _pathWorld.Clear();
+    }
+
+    public void PushTo(Vector2 target)
+    {
+        _moving = false; // cortar cualquier path activo
+
+        var tween = CreateTween();
+
+        tween.TweenProperty(this, "global_position", target, GameManager.I.CombatConfig.LoserPushTime)
+            .SetTrans(Tween.TransitionType.Quad)
+            .SetEase(Tween.EaseType.Out);
+
+        tween.TweenCallback(Callable.From(() =>
+        {
+            GridPosition = _map.WorldToGrid(GlobalPosition);
+            EmitSignal(SignalName.PushFinished);
+        }));
     }
 
     // ---------------------------------------
