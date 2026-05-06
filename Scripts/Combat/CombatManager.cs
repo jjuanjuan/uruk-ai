@@ -65,7 +65,8 @@ public partial class CombatManager : Node
     [Signal]
     public delegate void CombatFinishedEventHandler(
         CharacterParty winner,
-        CharacterParty loser
+        CharacterParty loser,
+        bool isDraw
     );
     [Signal] public delegate void CombatLogEventHandler(string text);
 
@@ -449,6 +450,7 @@ public partial class CombatManager : Node
 
         CharacterParty winner = null;
         CharacterParty loser = null;
+        bool isDraw = false;
 
         float adv = combatContext.CalculateAdvantage();
 
@@ -468,16 +470,12 @@ public partial class CombatManager : Node
         }
         else
         {
-            // TODO: manejar empate?
-            /*
-            winner = PartyFront;
-            loser = PartyFront;
-            */
+            isDraw = true;
             UI?.AddLog("<<COMBAT IS TIED!!>>");
             GD.Print("<<COMBAT IS TIED!!>>");
         }
 
-        EmitSignal(SignalName.CombatFinished, winner, loser);
+        EmitSignal(SignalName.CombatFinished, winner, loser, isDraw);
 
         SetState(CombatState.Ended);
     }

@@ -24,8 +24,10 @@ public partial class MapManager : Node
 
     int _width;
     int _height;
+
     bool paused = false;
 
+    int _pendingPushes = 0;
     MapUnit combatUnitA;
     MapUnit combatUnitB;
 
@@ -183,7 +185,7 @@ public partial class MapManager : Node
         );
     }
 
-    void OnCombatFinished(CharacterParty winnerParty, CharacterParty loserParty)
+    void OnCombatFinished(CharacterParty winnerParty, CharacterParty loserParty, bool isDraw)
     {
         GD.Print("On Combat finished");
 
@@ -191,6 +193,12 @@ public partial class MapManager : Node
 
         var winner = GetUnitFromParty(winnerParty);
         var loser = GetUnitFromParty(loserParty);
+
+        if (isDraw)
+        {
+            PushBoth(winner, loser);
+            return;
+        }
 
         // destroy loser if all units were killed
         if (!loserParty.HasLivingOrcs())
@@ -435,6 +443,31 @@ public partial class MapManager : Node
         return new Vector2I(x, y);
     }
 
+    Vector2 GetValidPushTarget(Vector2 from, Vector2 dir, float distance)
+    {
+        float step = 16f; // resolución
+        Vector2 current = from;
+
+        for (float t = 0; t < distance; t += step)
+        {
+            Vector2 next = from + dir * t;
+            Vector2I grid = WorldToGrid(next);
+
+            grid = ClampToMap(grid);
+            var cell = GetCell(grid);
+
+            if (cell.TerrainData == null || !cell.TerrainData.Walkable)
+                break;
+
+            if (cell.BuildingData != null && cell.BuildingData.BlocksMovement)
+                break;
+
+            current = GridToWorld(grid);
+        }
+
+        return current;
+    }
+
     // ---------------------------------------
     // TILEMAP READERS
     // ---------------------------------------
@@ -581,7 +614,11 @@ public partial class MapManager : Node
     void PushLoser(MapUnit loser, Vector2 lastAttackerPosition)
     {
         Vector2 pushDir = (loser.GlobalPosition - lastAttackerPosition).Normalized();
-        Vector2 target = loser.GlobalPosition + pushDir * GameManager.I.CombatConfig.LoserPushDistance;
+        Vector2 target = GetValidPushTarget(
+            loser.GlobalPosition,
+            pushDir,
+            GameManager.I.CombatConfig.LoserPushDistance
+        );
 
         loser.PushTo(target);
 
@@ -590,6 +627,44 @@ public partial class MapManager : Node
             new Callable(this, nameof(OnPushFinished)),
             (uint)ConnectFlags.OneShot
         );
+    }
+
+    void PushBoth(MapUnit a, MapUnit b)
+    {
+        if (a == null || b == null)
+        {
+            paused = false;
+            return;
+        }
+
+        Vector2 dir = (a.GlobalPosition - b.GlobalPosition).Normalized();
+
+        Vector2 targetA = GetValidPushTarget(a.GlobalPosition, dir, GameManager.I.CombatConfig.LoserPushDistance);
+        Vector2 targetB = GetValidPushTarget(b.GlobalPosition, -dir, GameManager.I.CombatConfig.LoserPushDistance);
+
+        _pendingPushes = 2;
+
+        a.PushTo(targetA);
+        b.PushTo(targetB);
+
+        a.Connect(MapUnit.SignalName.PushFinished,
+            new Callable(this, nameof(OnOnePushFinished)),
+            (uint)ConnectFlags.OneShot);
+
+        b.Connect(MapUnit.SignalName.PushFinished,
+            new Callable(this, nameof(OnOnePushFinished)),
+            (uint)ConnectFlags.OneShot);
+    }
+
+    void OnOnePushFinished()
+    {
+        _pendingPushes--;
+
+        if (_pendingPushes <= 0)
+        {
+            GD.Print("Both pushes finished → resume map");
+            paused = false;
+        }
     }
 
     void OnPushFinished()
