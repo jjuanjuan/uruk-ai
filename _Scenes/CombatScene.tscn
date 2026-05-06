@@ -23,7 +23,7 @@ border_width_bottom = 2
 
 [sub_resource type="ImageTexture" id="ImageTexture_cph6q"]
 
-[node name="CombatScene" type="Control" unique_id=1636238207 node_paths=PackedStringArray("Team1UI", "Team2UI", "StartCombatButton", "Log", "CurrentUnitLabel", "AdvantageBar")]
+[node name="CombatScene" type="Control" unique_id=1636238207 node_paths=PackedStringArray("Team1UI", "Team2UI", "StartCombatButton", "Log", "CurrentUnitLabel", "AdvantageBar", "ResultPanel", "ResultText")]
 layout_mode = 3
 anchors_preset = 0
 script = ExtResource("1_3mdtu")
@@ -33,6 +33,8 @@ StartCombatButton = NodePath("Button StartCombat")
 Log = NodePath("Combat log")
 CurrentUnitLabel = NodePath("Current unit")
 AdvantageBar = NodePath("AdvantageBar border/AdvantageBar")
+ResultPanel = NodePath("Result Panel")
+ResultText = NodePath("Result Panel/Background/RichTextLabel")
 
 [node name="CombatManager" type="Node" parent="." unique_id=1959779666 node_paths=PackedStringArray("UI", "VFXLayer")]
 script = ExtResource("1_qyew6")
@@ -226,3 +228,41 @@ offset_right = 11.0
 offset_bottom = 1.0
 grow_vertical = 2
 color = Color(0, 0, 0, 1)
+
+[node name="Result Panel" type="Control" parent="." unique_id=334643440]
+visible = false
+z_index = 100
+layout_mode = 1
+anchors_preset = 0
+offset_right = 1154.0
+offset_bottom = 651.0
+
+[node name="Background" type="ColorRect" parent="Result Panel" unique_id=210277316]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.5)
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Result Panel/Background" unique_id=488879323]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.5)
+theme_override_constants/shadow_outline_size = 8
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/outline_size = 8
+theme_override_fonts/normal_font = ExtResource("7_cph6q")
+theme_override_font_sizes/normal_font_size = 36
+text = "TEAM 1 WINS!"
+fit_content = true
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1

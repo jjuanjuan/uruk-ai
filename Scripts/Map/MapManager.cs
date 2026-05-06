@@ -30,6 +30,9 @@ public partial class MapManager : Node
     int _pendingPushes = 0;
     MapUnit combatUnitA;
     MapUnit combatUnitB;
+    CharacterParty _winnerParty;
+    CharacterParty _loserParty;
+    bool _lastCombatWasDraw;
 
     static readonly Vector2I[] Directions8 = new[]
     {
@@ -185,26 +188,43 @@ public partial class MapManager : Node
         );
     }
 
-    void OnCombatFinished(CharacterParty winnerParty, CharacterParty loserParty, bool isDraw)
+    void OnCombatFinished(CharacterParty winner, CharacterParty loser, bool isDraw)
     {
         GD.Print("On Combat finished");
 
+        _winnerParty = winner;
+        _loserParty = loser;
+        _lastCombatWasDraw = isDraw;
+
+        CombatScene.ShowResult(winner, loser, isDraw);
+
+        CombatScene.Connect(
+            UICombatScene.SignalName.ResultFinished,
+            new Callable(this, nameof(OnResultFinished)),
+            (uint)ConnectFlags.OneShot
+        );
+    }
+
+    void OnResultFinished()
+    {
+        GD.Print("Result finished → back to map");
+
         CombatScene.QueueFree();
 
-        var winner = GetUnitFromParty(winnerParty);
-        var loser = GetUnitFromParty(loserParty);
-
-        if (isDraw)
+        if (_lastCombatWasDraw)
         {
-            PushBoth(winner, loser);
+            PushBoth(combatUnitA, combatUnitB);
             return;
         }
 
-        // destroy loser if all units were killed
-        if (!loserParty.HasLivingOrcs())
+        var winner = GetUnitFromParty(_winnerParty);
+        var loser = GetUnitFromParty(_loserParty);
+
+        if (!loser.Party.HasLivingOrcs())
         {
             Units.Remove(loser);
             loser.QueueFree();
+            paused = false;
         }
         else
         {

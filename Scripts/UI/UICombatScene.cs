@@ -14,11 +14,16 @@ public partial class UICombatScene : Control
 
     [Export] CombatAdvantageBar AdvantageBar;
 
-    public CombatManager CombatManager;
+    [Export] Control ResultPanel;
+    [Export] RichTextLabel ResultText;
+    [Export] float ResultDuration = 1.5f;
 
+    public CombatManager CombatManager;
+    
     List<string> logs = new();
 
     [Signal] public delegate void CombatFinishedEventHandler();
+    [Signal] public delegate void ResultFinishedEventHandler();
 
     public override void _Ready()
     {
@@ -54,6 +59,8 @@ public partial class UICombatScene : Control
     {
         Log.Text = "";
 
+        ResultPanel.Visible = false;
+
         CombatManager.SetupCombat(partyA, partyB);
 
         Team1UI.Setup(partyA, true);
@@ -83,16 +90,6 @@ public partial class UICombatScene : Control
 
     void OnCombatStateChanged()
     {
-        //TODO: cambiar a animación para cerrar
-        /*
-        if (CombatManager.CurrentState == CombatManager.CombatState.Ended)
-        {
-            EmitSignal(SignalName.CombatFinished);
-
-            // cerrar UI : TODO: cambiar a animación para cerrar
-            QueueFree();
-        }
-        */
     }
     void OnCombatFinished()
     {
@@ -114,5 +111,27 @@ public partial class UICombatScene : Control
     public void AnimateAdvantageBar(float value)
     {
         AdvantageBar.UpdateBarAnimated(value);
+    }
+
+    public async void ShowResult(CharacterParty winner, CharacterParty loser, bool isDraw)
+    {
+        ResultPanel.Visible = true;
+
+        if (isDraw)
+        {
+            ResultText.Text = "DRAW";
+        }
+        else if (winner == CombatManager.PartyFront)
+        {
+            ResultText.Text = "TEAM 1 WINS";
+        }
+        else
+        {
+            ResultText.Text = "TEAM 2 WINS";
+        }
+
+        await ToSignal(GetTree().CreateTimer(ResultDuration), SceneTreeTimer.SignalName.Timeout);
+
+        EmitSignal(SignalName.ResultFinished);
     }
 }
