@@ -58,25 +58,9 @@ public partial class UIMain : CanvasLayer
 		// elegir team (ejemplo: player)
 		var pool = gm.PlayerPartyPool;
 
-		// 1. obtener party disponible
-		var party = pool.GetFirstAvailable();
+		var party = pool.CreateRandomParty();
 
-		if (party == null)
-		{
-			GD.Print("No hay parties disponibles, creando una nueva");
-
-			party = pool.CreateParty();
-		}
-
-		// 2. si está vacía, meterle algo
-		if (party.GetAllOrcs().Count == 0)
-		{
-			var orc = gm.GenerateOrc();
-			party.PlaceOrc(orc, 0, 0);
-			party.SetLeader(orc);
-		}
-
-		// 3. spawn
+		// spawn
 		Vector2 worldPos = gm.MapManager.MapCamera.GlobalPosition;
 		Vector2I gridPos = gm.MapManager.WorldToGrid(worldPos);
 
@@ -100,25 +84,9 @@ public partial class UIMain : CanvasLayer
 		// elegir team (ahora enemy (esto es lo idiota))
 		var pool = gm.EnemyPartyPool;
 
-		// 1. obtener party disponible
-		var party = pool.GetFirstAvailable();
+		var party = pool.CreateRandomParty();
 
-		if (party == null)
-		{
-			GD.Print("No hay parties disponibles, creando una nueva");
-
-			party = pool.CreateParty();
-		}
-
-		// 2. si está vacía, meterle algo
-		if (party.GetAllOrcs().Count == 0)
-		{
-			var orc = gm.GenerateOrc();
-			party.PlaceOrc(orc, 0, 0);
-			party.SetLeader(orc);
-		}
-
-		// 3. spawn
+		// spawn
 		Vector2 worldPos = gm.MapManager.MapCamera.GlobalPosition;
 		Vector2I gridPos = gm.MapManager.WorldToGrid(worldPos);
 

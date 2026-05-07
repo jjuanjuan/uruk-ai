@@ -8,7 +8,7 @@ public partial class GameManager : Node
     [Export] public OrcTemplate OrcTemplate;
     [Export] public CombatConfig CombatConfig;
     [Export] public GameDatabase Database;
-	[Export] public PackedScene CombatScene;
+    [Export] public PackedScene CombatScene;
 
     public MapManager MapManager;
     public CombatManager CombatManager;
@@ -111,6 +111,46 @@ public partial class GameManager : Node
         return Parties.Find(p => p.Team != null && p.Team.Id == teamId);
     }
 
+    public CharacterParty GenerateRandomParty(
+        Team team,
+        int unitCount,
+        string partyName = "Party")
+    {
+        var party = CreateParty(team, partyName);
+
+        int attempts = 0;
+        int maxAttempts = 200;
+
+        while (party.CurrentUnits < unitCount &&
+               attempts < maxAttempts)
+        {
+            attempts++;
+
+            int row = NextInt(0, CharacterParty.ROWS - 1);
+            int col = NextInt(0, CharacterParty.COLUMNS - 1);
+
+            if (!party.CanPlaceOrc(row, col))
+                continue;
+
+            var orc = GenerateOrc();
+
+            party.PlaceOrc(orc, row, col);
+        }
+
+        // leader random
+        var all = party.GetAllOrcs();
+
+        if (all.Count > 0)
+        {
+            var leader = all[
+                NextInt(0, all.Count - 1)
+            ];
+
+            party.SetLeader(leader);
+        }
+
+        return party;
+    }
     // =====================================================
     // ORCS
     // =====================================================

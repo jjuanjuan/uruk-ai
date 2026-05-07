@@ -22,6 +22,15 @@ public partial class CharacterPartyPool : Node
         return party;
     }
 
+    public CharacterParty CreateRandomParty()
+    {
+        var party = GameManager.I.GenerateRandomParty(Team, GameManager.I.NextInt(3, 6), $"{Team.Name} Party");
+
+        _available.Add(party);
+
+        return party;
+    }
+
     public CharacterParty GetFirstAvailable()
     {
         if (_available.Count == 0)
