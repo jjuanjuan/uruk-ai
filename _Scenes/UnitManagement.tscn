@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://jh1ftys40xae" path="res://_Scenes/PoolItem.tscn" id="2_p5wqt"]
 [ext_resource type="FontFile" uid="uid://dd6yoetodmb25" path="res://Art/Fonts/PixgamerRegular-OVD6A.ttf" id="3_44ew6"]
 [ext_resource type="Script" uid="uid://bh3knogh07yui" path="res://Scripts/UI/UIPartyPool.cs" id="5_44ew6"]
-[ext_resource type="PackedScene" uid="uid://cv8iaby88pfrn" path="res://_Scenes/SmallParty.tscn" id="6_eqnvv"]
+[ext_resource type="PackedScene" uid="uid://cv8iaby88pfrn" path="res://_Scenes/UIPartyManagement.tscn" id="6_eqnvv"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_eqnvv"]
 bg_color = Color(0.3491902, 0.3491902, 0.3491902, 0.90000004)

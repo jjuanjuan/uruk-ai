@@ -4,7 +4,6 @@ public partial class UIPartyCombat : Control
 {
     public CharacterParty Party;
 
-    [Export] public PackedScene SlotScene;
     [Export] public Control BoardRoot;
     [Export] Control TopLayer;
     [Export] PackedScene DamagePopupScene;
@@ -16,13 +15,26 @@ public partial class UIPartyCombat : Control
         Party = party;
         IsFront = front;
 
-        BuildGrid();
-        LayoutSlots();
         Refresh();
+
+        AssignSlots();
+        SetParty(party);
+    }
+
+    void AssignSlots()
+    {
+        foreach (PartySlotCombat slot in BoardRoot.GetChildren())
+        {
+            slot.UIParty = this;
+            slot.IsFront = IsFront;
+        }
     }
 
     public void SetParty(CharacterParty party)
     {
+        if (Party != null)
+            Party.PartyChanged -= Refresh;
+
         Party = party;
 
         foreach (PartySlotCombat slot in BoardRoot.GetChildren())
@@ -30,84 +42,21 @@ public partial class UIPartyCombat : Control
             slot.Party = Party;
         }
 
-        Party.PartyChanged += Refresh;
+        if (Party != null)
+            Party.PartyChanged += Refresh;
 
         Refresh();
     }
 
-    void BuildGrid()
-    {
-        foreach (Node child in BoardRoot.GetChildren())
-            child.QueueFree();
-
-        for (int r = 0; r < CharacterParty.ROWS; r++)
-        {
-            for (int c = 0; c < CharacterParty.COLUMNS; c++)
-            {
-                var slot = SlotScene.Instantiate<PartySlotCombat>();
-
-                slot.Row = r;
-                slot.Column = c;
-                slot.UIParty = this;
-                slot.Party = Party;
-
-                BoardRoot.AddChild(slot);
-            }
-        }
-    }
-    
     public void Refresh()
     {
-        if (Party == null || BoardRoot == null)
+        if (Party == null)
             return;
 
         foreach (PartySlotCombat slot in BoardRoot.GetChildren())
         {
             var orc = Party.GetOrc(slot.Row, slot.Column);
             slot.SetOrc(orc);
-        }
-    }
-
-    public Vector2 GetVisualPosition(int row, int col)
-    {
-        float width = BoardRoot.Size.X;
-        float height = BoardRoot.Size.Y;
-
-        float cellW = width / CharacterParty.COLUMNS;
-        float cellH = height / CharacterParty.ROWS;
-
-        int visualRow = IsFront
-            ? (CharacterParty.ROWS - 1 - row)
-            : row;
-
-        float x = col * cellW;
-        float y = visualRow * cellH;
-
-        return new Vector2(x, y);
-    }
-
-    public void LayoutSlots()
-    {
-        float width = BoardRoot.Size.X;
-        float height = BoardRoot.Size.Y;
-
-        float cellW = width / CharacterParty.COLUMNS;
-        float cellH = height / CharacterParty.ROWS;
-
-        foreach (PartySlotCombat slot in BoardRoot.GetChildren())
-        {
-            slot.IsFront = IsFront;
-
-            int visualRow = IsFront
-                ? (CharacterParty.ROWS - 1 - slot.Row)
-                : slot.Row;
-
-            slot.Position = new Vector2(
-                slot.Column * cellW,
-                visualRow * cellH
-            );
-
-            slot.Size = new Vector2(cellW, cellH);
         }
     }
 

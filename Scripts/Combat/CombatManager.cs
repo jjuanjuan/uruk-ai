@@ -373,7 +373,7 @@ public partial class CombatManager : Node
             .GetUI(attackerTeamId, UI)
             .GetSlot(attacker);
 
-        Vector2 start = attackerSlot.GlobalPosition;
+        Vector2 start = attackerSlot.GetCenterPosition();
 
         CharacterParty enemyTeam = combatContext.GetParty(enemyTeamId);
         Vector2 end = GetTargetCenter(targets);
@@ -404,7 +404,7 @@ public partial class CombatManager : Node
         foreach (var target in targets)
         {
             var slot = combatContext.GetUI(teamId, UI).GetSlot(target);
-            sum += slot.GlobalPosition;
+            sum += slot.GetCenterPosition();
         }
         return sum / targets.Count;
     }
