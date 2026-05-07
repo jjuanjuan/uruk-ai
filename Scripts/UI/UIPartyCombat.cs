@@ -1,6 +1,6 @@
 using Godot;
 
-public partial class UIParty : Control
+public partial class UIPartyCombat : Control
 {
     public CharacterParty Party;
 
@@ -25,7 +25,7 @@ public partial class UIParty : Control
     {
         Party = party;
 
-        foreach (PartySlot slot in BoardRoot.GetChildren())
+        foreach (PartySlotCombat slot in BoardRoot.GetChildren())
         {
             slot.Party = Party;
         }
@@ -44,7 +44,7 @@ public partial class UIParty : Control
         {
             for (int c = 0; c < CharacterParty.COLUMNS; c++)
             {
-                var slot = SlotScene.Instantiate<PartySlot>();
+                var slot = SlotScene.Instantiate<PartySlotCombat>();
 
                 slot.Row = r;
                 slot.Column = c;
@@ -61,7 +61,7 @@ public partial class UIParty : Control
         if (Party == null || BoardRoot == null)
             return;
 
-        foreach (PartySlot slot in BoardRoot.GetChildren())
+        foreach (PartySlotCombat slot in BoardRoot.GetChildren())
         {
             var orc = Party.GetOrc(slot.Row, slot.Column);
             slot.SetOrc(orc);
@@ -94,7 +94,7 @@ public partial class UIParty : Control
         float cellW = width / CharacterParty.COLUMNS;
         float cellH = height / CharacterParty.ROWS;
 
-        foreach (PartySlot slot in BoardRoot.GetChildren())
+        foreach (PartySlotCombat slot in BoardRoot.GetChildren())
         {
             slot.IsFront = IsFront;
 
@@ -111,9 +111,9 @@ public partial class UIParty : Control
         }
     }
 
-    public PartySlot GetSlot(OrcInstance unit)
+    public PartySlotCombat GetSlot(OrcInstance unit)
     {
-        foreach (PartySlot slot in BoardRoot.GetChildren())
+        foreach (PartySlotCombat slot in BoardRoot.GetChildren())
         {
             if (slot.Orc == unit) return slot;
         }
@@ -137,7 +137,7 @@ public partial class UIParty : Control
 
     public void SetNamesVisible(bool visible)
     {
-        foreach (PartySlot slot in BoardRoot.GetChildren())
+        foreach (PartySlotCombat slot in BoardRoot.GetChildren())
         {
             slot.SetNameVisible(visible);
         }

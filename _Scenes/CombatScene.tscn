@@ -1,9 +1,9 @@
 [gd_scene format=3 uid="uid://cgiw7nq0rr8g5"]
 
 [ext_resource type="Script" uid="uid://dllc5dwksbeab" path="res://Scripts/UI/UICombatScene.cs" id="1_3mdtu"]
-[ext_resource type="Script" uid="uid://bkti6f1dxgf7i" path="res://Scripts/UI/UIParty.cs" id="1_dk7xb"]
+[ext_resource type="Script" uid="uid://bkti6f1dxgf7i" path="res://Scripts/UI/UIPartyCombat.cs" id="1_dk7xb"]
 [ext_resource type="Script" uid="uid://cgs2co0jxdffn" path="res://Scripts/Combat/CombatManager.cs" id="1_qyew6"]
-[ext_resource type="PackedScene" uid="uid://dn0of61i2vxkg" path="res://_Scenes/PartySlotFull.tscn" id="2_qyew6"]
+[ext_resource type="PackedScene" uid="uid://dn0of61i2vxkg" path="res://_Scenes/PartySlotCombat.tscn" id="2_qyew6"]
 [ext_resource type="PackedScene" uid="uid://bady36ssuw2qw" path="res://_Scenes/AttackDebug.tscn" id="3_f6h1k"]
 [ext_resource type="Script" uid="uid://47etf6uct6hc" path="res://Scripts/UI/CombatAdvantageBar.cs" id="6_3g8y2"]
 [ext_resource type="PackedScene" uid="uid://ciauu588bs6od" path="res://_Scenes/DamagePopup.tscn" id="6_f6h1k"]

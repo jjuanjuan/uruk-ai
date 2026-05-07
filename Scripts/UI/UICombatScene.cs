@@ -4,8 +4,8 @@ using System.Collections.Generic;
 
 public partial class UICombatScene : Control
 {
-    [Export] public UIParty Team1UI;
-    [Export] public UIParty Team2UI;
+    [Export] public UIPartyCombat Team1UI;
+    [Export] public UIPartyCombat Team2UI;
 
     [Export] Button StartCombatButton;
 

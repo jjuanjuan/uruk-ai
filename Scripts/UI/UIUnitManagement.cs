@@ -13,6 +13,12 @@ public partial class UIUnitManagement : Control
         RefreshPools();
     }
 
+    public override void _ExitTree()
+    {
+        if (GameManager.I != null)
+            GameManager.I.PartiesChanged -= RefreshPools;
+    }
+
     void RefreshPools()
     {
         OrcPoolUI.SetOrcs(GameManager.I.GetAvailableOrcs());

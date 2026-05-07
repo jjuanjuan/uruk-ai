@@ -698,7 +698,7 @@ public class CombatContext
     {
         return GetParty(GetTeamId(orc));
     }
-    public UIParty GetUI(TeamId teamId, UICombatScene ui)
+    public UIPartyCombat GetUI(TeamId teamId, UICombatScene ui)
     {
         return TeamId.Team1 == teamId ? ui.Team1UI : ui.Team2UI;
     }

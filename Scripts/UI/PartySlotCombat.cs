@@ -1,6 +1,6 @@
 using Godot;
 
-public partial class PartySlot : PanelContainer
+public partial class PartySlotCombat : PanelContainer
 {
     [Export] public int Row;
     [Export] public int Column;
@@ -25,7 +25,7 @@ public partial class PartySlot : PanelContainer
 
     public OrcInstance Orc;
     public CharacterParty Party;
-    public UIParty UIParty;
+    public UIPartyCombat UIParty;
     public bool IsFront;
 
     // changing style when dragging

@@ -11,6 +11,7 @@ public partial class CharacterParty : Node
     [Export] public int MaxUnits = 6;
     [Export] OrcInstance Leader;
     public Team Team { get; private set; }
+    public bool IsDeployed;
 
     [Signal] public delegate void PartyChangedEventHandler();
 
