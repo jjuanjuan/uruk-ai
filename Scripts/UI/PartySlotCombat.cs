@@ -13,6 +13,7 @@ public partial class PartySlotCombat : Panel
 	[Export] HealthBar HPBar;
 
 	[Export] Control ContentParent; // uso este para sacudir y otros efectos
+	[Export] Control HitPosition;
 
 	[Export] float ShakeDuration = 0.6f;
 	[Export] Vector2 ShakeIntensity = new Vector2(2f, 10f);
@@ -471,9 +472,9 @@ public partial class PartySlotCombat : Panel
 	}
 	////////////////////////////////////////////////////////////////////////
 
-	public Vector2 GetCenterPosition()
+	public Vector2 GetHitPosition()
 	{
-		return ContentParent.GlobalPosition;
+		return HitPosition.GlobalPosition;
 	}
 
 	// Select orc

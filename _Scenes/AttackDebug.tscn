@@ -3,6 +3,9 @@
 [node name="AttackDebug" type="Control" unique_id=484702840]
 layout_mode = 3
 anchors_preset = 0
+offset_right = 20.0
+offset_bottom = 20.0
+pivot_offset = Vector2(10, 10)
 
 [node name="ColorRect" type="ColorRect" parent="." unique_id=476889902]
 layout_mode = 0

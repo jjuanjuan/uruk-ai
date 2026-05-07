@@ -80,7 +80,7 @@ public partial class UIPartyCombat : Control
 
         TopLayer.AddChild(popup);
 
-        popup.GlobalPosition = slot.GlobalPosition;
+        popup.GlobalPosition = slot.GetHitPosition();
         popup.Setup(value);
     }
 

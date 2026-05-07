@@ -7,7 +7,7 @@
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_rngbm"]
 
-[node name="PartySlot" type="Panel" unique_id=1844506426 node_paths=PackedStringArray("CharImg", "CharName", "FlashSprite", "HPBarParent", "HPFlashOverlay", "HPBar", "ContentParent")]
+[node name="PartySlot" type="Panel" unique_id=1844506426 node_paths=PackedStringArray("CharImg", "CharName", "FlashSprite", "HPBarParent", "HPFlashOverlay", "HPBar", "ContentParent", "HitPosition")]
 custom_minimum_size = Vector2(80, 80)
 offset_right = 80.0
 offset_bottom = 80.0
@@ -20,6 +20,7 @@ HPBarParent = NodePath("Control/HP Bar parent")
 HPFlashOverlay = NodePath("Control/HP Bar parent/HP Bar/Flash overlay")
 HPBar = NodePath("Control/HP Bar parent/HP Bar")
 ContentParent = NodePath("Control")
+HitPosition = NodePath("Control/HitPosition")
 ShakeDuration = 1.0
 ShakeIntensity = Vector2(5, 20)
 SquashDuration = 0.15
@@ -132,3 +133,10 @@ theme_override_font_sizes/normal_font_size = 18
 text = "Boris"
 fit_content = true
 scroll_active = false
+
+[node name="HitPosition" type="Control" parent="Control" unique_id=145342512]
+anchors_preset = 0
+offset_left = 40.0
+offset_top = 40.0
+offset_right = 40.0
+offset_bottom = 40.0

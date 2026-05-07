@@ -112,3 +112,10 @@ theme_override_font_sizes/normal_font_size = 18
 text = "Boris"
 fit_content = true
 scroll_active = false
+
+[node name="HitPosition" type="Control" parent="Control" unique_id=82275068]
+anchors_preset = 0
+offset_left = 40.0
+offset_top = 40.0
+offset_right = 40.0
+offset_bottom = 40.0
