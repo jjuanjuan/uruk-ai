@@ -1,0 +1,119 @@
+[gd_scene format=3 uid="uid://dyj48agh5jwg3"]
+
+[ext_resource type="Script" uid="uid://5781d3mwk2dl" path="res://Scripts/UI/PartySlot.cs" id="1_plerv"]
+[ext_resource type="Script" uid="uid://bqpqwbfis0yul" path="res://Scripts/UI/HealthBar.cs" id="2_6ktk8"]
+[ext_resource type="Texture2D" uid="uid://3geatbyu0jce" path="res://Art/Placeholders/Units/2_knight_front.png" id="3_cib25"]
+[ext_resource type="FontFile" uid="uid://dd6yoetodmb25" path="res://Art/Fonts/PixgamerRegular-OVD6A.ttf" id="4_we5t2"]
+
+[node name="PartySlot" type="PanelContainer" unique_id=32862197 node_paths=PackedStringArray("CharImg", "CharName", "FlashSprite", "HPBarParent", "HPFlashOverlay", "HPBar", "ContentParent")]
+offset_right = 10.0
+offset_bottom = 20.0
+script = ExtResource("1_plerv")
+CharImg = NodePath("MarginContainer/Control/CharImg")
+CharName = NodePath("MarginContainer/Control/CharImg/CharName")
+FlashSprite = NodePath("MarginContainer/Control/CharImg/FlashSprite")
+HPBarParent = NodePath("MarginContainer/Control/HP Bar parent")
+HPFlashOverlay = NodePath("MarginContainer/Control/HP Bar parent/HP Bar/Flash overlay")
+HPBar = NodePath("MarginContainer/Control/HP Bar parent/HP Bar")
+ContentParent = NodePath("MarginContainer/Control")
+ShakeDuration = 1.0
+ShakeIntensity = Vector2(5, 20)
+SquashDuration = 0.15
+DeathAnimationDuration = 1.1
+HPTweenDuration = 0.5
+HitFlashDuration = 0.15
+HitFlashColor = Color(1, 1, 1, 0.90400004)
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=1598539679]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 15
+
+[node name="Control" type="Control" parent="MarginContainer" unique_id=1006174726]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="HP Bar parent" type="ColorRect" parent="MarginContainer/Control" unique_id=349579198]
+custom_minimum_size = Vector2(2, 2)
+layout_mode = 1
+offset_left = -30.0
+offset_top = 5.0
+offset_right = -19.0
+offset_bottom = 69.0
+mouse_filter = 2
+color = Color(0, 0, 0, 1)
+
+[node name="HP Bar" type="TextureProgressBar" parent="MarginContainer/Control/HP Bar parent" unique_id=1757951918]
+z_index = 1
+custom_minimum_size = Vector2(2, 2)
+layout_mode = 1
+offset_left = 2.0
+offset_top = 2.0
+offset_right = 9.0
+offset_bottom = 62.0
+mouse_filter = 2
+max_value = 1.0
+step = 0.05
+script = ExtResource("2_6ktk8")
+DamageColor = Color(0.48775607, 1.0287948e-06, 3.3691526e-07, 1)
+HealthyColor = Color(0.19966345, 0.41822335, 0, 1)
+
+[node name="Flash overlay" type="ColorRect" parent="MarginContainer/Control/HP Bar parent/HP Bar" unique_id=2077018479]
+visible = false
+custom_minimum_size = Vector2(2, 2)
+layout_mode = 1
+offset_right = 7.0
+offset_bottom = 60.0
+mouse_filter = 2
+
+[node name="CharImg" type="TextureRect" parent="MarginContainer/Control" unique_id=34993198]
+z_index = 2
+layout_mode = 1
+offset_left = -40.0
+offset_top = -20.0
+offset_right = 72.0
+offset_bottom = 92.0
+size_flags_vertical = 3
+mouse_filter = 2
+texture = ExtResource("3_cib25")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="FlashSprite" type="TextureRect" parent="MarginContainer/Control/CharImg" unique_id=1905336900]
+visible = false
+z_index = 3
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 3
+mouse_filter = 2
+texture = ExtResource("3_cib25")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="CharName" type="RichTextLabel" parent="MarginContainer/Control/CharImg" unique_id=1873711256]
+visible = false
+z_index = 1
+custom_minimum_size = Vector2(40, 10)
+layout_mode = 1
+offset_left = 10.0
+offset_top = 11.0
+offset_right = 90.0
+offset_bottom = 25.0
+mouse_filter = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.5)
+theme_override_constants/shadow_outline_size = 4
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 1
+theme_override_constants/outline_size = 4
+theme_override_fonts/normal_font = ExtResource("4_we5t2")
+theme_override_font_sizes/normal_font_size = 18
+text = "Boris"
+fit_content = true
+scroll_active = false

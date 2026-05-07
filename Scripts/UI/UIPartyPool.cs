@@ -3,7 +3,7 @@ using Godot;
 public partial class UIPartyPool : Control
 {
     [Export] public PackedScene PoolItemScene;
-    [Export] VBoxContainer list;
+    [Export] GridContainer list;
 
     public void Refresh()
     {

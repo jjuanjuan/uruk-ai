@@ -12,8 +12,8 @@ shadow_size = 2
 shadow_offset = Vector2(1, 1)
 
 [node name="SmallParty" type="Panel" unique_id=742573588]
-offset_right = 128.0
-offset_bottom = 128.0
+offset_right = 140.0
+offset_bottom = 140.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_fnj3o")
 
 [node name="BoardContainer" type="Control" parent="." unique_id=489692257]
@@ -25,6 +25,6 @@ offset_bottom = 40.0
 anchors_preset = 0
 offset_left = 15.0
 offset_top = 5.0
-offset_right = 113.0
-offset_bottom = 123.0
+offset_right = 125.0
+offset_bottom = 135.0
 mouse_filter = 2
