@@ -25,14 +25,6 @@ offset_bottom = 514.0
 scale = Vector2(0.59665895, 0.6000012)
 text = "Open Unit Management"
 
-[node name="GenerateOrcButton" type="Button" parent="." unique_id=443345402]
-offset_left = 16.00003
-offset_top = 492.0
-offset_right = 246.00003
-offset_bottom = 562.0
-scale = Vector2(0.59665895, 0.6000012)
-text = "Generate Orc"
-
 [node name="GenerateMapUnitPlayerButton" type="Button" parent="." unique_id=1888601964]
 offset_left = 15.0
 offset_top = 540.0

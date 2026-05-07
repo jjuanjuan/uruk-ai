@@ -11,7 +11,6 @@ public partial class UIMain : CanvasLayer
 
 		GetNode<Button>("OpenClassTreeButton").Pressed += OpenClassTree;
 		GetNode<Button>("OpenUnitManagementButton").Pressed += OpenUnitManagement;
-		GetNode<Button>("GenerateOrcButton").Pressed += GenerateOrc;
 		GetNode<Button>("GenerateMapUnitPlayerButton").Pressed += GenerateMapUnitPlayer;
 		GetNode<Button>("GenerateMapUnitEnemyButton").Pressed += GenerateMapUnitEnemy;
 	}
@@ -38,15 +37,7 @@ public partial class UIMain : CanvasLayer
 
 		AddChild(tree);
 	}
-	void GenerateOrc()
-	{
-		GameManager.I.GenerateOrc();
-	}
-	void CreatePartyPlayer()
-	{
-		GameManager.I.PlayerPartyPool.CreateParty();
-	}
-
+	
 	void CreatePartyEnemy()
 	{
 		GameManager.I.EnemyPartyPool.CreateParty();
