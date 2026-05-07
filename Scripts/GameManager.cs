@@ -43,7 +43,6 @@ public partial class GameManager : Node
 
         CreateTeams();
         CreatePools();
-        CreateInitialParties();
     }
 
     // =====================================================
@@ -78,12 +77,6 @@ public partial class GameManager : Node
     // =====================================================
     // PARTIES
     // =====================================================
-    void CreateInitialParties()
-    {
-        CreateParty(PlayerTeam, "Player Party");
-        CreateParty(EnemyTeam, "Enemy Party");
-    }
-
     public CharacterParty CreateParty(Team team, string name = "Party")
     {
         var party = new CharacterParty

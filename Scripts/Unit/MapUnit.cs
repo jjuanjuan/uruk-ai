@@ -51,6 +51,7 @@ public partial class MapUnit : Area2D
         _currentSpeed = BaseSpeed;
 
         LeaderTexture.Texture = Party.GetLeader().CharacterClass.GetFrontTexture();
+        LeaderTexture.FlipH = Party.Team.Id != TeamId.Player;
     }
     public void Setup(CharacterParty party)
     {

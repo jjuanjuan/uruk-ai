@@ -643,6 +643,12 @@ public partial class MapManager : Node
     void PushLoser(MapUnit loser, Vector2 lastAttackerPosition)
     {
         Vector2 pushDir = (loser.GlobalPosition - lastAttackerPosition).Normalized();
+        if (pushDir == Vector2.Zero)
+        {
+            // push randomly if they're stacked
+            pushDir = new Vector2(GameManager.I.NextFloat(-1f, 1f), GameManager.I.NextFloat(-1f, 1f)).Normalized();
+        }
+
         Vector2 target = GetValidPushTarget(
             loser.GlobalPosition,
             pushDir,
@@ -667,6 +673,10 @@ public partial class MapManager : Node
         }
 
         Vector2 dir = (a.GlobalPosition - b.GlobalPosition).Normalized();
+        if (dir == Vector2.Zero)
+        {
+            dir = new Vector2(GameManager.I.NextFloat(-1f, 1f), GameManager.I.NextFloat(-1f, 1f)).Normalized();
+        }
 
         Vector2 targetA = GetValidPushTarget(a.GlobalPosition, dir, GameManager.I.CombatConfig.LoserPushDistance);
         Vector2 targetB = GetValidPushTarget(b.GlobalPosition, -dir, GameManager.I.CombatConfig.LoserPushDistance);
