@@ -9,10 +9,9 @@
 [ext_resource type="Resource" uid="uid://dsywmpxgobhst" path="res://Data/CharacterClasses/1_Bludgeoner.tres" id="6_rtw6k"]
 [ext_resource type="Script" uid="uid://1pbhreu2codn" path="res://Scripts/Unit/CharacterClass.cs" id="7_a0yx5"]
 
-[sub_resource type="Resource" id="Resource_ncstq"]
+[sub_resource type="Resource" id="Resource_hqaj3"]
 script = ExtResource("2_rtw6k")
-AttackAction = ExtResource("1_rtw6k")
-Amount = 2
+AttackAction = ExtResource("3_0o625")
 metadata/_custom_type_script = "uid://du724smqstcfc"
 
 [sub_resource type="Resource" id="Resource_fpcew"]
@@ -21,9 +20,10 @@ AttackAction = ExtResource("1_rtw6k")
 Amount = 2
 metadata/_custom_type_script = "uid://du724smqstcfc"
 
-[sub_resource type="Resource" id="Resource_hqaj3"]
+[sub_resource type="Resource" id="Resource_ncstq"]
 script = ExtResource("2_rtw6k")
-AttackAction = ExtResource("3_0o625")
+AttackAction = ExtResource("1_rtw6k")
+Amount = 2
 metadata/_custom_type_script = "uid://du724smqstcfc"
 
 [sub_resource type="Resource" id="Resource_rbfhh"]
@@ -35,10 +35,10 @@ metadata/_custom_type_script = "uid://bmylglyshe6wd"
 [resource]
 script = ExtResource("7_a0yx5")
 ClassName = "Wild One"
-BaseHP = 80
+BaseHP = 90
 ClassTextureFront = ExtResource("5_pkgga")
 ClassTextureBack = ExtResource("3_ng4m8")
-AttacksPerPosition = Array[Object]([SubResource("Resource_ncstq"), SubResource("Resource_fpcew"), SubResource("Resource_hqaj3")])
+AttacksPerPosition = Array[Object]([SubResource("Resource_hqaj3"), SubResource("Resource_fpcew"), SubResource("Resource_ncstq")])
 BaseAttackDamage = 25
 ArmorType = 1
 MovementType = 3

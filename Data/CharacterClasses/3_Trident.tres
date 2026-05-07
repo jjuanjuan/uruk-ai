@@ -23,7 +23,7 @@ metadata/_custom_type_script = "uid://du724smqstcfc"
 [sub_resource type="Resource" id="Resource_hqaj3"]
 script = ExtResource("2_nejg1")
 AttackAction = ExtResource("1_pwnhl")
-Amount = 2
+Amount = 3
 metadata/_custom_type_script = "uid://du724smqstcfc"
 
 [sub_resource type="Resource" id="Resource_hs6x5"]

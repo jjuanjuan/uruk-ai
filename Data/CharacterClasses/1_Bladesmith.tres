@@ -8,6 +8,11 @@
 [ext_resource type="Resource" uid="uid://c7rktj3ymrup" path="res://Data/CharacterClasses/0_Militia.tres" id="5_dppkv"]
 [ext_resource type="Script" uid="uid://bmylglyshe6wd" path="res://Scripts/Unit/ClassRequirements.cs" id="6_miafs"]
 
+[sub_resource type="Resource" id="Resource_hqaj3"]
+script = ExtResource("2_r1tbe")
+AttackAction = ExtResource("1_daw4q")
+metadata/_custom_type_script = "uid://du724smqstcfc"
+
 [sub_resource type="Resource" id="Resource_ncstq"]
 script = ExtResource("2_r1tbe")
 AttackAction = ExtResource("1_daw4q")
@@ -18,11 +23,6 @@ metadata/_custom_type_script = "uid://du724smqstcfc"
 script = ExtResource("2_r1tbe")
 AttackAction = ExtResource("1_daw4q")
 Amount = 2
-metadata/_custom_type_script = "uid://du724smqstcfc"
-
-[sub_resource type="Resource" id="Resource_hqaj3"]
-script = ExtResource("2_r1tbe")
-AttackAction = ExtResource("1_daw4q")
 metadata/_custom_type_script = "uid://du724smqstcfc"
 
 [sub_resource type="Resource" id="Resource_qyw1s"]
@@ -37,7 +37,7 @@ ClassName = "Bladesmith"
 BaseHP = 50
 ClassTextureFront = ExtResource("4_dppkv")
 ClassTextureBack = ExtResource("3_3jc0v")
-AttacksPerPosition = Array[Object]([SubResource("Resource_ncstq"), SubResource("Resource_fpcew"), SubResource("Resource_hqaj3")])
+AttacksPerPosition = Array[Object]([SubResource("Resource_hqaj3"), SubResource("Resource_ncstq"), SubResource("Resource_fpcew")])
 BaseAttackDamage = 15
 ArmorType = 1
 Requirements = Array[Object]([SubResource("Resource_qyw1s")])

@@ -504,6 +504,10 @@ public partial class CombatManager : Node
                 anchor = enemies[GameManager.I.NextInt(0, enemies.Count - 1)];
                 return new List<OrcInstance> { anchor };
 
+            case AttackAction.AttackActionTarget.FarSingle:
+                anchor = GetFarthestEnemy(enemies, attacker);
+                return new List<OrcInstance> { anchor };
+
             case AttackAction.AttackActionTarget.CloseSingle:
             default:
                 anchor = GetClosestEnemy(enemies, attacker);

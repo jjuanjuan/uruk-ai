@@ -5,5 +5,5 @@
 [resource]
 script = ExtResource("1_tjy2t")
 AttackName = "Axe throw"
-Target = 1
+Target = 2
 metadata/_custom_type_script = "uid://8p18r81fnngn"

@@ -9,6 +9,11 @@
 [ext_resource type="Script" uid="uid://bmylglyshe6wd" path="res://Scripts/Unit/ClassRequirements.cs" id="7_x25bo"]
 [ext_resource type="Script" uid="uid://1pbhreu2codn" path="res://Scripts/Unit/CharacterClass.cs" id="8_fixa0"]
 
+[sub_resource type="Resource" id="Resource_hqaj3"]
+script = ExtResource("2_8gena")
+AttackAction = ExtResource("3_4quev")
+metadata/_custom_type_script = "uid://du724smqstcfc"
+
 [sub_resource type="Resource" id="Resource_ncstq"]
 script = ExtResource("2_8gena")
 AttackAction = ExtResource("1_div7i")
@@ -19,11 +24,6 @@ metadata/_custom_type_script = "uid://du724smqstcfc"
 script = ExtResource("2_8gena")
 AttackAction = ExtResource("1_div7i")
 Amount = 2
-metadata/_custom_type_script = "uid://du724smqstcfc"
-
-[sub_resource type="Resource" id="Resource_hqaj3"]
-script = ExtResource("2_8gena")
-AttackAction = ExtResource("3_4quev")
 metadata/_custom_type_script = "uid://du724smqstcfc"
 
 [sub_resource type="Resource" id="Resource_rbfhh"]
@@ -37,7 +37,7 @@ script = ExtResource("8_fixa0")
 ClassName = "Hoplite"
 ClassTextureFront = ExtResource("5_div7i")
 ClassTextureBack = ExtResource("4_68x02")
-AttacksPerPosition = Array[Object]([SubResource("Resource_ncstq"), SubResource("Resource_fpcew"), SubResource("Resource_hqaj3")])
+AttacksPerPosition = Array[Object]([SubResource("Resource_hqaj3"), SubResource("Resource_ncstq"), SubResource("Resource_fpcew")])
 BaseAttackDamage = 15
 BaseSpeed = 0
 ArmorType = 2

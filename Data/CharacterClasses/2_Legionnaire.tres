@@ -8,10 +8,9 @@
 [ext_resource type="Script" uid="uid://bmylglyshe6wd" path="res://Scripts/Unit/ClassRequirements.cs" id="6_61jg2"]
 [ext_resource type="Script" uid="uid://1pbhreu2codn" path="res://Scripts/Unit/CharacterClass.cs" id="7_1d8tv"]
 
-[sub_resource type="Resource" id="Resource_ncstq"]
+[sub_resource type="Resource" id="Resource_hqaj3"]
 script = ExtResource("2_0fro6")
 AttackAction = ExtResource("1_a40h8")
-Amount = 2
 metadata/_custom_type_script = "uid://du724smqstcfc"
 
 [sub_resource type="Resource" id="Resource_fpcew"]
@@ -20,9 +19,10 @@ AttackAction = ExtResource("1_a40h8")
 Amount = 2
 metadata/_custom_type_script = "uid://du724smqstcfc"
 
-[sub_resource type="Resource" id="Resource_hqaj3"]
+[sub_resource type="Resource" id="Resource_ncstq"]
 script = ExtResource("2_0fro6")
 AttackAction = ExtResource("1_a40h8")
+Amount = 2
 metadata/_custom_type_script = "uid://du724smqstcfc"
 
 [sub_resource type="Resource" id="Resource_rbfhh"]
@@ -34,10 +34,10 @@ metadata/_custom_type_script = "uid://bmylglyshe6wd"
 [resource]
 script = ExtResource("7_1d8tv")
 ClassName = "Legionnaire"
-BaseHP = 75
+BaseHP = 85
 ClassTextureFront = ExtResource("4_v5yg6")
 ClassTextureBack = ExtResource("3_dhmcj")
-AttacksPerPosition = Array[Object]([SubResource("Resource_ncstq"), SubResource("Resource_fpcew"), SubResource("Resource_hqaj3")])
+AttacksPerPosition = Array[Object]([SubResource("Resource_hqaj3"), SubResource("Resource_fpcew"), SubResource("Resource_ncstq")])
 BaseAttackDamage = 20
 ArmorType = 1
 Requirements = Array[Object]([SubResource("Resource_rbfhh")])

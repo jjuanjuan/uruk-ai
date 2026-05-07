@@ -1,0 +1,45 @@
+[gd_resource type="Resource" script_class="CharacterClass" format=3 uid="uid://2j2uew1uaar8"]
+
+[ext_resource type="Resource" uid="uid://nwnecenxibir" path="res://Data/AttackActions/Basic Slash.tres" id="1_h1anj"]
+[ext_resource type="Script" uid="uid://du724smqstcfc" path="res://Scripts/Combat/AttackPerPosition.cs" id="2_gw1r6"]
+[ext_resource type="Texture2D" uid="uid://de5j0u588upr7" path="res://Art/Placeholders/Units/0_militia_back.png" id="3_bf02q"]
+[ext_resource type="Texture2D" uid="uid://cvv2dspfx14yw" path="res://Art/Placeholders/Units/1_explorer_front.png" id="4_h1anj"]
+[ext_resource type="Resource" uid="uid://gogb8s6l7npy" path="res://Data/CharacterClasses/0_Scout.tres" id="5_h1anj"]
+[ext_resource type="Script" uid="uid://bmylglyshe6wd" path="res://Scripts/Unit/ClassRequirements.cs" id="6_5x6nb"]
+[ext_resource type="Script" uid="uid://1pbhreu2codn" path="res://Scripts/Unit/CharacterClass.cs" id="7_ho4g0"]
+
+[sub_resource type="Resource" id="Resource_ncstq"]
+script = ExtResource("2_gw1r6")
+AttackAction = ExtResource("1_h1anj")
+Amount = 2
+metadata/_custom_type_script = "uid://du724smqstcfc"
+
+[sub_resource type="Resource" id="Resource_fpcew"]
+script = ExtResource("2_gw1r6")
+AttackAction = ExtResource("1_h1anj")
+Amount = 2
+metadata/_custom_type_script = "uid://du724smqstcfc"
+
+[sub_resource type="Resource" id="Resource_hqaj3"]
+script = ExtResource("2_gw1r6")
+AttackAction = ExtResource("1_h1anj")
+Amount = 2
+metadata/_custom_type_script = "uid://du724smqstcfc"
+
+[sub_resource type="Resource" id="Resource_qyw1s"]
+script = ExtResource("6_5x6nb")
+RequiredClass = ExtResource("5_h1anj")
+RequiredLevel = 3
+metadata/_custom_type_script = "uid://bmylglyshe6wd"
+
+[resource]
+script = ExtResource("7_ho4g0")
+ClassName = "Explorer"
+BaseHP = 40
+ClassTextureFront = ExtResource("4_h1anj")
+ClassTextureBack = ExtResource("3_bf02q")
+AttacksPerPosition = Array[Object]([SubResource("Resource_ncstq"), SubResource("Resource_fpcew"), SubResource("Resource_hqaj3")])
+BaseAttackDamage = 15
+BaseSpeed = 3
+Requirements = Array[Object]([SubResource("Resource_qyw1s")])
+metadata/_custom_type_script = "uid://1pbhreu2codn"

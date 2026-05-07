@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="CharacterClass" format=3 uid="uid://bgcytl2hmpbiy"]
 
-[ext_resource type="Resource" uid="uid://12oxed00qf40" path="res://Data/AttackActions/Whip Column.tres" id="1_jakd5"]
+[ext_resource type="Resource" uid="uid://12oxed00qf40" path="res://Data/AttackActions/Whip Row.tres" id="1_jakd5"]
 [ext_resource type="Script" uid="uid://du724smqstcfc" path="res://Scripts/Combat/AttackPerPosition.cs" id="2_jakd5"]
 [ext_resource type="Script" uid="uid://1pbhreu2codn" path="res://Scripts/Unit/CharacterClass.cs" id="3_fmxnv"]
 [ext_resource type="Resource" uid="uid://d0vr5cfpj2204" path="res://Data/AttackActions/Whip Strike.tres" id="3_sjlno"]
@@ -9,10 +9,9 @@
 [ext_resource type="Resource" uid="uid://dsywmpxgobhst" path="res://Data/CharacterClasses/1_Bludgeoner.tres" id="6_k4t0i"]
 [ext_resource type="Script" uid="uid://bmylglyshe6wd" path="res://Scripts/Unit/ClassRequirements.cs" id="7_e2e8x"]
 
-[sub_resource type="Resource" id="Resource_ncstq"]
+[sub_resource type="Resource" id="Resource_hqaj3"]
 script = ExtResource("2_jakd5")
-AttackAction = ExtResource("1_jakd5")
-Amount = 2
+AttackAction = ExtResource("3_sjlno")
 metadata/_custom_type_script = "uid://du724smqstcfc"
 
 [sub_resource type="Resource" id="Resource_fpcew"]
@@ -21,9 +20,9 @@ AttackAction = ExtResource("3_sjlno")
 Amount = 3
 metadata/_custom_type_script = "uid://du724smqstcfc"
 
-[sub_resource type="Resource" id="Resource_hqaj3"]
+[sub_resource type="Resource" id="Resource_ncstq"]
 script = ExtResource("2_jakd5")
-AttackAction = ExtResource("3_sjlno")
+AttackAction = ExtResource("1_jakd5")
 Amount = 2
 metadata/_custom_type_script = "uid://du724smqstcfc"
 
@@ -36,10 +35,10 @@ metadata/_custom_type_script = "uid://bmylglyshe6wd"
 [resource]
 script = ExtResource("3_fmxnv")
 ClassName = "Chicoteador"
-BaseHP = 50
+BaseHP = 75
 ClassTextureFront = ExtResource("5_pmgdi")
 ClassTextureBack = ExtResource("4_sjlno")
-AttacksPerPosition = Array[Object]([SubResource("Resource_ncstq"), SubResource("Resource_fpcew"), SubResource("Resource_hqaj3")])
+AttacksPerPosition = Array[Object]([SubResource("Resource_hqaj3"), SubResource("Resource_fpcew"), SubResource("Resource_ncstq")])
 BaseAttackDamage = 15
 BaseSpeed = 2
 MovementType = 4

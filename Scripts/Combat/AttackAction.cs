@@ -16,6 +16,7 @@ public partial class AttackAction : Resource
     public enum AttackActionTarget
     {
         CloseSingle,
+        FarSingle,
         AnySingle,
         RandomSingle,
         CloseColumn,

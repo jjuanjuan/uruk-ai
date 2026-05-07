@@ -9,9 +9,9 @@
 [ext_resource type="Script" uid="uid://bmylglyshe6wd" path="res://Scripts/Unit/ClassRequirements.cs" id="6_81o6r"]
 [ext_resource type="Script" uid="uid://1pbhreu2codn" path="res://Scripts/Unit/CharacterClass.cs" id="7_2nf1q"]
 
-[sub_resource type="Resource" id="Resource_ncstq"]
+[sub_resource type="Resource" id="Resource_hqaj3"]
 script = ExtResource("2_5bl0e")
-AttackAction = ExtResource("1_gqpa1")
+AttackAction = ExtResource("3_5bl0e")
 Amount = 3
 metadata/_custom_type_script = "uid://du724smqstcfc"
 
@@ -21,9 +21,9 @@ AttackAction = ExtResource("3_5bl0e")
 Amount = 4
 metadata/_custom_type_script = "uid://du724smqstcfc"
 
-[sub_resource type="Resource" id="Resource_hqaj3"]
+[sub_resource type="Resource" id="Resource_ncstq"]
 script = ExtResource("2_5bl0e")
-AttackAction = ExtResource("3_5bl0e")
+AttackAction = ExtResource("1_gqpa1")
 Amount = 3
 metadata/_custom_type_script = "uid://du724smqstcfc"
 
@@ -39,9 +39,9 @@ ClassName = "Rogue"
 BaseHP = 60
 ClassTextureFront = ExtResource("4_gqpa1")
 ClassTextureBack = ExtResource("3_htiid")
-AttacksPerPosition = Array[Object]([SubResource("Resource_ncstq"), SubResource("Resource_fpcew"), SubResource("Resource_hqaj3")])
-BaseAttackDamage = 8
-BaseSpeed = 3
+AttacksPerPosition = Array[Object]([SubResource("Resource_hqaj3"), SubResource("Resource_fpcew"), SubResource("Resource_ncstq")])
+BaseAttackDamage = 12
+BaseSpeed = 4
 MovementType = 4
 Requirements = Array[Object]([SubResource("Resource_qyw1s")])
 metadata/_custom_type_script = "uid://1pbhreu2codn"

@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="AttackAction" format=3 uid="uid://cb4xgj33kxa1p"]
+
+[ext_resource type="Script" uid="uid://8p18r81fnngn" path="res://Scripts/Combat/AttackAction.cs" id="1_k3enn"]
+
+[resource]
+script = ExtResource("1_k3enn")
+AttackName = "Ice Ball"
+BaseDamageMultiplier = 0.75
+AttackType = 4
+Target = 2
+metadata/_custom_type_script = "uid://8p18r81fnngn"

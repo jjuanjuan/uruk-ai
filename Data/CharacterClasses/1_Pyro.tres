@@ -1,0 +1,43 @@
+[gd_resource type="Resource" script_class="CharacterClass" format=3 uid="uid://bwibpl2l3wgug"]
+
+[ext_resource type="Resource" uid="uid://cwexngqkhtadw" path="res://Data/AttackActions/Magic Flame.tres" id="1_fn638"]
+[ext_resource type="Script" uid="uid://du724smqstcfc" path="res://Scripts/Combat/AttackPerPosition.cs" id="2_c5irq"]
+[ext_resource type="Texture2D" uid="uid://de5j0u588upr7" path="res://Art/Placeholders/Units/0_militia_back.png" id="4_m5r7m"]
+[ext_resource type="Resource" uid="uid://lfiwqo10jajx" path="res://Data/CharacterClasses/0_Apprentice.tres" id="5_0pxtp"]
+[ext_resource type="Texture2D" uid="uid://njmsxv05hlix" path="res://Art/Placeholders/Units/1_pyromancer_front.png" id="5_c5irq"]
+[ext_resource type="Script" uid="uid://1pbhreu2codn" path="res://Scripts/Unit/CharacterClass.cs" id="6_j8xd3"]
+[ext_resource type="Script" uid="uid://bmylglyshe6wd" path="res://Scripts/Unit/ClassRequirements.cs" id="6_m5r7m"]
+
+[sub_resource type="Resource" id="Resource_tq6mj"]
+script = ExtResource("2_c5irq")
+AttackAction = ExtResource("1_fn638")
+Amount = 2
+metadata/_custom_type_script = "uid://du724smqstcfc"
+
+[sub_resource type="Resource" id="Resource_fvaiu"]
+script = ExtResource("2_c5irq")
+AttackAction = ExtResource("1_fn638")
+Amount = 2
+metadata/_custom_type_script = "uid://du724smqstcfc"
+
+[sub_resource type="Resource" id="Resource_ooqhg"]
+script = ExtResource("2_c5irq")
+AttackAction = ExtResource("1_fn638")
+metadata/_custom_type_script = "uid://du724smqstcfc"
+
+[sub_resource type="Resource" id="Resource_mfcxo"]
+script = ExtResource("6_m5r7m")
+RequiredClass = ExtResource("5_0pxtp")
+RequiredLevel = 3
+metadata/_custom_type_script = "uid://bmylglyshe6wd"
+
+[resource]
+script = ExtResource("6_j8xd3")
+ClassName = "Pyro"
+BaseHP = 35
+ClassTextureFront = ExtResource("5_c5irq")
+ClassTextureBack = ExtResource("4_m5r7m")
+AttacksPerPosition = Array[Object]([SubResource("Resource_tq6mj"), SubResource("Resource_fvaiu"), SubResource("Resource_ooqhg")])
+BaseAttackDamage = 15
+Requirements = Array[Object]([SubResource("Resource_mfcxo")])
+metadata/_custom_type_script = "uid://1pbhreu2codn"

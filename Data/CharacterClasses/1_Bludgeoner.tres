@@ -8,6 +8,11 @@
 [ext_resource type="Resource" uid="uid://c7rktj3ymrup" path="res://Data/CharacterClasses/0_Militia.tres" id="5_hqaj3"]
 [ext_resource type="Script" uid="uid://bmylglyshe6wd" path="res://Scripts/Unit/ClassRequirements.cs" id="6_rue22"]
 
+[sub_resource type="Resource" id="Resource_hqaj3"]
+script = ExtResource("2_vu0c2")
+AttackAction = ExtResource("1_pj32f")
+metadata/_custom_type_script = "uid://du724smqstcfc"
+
 [sub_resource type="Resource" id="Resource_ncstq"]
 script = ExtResource("2_vu0c2")
 AttackAction = ExtResource("1_pj32f")
@@ -18,11 +23,6 @@ metadata/_custom_type_script = "uid://du724smqstcfc"
 script = ExtResource("2_vu0c2")
 AttackAction = ExtResource("1_pj32f")
 Amount = 2
-metadata/_custom_type_script = "uid://du724smqstcfc"
-
-[sub_resource type="Resource" id="Resource_hqaj3"]
-script = ExtResource("2_vu0c2")
-AttackAction = ExtResource("1_pj32f")
 metadata/_custom_type_script = "uid://du724smqstcfc"
 
 [sub_resource type="Resource" id="Resource_exk64"]
@@ -37,7 +37,7 @@ ClassName = "Bludgeoner"
 BaseHP = 50
 ClassTextureFront = ExtResource("4_fpcew")
 ClassTextureBack = ExtResource("3_ncstq")
-AttacksPerPosition = Array[Object]([SubResource("Resource_ncstq"), SubResource("Resource_fpcew"), SubResource("Resource_hqaj3")])
+AttacksPerPosition = Array[Object]([SubResource("Resource_hqaj3"), SubResource("Resource_ncstq"), SubResource("Resource_fpcew")])
 BaseAttackDamage = 15
 ArmorType = 1
 Requirements = Array[Object]([SubResource("Resource_exk64")])

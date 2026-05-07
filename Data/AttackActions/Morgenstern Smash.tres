@@ -7,5 +7,5 @@ script = ExtResource("1_iad48")
 AttackName = "Row Smash"
 BaseDamageMultiplier = 0.75
 AttackType = 0
-Target = 5
+Target = 6
 metadata/_custom_type_script = "uid://8p18r81fnngn"

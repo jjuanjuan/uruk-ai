@@ -17,8 +17,16 @@
 [ext_resource type="Resource" uid="uid://ce6exe4327m40" path="res://Data/CharacterClasses/3_Cataphract.tres" id="13_wqynm"]
 [ext_resource type="Resource" uid="uid://cpqn3u03t1iv8" path="res://Data/CharacterClasses/3_Samurai.tres" id="15_snyh8"]
 [ext_resource type="Resource" uid="uid://drgell8yjnncv" path="res://Data/CharacterClasses/3_Trident.tres" id="16_i82go"]
+[ext_resource type="Resource" uid="uid://lfiwqo10jajx" path="res://Data/CharacterClasses/0_Apprentice.tres" id="17_wqynm"]
+[ext_resource type="Resource" uid="uid://dhbyhkyeujpvv" path="res://Data/CharacterClasses/1_Frost.tres" id="18_snyh8"]
+[ext_resource type="Resource" uid="uid://bwibpl2l3wgug" path="res://Data/CharacterClasses/1_Pyro.tres" id="19_i82go"]
+[ext_resource type="Resource" uid="uid://crvs0ulljx1w8" path="res://Data/CharacterClasses/2_Blaze.tres" id="20_a1wix"]
+[ext_resource type="Resource" uid="uid://ylkclmndtlsg" path="res://Data/CharacterClasses/2_Gale.tres" id="21_fygm1"]
+[ext_resource type="Resource" uid="uid://bjmyp1xc7kxll" path="res://Data/CharacterClasses/3_Vulcan.tres" id="22_1uckk"]
+[ext_resource type="Resource" uid="uid://dywdnwfffm48j" path="res://Data/CharacterClasses/3_Yaka.tres" id="23_uq1o5"]
+[ext_resource type="Resource" uid="uid://2j2uew1uaar8" path="res://Data/CharacterClasses/1_Explorer.tres" id="24_snyh8"]
 
 [resource]
 script = ExtResource("1_sm56y")
-BaseClasses = Array[Object]([ExtResource("2_eyntb"), ExtResource("2_72mds"), ExtResource("3_fmdy7"), ExtResource("4_s2q0r"), ExtResource("3_ky6dn"), ExtResource("6_jhkxy"), ExtResource("4_7k35s"), ExtResource("8_4u470"), ExtResource("9_otu04"), ExtResource("5_3me6e"), ExtResource("11_xitr7"), ExtResource("3_5yqo0"), ExtResource("13_wqynm"), ExtResource("6_jjswt"), ExtResource("15_snyh8"), ExtResource("16_i82go")])
+BaseClasses = Array[Object]([ExtResource("2_eyntb"), ExtResource("2_72mds"), ExtResource("3_fmdy7"), ExtResource("4_s2q0r"), ExtResource("3_ky6dn"), ExtResource("6_jhkxy"), ExtResource("4_7k35s"), ExtResource("8_4u470"), ExtResource("9_otu04"), ExtResource("5_3me6e"), ExtResource("11_xitr7"), ExtResource("3_5yqo0"), ExtResource("13_wqynm"), ExtResource("6_jjswt"), ExtResource("15_snyh8"), ExtResource("16_i82go"), ExtResource("17_wqynm"), ExtResource("18_snyh8"), ExtResource("19_i82go"), ExtResource("20_a1wix"), ExtResource("21_fygm1"), ExtResource("22_1uckk"), ExtResource("23_uq1o5"), ExtResource("24_snyh8")])
 metadata/_custom_type_script = "uid://dbqerfupo2uot"

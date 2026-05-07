@@ -6,12 +6,6 @@
 [ext_resource type="Texture2D" uid="uid://de5j0u588upr7" path="res://Art/Placeholders/Units/0_militia_back.png" id="3_tq6mj"]
 [ext_resource type="Script" uid="uid://1pbhreu2codn" path="res://Scripts/Unit/CharacterClass.cs" id="5_wu0ou"]
 
-[sub_resource type="Resource" id="Resource_tq6mj"]
-script = ExtResource("2_kku7t")
-AttackAction = ExtResource("1_vcdok")
-Amount = 2
-metadata/_custom_type_script = "uid://du724smqstcfc"
-
 [sub_resource type="Resource" id="Resource_fvaiu"]
 script = ExtResource("2_kku7t")
 AttackAction = ExtResource("1_vcdok")
@@ -22,12 +16,18 @@ script = ExtResource("2_kku7t")
 AttackAction = ExtResource("1_vcdok")
 metadata/_custom_type_script = "uid://du724smqstcfc"
 
+[sub_resource type="Resource" id="Resource_tq6mj"]
+script = ExtResource("2_kku7t")
+AttackAction = ExtResource("1_vcdok")
+Amount = 2
+metadata/_custom_type_script = "uid://du724smqstcfc"
+
 [resource]
 script = ExtResource("5_wu0ou")
 ClassName = "Militia"
-BaseHP = 30
+BaseHP = 40
 ClassTextureFront = ExtResource("3_kq20t")
 ClassTextureBack = ExtResource("3_tq6mj")
-AttacksPerPosition = Array[Object]([SubResource("Resource_tq6mj"), SubResource("Resource_fvaiu"), SubResource("Resource_ooqhg")])
+AttacksPerPosition = Array[Object]([SubResource("Resource_fvaiu"), SubResource("Resource_ooqhg"), SubResource("Resource_tq6mj")])
 Requirements = Array[Object]([])
 metadata/_custom_type_script = "uid://1pbhreu2codn"
