@@ -1,5 +1,5 @@
 using Godot;
 
-public partial class PartySlotManagement : Panel
+public partial class PartySlotManagement : Control
 {
 }

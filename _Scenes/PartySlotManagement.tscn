@@ -5,8 +5,10 @@
 [ext_resource type="Texture2D" uid="uid://3geatbyu0jce" path="res://Art/Placeholders/Units/2_knight_front.png" id="3_cib25"]
 [ext_resource type="FontFile" uid="uid://dd6yoetodmb25" path="res://Art/Fonts/PixgamerRegular-OVD6A.ttf" id="4_we5t2"]
 
-[node name="PartySlot" type="Panel" unique_id=1844506426]
+[node name="PartySlot" type="Control" unique_id=506167646]
 custom_minimum_size = Vector2(80, 80)
+layout_mode = 3
+anchors_preset = 0
 offset_right = 80.0
 offset_bottom = 80.0
 script = ExtResource("1_e5ain")
@@ -64,10 +66,6 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -10.0
-offset_top = -10.0
-offset_right = 10.0
-offset_bottom = 10.0
 grow_horizontal = 2
 grow_vertical = 2
 pivot_offset = Vector2(50, 50)
@@ -93,14 +91,11 @@ expand_mode = 2
 stretch_mode = 5
 
 [node name="CharName" type="RichTextLabel" parent="Control/CharImg" unique_id=1873711256]
-visible = false
 z_index = 1
 custom_minimum_size = Vector2(40, 10)
 layout_mode = 1
-offset_left = 10.0
-offset_top = 11.0
-offset_right = 90.0
-offset_bottom = 25.0
+offset_right = 80.0
+offset_bottom = 19.0
 mouse_filter = 2
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.5)
 theme_override_constants/shadow_outline_size = 4
@@ -112,3 +107,11 @@ theme_override_font_sizes/normal_font_size = 18
 text = "Boris"
 fit_content = true
 scroll_active = false
+
+[node name="Panel" type="Panel" parent="." unique_id=1208245577]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2

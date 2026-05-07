@@ -5,13 +5,12 @@
 [ext_resource type="Script" uid="uid://bqpqwbfis0yul" path="res://Scripts/UI/HealthBar.cs" id="3_7mel0"]
 [ext_resource type="FontFile" uid="uid://dd6yoetodmb25" path="res://Art/Fonts/PixgamerRegular-OVD6A.ttf" id="4_pky8r"]
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_rngbm"]
-
-[node name="PartySlot" type="Panel" unique_id=1844506426 node_paths=PackedStringArray("CharImg", "CharName", "FlashSprite", "HPBarParent", "HPFlashOverlay", "HPBar", "ContentParent", "HitPosition")]
+[node name="PartySlot" type="Control" unique_id=1815519293 node_paths=PackedStringArray("CharImg", "CharName", "FlashSprite", "HPBarParent", "HPFlashOverlay", "HPBar", "ContentParent", "HitPosition", "Background")]
 custom_minimum_size = Vector2(80, 80)
+layout_mode = 3
+anchors_preset = 0
 offset_right = 80.0
 offset_bottom = 80.0
-theme_override_styles/panel = SubResource("StyleBoxEmpty_rngbm")
 script = ExtResource("1_54qfb")
 CharImg = NodePath("Control/CharImg")
 CharName = NodePath("Control/CharImg/CharName")
@@ -21,6 +20,7 @@ HPFlashOverlay = NodePath("Control/HP Bar parent/HP Bar/Flash overlay")
 HPBar = NodePath("Control/HP Bar parent/HP Bar")
 ContentParent = NodePath("Control")
 HitPosition = NodePath("Control/HitPosition")
+Background = NodePath("SlotBackground")
 ShakeDuration = 1.0
 ShakeIntensity = Vector2(5, 20)
 SquashDuration = 0.15
@@ -140,3 +140,12 @@ offset_left = 40.0
 offset_top = 32.0
 offset_right = 40.0
 offset_bottom = 32.0
+
+[node name="SlotBackground" type="Panel" parent="." unique_id=2141344921]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2

@@ -1,6 +1,6 @@
 using Godot;
 
-public partial class PartySlotCombat : Panel
+public partial class PartySlotCombat : Control
 {
 	[Export] public int Row;
 	[Export] public int Column;
@@ -14,6 +14,7 @@ public partial class PartySlotCombat : Panel
 
 	[Export] Control ContentParent; // uso este para sacudir y otros efectos
 	[Export] Control HitPosition;
+	[Export] Panel Background;
 
 	[Export] float ShakeDuration = 0.6f;
 	[Export] Vector2 ShakeIntensity = new Vector2(2f, 10f);
@@ -42,6 +43,7 @@ public partial class PartySlotCombat : Panel
 		BuildStyles();
 		ApplyNormal();
 		UpdateVisual();
+		Background.Visible = false;
 
 		GameManager.I.SelectedOrcChanged += OnSelectedChanged;
 	}
@@ -66,7 +68,7 @@ public partial class PartySlotCombat : Panel
 			//CharImg.Texture = orc.CharacterClass.GetBackTexture();
 			CharImg.Visible = true;
 			CharName.Text = Orc.GetCustomName();
-			float charNameX = IsFront? 1f : -1f;
+			float charNameX = IsFront ? 1f : -1f;
 			CharName.Scale = new Vector2(charNameX, 1f);
 			UpdateNameVisibility();
 			HPBarParent.Visible = true;
@@ -120,9 +122,9 @@ public partial class PartySlotCombat : Panel
 		};
 	}
 
-	void ApplyNormal() => AddThemeStyleboxOverride("panel", normalStyle);
-	void ApplyValid() => AddThemeStyleboxOverride("panel", highlightValid);
-	void ApplyInvalid() => AddThemeStyleboxOverride("panel", highlightInvalid);
+	void ApplyNormal() => Background.AddThemeStyleboxOverride("panel", normalStyle);
+	void ApplyValid() => Background.AddThemeStyleboxOverride("panel", highlightValid);
+	void ApplyInvalid() => Background.AddThemeStyleboxOverride("panel", highlightInvalid);
 
 
 	public void SetOrc(OrcInstance orc)
@@ -177,6 +179,8 @@ public partial class PartySlotCombat : Panel
 
 	public override bool _CanDropData(Vector2 atPosition, Variant data)
 	{
+		Background.Visible = true;
+
 		if (Party == null)
 		{
 			ApplyInvalid();
@@ -282,6 +286,7 @@ public partial class PartySlotCombat : Panel
 
 		if (!DragState.IsDragging || DragState.Data == null)
 		{
+			Background.Visible = false;
 			ApplyNormal();
 			return;
 		}
