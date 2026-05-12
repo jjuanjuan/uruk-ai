@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://qae3crcpu528" path="res://Scripts/UI/UIMain.cs" id="1_husyh"]
 [ext_resource type="PackedScene" uid="uid://c5ug66lr4e0cx" path="res://_Scenes/ClassTree.tscn" id="3_epl5v"]
-[ext_resource type="PackedScene" uid="uid://j2bhyj5gf67q" path="res://_Scenes/UnitManagement.tscn" id="3_geeft"]
+[ext_resource type="PackedScene" uid="uid://j2bhyj5gf67q" path="res://_Scenes/UIUnitManagementMenu.tscn" id="3_geeft"]
 
 [node name="UI Main" type="CanvasLayer" unique_id=464530899]
 script = ExtResource("1_husyh")

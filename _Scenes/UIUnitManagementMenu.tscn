@@ -1,11 +1,11 @@
 [gd_scene format=3 uid="uid://j2bhyj5gf67q"]
 
-[ext_resource type="Script" uid="uid://xjr0uwhqqgxh" path="res://Scripts/UI/UIUnitManagement.cs" id="1_p5wqt"]
-[ext_resource type="Script" uid="uid://jw62aqdff52j" path="res://Scripts/UI/UIOrcPool.cs" id="1_uthg3"]
-[ext_resource type="PackedScene" uid="uid://jh1ftys40xae" path="res://_Scenes/PoolItem.tscn" id="2_p5wqt"]
-[ext_resource type="FontFile" uid="uid://dd6yoetodmb25" path="res://Art/Fonts/PixgamerRegular-OVD6A.ttf" id="3_44ew6"]
-[ext_resource type="Script" uid="uid://bh3knogh07yui" path="res://Scripts/UI/UIPartyPool.cs" id="5_44ew6"]
-[ext_resource type="PackedScene" uid="uid://cv8iaby88pfrn" path="res://_Scenes/UIPartyManagement.tscn" id="6_eqnvv"]
+[ext_resource type="Script" uid="uid://xjr0uwhqqgxh" path="res://Scripts/UI/UIUnitManagement.cs" id="1_vy541"]
+[ext_resource type="Script" uid="uid://bh3knogh07yui" path="res://Scripts/UI/UIPartyPool.cs" id="2_ck0cg"]
+[ext_resource type="PackedScene" uid="uid://cv8iaby88pfrn" path="res://_Scenes/UIPartyManagement.tscn" id="3_8hk38"]
+[ext_resource type="FontFile" uid="uid://dd6yoetodmb25" path="res://Art/Fonts/PixgamerRegular-OVD6A.ttf" id="4_tipyi"]
+[ext_resource type="Script" uid="uid://jw62aqdff52j" path="res://Scripts/UI/UIOrcPool.cs" id="5_t7kqc"]
+[ext_resource type="PackedScene" uid="uid://jh1ftys40xae" path="res://_Scenes/PoolItem.tscn" id="6_ymbnh"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_eqnvv"]
 bg_color = Color(0.3491902, 0.3491902, 0.3491902, 0.90000004)
@@ -22,7 +22,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_p5wqt")
+script = ExtResource("1_vy541")
 OrcPoolUI = NodePath("UI Orc Pool")
 PartyPoolUI = NodePath("UI Party Pool")
 CloseButton = NodePath("Buttons panel/ReturnButton")
@@ -82,8 +82,8 @@ offset_top = 40.0
 offset_right = 962.0
 offset_bottom = 630.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_eqnvv")
-script = ExtResource("5_44ew6")
-PoolItemScene = ExtResource("6_eqnvv")
+script = ExtResource("2_ck0cg")
+PoolItemScene = ExtResource("3_8hk38")
 
 [node name="RichTextLabel" type="RichTextLabel" parent="UI Party Pool" unique_id=1766278948]
 layout_mode = 1
@@ -95,7 +95,7 @@ theme_override_constants/shadow_outline_size = 4
 theme_override_constants/shadow_offset_x = 1
 theme_override_constants/shadow_offset_y = 1
 theme_override_constants/outline_size = 4
-theme_override_fonts/normal_font = ExtResource("3_44ew6")
+theme_override_fonts/normal_font = ExtResource("4_tipyi")
 theme_override_font_sizes/normal_font_size = 24
 text = "Parties"
 
@@ -127,67 +127,67 @@ theme_override_constants/h_separation = 10
 theme_override_constants/v_separation = 10
 columns = 5
 
-[node name="SmallParty" parent="UI Party Pool/MarginContainer/ScrollContainer/GridContainer" unique_id=742573588 instance=ExtResource("6_eqnvv")]
+[node name="SmallParty" parent="UI Party Pool/MarginContainer/ScrollContainer/GridContainer" unique_id=742573588 instance=ExtResource("3_8hk38")]
 custom_minimum_size = Vector2(140, 140)
 layout_mode = 2
 
-[node name="SmallParty2" parent="UI Party Pool/MarginContainer/ScrollContainer/GridContainer" unique_id=1396978466 instance=ExtResource("6_eqnvv")]
+[node name="SmallParty2" parent="UI Party Pool/MarginContainer/ScrollContainer/GridContainer" unique_id=1396978466 instance=ExtResource("3_8hk38")]
 custom_minimum_size = Vector2(140, 140)
 layout_mode = 2
 
-[node name="SmallParty3" parent="UI Party Pool/MarginContainer/ScrollContainer/GridContainer" unique_id=1495725908 instance=ExtResource("6_eqnvv")]
+[node name="SmallParty3" parent="UI Party Pool/MarginContainer/ScrollContainer/GridContainer" unique_id=1495725908 instance=ExtResource("3_8hk38")]
 custom_minimum_size = Vector2(140, 140)
 layout_mode = 2
 
-[node name="SmallParty4" parent="UI Party Pool/MarginContainer/ScrollContainer/GridContainer" unique_id=750125132 instance=ExtResource("6_eqnvv")]
+[node name="SmallParty4" parent="UI Party Pool/MarginContainer/ScrollContainer/GridContainer" unique_id=750125132 instance=ExtResource("3_8hk38")]
 custom_minimum_size = Vector2(140, 140)
 layout_mode = 2
 
-[node name="SmallParty5" parent="UI Party Pool/MarginContainer/ScrollContainer/GridContainer" unique_id=204766406 instance=ExtResource("6_eqnvv")]
+[node name="SmallParty5" parent="UI Party Pool/MarginContainer/ScrollContainer/GridContainer" unique_id=204766406 instance=ExtResource("3_8hk38")]
 custom_minimum_size = Vector2(140, 140)
 layout_mode = 2
 
-[node name="SmallParty6" parent="UI Party Pool/MarginContainer/ScrollContainer/GridContainer" unique_id=762388561 instance=ExtResource("6_eqnvv")]
+[node name="SmallParty6" parent="UI Party Pool/MarginContainer/ScrollContainer/GridContainer" unique_id=762388561 instance=ExtResource("3_8hk38")]
 custom_minimum_size = Vector2(140, 140)
 layout_mode = 2
 
-[node name="SmallParty7" parent="UI Party Pool/MarginContainer/ScrollContainer/GridContainer" unique_id=680835105 instance=ExtResource("6_eqnvv")]
+[node name="SmallParty7" parent="UI Party Pool/MarginContainer/ScrollContainer/GridContainer" unique_id=680835105 instance=ExtResource("3_8hk38")]
 custom_minimum_size = Vector2(140, 140)
 layout_mode = 2
 
-[node name="SmallParty8" parent="UI Party Pool/MarginContainer/ScrollContainer/GridContainer" unique_id=982998041 instance=ExtResource("6_eqnvv")]
+[node name="SmallParty8" parent="UI Party Pool/MarginContainer/ScrollContainer/GridContainer" unique_id=982998041 instance=ExtResource("3_8hk38")]
 custom_minimum_size = Vector2(140, 140)
 layout_mode = 2
 
-[node name="SmallParty9" parent="UI Party Pool/MarginContainer/ScrollContainer/GridContainer" unique_id=205451742 instance=ExtResource("6_eqnvv")]
+[node name="SmallParty9" parent="UI Party Pool/MarginContainer/ScrollContainer/GridContainer" unique_id=205451742 instance=ExtResource("3_8hk38")]
 custom_minimum_size = Vector2(140, 140)
 layout_mode = 2
 
-[node name="SmallParty10" parent="UI Party Pool/MarginContainer/ScrollContainer/GridContainer" unique_id=1889841261 instance=ExtResource("6_eqnvv")]
+[node name="SmallParty10" parent="UI Party Pool/MarginContainer/ScrollContainer/GridContainer" unique_id=1889841261 instance=ExtResource("3_8hk38")]
 custom_minimum_size = Vector2(140, 140)
 layout_mode = 2
 
-[node name="SmallParty11" parent="UI Party Pool/MarginContainer/ScrollContainer/GridContainer" unique_id=891516297 instance=ExtResource("6_eqnvv")]
+[node name="SmallParty11" parent="UI Party Pool/MarginContainer/ScrollContainer/GridContainer" unique_id=891516297 instance=ExtResource("3_8hk38")]
 custom_minimum_size = Vector2(140, 140)
 layout_mode = 2
 
-[node name="SmallParty12" parent="UI Party Pool/MarginContainer/ScrollContainer/GridContainer" unique_id=777355541 instance=ExtResource("6_eqnvv")]
+[node name="SmallParty12" parent="UI Party Pool/MarginContainer/ScrollContainer/GridContainer" unique_id=777355541 instance=ExtResource("3_8hk38")]
 custom_minimum_size = Vector2(140, 140)
 layout_mode = 2
 
-[node name="SmallParty13" parent="UI Party Pool/MarginContainer/ScrollContainer/GridContainer" unique_id=238783329 instance=ExtResource("6_eqnvv")]
+[node name="SmallParty13" parent="UI Party Pool/MarginContainer/ScrollContainer/GridContainer" unique_id=238783329 instance=ExtResource("3_8hk38")]
 custom_minimum_size = Vector2(140, 140)
 layout_mode = 2
 
-[node name="SmallParty14" parent="UI Party Pool/MarginContainer/ScrollContainer/GridContainer" unique_id=426672831 instance=ExtResource("6_eqnvv")]
+[node name="SmallParty14" parent="UI Party Pool/MarginContainer/ScrollContainer/GridContainer" unique_id=426672831 instance=ExtResource("3_8hk38")]
 custom_minimum_size = Vector2(140, 140)
 layout_mode = 2
 
-[node name="SmallParty15" parent="UI Party Pool/MarginContainer/ScrollContainer/GridContainer" unique_id=222787388 instance=ExtResource("6_eqnvv")]
+[node name="SmallParty15" parent="UI Party Pool/MarginContainer/ScrollContainer/GridContainer" unique_id=222787388 instance=ExtResource("3_8hk38")]
 custom_minimum_size = Vector2(140, 140)
 layout_mode = 2
 
-[node name="SmallParty16" parent="UI Party Pool/MarginContainer/ScrollContainer/GridContainer" unique_id=413485085 instance=ExtResource("6_eqnvv")]
+[node name="SmallParty16" parent="UI Party Pool/MarginContainer/ScrollContainer/GridContainer" unique_id=413485085 instance=ExtResource("3_8hk38")]
 custom_minimum_size = Vector2(140, 140)
 layout_mode = 2
 
@@ -202,8 +202,8 @@ offset_right = -18.0
 offset_bottom = 630.0
 grow_horizontal = 0
 theme_override_styles/panel = SubResource("StyleBoxFlat_eqnvv")
-script = ExtResource("1_uthg3")
-PoolItemScene = ExtResource("2_p5wqt")
+script = ExtResource("5_t7kqc")
+PoolItemScene = ExtResource("6_ymbnh")
 list = NodePath("MarginContainer/ScrollContainer/VBoxContainer")
 
 [node name="RichTextLabel" type="RichTextLabel" parent="UI Orc Pool" unique_id=1031727981]
@@ -221,7 +221,7 @@ theme_override_constants/shadow_outline_size = 4
 theme_override_constants/shadow_offset_x = 1
 theme_override_constants/shadow_offset_y = 1
 theme_override_constants/outline_size = 4
-theme_override_fonts/normal_font = ExtResource("3_44ew6")
+theme_override_fonts/normal_font = ExtResource("4_tipyi")
 theme_override_font_sizes/normal_font_size = 24
 text = "Pool"
 horizontal_alignment = 2
