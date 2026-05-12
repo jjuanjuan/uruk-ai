@@ -1,0 +1,33 @@
+[gd_resource type="Resource" script_class="CharacterClass" format=3 uid="uid://c7rktj3ymrup"]
+
+[ext_resource type="Resource" uid="uid://nwnecenxibir" path="res://Data/AttackActions/Basic Slash.tres" id="1_yb1ds"]
+[ext_resource type="Script" uid="uid://du724smqstcfc" path="res://Scripts/Combat/AttackPerPosition.cs" id="2_hjeoc"]
+[ext_resource type="Texture2D" uid="uid://de5j0u588upr7" path="res://Art/Placeholders/Units/0_militia_back.png" id="3_tr7a7"]
+[ext_resource type="Texture2D" uid="uid://d16kcku6f2bb3" path="res://Art/Placeholders/Units/0_militia_front.png" id="4_h6oi8"]
+[ext_resource type="Script" uid="uid://1pbhreu2codn" path="res://Scripts/Unit/CharacterClass.cs" id="5_1yy46"]
+
+[sub_resource type="Resource" id="Resource_fvaiu"]
+script = ExtResource("2_hjeoc")
+AttackAction = ExtResource("1_yb1ds")
+metadata/_custom_type_script = "uid://du724smqstcfc"
+
+[sub_resource type="Resource" id="Resource_ooqhg"]
+script = ExtResource("2_hjeoc")
+AttackAction = ExtResource("1_yb1ds")
+metadata/_custom_type_script = "uid://du724smqstcfc"
+
+[sub_resource type="Resource" id="Resource_tq6mj"]
+script = ExtResource("2_hjeoc")
+AttackAction = ExtResource("1_yb1ds")
+Amount = 2
+metadata/_custom_type_script = "uid://du724smqstcfc"
+
+[resource]
+script = ExtResource("5_1yy46")
+ClassName = "Militia"
+BaseHP = 35
+ClassTextureFront = ExtResource("4_h6oi8")
+ClassTextureBack = ExtResource("3_tr7a7")
+AttacksPerPosition = Array[Object]([SubResource("Resource_fvaiu"), SubResource("Resource_ooqhg"), SubResource("Resource_tq6mj")])
+Requirements = Array[Object]([])
+metadata/_custom_type_script = "uid://1pbhreu2codn"

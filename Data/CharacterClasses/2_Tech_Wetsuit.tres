@@ -1,0 +1,46 @@
+[gd_resource type="Resource" script_class="CharacterClass" format=3 uid="uid://bu0r3d802es0y"]
+
+[ext_resource type="Resource" uid="uid://d4a48po4oos60" path="res://Data/AttackActions/Javelin Throw.tres" id="1_2wdi0"]
+[ext_resource type="Script" uid="uid://du724smqstcfc" path="res://Scripts/Combat/AttackPerPosition.cs" id="2_2wdi0"]
+[ext_resource type="Texture2D" uid="uid://de5j0u588upr7" path="res://Art/Placeholders/Units/0_militia_back.png" id="3_6tqje"]
+[ext_resource type="Resource" uid="uid://brtv75x54g11n" path="res://Data/AttackActions/Basic Pierce.tres" id="3_hhltf"]
+[ext_resource type="Texture2D" uid="uid://cjj1kx5u43irg" path="res://Art/Placeholders/Units/2_wetsuit_front.png" id="5_n4dq2"]
+[ext_resource type="Script" uid="uid://bmylglyshe6wd" path="res://Scripts/Unit/ClassRequirements.cs" id="6_5dob7"]
+[ext_resource type="Resource" uid="uid://2j2uew1uaar8" path="res://Data/CharacterClasses/1_Tech_Explorer.tres" id="6_oyx0g"]
+[ext_resource type="Script" uid="uid://1pbhreu2codn" path="res://Scripts/Unit/CharacterClass.cs" id="7_oyx0g"]
+
+[sub_resource type="Resource" id="Resource_ncstq"]
+script = ExtResource("2_2wdi0")
+AttackAction = ExtResource("1_2wdi0")
+metadata/_custom_type_script = "uid://du724smqstcfc"
+
+[sub_resource type="Resource" id="Resource_fpcew"]
+script = ExtResource("2_2wdi0")
+AttackAction = ExtResource("3_hhltf")
+Amount = 2
+metadata/_custom_type_script = "uid://du724smqstcfc"
+
+[sub_resource type="Resource" id="Resource_hqaj3"]
+script = ExtResource("2_2wdi0")
+AttackAction = ExtResource("3_hhltf")
+Amount = 2
+metadata/_custom_type_script = "uid://du724smqstcfc"
+
+[sub_resource type="Resource" id="Resource_qyw1s"]
+script = ExtResource("6_5dob7")
+RequiredClass = ExtResource("6_oyx0g")
+RequiredLevel = 3
+metadata/_custom_type_script = "uid://bmylglyshe6wd"
+
+[resource]
+script = ExtResource("7_oyx0g")
+ClassName = "Wetsuit"
+BaseHP = 60
+ClassTextureFront = ExtResource("5_n4dq2")
+ClassTextureBack = ExtResource("3_6tqje")
+AttacksPerPosition = Array[Object]([SubResource("Resource_ncstq"), SubResource("Resource_fpcew"), SubResource("Resource_hqaj3")])
+BaseAttackDamage = 20
+BaseSpeed = 2
+MovementType = 1
+Requirements = Array[Object]([SubResource("Resource_qyw1s")])
+metadata/_custom_type_script = "uid://1pbhreu2codn"

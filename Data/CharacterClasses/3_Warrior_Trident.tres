@@ -1,0 +1,45 @@
+[gd_resource type="Resource" script_class="CharacterClass" format=3 uid="uid://drgell8yjnncv"]
+
+[ext_resource type="Resource" uid="uid://die58tr4ggpit" path="res://Data/AttackActions/Trident Pierce.tres" id="1_pwnhl"]
+[ext_resource type="Script" uid="uid://du724smqstcfc" path="res://Scripts/Combat/AttackPerPosition.cs" id="2_nejg1"]
+[ext_resource type="Texture2D" uid="uid://bj11igbjb0h5h" path="res://Art/Placeholders/Units/3_trident_front.png" id="4_6vckn"]
+[ext_resource type="Texture2D" uid="uid://de5j0u588upr7" path="res://Art/Placeholders/Units/0_militia_back.png" id="4_scv6j"]
+[ext_resource type="Resource" uid="uid://cry0fyf1u8o8v" path="res://Data/CharacterClasses/2_Warrior_Legionnaire.tres" id="6_3npnx"]
+[ext_resource type="Script" uid="uid://bmylglyshe6wd" path="res://Scripts/Unit/ClassRequirements.cs" id="7_6pqu1"]
+[ext_resource type="Script" uid="uid://1pbhreu2codn" path="res://Scripts/Unit/CharacterClass.cs" id="8_3adcl"]
+
+[sub_resource type="Resource" id="Resource_ncstq"]
+script = ExtResource("2_nejg1")
+AttackAction = ExtResource("1_pwnhl")
+Amount = 2
+metadata/_custom_type_script = "uid://du724smqstcfc"
+
+[sub_resource type="Resource" id="Resource_fpcew"]
+script = ExtResource("2_nejg1")
+AttackAction = ExtResource("1_pwnhl")
+Amount = 2
+metadata/_custom_type_script = "uid://du724smqstcfc"
+
+[sub_resource type="Resource" id="Resource_hqaj3"]
+script = ExtResource("2_nejg1")
+AttackAction = ExtResource("1_pwnhl")
+Amount = 3
+metadata/_custom_type_script = "uid://du724smqstcfc"
+
+[sub_resource type="Resource" id="Resource_hs6x5"]
+script = ExtResource("7_6pqu1")
+RequiredClass = ExtResource("6_3npnx")
+RequiredLevel = 5
+metadata/_custom_type_script = "uid://bmylglyshe6wd"
+
+[resource]
+script = ExtResource("8_3adcl")
+ClassName = "Trident"
+ClassTextureFront = ExtResource("4_6vckn")
+ClassTextureBack = ExtResource("4_scv6j")
+AttacksPerPosition = Array[Object]([SubResource("Resource_ncstq"), SubResource("Resource_fpcew"), SubResource("Resource_hqaj3")])
+BaseAttackDamage = 25
+ArmorType = 1
+MovementType = 1
+Requirements = Array[Object]([SubResource("Resource_hs6x5")])
+metadata/_custom_type_script = "uid://1pbhreu2codn"

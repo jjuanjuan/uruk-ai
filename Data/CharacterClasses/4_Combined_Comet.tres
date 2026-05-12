@@ -1,0 +1,53 @@
+[gd_resource type="Resource" script_class="CharacterClass" format=3 uid="uid://dhaftn373vlsb"]
+
+[ext_resource type="Resource" uid="uid://h7dsqqjhproi" path="res://Data/AttackActions/Tech Fire Comet.tres" id="1_cpeu1"]
+[ext_resource type="Script" uid="uid://du724smqstcfc" path="res://Scripts/Combat/AttackPerPosition.cs" id="2_cpeu1"]
+[ext_resource type="Resource" uid="uid://qrcojbt58wlj" path="res://Data/AttackActions/Tech Fire Column.tres" id="3_me4a0"]
+[ext_resource type="Texture2D" uid="uid://de5j0u588upr7" path="res://Art/Placeholders/Units/0_militia_back.png" id="3_nj4ij"]
+[ext_resource type="Texture2D" uid="uid://b2x0l7o8n3kys" path="res://Art/Placeholders/Units/4_comet_front.png" id="4_pb7j6"]
+[ext_resource type="Resource" uid="uid://hyhphkjfedfi" path="res://Data/CharacterClasses/2_Tech_Flammer.tres" id="6_cb7h6"]
+[ext_resource type="Script" uid="uid://bmylglyshe6wd" path="res://Scripts/Unit/ClassRequirements.cs" id="6_ug153"]
+[ext_resource type="Resource" uid="uid://bayepcftmfmd" path="res://Data/CharacterClasses/2_Tech_Jet.tres" id="7_bo74h"]
+[ext_resource type="Script" uid="uid://1pbhreu2codn" path="res://Scripts/Unit/CharacterClass.cs" id="8_2fden"]
+
+[sub_resource type="Resource" id="Resource_ncstq"]
+script = ExtResource("2_cpeu1")
+AttackAction = ExtResource("1_cpeu1")
+Amount = 2
+metadata/_custom_type_script = "uid://du724smqstcfc"
+
+[sub_resource type="Resource" id="Resource_fpcew"]
+script = ExtResource("2_cpeu1")
+AttackAction = ExtResource("1_cpeu1")
+Amount = 2
+metadata/_custom_type_script = "uid://du724smqstcfc"
+
+[sub_resource type="Resource" id="Resource_hqaj3"]
+script = ExtResource("2_cpeu1")
+AttackAction = ExtResource("3_me4a0")
+metadata/_custom_type_script = "uid://du724smqstcfc"
+
+[sub_resource type="Resource" id="Resource_hs6x5"]
+script = ExtResource("6_ug153")
+RequiredClass = ExtResource("6_cb7h6")
+RequiredLevel = 5
+metadata/_custom_type_script = "uid://bmylglyshe6wd"
+
+[sub_resource type="Resource" id="Resource_d1kji"]
+script = ExtResource("6_ug153")
+RequiredClass = ExtResource("7_bo74h")
+RequiredLevel = 5
+metadata/_custom_type_script = "uid://bmylglyshe6wd"
+
+[resource]
+script = ExtResource("8_2fden")
+ClassName = "Comet"
+BaseHP = 130
+ClassTextureFront = ExtResource("4_pb7j6")
+ClassTextureBack = ExtResource("3_nj4ij")
+AttacksPerPosition = Array[Object]([SubResource("Resource_ncstq"), SubResource("Resource_fpcew"), SubResource("Resource_hqaj3")])
+BaseAttackDamage = 40
+ArmorType = 2
+MovementType = 2
+Requirements = Array[Object]([SubResource("Resource_hs6x5"), SubResource("Resource_d1kji")])
+metadata/_custom_type_script = "uid://1pbhreu2codn"

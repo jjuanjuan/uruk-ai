@@ -1,0 +1,45 @@
+[gd_resource type="Resource" script_class="CharacterClass" format=3 uid="uid://bcyo7hv1ml5i7"]
+
+[ext_resource type="Resource" uid="uid://nhbpujjmpn7e" path="res://Data/AttackActions/Tech Snipe.tres" id="1_h7gnr"]
+[ext_resource type="Script" uid="uid://du724smqstcfc" path="res://Scripts/Combat/AttackPerPosition.cs" id="2_h7gnr"]
+[ext_resource type="Resource" uid="uid://b8jokhtgsjqtk" path="res://Data/AttackActions/Tech Gunshot.tres" id="3_m522f"]
+[ext_resource type="Resource" uid="uid://6lj5hlhugy7f" path="res://Data/AttackActions/Weak Smash.tres" id="4_h7gnr"]
+[ext_resource type="Texture2D" uid="uid://de5j0u588upr7" path="res://Art/Placeholders/Units/0_militia_back.png" id="4_uu7po"]
+[ext_resource type="Texture2D" uid="uid://ope6ime6xa4w" path="res://Art/Placeholders/Units/3_inventor_front.png" id="6_dj0p8"]
+[ext_resource type="Resource" uid="uid://dqpfmx2n2suc5" path="res://Data/CharacterClasses/2_Tech_Machinist.tres" id="6_ykh88"]
+[ext_resource type="Script" uid="uid://bmylglyshe6wd" path="res://Scripts/Unit/ClassRequirements.cs" id="7_dj0p8"]
+[ext_resource type="Script" uid="uid://1pbhreu2codn" path="res://Scripts/Unit/CharacterClass.cs" id="8_4j6my"]
+
+[sub_resource type="Resource" id="Resource_ncstq"]
+script = ExtResource("2_h7gnr")
+AttackAction = ExtResource("1_h7gnr")
+metadata/_custom_type_script = "uid://du724smqstcfc"
+
+[sub_resource type="Resource" id="Resource_fpcew"]
+script = ExtResource("2_h7gnr")
+AttackAction = ExtResource("3_m522f")
+Amount = 2
+metadata/_custom_type_script = "uid://du724smqstcfc"
+
+[sub_resource type="Resource" id="Resource_hqaj3"]
+script = ExtResource("2_h7gnr")
+AttackAction = ExtResource("4_h7gnr")
+Amount = 2
+metadata/_custom_type_script = "uid://du724smqstcfc"
+
+[sub_resource type="Resource" id="Resource_qyw1s"]
+script = ExtResource("7_dj0p8")
+RequiredClass = ExtResource("6_ykh88")
+RequiredLevel = 3
+metadata/_custom_type_script = "uid://bmylglyshe6wd"
+
+[resource]
+script = ExtResource("8_4j6my")
+ClassName = "Inventor"
+BaseHP = 80
+ClassTextureFront = ExtResource("6_dj0p8")
+ClassTextureBack = ExtResource("4_uu7po")
+AttacksPerPosition = Array[Object]([SubResource("Resource_ncstq"), SubResource("Resource_fpcew"), SubResource("Resource_hqaj3")])
+BaseAttackDamage = 35
+Requirements = Array[Object]([SubResource("Resource_qyw1s")])
+metadata/_custom_type_script = "uid://1pbhreu2codn"

@@ -1,0 +1,43 @@
+[gd_resource type="Resource" script_class="CharacterClass" format=3 uid="uid://cqbjt24d3b1p5"]
+
+[ext_resource type="Resource" uid="uid://88yapdn1bvbt" path="res://Data/AttackActions/Tech Spark.tres" id="1_pulf7"]
+[ext_resource type="Script" uid="uid://du724smqstcfc" path="res://Scripts/Combat/AttackPerPosition.cs" id="2_7h5xq"]
+[ext_resource type="Texture2D" uid="uid://de5j0u588upr7" path="res://Art/Placeholders/Units/0_militia_back.png" id="3_qyypr"]
+[ext_resource type="Texture2D" uid="uid://24tro3v7xdq6" path="res://Art/Placeholders/Units/2_spark_front.png" id="4_7h5xq"]
+[ext_resource type="Resource" uid="uid://cw4enqbv0f6b8" path="res://Data/CharacterClasses/1_Tech_Tinkerer.tres" id="5_pulf7"]
+[ext_resource type="Script" uid="uid://bmylglyshe6wd" path="res://Scripts/Unit/ClassRequirements.cs" id="6_uqx15"]
+[ext_resource type="Script" uid="uid://1pbhreu2codn" path="res://Scripts/Unit/CharacterClass.cs" id="7_tqyae"]
+
+[sub_resource type="Resource" id="Resource_ncstq"]
+script = ExtResource("2_7h5xq")
+AttackAction = ExtResource("1_pulf7")
+metadata/_custom_type_script = "uid://du724smqstcfc"
+
+[sub_resource type="Resource" id="Resource_fpcew"]
+script = ExtResource("2_7h5xq")
+AttackAction = ExtResource("1_pulf7")
+Amount = 2
+metadata/_custom_type_script = "uid://du724smqstcfc"
+
+[sub_resource type="Resource" id="Resource_hqaj3"]
+script = ExtResource("2_7h5xq")
+AttackAction = ExtResource("1_pulf7")
+Amount = 2
+metadata/_custom_type_script = "uid://du724smqstcfc"
+
+[sub_resource type="Resource" id="Resource_qyw1s"]
+script = ExtResource("6_uqx15")
+RequiredClass = ExtResource("5_pulf7")
+RequiredLevel = 3
+metadata/_custom_type_script = "uid://bmylglyshe6wd"
+
+[resource]
+script = ExtResource("7_tqyae")
+ClassName = "Spark"
+BaseHP = 60
+ClassTextureFront = ExtResource("4_7h5xq")
+ClassTextureBack = ExtResource("3_qyypr")
+AttacksPerPosition = Array[Object]([SubResource("Resource_ncstq"), SubResource("Resource_fpcew"), SubResource("Resource_hqaj3")])
+BaseAttackDamage = 25
+Requirements = Array[Object]([SubResource("Resource_qyw1s")])
+metadata/_custom_type_script = "uid://1pbhreu2codn"

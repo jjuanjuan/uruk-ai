@@ -1,0 +1,44 @@
+[gd_resource type="Resource" script_class="CharacterClass" format=3 uid="uid://bjmyp1xc7kxll"]
+
+[ext_resource type="Resource" uid="uid://5rjq7c2iiwg0" path="res://Data/AttackActions/Magic Flame Row.tres" id="1_a05j2"]
+[ext_resource type="Script" uid="uid://du724smqstcfc" path="res://Scripts/Combat/AttackPerPosition.cs" id="2_q1wn4"]
+[ext_resource type="Resource" uid="uid://m4t0x8wvudyy" path="res://Data/AttackActions/Magic Flame Bomb.tres" id="3_f28wp"]
+[ext_resource type="Texture2D" uid="uid://de5j0u588upr7" path="res://Art/Placeholders/Units/0_militia_back.png" id="4_noa3r"]
+[ext_resource type="Texture2D" uid="uid://b16w1fyg5v7br" path="res://Art/Placeholders/Units/3_vulcan_front.png" id="5_yf0hl"]
+[ext_resource type="Resource" uid="uid://crvs0ulljx1w8" path="res://Data/CharacterClasses/2_Magic_Blaze.tres" id="6_chihi"]
+[ext_resource type="Script" uid="uid://bmylglyshe6wd" path="res://Scripts/Unit/ClassRequirements.cs" id="7_ynyxf"]
+[ext_resource type="Script" uid="uid://1pbhreu2codn" path="res://Scripts/Unit/CharacterClass.cs" id="8_h3o5b"]
+
+[sub_resource type="Resource" id="Resource_tq6mj"]
+script = ExtResource("2_q1wn4")
+AttackAction = ExtResource("1_a05j2")
+Amount = 2
+metadata/_custom_type_script = "uid://du724smqstcfc"
+
+[sub_resource type="Resource" id="Resource_fvaiu"]
+script = ExtResource("2_q1wn4")
+AttackAction = ExtResource("3_f28wp")
+metadata/_custom_type_script = "uid://du724smqstcfc"
+
+[sub_resource type="Resource" id="Resource_ooqhg"]
+script = ExtResource("2_q1wn4")
+AttackAction = ExtResource("1_a05j2")
+metadata/_custom_type_script = "uid://du724smqstcfc"
+
+[sub_resource type="Resource" id="Resource_mfcxo"]
+script = ExtResource("7_ynyxf")
+RequiredClass = ExtResource("6_chihi")
+RequiredLevel = 3
+metadata/_custom_type_script = "uid://bmylglyshe6wd"
+
+[resource]
+script = ExtResource("8_h3o5b")
+ClassName = "Vulcan"
+BaseHP = 65
+ClassTextureFront = ExtResource("5_yf0hl")
+ClassTextureBack = ExtResource("4_noa3r")
+AttacksPerPosition = Array[Object]([SubResource("Resource_tq6mj"), SubResource("Resource_fvaiu"), SubResource("Resource_ooqhg")])
+BaseAttackDamage = 35
+ArmorType = 3
+Requirements = Array[Object]([SubResource("Resource_mfcxo")])
+metadata/_custom_type_script = "uid://1pbhreu2codn"

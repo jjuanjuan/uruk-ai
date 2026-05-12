@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="AttackAction" format=3 uid="uid://nhbpujjmpn7e"]
+
+[ext_resource type="Script" uid="uid://8p18r81fnngn" path="res://Scripts/Combat/AttackAction.cs" id="1_ym0mh"]
+
+[resource]
+script = ExtResource("1_ym0mh")
+AttackName = "Snipe"
+BaseDamageMultiplier = 2.0
+AttackType = 2
+Target = 1
+metadata/_custom_type_script = "uid://8p18r81fnngn"

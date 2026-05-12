@@ -1,0 +1,54 @@
+[gd_resource type="Resource" script_class="CharacterClass" format=3 uid="uid://bpd4kie8cjj6u"]
+
+[ext_resource type="Resource" uid="uid://nwnecenxibir" path="res://Data/AttackActions/Basic Slash.tres" id="1_786i0"]
+[ext_resource type="Script" uid="uid://du724smqstcfc" path="res://Scripts/Combat/AttackPerPosition.cs" id="2_d1kji"]
+[ext_resource type="Texture2D" uid="uid://rvwv1smsfr80" path="res://Art/Placeholders/Units/4_zealot_front.png" id="4_6yf17"]
+[ext_resource type="Texture2D" uid="uid://de5j0u588upr7" path="res://Art/Placeholders/Units/0_militia_back.png" id="4_p6582"]
+[ext_resource type="Resource" uid="uid://cry0fyf1u8o8v" path="res://Data/CharacterClasses/2_Warrior_Legionnaire.tres" id="6_q778h"]
+[ext_resource type="Resource" uid="uid://bayepcftmfmd" path="res://Data/CharacterClasses/2_Tech_Jet.tres" id="7_786i0"]
+[ext_resource type="Script" uid="uid://bmylglyshe6wd" path="res://Scripts/Unit/ClassRequirements.cs" id="7_dokq6"]
+[ext_resource type="Script" uid="uid://1pbhreu2codn" path="res://Scripts/Unit/CharacterClass.cs" id="8_l1uiv"]
+
+[sub_resource type="Resource" id="Resource_ncstq"]
+script = ExtResource("2_d1kji")
+AttackAction = ExtResource("1_786i0")
+Amount = 2
+metadata/_custom_type_script = "uid://du724smqstcfc"
+
+[sub_resource type="Resource" id="Resource_fpcew"]
+script = ExtResource("2_d1kji")
+AttackAction = ExtResource("1_786i0")
+Amount = 3
+metadata/_custom_type_script = "uid://du724smqstcfc"
+
+[sub_resource type="Resource" id="Resource_hqaj3"]
+script = ExtResource("2_d1kji")
+AttackAction = ExtResource("1_786i0")
+Amount = 3
+metadata/_custom_type_script = "uid://du724smqstcfc"
+
+[sub_resource type="Resource" id="Resource_hs6x5"]
+script = ExtResource("7_dokq6")
+RequiredClass = ExtResource("6_q778h")
+RequiredLevel = 5
+metadata/_custom_type_script = "uid://bmylglyshe6wd"
+
+[sub_resource type="Resource" id="Resource_d1kji"]
+script = ExtResource("7_dokq6")
+RequiredClass = ExtResource("7_786i0")
+RequiredLevel = 5
+metadata/_custom_type_script = "uid://bmylglyshe6wd"
+
+[resource]
+script = ExtResource("8_l1uiv")
+ClassName = "Zealot"
+BaseHP = 150
+ClassTextureFront = ExtResource("4_6yf17")
+ClassTextureBack = ExtResource("4_p6582")
+AttacksPerPosition = Array[Object]([SubResource("Resource_ncstq"), SubResource("Resource_fpcew"), SubResource("Resource_hqaj3")])
+BaseAttackDamage = 30
+BaseSpeed = 2
+ArmorType = 2
+MovementType = 2
+Requirements = Array[Object]([SubResource("Resource_hs6x5"), SubResource("Resource_d1kji")])
+metadata/_custom_type_script = "uid://1pbhreu2codn"

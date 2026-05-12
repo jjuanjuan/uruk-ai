@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d3euasv2y2gev"
-path="res://.godot/imported/2_jet_front.png-6d62e3a96349546a0ee178e60b1e0c73.ctex"
+uid="uid://rvwv1smsfr80"
+path="res://.godot/imported/4_zealot_front.png-b4a559ee4315b5d80187347a8d512d67.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Art/Placeholders/Units/2_jet_front.png"
-dest_files=["res://.godot/imported/2_jet_front.png-6d62e3a96349546a0ee178e60b1e0c73.ctex"]
+source_file="res://Art/Placeholders/Units/4_zealot_front.png"
+dest_files=["res://.godot/imported/4_zealot_front.png-b4a559ee4315b5d80187347a8d512d67.ctex"]
 
 [params]
 
