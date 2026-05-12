@@ -29,12 +29,36 @@ public partial class CharacterClass : Resource
 	public int GetBaseHP() { return BaseHP; }
 	public Texture2D GetFrontTexture() { return ClassTextureFront; }
 	public Texture2D GetBackTexture() { return ClassTextureBack; }
-	public AttackPerPosition GetAttackPerPosition(int Row) { return AttacksPerPosition[Row]; }
 	public int GetBaseAttackDamage() { return BaseAttackDamage; }
 	public int GetBaseSpeed() { return BaseSpeed; }
 	public CombatConfig.ArmorType GetArmorType() { return ArmorType; }
 	public Godot.Collections.Array<ClassRequirements> GetRequirements() { return Requirements; }
 	public int GetXPToNextLevel() { return XPToNextLevel; }
+	public AttackPerPosition GetAttackPerPosition(int Row)
+	{
+		var position = Row;
+		switch (Row)
+		{
+			case 1:
+			case 2:
+				position = 1;
+				break;
+			case 3:
+			case 4:
+				position = 2;
+				break;
+			case 0:
+			default:
+				position = 0;
+				break;
+		}
+
+		return AttacksPerPosition[position];
+	}
+
+	// row 0 back
+	// row 1 y 2 middle
+	// row 3 y 4 front
 }
 
 public enum MovementType

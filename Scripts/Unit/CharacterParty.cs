@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 public partial class CharacterParty : Node
 {
-    public const int ROWS = 3;
+    public const int ROWS = 5;
     public const int COLUMNS = 5;
 
     private Dictionary<OrcInstance, PartyPosition> origin = new();
@@ -26,12 +26,25 @@ public partial class CharacterParty : Node
         foreach (var kv in origin)
         {
             var other = kv.Key;
-            if (other == movingOrc) continue;
+            if (other == movingOrc)
+                continue;
 
             var pos = kv.Value;
-            if (pos.Row != row) continue;
 
-            if (Mathf.Abs(pos.Column - col) <= 1)
+            int rowDiff = Mathf.Abs(pos.Row - row);
+            int colDiff = Mathf.Abs(pos.Column - col);
+
+            // mismo tile
+            if (rowDiff == 0 && colDiff == 0)
+                return false;
+
+            // adyacencia cardinal
+            // manhattan distance
+            bool adjacent =
+                (rowDiff == 1 && colDiff == 0) ||
+                (rowDiff == 0 && colDiff == 1);
+
+            if (adjacent)
                 return false;
         }
 

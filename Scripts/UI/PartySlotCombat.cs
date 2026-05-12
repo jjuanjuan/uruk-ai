@@ -217,23 +217,7 @@ public partial class PartySlotCombat : Control
 			return false;
 		}
 
-		bool valid = true;
-
-		// adyacencia
-		int start = Mathf.Max(0, Column - 1);
-		int end = Mathf.Min(CharacterParty.COLUMNS - 1, Column + 1);
-
-		for (int c = start; c <= end; c++)
-		{
-			var other = Party.GetOrc(Row, c);
-
-			if (other != null && other != orc)
-			{
-				valid = false;
-				break;
-			}
-		}
-
+		bool valid = Party.CanPlaceOrc(Row, Column, orc);
 		if (valid) ApplyValid();
 		else ApplyInvalid();
 
@@ -319,22 +303,7 @@ public partial class PartySlotCombat : Control
 			return;
 		}
 
-		bool valid = true;
-
-		int start = Mathf.Max(0, Column - 1);
-		int end = Mathf.Min(CharacterParty.COLUMNS - 1, Column + 1);
-
-		for (int c = start; c <= end; c++)
-		{
-			var other = Party.GetOrc(Row, c);
-
-			if (other != null && other != orc)
-			{
-				valid = false;
-				break;
-			}
-		}
-
+		bool valid = Party.CanPlaceOrc(Row, Column, orc);
 		if (valid) ApplyValid();
 		else ApplyInvalid();
 	}
