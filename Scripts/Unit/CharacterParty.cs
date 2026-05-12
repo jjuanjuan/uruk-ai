@@ -57,6 +57,16 @@ public partial class CharacterParty : Node
         if (!CanPlaceOrc(row, col, orc))
             return false;
 
+        if (orc.CurrentParty != null && orc.CurrentParty != this)
+        {
+            orc.CurrentParty.RemoveOrc(
+                orc.PartyPosition.Row,
+                orc.PartyPosition.Column
+            );
+        }
+
+        orc.CurrentParty = this;
+
         origin[orc] = new PartyPosition(row, col);
         orc.PartyPosition = new PartyPosition(row, col);
         GD.Print($"Placed {orc.GetCustomName()} in {row},{col}");

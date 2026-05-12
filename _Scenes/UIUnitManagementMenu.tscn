@@ -75,7 +75,7 @@ offset_bottom = 370.0
 text = "Create
 Orc"
 
-[node name="UI Party Pool" type="Panel" parent="." unique_id=370364582]
+[node name="UI Party Pool" type="Panel" parent="." unique_id=370364582 node_paths=PackedStringArray("List")]
 layout_mode = 1
 offset_left = 162.0
 offset_top = 40.0
@@ -83,7 +83,8 @@ offset_right = 962.0
 offset_bottom = 630.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_eqnvv")
 script = ExtResource("2_ck0cg")
-PoolItemScene = ExtResource("3_8hk38")
+UIPartyScene = ExtResource("3_8hk38")
+List = NodePath("MarginContainer/ScrollContainer/GridContainer")
 
 [node name="RichTextLabel" type="RichTextLabel" parent="UI Party Pool" unique_id=1766278948]
 layout_mode = 1
@@ -126,70 +127,6 @@ size_flags_vertical = 3
 theme_override_constants/h_separation = 10
 theme_override_constants/v_separation = 10
 columns = 5
-
-[node name="SmallParty" parent="UI Party Pool/MarginContainer/ScrollContainer/GridContainer" unique_id=742573588 instance=ExtResource("3_8hk38")]
-custom_minimum_size = Vector2(140, 140)
-layout_mode = 2
-
-[node name="SmallParty2" parent="UI Party Pool/MarginContainer/ScrollContainer/GridContainer" unique_id=1396978466 instance=ExtResource("3_8hk38")]
-custom_minimum_size = Vector2(140, 140)
-layout_mode = 2
-
-[node name="SmallParty3" parent="UI Party Pool/MarginContainer/ScrollContainer/GridContainer" unique_id=1495725908 instance=ExtResource("3_8hk38")]
-custom_minimum_size = Vector2(140, 140)
-layout_mode = 2
-
-[node name="SmallParty4" parent="UI Party Pool/MarginContainer/ScrollContainer/GridContainer" unique_id=750125132 instance=ExtResource("3_8hk38")]
-custom_minimum_size = Vector2(140, 140)
-layout_mode = 2
-
-[node name="SmallParty5" parent="UI Party Pool/MarginContainer/ScrollContainer/GridContainer" unique_id=204766406 instance=ExtResource("3_8hk38")]
-custom_minimum_size = Vector2(140, 140)
-layout_mode = 2
-
-[node name="SmallParty6" parent="UI Party Pool/MarginContainer/ScrollContainer/GridContainer" unique_id=762388561 instance=ExtResource("3_8hk38")]
-custom_minimum_size = Vector2(140, 140)
-layout_mode = 2
-
-[node name="SmallParty7" parent="UI Party Pool/MarginContainer/ScrollContainer/GridContainer" unique_id=680835105 instance=ExtResource("3_8hk38")]
-custom_minimum_size = Vector2(140, 140)
-layout_mode = 2
-
-[node name="SmallParty8" parent="UI Party Pool/MarginContainer/ScrollContainer/GridContainer" unique_id=982998041 instance=ExtResource("3_8hk38")]
-custom_minimum_size = Vector2(140, 140)
-layout_mode = 2
-
-[node name="SmallParty9" parent="UI Party Pool/MarginContainer/ScrollContainer/GridContainer" unique_id=205451742 instance=ExtResource("3_8hk38")]
-custom_minimum_size = Vector2(140, 140)
-layout_mode = 2
-
-[node name="SmallParty10" parent="UI Party Pool/MarginContainer/ScrollContainer/GridContainer" unique_id=1889841261 instance=ExtResource("3_8hk38")]
-custom_minimum_size = Vector2(140, 140)
-layout_mode = 2
-
-[node name="SmallParty11" parent="UI Party Pool/MarginContainer/ScrollContainer/GridContainer" unique_id=891516297 instance=ExtResource("3_8hk38")]
-custom_minimum_size = Vector2(140, 140)
-layout_mode = 2
-
-[node name="SmallParty12" parent="UI Party Pool/MarginContainer/ScrollContainer/GridContainer" unique_id=777355541 instance=ExtResource("3_8hk38")]
-custom_minimum_size = Vector2(140, 140)
-layout_mode = 2
-
-[node name="SmallParty13" parent="UI Party Pool/MarginContainer/ScrollContainer/GridContainer" unique_id=238783329 instance=ExtResource("3_8hk38")]
-custom_minimum_size = Vector2(140, 140)
-layout_mode = 2
-
-[node name="SmallParty14" parent="UI Party Pool/MarginContainer/ScrollContainer/GridContainer" unique_id=426672831 instance=ExtResource("3_8hk38")]
-custom_minimum_size = Vector2(140, 140)
-layout_mode = 2
-
-[node name="SmallParty15" parent="UI Party Pool/MarginContainer/ScrollContainer/GridContainer" unique_id=222787388 instance=ExtResource("3_8hk38")]
-custom_minimum_size = Vector2(140, 140)
-layout_mode = 2
-
-[node name="SmallParty16" parent="UI Party Pool/MarginContainer/ScrollContainer/GridContainer" unique_id=413485085 instance=ExtResource("3_8hk38")]
-custom_minimum_size = Vector2(140, 140)
-layout_mode = 2
 
 [node name="UI Orc Pool" type="Panel" parent="." unique_id=592017298 node_paths=PackedStringArray("list")]
 layout_mode = 1

@@ -18,6 +18,7 @@ public partial class OrcInstance : Resource
     public bool IsAlive => CurrentHP > 0;
 
     public PartyPosition PartyPosition;
+    public CharacterParty CurrentParty;
 
     public string GetCustomName()
     {

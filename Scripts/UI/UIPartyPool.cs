@@ -2,11 +2,34 @@ using Godot;
 
 public partial class UIPartyPool : Control
 {
-    [Export] public PackedScene PoolItemScene;
-    [Export] GridContainer list;
+    [Export] PackedScene UIPartyScene;
+    [Export] GridContainer List;
+
+    public override void _Ready()
+    {
+        GameManager.I.PartiesChanged += Refresh;
+
+        Refresh();
+    }
 
     public void Refresh()
     {
-        // do stuff
+        foreach (Node child in List.GetChildren())
+        {
+            child.QueueFree();
+        }
+
+        var parties = GameManager.I.GetPartiesByTeam(
+            TeamId.Player
+        );
+
+        foreach (var party in parties)
+        {
+            var ui = UIPartyScene.Instantiate<UIPartyManagement>();
+
+            List.AddChild(ui);
+
+            ui.Setup(party);
+        }
     }
 }

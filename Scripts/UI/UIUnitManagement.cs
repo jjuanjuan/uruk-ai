@@ -44,7 +44,18 @@ public partial class UIUnitManagement : Control
     }
     void CreatePartyPlayer()
     {
-        // TODO: Create party with Orc selected as Leader and add it to the party
-        GameManager.I.PlayerPartyPool.CreateParty();
+        var selected = GameManager.I.SelectedOrc;
+
+        if (selected == null)
+            return;
+
+        var party = GameManager.I.CreateParty(GameManager.I.PlayerTeam, selected.GetCustomName() + "'s Party");
+
+        party.SetLeader(selected);
+
+        // poner leader en posición default
+        party.PlaceOrc(selected, 2, 2);
+
+        PartyPoolUI.Refresh();
     }
 }
