@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://cv8iaby88pfrn"]
 
 [ext_resource type="Script" uid="uid://dafbm0wrbof85" path="res://Scripts/UI/UIPartyManagement.cs" id="1_quso7"]
-[ext_resource type="PackedScene" uid="uid://b21lurauknkrw" path="res://_Scenes/PartySlotManagement.tscn" id="2_n21tk"]
+[ext_resource type="PackedScene" uid="uid://b21lurauknkrw" path="res://_Scenes/PartySlotSmall.tscn" id="2_n21tk"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fnj3o"]
 bg_color = Color(0.4700758, 0.47007585, 0.47007567, 1)

@@ -14,7 +14,7 @@ public partial class UIPartyManagement : Control
 
     void AssignSlots()
     {
-        foreach (PartySlotManagement slot in BoardRoot.GetChildren())
+        foreach (PartySlotSmall slot in BoardRoot.GetChildren())
         {
             slot.UIParty = this;
         }
@@ -27,7 +27,7 @@ public partial class UIPartyManagement : Control
 
         Party = party;
 
-        foreach (PartySlotManagement slot in BoardRoot.GetChildren())
+        foreach (PartySlotSmall slot in BoardRoot.GetChildren())
         {
             slot.Party = Party;
         }
@@ -43,7 +43,7 @@ public partial class UIPartyManagement : Control
         if (Party == null)
             return;
 
-        foreach (PartySlotManagement slot in BoardRoot.GetChildren())
+        foreach (PartySlotSmall slot in BoardRoot.GetChildren())
         {
             var orc = Party.GetOrc(slot.Row, slot.Column);
 

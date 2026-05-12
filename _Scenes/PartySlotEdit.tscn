@@ -1,17 +1,17 @@
-[gd_scene format=3 uid="uid://b21lurauknkrw"]
+[gd_scene format=3 uid="uid://cafr2y4kkkt35"]
 
-[ext_resource type="Script" uid="uid://cf1v7v21op0g3" path="res://Scripts/UI/PartySlotManagement.cs" id="1_e5ain"]
-[ext_resource type="Script" uid="uid://bqpqwbfis0yul" path="res://Scripts/UI/HealthBar.cs" id="2_6ktk8"]
-[ext_resource type="Texture2D" uid="uid://3geatbyu0jce" path="res://Art/Placeholders/Units/2_knight_front.png" id="3_cib25"]
-[ext_resource type="FontFile" uid="uid://dd6yoetodmb25" path="res://Art/Fonts/PixgamerRegular-OVD6A.ttf" id="4_we5t2"]
+[ext_resource type="Script" uid="uid://cjep5g4r12pu7" path="res://Scripts/UI/PartySlotEdit.cs" id="1_ok687"]
+[ext_resource type="Script" uid="uid://bqpqwbfis0yul" path="res://Scripts/UI/HealthBar.cs" id="2_xknuo"]
+[ext_resource type="Texture2D" uid="uid://3geatbyu0jce" path="res://Art/Placeholders/Units/2_knight_front.png" id="3_unseh"]
+[ext_resource type="FontFile" uid="uid://dd6yoetodmb25" path="res://Art/Fonts/PixgamerRegular-OVD6A.ttf" id="4_0etaj"]
 
 [node name="PartySlot" type="Control" unique_id=506167646 node_paths=PackedStringArray("CharImg", "CharName", "HPBarParent", "HPBar", "Background")]
-custom_minimum_size = Vector2(80, 80)
+custom_minimum_size = Vector2(125, 125)
 layout_mode = 3
 anchors_preset = 0
 offset_right = 80.0
 offset_bottom = 80.0
-script = ExtResource("1_e5ain")
+script = ExtResource("1_ok687")
 CharImg = NodePath("Control/CharImg")
 CharName = NodePath("Control/CharImg/CharName")
 HPBarParent = NodePath("Control/HP Bar parent")
@@ -25,7 +25,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-pivot_offset = Vector2(40, 40)
+pivot_offset_ratio = Vector2(0.5, 0.5)
 mouse_filter = 2
 
 [node name="HP Bar parent" type="ColorRect" parent="Control" unique_id=349579198]
@@ -34,10 +34,10 @@ layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -40.0
-offset_top = 5.0
-offset_right = -29.0
-offset_bottom = 69.0
+offset_left = -60.5
+offset_top = 24.0
+offset_right = -49.5
+offset_bottom = 104.0
 grow_horizontal = 2
 mouse_filter = 2
 color = Color(0, 0, 0, 1)
@@ -49,21 +49,13 @@ layout_mode = 1
 offset_left = 2.0
 offset_top = 2.0
 offset_right = 9.0
-offset_bottom = 62.0
+offset_bottom = 78.0
 mouse_filter = 2
 max_value = 1.0
 step = 0.05
-script = ExtResource("2_6ktk8")
+script = ExtResource("2_xknuo")
 DamageColor = Color(0.48775607, 1.0287948e-06, 3.3691526e-07, 1)
 HealthyColor = Color(0.19966345, 0.41822335, 0, 1)
-
-[node name="Flash overlay" type="ColorRect" parent="Control/HP Bar parent/HP Bar" unique_id=2077018479]
-visible = false
-custom_minimum_size = Vector2(2, 2)
-layout_mode = 1
-offset_right = 7.0
-offset_bottom = 60.0
-mouse_filter = 2
 
 [node name="CharImg" type="TextureRect" parent="Control" unique_id=34993198]
 z_index = 2
@@ -76,7 +68,7 @@ grow_vertical = 2
 pivot_offset = Vector2(50, 50)
 size_flags_vertical = 3
 mouse_filter = 2
-texture = ExtResource("3_cib25")
+texture = ExtResource("3_unseh")
 expand_mode = 2
 stretch_mode = 5
 
@@ -91,7 +83,7 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_vertical = 3
 mouse_filter = 2
-texture = ExtResource("3_cib25")
+texture = ExtResource("3_unseh")
 expand_mode = 2
 stretch_mode = 5
 
@@ -99,7 +91,8 @@ stretch_mode = 5
 z_index = 1
 custom_minimum_size = Vector2(40, 10)
 layout_mode = 1
-offset_right = 80.0
+offset_left = 2.0
+offset_right = 82.0
 offset_bottom = 19.0
 mouse_filter = 2
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.5)
@@ -107,7 +100,7 @@ theme_override_constants/shadow_outline_size = 4
 theme_override_constants/shadow_offset_x = 1
 theme_override_constants/shadow_offset_y = 1
 theme_override_constants/outline_size = 4
-theme_override_fonts/normal_font = ExtResource("4_we5t2")
+theme_override_fonts/normal_font = ExtResource("4_0etaj")
 theme_override_font_sizes/normal_font_size = 18
 text = "Boris"
 fit_content = true

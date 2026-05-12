@@ -1,0 +1,95 @@
+[gd_scene format=3 uid="uid://b21lurauknkrw"]
+
+[ext_resource type="Script" uid="uid://cf1v7v21op0g3" path="res://Scripts/UI/PartySlotSmall.cs" id="1_e5ain"]
+[ext_resource type="Script" uid="uid://bqpqwbfis0yul" path="res://Scripts/UI/HealthBar.cs" id="2_6ktk8"]
+[ext_resource type="Texture2D" uid="uid://3geatbyu0jce" path="res://Art/Placeholders/Units/2_knight_front.png" id="3_cib25"]
+
+[node name="PartySlot" type="Control" unique_id=506167646 node_paths=PackedStringArray("CharImg", "CharName", "HPBarParent", "HPBar", "Background")]
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 80.0
+offset_bottom = 80.0
+script = ExtResource("1_e5ain")
+CharImg = NodePath("Control/CharImg")
+CharName = NodePath("")
+HPBarParent = NodePath("Control/HP Bar parent")
+HPBar = NodePath("Control/HP Bar parent/HP Bar")
+Background = NodePath("SlotBackground")
+
+[node name="Control" type="Control" parent="." unique_id=1006174726]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(40, 40)
+mouse_filter = 2
+
+[node name="HP Bar parent" type="ColorRect" parent="Control" unique_id=349579198]
+custom_minimum_size = Vector2(2, 2)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -38.0
+offset_top = 5.0
+offset_right = -27.0
+offset_bottom = 69.0
+grow_horizontal = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 1)
+
+[node name="HP Bar" type="TextureProgressBar" parent="Control/HP Bar parent" unique_id=1757951918]
+z_index = 1
+custom_minimum_size = Vector2(2, 2)
+layout_mode = 1
+offset_left = 2.0
+offset_top = 2.0
+offset_right = 9.0
+offset_bottom = 62.0
+mouse_filter = 2
+max_value = 1.0
+step = 0.05
+script = ExtResource("2_6ktk8")
+DamageColor = Color(0.48775607, 1.0287948e-06, 3.3691526e-07, 1)
+HealthyColor = Color(0.19966345, 0.41822335, 0, 1)
+
+[node name="CharImg" type="TextureRect" parent="Control" unique_id=34993198]
+z_index = 2
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(50, 50)
+size_flags_vertical = 3
+mouse_filter = 2
+texture = ExtResource("3_cib25")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="FlashSprite" type="TextureRect" parent="Control/CharImg" unique_id=1905336900]
+visible = false
+z_index = 3
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 3
+mouse_filter = 2
+texture = ExtResource("3_cib25")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="SlotBackground" type="Panel" parent="." unique_id=1208245577]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2

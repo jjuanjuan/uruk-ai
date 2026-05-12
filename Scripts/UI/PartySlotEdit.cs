@@ -1,6 +1,6 @@
 using Godot;
 
-public partial class PartySlotManagement : Control
+public partial class PartySlotEdit : Control
 {
     [Export] public int Row;
     [Export] public int Column;
