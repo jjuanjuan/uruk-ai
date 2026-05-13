@@ -10,7 +10,17 @@ border_width_top = 8
 border_width_right = 8
 border_width_bottom = 8
 
-[node name="UIPartyInfo" type="Control" unique_id=382418319]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_q4s5w"]
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0, 0, 0, 1)
+shadow_color = Color(0, 0, 0, 0.5)
+shadow_size = 4
+shadow_offset = Vector2(2, 2)
+
+[node name="UIPartyInfo" type="Control" unique_id=382418319 node_paths=PackedStringArray("UnitName", "UnitLvl", "UnitClass", "UnitHP", "UnitSTR", "UnitDEX", "UnitINT", "UnitWIS", "UnitSPD", "UnitArmor", "UnitMovement", "UnitAttack", "SetLeaderButton", "ChangeClassButton", "CloseButton", "SlotsContainer")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -18,8 +28,25 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_q4s5w")
+UnitName = NodePath("Unit Stats/Label Name")
+UnitLvl = NodePath("Unit Stats/Label Lvl")
+UnitClass = NodePath("Unit Stats/Label Class/Value Class")
+UnitHP = NodePath("Unit Stats/Label HP/Value HP")
+UnitSTR = NodePath("Unit Stats/Label Str/Value Str")
+UnitDEX = NodePath("Unit Stats/Label Dex/Value Dex")
+UnitINT = NodePath("Unit Stats/Label Int/Value Int")
+UnitWIS = NodePath("Unit Stats/Label Wis/Value Wis")
+UnitSPD = NodePath("Unit Stats/Label Spd/Value Spd")
+UnitArmor = NodePath("Unit Stats/Label Armor")
+UnitMovement = NodePath("Unit Stats/Label Movement Type")
+UnitAttack = NodePath("Unit Stats/Label Attack/Value Attack")
+SetLeaderButton = NodePath("Button Panel/SetLeaderButton")
+ChangeClassButton = NodePath("Button Panel/ChangeClassButton")
+CloseButton = NodePath("CloseButton")
+SlotsContainer = NodePath("Party UI/SlotsContainer")
 
 [node name="Background" type="ColorRect" parent="." unique_id=576227407]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -776,4 +803,5 @@ offset_bottom = 90.0
 theme_override_constants/outline_size = 4
 theme_override_fonts/font = ExtResource("1_v8s7c")
 theme_override_font_sizes/font_size = 24
+theme_override_styles/normal = SubResource("StyleBoxFlat_q4s5w")
 text = "X"

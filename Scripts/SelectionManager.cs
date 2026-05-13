@@ -4,14 +4,13 @@ public partial class SelectionManager : Node
 {
     public static SelectionManager I;
 
-    [Signal]
-    public delegate void SelectedOrcChangedEventHandler(OrcInstance orc);
-
-    [Signal]
-    public delegate void SelectedMapUnitChangedEventHandler(MapUnit unit);
+    [Signal] public delegate void SelectedOrcChangedEventHandler(OrcInstance orc);
+    [Signal] public delegate void SelectedMapUnitChangedEventHandler(MapUnit unit);
+    [Signal] public delegate void SelectedPartyChangedEventHandler(CharacterParty party);
 
     public OrcInstance SelectedOrc;
     public MapUnit SelectedMapUnit;
+    public CharacterParty SelectedParty;
 
     public override void _EnterTree()
     {
@@ -75,6 +74,29 @@ public partial class SelectionManager : Node
         EmitSignal(
             SignalName.SelectedMapUnitChanged,
             (MapUnit)null
+        );
+    }
+
+    // =====================================================
+    // Select Party
+    // =====================================================
+    public void SelectParty(CharacterParty party)
+    {
+        SelectedParty = party;
+
+        EmitSignal(
+            SignalName.SelectedPartyChanged,
+            party
+        );
+    }
+
+    public void ClearPartySelection()
+    {
+        SelectedParty = null;
+
+        EmitSignal(
+            SignalName.SelectedPartyChanged,
+            (CharacterParty)null
         );
     }
 }

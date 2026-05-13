@@ -27,8 +27,6 @@ public partial class GameManager : Node
     [Signal] public delegate void PartiesChangedEventHandler();
     [Signal] public delegate void SelectedOrcChangedEventHandler(OrcInstance orc);
 
-    public OrcInstance SelectedOrc { get; private set; }
-
     // SINGLETON
     public static GameManager I { get; private set; }
 
@@ -193,21 +191,6 @@ public partial class GameManager : Node
                 return true;
         }
         return false;
-    }
-
-    // =====================================================
-    // SELECTION
-    // =====================================================
-    public void SelectOrc(OrcInstance orc)
-    {
-        SelectedOrc = orc;
-        EmitSignal(SignalName.SelectedOrcChanged, orc);
-    }
-
-    public void ClearSelection()
-    {
-        SelectedOrc = null;
-        EmitSignal(SignalName.SelectedOrcChanged, (OrcInstance)null);
     }
 
     // =====================================================

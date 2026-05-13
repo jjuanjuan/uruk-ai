@@ -5,10 +5,12 @@ public partial class UIUnitManagement : Control
 {
     [Export] public UIOrcPool OrcPoolUI;
     [Export] public UIPartyPool PartyPoolUI;
+    [Export] UIPartyInfo UIPartyInfo;
 
     [Export] Button CloseButton;
     [Export] Button GenerateOrcButton;
     [Export] Button CreatePartyButton;
+    [Export] Button EditPartyButton;
 
     public override void _Ready()
     {
@@ -16,6 +18,7 @@ public partial class UIUnitManagement : Control
         CloseButton.Pressed += Close;
         GenerateOrcButton.Pressed += GenerateOrc;
         CreatePartyButton.Pressed += CreatePartyPlayer;
+        EditPartyButton.Pressed += EditParty;
 
         RefreshPools();
     }
@@ -38,13 +41,27 @@ public partial class UIUnitManagement : Control
         PartyPoolUI.Refresh();
     }
 
+    void EditParty()
+    {
+        var party = SelectionManager.I.SelectedParty;
+
+        if (party == null)
+        {
+            GD.Print("No party selected");
+            return;
+        }
+
+        UIPartyInfo.Visible = true;
+        UIPartyInfo.Setup(party);
+    }
+
     void GenerateOrc()
     {
         GameManager.I.GenerateOrc();
     }
     void CreatePartyPlayer()
     {
-        var selected = GameManager.I.SelectedOrc;
+        var selected = SelectionManager.I.SelectedOrc;
 
         if (selected == null)
             return;
@@ -57,5 +74,7 @@ public partial class UIUnitManagement : Control
         party.PlaceOrc(selected, 2, 2);
 
         PartyPoolUI.Refresh();
+
+        SelectionManager.I.SelectedParty = party;
     }
 }

@@ -45,13 +45,13 @@ public partial class PartySlotCombat : Control
 		UpdateVisual();
 		Background.Visible = false;
 
-		GameManager.I.SelectedOrcChanged += OnSelectedChanged;
+		SelectionManager.I.SelectedOrcChanged += OnSelectedChanged;
 	}
 
 	public override void _ExitTree()
 	{
-		if (GameManager.I != null)
-			GameManager.I.SelectedOrcChanged -= OnSelectedChanged;
+		if (SelectionManager.I != null)
+			SelectionManager.I.SelectedOrcChanged -= OnSelectedChanged;
 	}
 
 	public void UpdateVisual()
@@ -140,7 +140,7 @@ public partial class PartySlotCombat : Control
 
 		UpdateVisual();
 
-		if (GameManager.I.SelectedOrc == orc)
+		if (SelectionManager.I.SelectedOrc == orc)
 			AddThemeStyleboxOverride("panel", selectedStyle);
 		else
 			ApplyNormal();
@@ -265,7 +265,7 @@ public partial class PartySlotCombat : Control
 	public override void _Process(double delta)
 	{
 		// no sobreescribir el highlight de selected
-		if (GameManager.I.SelectedOrc == Orc)
+		if (SelectionManager.I.SelectedOrc == Orc)
 			return;
 
 		if (!DragState.IsDragging || DragState.Data == null)
@@ -461,7 +461,7 @@ public partial class PartySlotCombat : Control
 			mb.Pressed &&
 			mb.ButtonIndex == MouseButton.Left)
 		{
-			GameManager.I.SelectOrc(Orc);
+			SelectionManager.I.SelectOrc(Orc);
 		}
 	}
 	void OnSelectedChanged(OrcInstance selected)

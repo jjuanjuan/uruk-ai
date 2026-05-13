@@ -19,7 +19,7 @@ public partial class PoolItem : PanelContainer
         BuildStyles();
         ApplyNormal();
 
-        GameManager.I.SelectedOrcChanged += OnSelectedChanged;
+        SelectionManager.I.SelectedOrcChanged += OnSelectedChanged;
     }
 
     public void Setup(OrcInstance orc)
@@ -32,8 +32,8 @@ public partial class PoolItem : PanelContainer
 
     public override void _ExitTree()
     {
-        if (GameManager.I != null)
-            GameManager.I.SelectedOrcChanged -= OnSelectedChanged;
+        if (SelectionManager.I != null)
+            SelectionManager.I.SelectedOrcChanged -= OnSelectedChanged;
     }
 
     // DRAG START
@@ -69,7 +69,7 @@ public partial class PoolItem : PanelContainer
             mb.Pressed &&
             mb.ButtonIndex == MouseButton.Left)
         {
-            GameManager.I.SelectOrc(Orc);
+            SelectionManager.I.SelectOrc(Orc);
         }
     }
 

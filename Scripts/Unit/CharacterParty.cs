@@ -118,6 +118,7 @@ public partial class CharacterParty : Node
         if (orc == null) return;
 
         origin.Remove(orc);
+        orc.CurrentParty = null;
 
         EmitAllSignals();
     }

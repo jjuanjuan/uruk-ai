@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://cv8iaby88pfrn"]
 
-[ext_resource type="Script" uid="uid://dafbm0wrbof85" path="res://Scripts/UI/UIPartyManagement.cs" id="1_quso7"]
-[ext_resource type="PackedScene" uid="uid://b21lurauknkrw" path="res://_Scenes/PartySlotSmall.tscn" id="2_n21tk"]
+[ext_resource type="Script" uid="uid://dafbm0wrbof85" path="res://Scripts/UI/UIPartySmall.cs" id="1_2k62b"]
+[ext_resource type="PackedScene" uid="uid://b21lurauknkrw" path="res://_Scenes/PartySlotSmall.tscn" id="2_iwj2a"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fnj3o"]
 bg_color = Color(0.4700758, 0.47007585, 0.47007567, 1)
@@ -19,7 +19,7 @@ custom_minimum_size = Vector2(140, 140)
 offset_right = 140.0
 offset_bottom = 140.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_fnj3o")
-script = ExtResource("1_quso7")
+script = ExtResource("1_2k62b")
 BoardRoot = NodePath("BoardContainer")
 
 [node name="BoardContainer" type="Control" parent="." unique_id=489692257]
@@ -30,7 +30,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="PartySlot" parent="BoardContainer" unique_id=506167646 instance=ExtResource("2_n21tk")]
+[node name="PartySlot" parent="BoardContainer" unique_id=506167646 instance=ExtResource("2_iwj2a")]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 0
 offset_left = 10.0
@@ -38,7 +38,7 @@ offset_top = 10.0
 offset_right = 50.0
 offset_bottom = 50.0
 
-[node name="PartySlot2" parent="BoardContainer" unique_id=1382688674 instance=ExtResource("2_n21tk")]
+[node name="PartySlot2" parent="BoardContainer" unique_id=1382688674 instance=ExtResource("2_iwj2a")]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 0
 offset_left = 30.0
@@ -47,7 +47,7 @@ offset_right = 70.0
 offset_bottom = 50.0
 Column = 1
 
-[node name="PartySlot3" parent="BoardContainer" unique_id=1025774346 instance=ExtResource("2_n21tk")]
+[node name="PartySlot3" parent="BoardContainer" unique_id=1025774346 instance=ExtResource("2_iwj2a")]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 0
 offset_left = 50.0
@@ -56,7 +56,7 @@ offset_right = 90.0
 offset_bottom = 50.0
 Column = 2
 
-[node name="PartySlot4" parent="BoardContainer" unique_id=1384099921 instance=ExtResource("2_n21tk")]
+[node name="PartySlot4" parent="BoardContainer" unique_id=1384099921 instance=ExtResource("2_iwj2a")]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 0
 offset_left = 70.0
@@ -65,7 +65,7 @@ offset_right = 110.0
 offset_bottom = 50.0
 Column = 3
 
-[node name="PartySlot5" parent="BoardContainer" unique_id=884276667 instance=ExtResource("2_n21tk")]
+[node name="PartySlot5" parent="BoardContainer" unique_id=884276667 instance=ExtResource("2_iwj2a")]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 0
 offset_left = 90.0
@@ -74,7 +74,7 @@ offset_right = 130.0
 offset_bottom = 50.0
 Column = 4
 
-[node name="PartySlot6" parent="BoardContainer" unique_id=1477255480 instance=ExtResource("2_n21tk")]
+[node name="PartySlot6" parent="BoardContainer" unique_id=1477255480 instance=ExtResource("2_iwj2a")]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 0
 offset_left = 10.0
@@ -83,7 +83,7 @@ offset_right = 50.0
 offset_bottom = 70.0
 Row = 1
 
-[node name="PartySlot7" parent="BoardContainer" unique_id=415911695 instance=ExtResource("2_n21tk")]
+[node name="PartySlot7" parent="BoardContainer" unique_id=415911695 instance=ExtResource("2_iwj2a")]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 0
 offset_left = 30.0
@@ -93,7 +93,7 @@ offset_bottom = 70.0
 Row = 1
 Column = 1
 
-[node name="PartySlot8" parent="BoardContainer" unique_id=1888218706 instance=ExtResource("2_n21tk")]
+[node name="PartySlot8" parent="BoardContainer" unique_id=1888218706 instance=ExtResource("2_iwj2a")]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 0
 offset_left = 50.0
@@ -103,7 +103,7 @@ offset_bottom = 70.0
 Row = 1
 Column = 2
 
-[node name="PartySlot9" parent="BoardContainer" unique_id=1772720964 instance=ExtResource("2_n21tk")]
+[node name="PartySlot9" parent="BoardContainer" unique_id=1772720964 instance=ExtResource("2_iwj2a")]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 0
 offset_left = 70.0
@@ -113,7 +113,7 @@ offset_bottom = 70.0
 Row = 1
 Column = 3
 
-[node name="PartySlot10" parent="BoardContainer" unique_id=442661234 instance=ExtResource("2_n21tk")]
+[node name="PartySlot10" parent="BoardContainer" unique_id=442661234 instance=ExtResource("2_iwj2a")]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 0
 offset_left = 90.0
@@ -123,7 +123,7 @@ offset_bottom = 70.0
 Row = 1
 Column = 4
 
-[node name="PartySlot11" parent="BoardContainer" unique_id=167785323 instance=ExtResource("2_n21tk")]
+[node name="PartySlot11" parent="BoardContainer" unique_id=167785323 instance=ExtResource("2_iwj2a")]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 0
 offset_left = 10.0
@@ -132,7 +132,7 @@ offset_right = 50.0
 offset_bottom = 90.0
 Row = 2
 
-[node name="PartySlot12" parent="BoardContainer" unique_id=937179200 instance=ExtResource("2_n21tk")]
+[node name="PartySlot12" parent="BoardContainer" unique_id=937179200 instance=ExtResource("2_iwj2a")]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 0
 offset_left = 30.0
@@ -142,7 +142,7 @@ offset_bottom = 90.0
 Row = 2
 Column = 1
 
-[node name="PartySlot13" parent="BoardContainer" unique_id=732955444 instance=ExtResource("2_n21tk")]
+[node name="PartySlot13" parent="BoardContainer" unique_id=732955444 instance=ExtResource("2_iwj2a")]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 0
 offset_left = 50.0
@@ -152,7 +152,7 @@ offset_bottom = 90.0
 Row = 2
 Column = 2
 
-[node name="PartySlot14" parent="BoardContainer" unique_id=337770682 instance=ExtResource("2_n21tk")]
+[node name="PartySlot14" parent="BoardContainer" unique_id=337770682 instance=ExtResource("2_iwj2a")]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 0
 offset_left = 70.0
@@ -162,7 +162,7 @@ offset_bottom = 90.0
 Row = 2
 Column = 3
 
-[node name="PartySlot15" parent="BoardContainer" unique_id=1071867984 instance=ExtResource("2_n21tk")]
+[node name="PartySlot15" parent="BoardContainer" unique_id=1071867984 instance=ExtResource("2_iwj2a")]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 0
 offset_left = 90.0
@@ -172,7 +172,7 @@ offset_bottom = 90.0
 Row = 2
 Column = 4
 
-[node name="PartySlot16" parent="BoardContainer" unique_id=345716690 instance=ExtResource("2_n21tk")]
+[node name="PartySlot16" parent="BoardContainer" unique_id=345716690 instance=ExtResource("2_iwj2a")]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 0
 offset_left = 10.0
@@ -181,7 +181,7 @@ offset_right = 50.0
 offset_bottom = 110.0
 Row = 3
 
-[node name="PartySlot17" parent="BoardContainer" unique_id=1676662332 instance=ExtResource("2_n21tk")]
+[node name="PartySlot17" parent="BoardContainer" unique_id=1676662332 instance=ExtResource("2_iwj2a")]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 0
 offset_left = 30.0
@@ -191,7 +191,7 @@ offset_bottom = 110.0
 Row = 3
 Column = 1
 
-[node name="PartySlot18" parent="BoardContainer" unique_id=164750057 instance=ExtResource("2_n21tk")]
+[node name="PartySlot18" parent="BoardContainer" unique_id=164750057 instance=ExtResource("2_iwj2a")]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 0
 offset_left = 50.0
@@ -201,7 +201,7 @@ offset_bottom = 110.0
 Row = 3
 Column = 2
 
-[node name="PartySlot19" parent="BoardContainer" unique_id=970275804 instance=ExtResource("2_n21tk")]
+[node name="PartySlot19" parent="BoardContainer" unique_id=970275804 instance=ExtResource("2_iwj2a")]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 0
 offset_left = 70.0
@@ -211,7 +211,7 @@ offset_bottom = 110.0
 Row = 3
 Column = 3
 
-[node name="PartySlot20" parent="BoardContainer" unique_id=1748617227 instance=ExtResource("2_n21tk")]
+[node name="PartySlot20" parent="BoardContainer" unique_id=1748617227 instance=ExtResource("2_iwj2a")]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 0
 offset_left = 90.0
@@ -221,7 +221,7 @@ offset_bottom = 110.0
 Row = 3
 Column = 4
 
-[node name="PartySlot21" parent="BoardContainer" unique_id=443538643 instance=ExtResource("2_n21tk")]
+[node name="PartySlot21" parent="BoardContainer" unique_id=443538643 instance=ExtResource("2_iwj2a")]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 0
 offset_left = 10.0
@@ -230,7 +230,7 @@ offset_right = 50.0
 offset_bottom = 130.0
 Row = 3
 
-[node name="PartySlot22" parent="BoardContainer" unique_id=706699424 instance=ExtResource("2_n21tk")]
+[node name="PartySlot22" parent="BoardContainer" unique_id=706699424 instance=ExtResource("2_iwj2a")]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 0
 offset_left = 30.0
@@ -240,7 +240,7 @@ offset_bottom = 130.0
 Row = 3
 Column = 1
 
-[node name="PartySlot23" parent="BoardContainer" unique_id=1420953249 instance=ExtResource("2_n21tk")]
+[node name="PartySlot23" parent="BoardContainer" unique_id=1420953249 instance=ExtResource("2_iwj2a")]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 0
 offset_left = 50.0
@@ -250,7 +250,7 @@ offset_bottom = 130.0
 Row = 3
 Column = 2
 
-[node name="PartySlot24" parent="BoardContainer" unique_id=652077647 instance=ExtResource("2_n21tk")]
+[node name="PartySlot24" parent="BoardContainer" unique_id=652077647 instance=ExtResource("2_iwj2a")]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 0
 offset_left = 70.0
@@ -260,7 +260,7 @@ offset_bottom = 130.0
 Row = 3
 Column = 3
 
-[node name="PartySlot25" parent="BoardContainer" unique_id=891131730 instance=ExtResource("2_n21tk")]
+[node name="PartySlot25" parent="BoardContainer" unique_id=891131730 instance=ExtResource("2_iwj2a")]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 0
 offset_left = 90.0

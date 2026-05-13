@@ -16,7 +16,7 @@ public partial class UIClassTree : Control
 
     public override void _Ready()
     {
-        if (GameManager.I.SelectedOrc == null)
+        if (SelectionManager.I.SelectedOrc == null)
         {
             CloseTree();
             return;
@@ -25,13 +25,13 @@ public partial class UIClassTree : Control
         GetNode<Button>("CloseButton").Pressed += CloseTree;
         LoadAllClasses();
         Build();
-        GameManager.I.SelectedOrcChanged += OnOrcSelected;
+        SelectionManager.I.SelectedOrcChanged += OnOrcSelected;
     }
     
     public override void _ExitTree()
     {
-        if (GameManager.I != null)
-            GameManager.I.SelectedOrcChanged -= OnOrcSelected;
+        if (SelectionManager.I != null)
+            SelectionManager.I.SelectedOrcChanged -= OnOrcSelected;
     }
     void CloseTree()
     {
@@ -55,7 +55,7 @@ public partial class UIClassTree : Control
                 var cc = list[i];
 
                 var node = ClassNodeScene.Instantiate<UIClassNode>();
-                node.Setup(cc, GameManager.I.SelectedOrc);
+                node.Setup(cc, SelectionManager.I.SelectedOrc);
 
                 node.Position = new Vector2(
                     column * X_SPACING,

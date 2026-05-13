@@ -11,7 +11,7 @@ public partial class PartySlotEdit : Control
     [Export] Panel Background;
 
     public CharacterParty Party;
-    public UIPartyManagement UIParty;
+    public UIPartyInfo UIParty;
     public OrcInstance Orc;
 
     // changing style when dragging
@@ -29,7 +29,36 @@ public partial class PartySlotEdit : Control
         UpdateVisual();
         Background.Visible = false;
 
-        GameManager.I.SelectedOrcChanged += OnSelectedChanged;
+        SelectionManager.I.SelectedOrcChanged += OnSelectedChanged;
+    }
+
+    public override Variant _GetDragData(Vector2 atPosition)
+    {
+        if (Orc == null)
+            return new Variant();
+
+        var data = new Godot.Collections.Dictionary
+    {
+        { "orc", Orc },
+        { "source", "party" },
+        { "from_row", Row },
+        { "from_col", Column },
+        { "from_party", Party }
+    };
+
+        DragState.IsDragging = true;
+        DragState.Data = data;
+
+        var preview = new TextureRect
+        {
+            Texture = CharImg.Texture,
+            CustomMinimumSize = new Vector2(48, 48),
+            ExpandMode = TextureRect.ExpandModeEnum.FitWidthProportional
+        };
+
+        SetDragPreview(preview);
+
+        return data;
     }
 
     public override bool _CanDropData(Vector2 atPosition, Variant data)
@@ -121,7 +150,7 @@ public partial class PartySlotEdit : Control
 
         UpdateVisual();
 
-        if (GameManager.I.SelectedOrc == orc)
+        if (SelectionManager.I.SelectedOrc == orc)
             AddThemeStyleboxOverride("panel", selectedStyle);
         else
             ApplyNormal();
@@ -210,7 +239,7 @@ public partial class PartySlotEdit : Control
             mb.Pressed &&
             mb.ButtonIndex == MouseButton.Left)
         {
-            GameManager.I.SelectOrc(Orc);
+            SelectionManager.I.SelectOrc(Orc);
         }
     }
     void OnSelectedChanged(OrcInstance selected)
@@ -233,7 +262,7 @@ public partial class PartySlotEdit : Control
     public override void _Process(double delta)
     {
         // no sobreescribir el highlight de selected
-        if (GameManager.I.SelectedOrc == Orc)
+        if (SelectionManager.I.SelectedOrc == Orc)
             return;
 
         if (!DragState.IsDragging || DragState.Data == null)

@@ -16,10 +16,23 @@ public partial class UIPartyInfo : Control
     [Export] RichTextLabel UnitAttack;
     //
 
+    [Export] Button SetLeaderButton;
+    [Export] Button ChangeClassButton;
+    [Export] Button CloseButton;
+
+    [Export] Control SlotsContainer;
+
+    CharacterParty Party;
 
     public override void _Ready()
     {
         SelectionManager.I.SelectedOrcChanged += OnSelectedOrcChanged;
+        CloseButton.Pressed += CloseMenu;
+    }
+
+    void CloseMenu()
+    {
+        QueueFree(); // TODO: animations
     }
 
     public override void _ExitTree()
@@ -27,6 +40,34 @@ public partial class UIPartyInfo : Control
         if (SelectionManager.I != null)
         {
             SelectionManager.I.SelectedOrcChanged -= OnSelectedOrcChanged;
+        }
+    }
+
+    public void Setup(CharacterParty party)
+    {
+        if (Party != null)
+            Party.PartyChanged -= RefreshParty;
+
+        Party = party;
+
+        if (Party != null)
+            Party.PartyChanged += RefreshParty;
+
+        RefreshParty();
+    }
+
+    void RefreshParty()
+    {
+        foreach (PartySlotEdit slot in SlotsContainer.GetChildren())
+        {
+            slot.Party = Party;
+
+            var orc = Party.GetOrc(
+                slot.Row,
+                slot.Column
+            );
+
+            slot.SetOrc(orc);
         }
     }
 

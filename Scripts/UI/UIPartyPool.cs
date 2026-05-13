@@ -25,7 +25,7 @@ public partial class UIPartyPool : Control
 
         foreach (var party in parties)
         {
-            var ui = UIPartyScene.Instantiate<UIPartyManagement>();
+            var ui = UIPartyScene.Instantiate<UIPartySmall>();
 
             List.AddChild(ui);
 

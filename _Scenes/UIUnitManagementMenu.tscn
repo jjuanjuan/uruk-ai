@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://xjr0uwhqqgxh" path="res://Scripts/UI/UIUnitManagement.cs" id="1_vy541"]
 [ext_resource type="Script" uid="uid://bh3knogh07yui" path="res://Scripts/UI/UIPartyPool.cs" id="2_ck0cg"]
-[ext_resource type="PackedScene" uid="uid://cv8iaby88pfrn" path="res://_Scenes/UIPartyManagement.tscn" id="3_8hk38"]
+[ext_resource type="PackedScene" uid="uid://cv8iaby88pfrn" path="res://_Scenes/UIPartySmall.tscn" id="3_8hk38"]
 [ext_resource type="FontFile" uid="uid://dd6yoetodmb25" path="res://Art/Fonts/PixgamerRegular-OVD6A.ttf" id="4_tipyi"]
 [ext_resource type="Script" uid="uid://jw62aqdff52j" path="res://Scripts/UI/UIOrcPool.cs" id="5_t7kqc"]
 [ext_resource type="PackedScene" uid="uid://jh1ftys40xae" path="res://_Scenes/PoolItem.tscn" id="6_ymbnh"]
@@ -16,7 +16,7 @@ border_width_right = 6
 border_width_bottom = 6
 border_color = Color(0.6651851, 0.6651851, 0.6651851, 1)
 
-[node name="UnitManagement" type="Control" unique_id=220139828 node_paths=PackedStringArray("OrcPoolUI", "PartyPoolUI", "CloseButton", "GenerateOrcButton", "CreatePartyButton")]
+[node name="UnitManagement" type="Control" unique_id=220139828 node_paths=PackedStringArray("OrcPoolUI", "PartyPoolUI", "UIPartyInfo", "CloseButton", "GenerateOrcButton", "CreatePartyButton", "EditPartyButton")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -26,9 +26,11 @@ grow_vertical = 2
 script = ExtResource("1_vy541")
 OrcPoolUI = NodePath("UI Orc Pool")
 PartyPoolUI = NodePath("UI Party Pool")
+UIPartyInfo = NodePath("UIPartyInfo")
 CloseButton = NodePath("Buttons panel/ReturnButton")
 GenerateOrcButton = NodePath("Buttons panel/GenerateOrcButton")
 CreatePartyButton = NodePath("Buttons panel/CreatePartyButton")
+EditPartyButton = NodePath("Buttons panel/EditPartyButton")
 
 [node name="Background" type="ColorRect" parent="." unique_id=1478789195]
 layout_mode = 1
@@ -75,6 +77,16 @@ offset_right = 100.0
 offset_bottom = 370.0
 text = "Create
 Orc"
+
+[node name="EditPartyButton" type="Button" parent="Buttons panel" unique_id=1726936111]
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 1
+offset_left = 20.0
+offset_top = 194.0
+offset_right = 100.0
+offset_bottom = 274.0
+text = "Edit
+Party"
 
 [node name="UI Party Pool" type="Panel" parent="." unique_id=370364582 node_paths=PackedStringArray("List")]
 layout_mode = 1
@@ -183,5 +195,6 @@ horizontal_scroll_mode = 0
 [node name="VBoxContainer" type="VBoxContainer" parent="UI Orc Pool/MarginContainer/ScrollContainer" unique_id=1368985311]
 layout_mode = 2
 
-[node name="UiPartyEdit" parent="." unique_id=382418319 instance=ExtResource("7_ck0cg")]
+[node name="UIPartyInfo" parent="." unique_id=382418319 instance=ExtResource("7_ck0cg")]
+visible = false
 layout_mode = 1

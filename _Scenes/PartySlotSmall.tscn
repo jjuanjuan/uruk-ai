@@ -4,15 +4,15 @@
 [ext_resource type="Script" uid="uid://bqpqwbfis0yul" path="res://Scripts/UI/HealthBar.cs" id="2_6ktk8"]
 [ext_resource type="Texture2D" uid="uid://3geatbyu0jce" path="res://Art/Placeholders/Units/2_knight_front.png" id="3_cib25"]
 
-[node name="PartySlot" type="Control" unique_id=506167646 node_paths=PackedStringArray("CharImg", "CharName", "HPBarParent", "HPBar", "Background")]
+[node name="PartySlot" type="Control" unique_id=506167646 node_paths=PackedStringArray("CharImg", "HPBarParent", "HPBar", "Background")]
 custom_minimum_size = Vector2(80, 80)
 layout_mode = 3
 anchors_preset = 0
 offset_right = 80.0
 offset_bottom = 80.0
+mouse_filter = 2
 script = ExtResource("1_e5ain")
 CharImg = NodePath("Control/CharImg")
-CharName = NodePath("")
 HPBarParent = NodePath("Control/HP Bar parent")
 HPBar = NodePath("Control/HP Bar parent/HP Bar")
 Background = NodePath("SlotBackground")
