@@ -26,11 +26,10 @@ metadata/_custom_type_script = "uid://du724smqstcfc"
 [resource]
 script = ExtResource("5_rj5nc")
 ClassName = "Apprentice"
-BaseHP = 25
 ClassTextureFront = ExtResource("5_a3hju")
 ClassTextureBack = ExtResource("3_gdkup")
 AttacksPerPosition = Array[Object]([SubResource("Resource_tq6mj"), SubResource("Resource_fvaiu"), SubResource("Resource_ooqhg")])
-BaseAttackDamage = 8
-BaseSpeed = 0
+GrowthInt = 20
+GrowthWis = 20
 Requirements = Array[Object]([])
 metadata/_custom_type_script = "uid://1pbhreu2codn"

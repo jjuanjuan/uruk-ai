@@ -1,7 +1,5 @@
 using Godot;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 
 [GlobalClass]
 public partial class OrcInstance : Resource
@@ -14,20 +12,34 @@ public partial class OrcInstance : Resource
     public PartyPosition PartyPosition;
     public CharacterParty CurrentParty;
 
+    // =====================================================
+    // STATS CACHE
+    // =====================================================
+
+    StatBlock cachedStats;
+    bool dirtyStats = true;
+
+    // =====================================================
     // STATS
-    public int MaxHP => Template.BaseHP + CharacterClass.BaseHP;
-    public int Str => Template.BaseStr + CharacterClass.BaseStr;
-    public int Dex => Template.BaseDex + CharacterClass.BaseDex;
-    public int Int => Template.BaseInt + CharacterClass.BaseInt;
-    public int Wis => Template.BaseWis + CharacterClass.BaseWis;
-    public int Spd => Template.BaseSpd + CharacterClass.BaseSpd;
+    // =====================================================
+
+    public StatBlock TotalStats => GetTotalStats();
+
+    public int MaxHP => TotalStats.HP;
+    public int Str => TotalStats.Str;
+    public int Dex => TotalStats.Dex;
+    public int Int => TotalStats.Int;
+    public int Wis => TotalStats.Wis;
+    public int Spd => TotalStats.Spd;
 
     public int CurrentHP => Mathf.Max(MaxHP - Damage, 0);
     public float CurrentHPPercentile => CurrentHP / (float)MaxHP;
     public bool IsAlive => CurrentHP > 0;
+
     public int Damage = 0;
 
-
+    // =====================================================
+    // BASIC
     public string GetCustomName()
     {
         return string.IsNullOrEmpty(CustomName)
@@ -35,15 +47,18 @@ public partial class OrcInstance : Resource
             : CustomName;
     }
 
+    // HP
     public void TakeDamage(int amount)
     {
         Damage += amount;
     }
+
     public void Heal(int amount)
     {
         Damage = Mathf.Max(0, Damage - amount);
     }
 
+    // CLASS
     public void ChangeClass(CharacterClass characterClass)
     {
         if (!CanChangeToClass(characterClass))
@@ -53,26 +68,8 @@ public partial class OrcInstance : Resource
         }
 
         CharacterClass = characterClass;
-    }
 
-    public ClassProgress GetProgress(CharacterClass characterClass)
-    {
-        foreach (var cp in ClassProgresses)
-        {
-            if (cp.CharacterClass == characterClass)
-                return cp;
-        }
-
-        // si no existe, crear
-        var newProgress = new ClassProgress
-        {
-            CharacterClass = characterClass,
-            Level = 0,
-            XP = 0
-        };
-
-        ClassProgresses.Add(newProgress);
-        return newProgress;
+        MarkStatsDirty();
     }
 
     public bool CanChangeToClass(CharacterClass newClass)
@@ -88,8 +85,35 @@ public partial class OrcInstance : Resource
         return true;
     }
 
+    // PROGRESSION
+    public ClassProgress GetProgress(CharacterClass characterClass)
+    {
+        foreach (var cp in ClassProgresses)
+        {
+            if (cp.CharacterClass == characterClass)
+                return cp;
+        }
+
+        // crear progreso si no existe
+        var newProgress = new ClassProgress
+        {
+            CharacterClass = characterClass,
+            Level = 0,
+            XP = 0
+        };
+
+        ClassProgresses.Add(newProgress);
+
+        MarkStatsDirty();
+
+        return newProgress;
+    }
+
     public void GainXP(int amount)
     {
+        if (CharacterClass == null)
+            return;
+
         var progress = GetProgress(CharacterClass);
 
         progress.XP += amount;
@@ -101,7 +125,62 @@ public partial class OrcInstance : Resource
             progress.XP -= xpToLevel;
             progress.Level++;
 
-            GD.Print($"Subió a nivel {progress.Level} en {CharacterClass.GetClassName()}");
+            MarkStatsDirty();
+
+            GD.Print(
+                $"{GetCustomName()} subió a nivel " +
+                $"{progress.Level} en " +
+                $"{CharacterClass.GetClassName()}"
+            );
         }
+    }
+
+    // STATS
+    public StatBlock GetTotalStats()
+    {
+        if (!dirtyStats)
+            return cachedStats;
+
+        cachedStats = new StatBlock();
+
+        // template
+        if (Template != null)
+        {
+            cachedStats.Add(
+                Template.GetBaseStats()
+            );
+        }
+
+        // clase actual
+        if (CharacterClass != null)
+        {
+            cachedStats.Add(
+                CharacterClass.GetBaseStats()
+            );
+        }
+
+        // progreso acumulado de todas las clases
+        foreach (var progress in ClassProgresses)
+        {
+            if (progress == null)
+                continue;
+
+            if (progress.CharacterClass == null)
+                continue;
+
+            cachedStats.Add(
+                progress.CharacterClass
+                    .GetGrowthStatsAtLevel(progress.Level)
+            );
+        }
+
+        dirtyStats = false;
+
+        return cachedStats;
+    }
+
+    public void MarkStatsDirty()
+    {
+        dirtyStats = true;
     }
 }

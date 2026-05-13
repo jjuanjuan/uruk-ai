@@ -625,11 +625,17 @@ public partial class CombatManager : Node
     private void ApplyDamage(OrcInstance attacker, OrcInstance target, AttackAction action)
     {
         int baseDamage = action.BaseDamage;
-        float strMultiplier = Mathf.Max(1f, action.StrFactor * attacker.Str / 10f);
-        float dexMultiplier = Mathf.Max(1f, action.DexFactor * attacker.Dex / 10f);
-        float intMultiplier = Mathf.Max(1f, action.IntFactor * attacker.Int / 10f);
-        float wisMultiplier = Mathf.Max(1f, action.WisFactor * attacker.Wis / 10f);
-        float statMultiplier = strMultiplier * dexMultiplier * intMultiplier * wisMultiplier;
+        float strBonus = action.StrFactor * attacker.Str / 100f;
+        float dexBonus = action.DexFactor * attacker.Dex / 100f;
+        float intBonus = action.IntFactor * attacker.Int / 100f;
+        float wisBonus = action.WisFactor * attacker.Wis / 100f;
+
+        float statMultiplier =
+            1f +
+            strBonus +
+            dexBonus +
+            intBonus +
+            wisBonus;
 
         float typeMultiplier =
             GameManager.I.CombatConfig.GetMultiplier(
@@ -637,10 +643,24 @@ public partial class CombatManager : Node
                 target.CharacterClass.ArmorType
             );
 
+        float wisDefenderMultiplier = 1f;
+        switch (action.AttackType)
+        {
+            case CombatConfig.AttackType.Fire:
+            case CombatConfig.AttackType.Ice:
+            case CombatConfig.AttackType.Electric:
+                wisDefenderMultiplier =
+                    Mathf.Max(0.35f, 200f / (200f + target.Wis)); // 100 WIS = 33% reducción
+                break;
+            default:
+                break;
+        }
+
         int finalDamage = Mathf.RoundToInt(
             baseDamage *
             statMultiplier *
-            typeMultiplier
+            typeMultiplier *
+            wisDefenderMultiplier
         );
 
         float oldHP = target.CurrentHP;

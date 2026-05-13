@@ -34,11 +34,15 @@ metadata/_custom_type_script = "uid://bmylglyshe6wd"
 [resource]
 script = ExtResource("1_uo8t1")
 ClassName = "Bludgeoner"
-BaseHP = 50
 ClassTextureFront = ExtResource("4_fpcew")
 ClassTextureBack = ExtResource("3_ncstq")
 AttacksPerPosition = Array[Object]([SubResource("Resource_hqaj3"), SubResource("Resource_ncstq"), SubResource("Resource_fpcew")])
-BaseAttackDamage = 15
+BaseHP = 20
+BaseSpd = 9
+GrowthHP = 120
+GrowthStr = 40
+GrowthDex = 20
+GrowthSpd = 8
 ArmorType = 1
 Requirements = Array[Object]([SubResource("Resource_exk64")])
 metadata/_custom_type_script = "uid://1pbhreu2codn"

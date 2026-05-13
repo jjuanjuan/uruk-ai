@@ -34,11 +34,11 @@ metadata/_custom_type_script = "uid://bmylglyshe6wd"
 [resource]
 script = ExtResource("7_kd56v")
 ClassName = "Frost"
-BaseHP = 40
 ClassTextureFront = ExtResource("4_1vp8b")
 ClassTextureBack = ExtResource("3_2ul68")
 AttacksPerPosition = Array[Object]([SubResource("Resource_tq6mj"), SubResource("Resource_fvaiu"), SubResource("Resource_ooqhg")])
-BaseAttackDamage = 12
+GrowthInt = 40
+GrowthWis = 50
 ArmorType = 4
 Requirements = Array[Object]([SubResource("Resource_mfcxo")])
 metadata/_custom_type_script = "uid://1pbhreu2codn"

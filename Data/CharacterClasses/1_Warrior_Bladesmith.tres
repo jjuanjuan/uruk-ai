@@ -34,11 +34,13 @@ metadata/_custom_type_script = "uid://bmylglyshe6wd"
 [resource]
 script = ExtResource("3_ywtj5")
 ClassName = "Bladesmith"
-BaseHP = 50
 ClassTextureFront = ExtResource("4_dppkv")
 ClassTextureBack = ExtResource("3_3jc0v")
 AttacksPerPosition = Array[Object]([SubResource("Resource_hqaj3"), SubResource("Resource_ncstq"), SubResource("Resource_fpcew")])
-BaseAttackDamage = 15
+BaseHP = 20
+GrowthHP = 100
+GrowthStr = 30
+GrowthDex = 30
 ArmorType = 1
 Requirements = Array[Object]([SubResource("Resource_qyw1s")])
 metadata/_custom_type_script = "uid://1pbhreu2codn"

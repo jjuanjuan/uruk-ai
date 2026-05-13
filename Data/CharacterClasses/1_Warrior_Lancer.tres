@@ -35,11 +35,13 @@ metadata/_custom_type_script = "uid://bmylglyshe6wd"
 [resource]
 script = ExtResource("3_r1fcq")
 ClassName = "Lancer"
-BaseHP = 50
 ClassTextureFront = ExtResource("4_cmp0p")
 ClassTextureBack = ExtResource("3_83nue")
 AttacksPerPosition = Array[Object]([SubResource("Resource_hqaj3"), SubResource("Resource_ncstq"), SubResource("Resource_fpcew")])
-BaseAttackDamage = 15
+BaseHP = 20
+GrowthHP = 100
+GrowthStr = 20
+GrowthDex = 40
 ArmorType = 1
 Requirements = Array[Object]([SubResource("Resource_rbfhh")])
 metadata/_custom_type_script = "uid://1pbhreu2codn"

@@ -27,11 +27,12 @@ metadata/_custom_type_script = "uid://du724smqstcfc"
 [resource]
 script = ExtResource("6_4wjqs")
 ClassName = "Scout"
-BaseHP = 30
 ClassTextureFront = ExtResource("5_lyvky")
 ClassTextureBack = ExtResource("4_mqyk0")
 AttacksPerPosition = Array[Object]([SubResource("Resource_fvaiu"), SubResource("Resource_ooqhg"), SubResource("Resource_tq6mj")])
-BaseAttackDamage = 8
-BaseSpeed = 2
+BaseSpd = 15
+GrowthDex = 15
+GrowthInt = 15
+GrowthSpd = 20
 Requirements = Array[Object]([])
 metadata/_custom_type_script = "uid://1pbhreu2codn"

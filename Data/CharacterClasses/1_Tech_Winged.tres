@@ -33,12 +33,13 @@ metadata/_custom_type_script = "uid://bmylglyshe6wd"
 [resource]
 script = ExtResource("7_hvq0g")
 ClassName = "Winged"
-BaseHP = 30
 ClassTextureFront = ExtResource("4_aqocj")
 ClassTextureBack = ExtResource("3_0o63l")
 AttacksPerPosition = Array[Object]([SubResource("Resource_ncstq"), SubResource("Resource_fpcew"), SubResource("Resource_hqaj3")])
-BaseAttackDamage = 15
-BaseSpeed = 3
+BaseSpd = 15
+GrowthStr = 25
+GrowthDex = 30
+GrowthSpd = 25
 MovementType = 2
 Requirements = Array[Object]([SubResource("Resource_qyw1s")])
 metadata/_custom_type_script = "uid://1pbhreu2codn"

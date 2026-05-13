@@ -35,10 +35,12 @@ metadata/_custom_type_script = "uid://bmylglyshe6wd"
 [resource]
 script = ExtResource("7_pgp3c")
 ClassName = "Tinkerer"
-BaseHP = 40
 ClassTextureFront = ExtResource("4_ihv4s")
 ClassTextureBack = ExtResource("3_uejn5")
 AttacksPerPosition = Array[Object]([SubResource("Resource_ncstq"), SubResource("Resource_fpcew"), SubResource("Resource_hqaj3")])
-BaseAttackDamage = 12
+GrowthStr = 20
+GrowthDex = 15
+GrowthInt = 40
+GrowthWis = 20
 Requirements = Array[Object]([SubResource("Resource_qyw1s")])
 metadata/_custom_type_script = "uid://1pbhreu2codn"

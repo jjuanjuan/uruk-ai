@@ -36,11 +36,14 @@ metadata/_custom_type_script = "uid://bmylglyshe6wd"
 [resource]
 script = ExtResource("7_6i3il")
 ClassName = "Javelin"
-BaseHP = 60
 ClassTextureFront = ExtResource("5_mmev6")
 ClassTextureBack = ExtResource("3_mmev6")
 AttacksPerPosition = Array[Object]([SubResource("Resource_fpcew"), SubResource("Resource_hqaj3"), SubResource("Resource_ncstq")])
-BaseAttackDamage = 15
-BaseSpeed = 2
+BaseHP = 10
+BaseSpd = 15
+GrowthStr = 20
+GrowthDex = 40
+GrowthWis = 15
+GrowthSpd = 25
 Requirements = Array[Object]([SubResource("Resource_rbfhh")])
 metadata/_custom_type_script = "uid://1pbhreu2codn"

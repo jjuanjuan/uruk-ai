@@ -34,10 +34,10 @@ metadata/_custom_type_script = "uid://bmylglyshe6wd"
 [resource]
 script = ExtResource("6_j8xd3")
 ClassName = "Pyro"
-BaseHP = 35
 ClassTextureFront = ExtResource("5_c5irq")
 ClassTextureBack = ExtResource("4_m5r7m")
 AttacksPerPosition = Array[Object]([SubResource("Resource_tq6mj"), SubResource("Resource_fvaiu"), SubResource("Resource_ooqhg")])
-BaseAttackDamage = 15
+GrowthInt = 50
+GrowthWis = 40
 Requirements = Array[Object]([SubResource("Resource_mfcxo")])
 metadata/_custom_type_script = "uid://1pbhreu2codn"

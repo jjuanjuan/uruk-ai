@@ -4,20 +4,30 @@ using System;
 [GlobalClass]
 public partial class CharacterClass : Resource
 {
-	[Export]
-	string ClassName = "Clase base";
-	[Export]
-	Texture2D ClassTextureFront, ClassTextureBack;
-	[Export]
-	Godot.Collections.Array<AttackPerPosition> AttacksPerPosition;
-	// Stats
-	[Export] public int BaseStr = 10;
-	[Export] public int BaseDex = 10;
-	[Export] public int BaseInt = 10;
-	[Export] public int BaseWis = 10;
-	[Export] public int BaseSpd = 10;
-	[Export] public int BaseHP = 20;
+	[Export] string ClassName = "Clase base";
+	[Export] Texture2D ClassTextureFront, ClassTextureBack;
+	[Export] Godot.Collections.Array<AttackPerPosition> AttacksPerPosition;
+
+	// STATS AND GROWTH //
+	[ExportGroup("Base Stats")]
+	[Export] int BaseHP = 0;
+	[Export] int BaseStr = 0;
+	[Export] int BaseDex = 0;
+	[Export] int BaseInt = 0;
+	[Export] int BaseWis = 0;
+	[Export] int BaseSpd = 10;
+
+	[ExportGroup("Growth")]
+	[Export] public int MaxLevel = 10;
+
+	[Export] int GrowthHP = 50;
+	[Export] int GrowthStr = 10;
+	[Export] int GrowthDex = 10;
+	[Export] int GrowthInt = 10;
+	[Export] int GrowthWis = 10;
+	[Export] int GrowthSpd = 10;
 	//
+
 	[Export]
 	public CombatConfig.ArmorType ArmorType;
 	[Export]
@@ -57,6 +67,34 @@ public partial class CharacterClass : Resource
 	// row 0 back
 	// row 1 y 2 middle
 	// row 3 y 4 front
+
+	// STAT GETTERS //
+	public StatBlock GetBaseStats()
+	{
+		return new StatBlock
+		{
+			HP = BaseHP,
+			Str = BaseStr,
+			Dex = BaseDex,
+			Int = BaseInt,
+			Wis = BaseWis,
+			Spd = BaseSpd
+		};
+	}
+	public StatBlock GetGrowthStatsAtLevel(int level)
+	{
+		float t = level / (float)MaxLevel;
+
+		return new StatBlock
+		{
+			HP = Mathf.RoundToInt(GrowthHP * t),
+			Str = Mathf.RoundToInt(GrowthStr * t),
+			Dex = Mathf.RoundToInt(GrowthDex * t),
+			Int = Mathf.RoundToInt(GrowthInt * t),
+			Wis = Mathf.RoundToInt(GrowthWis * t),
+			Spd = Mathf.RoundToInt(GrowthSpd * t),
+		};
+	}
 }
 
 public enum MovementType
@@ -66,4 +104,24 @@ public enum MovementType
 	Flying,
 	Mountain,
 	Woods
+}
+
+public struct StatBlock
+{
+	public int HP;
+	public int Str;
+	public int Dex;
+	public int Int;
+	public int Wis;
+	public int Spd;
+
+	public void Add(StatBlock other)
+	{
+		HP += other.HP;
+		Str += other.Str;
+		Dex += other.Dex;
+		Int += other.Int;
+		Wis += other.Wis;
+		Spd += other.Spd;
+	}
 }

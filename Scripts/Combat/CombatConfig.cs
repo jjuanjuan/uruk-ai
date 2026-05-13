@@ -22,7 +22,7 @@ public partial class CombatConfig : Resource
         Fire,
         Ice,
     }
-    
+
     public float GetMultiplier(AttackType attack, ArmorType armor)
     {
         int armorCount = System.Enum.GetValues(typeof(ArmorType)).Length;
