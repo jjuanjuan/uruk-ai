@@ -34,10 +34,14 @@ metadata/_custom_type_script = "uid://bmylglyshe6wd"
 [resource]
 script = ExtResource("7_tqyae")
 ClassName = "Spark"
-BaseHP = 60
 ClassTextureFront = ExtResource("4_7h5xq")
 ClassTextureBack = ExtResource("3_qyypr")
 AttacksPerPosition = Array[Object]([SubResource("Resource_ncstq"), SubResource("Resource_fpcew"), SubResource("Resource_hqaj3")])
-BaseAttackDamage = 25
+BaseHP = 20
+BaseSpd = 15
+GrowthHP = 70
+GrowthDex = 25
+GrowthInt = 40
+GrowthSpd = 25
 Requirements = Array[Object]([SubResource("Resource_qyw1s")])
 metadata/_custom_type_script = "uid://1pbhreu2codn"

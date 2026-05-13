@@ -36,10 +36,14 @@ metadata/_custom_type_script = "uid://bmylglyshe6wd"
 [resource]
 script = ExtResource("8_4j6my")
 ClassName = "Inventor"
-BaseHP = 80
 ClassTextureFront = ExtResource("6_dj0p8")
 ClassTextureBack = ExtResource("4_uu7po")
 AttacksPerPosition = Array[Object]([SubResource("Resource_ncstq"), SubResource("Resource_fpcew"), SubResource("Resource_hqaj3")])
-BaseAttackDamage = 35
+BaseHP = 20
+GrowthHP = 70
+GrowthDex = 35
+GrowthInt = 95
+GrowthWis = 23
+GrowthSpd = 22
 Requirements = Array[Object]([SubResource("Resource_qyw1s")])
 metadata/_custom_type_script = "uid://1pbhreu2codn"

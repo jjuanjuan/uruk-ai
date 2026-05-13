@@ -42,11 +42,15 @@ metadata/_custom_type_script = "uid://bmylglyshe6wd"
 [resource]
 script = ExtResource("8_2fden")
 ClassName = "Comet"
-BaseHP = 130
 ClassTextureFront = ExtResource("4_pb7j6")
 ClassTextureBack = ExtResource("3_nj4ij")
 AttacksPerPosition = Array[Object]([SubResource("Resource_ncstq"), SubResource("Resource_fpcew"), SubResource("Resource_hqaj3")])
-BaseAttackDamage = 40
+BaseHP = 50
+BaseSpd = 7
+GrowthHP = 70
+GrowthDex = 50
+GrowthInt = 50
+GrowthSpd = 13
 ArmorType = 2
 MovementType = 2
 Requirements = Array[Object]([SubResource("Resource_hs6x5"), SubResource("Resource_d1kji")])

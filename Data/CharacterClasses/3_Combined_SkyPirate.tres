@@ -7,8 +7,8 @@
 [ext_resource type="Texture2D" uid="uid://k3jlu0vskn87" path="res://Art/Placeholders/Units/3_skypirate_front.png" id="5_5qdto"]
 [ext_resource type="Resource" uid="uid://cry0fyf1u8o8v" path="res://Data/CharacterClasses/2_Warrior_Legionnaire.tres" id="5_jrro7"]
 [ext_resource type="Script" uid="uid://bmylglyshe6wd" path="res://Scripts/Unit/ClassRequirements.cs" id="6_tmgow"]
-[ext_resource type="Resource" uid="uid://bayepcftmfmd" path="res://Data/CharacterClasses/2_Tech_Jet.tres" id="7_cpl4b"]
 [ext_resource type="Script" uid="uid://1pbhreu2codn" path="res://Scripts/Unit/CharacterClass.cs" id="8_7d6g7"]
+[ext_resource type="Resource" uid="uid://djjtgjb8p5jvu" path="res://Data/CharacterClasses/1_Tech_Winged.tres" id="8_ijts1"]
 
 [sub_resource type="Resource" id="Resource_ncstq"]
 script = ExtResource("2_ijts1")
@@ -36,7 +36,7 @@ metadata/_custom_type_script = "uid://bmylglyshe6wd"
 
 [sub_resource type="Resource" id="Resource_d1kji"]
 script = ExtResource("6_tmgow")
-RequiredClass = ExtResource("7_cpl4b")
+RequiredClass = ExtResource("8_ijts1")
 RequiredLevel = 5
 metadata/_custom_type_script = "uid://bmylglyshe6wd"
 
@@ -46,8 +46,12 @@ ClassName = "Sky Pirate"
 ClassTextureFront = ExtResource("5_5qdto")
 ClassTextureBack = ExtResource("3_5qdto")
 AttacksPerPosition = Array[Object]([SubResource("Resource_ncstq"), SubResource("Resource_fpcew"), SubResource("Resource_hqaj3")])
-BaseAttackDamage = 25
-BaseSpeed = 4
+BaseHP = 30
+BaseSpd = 20
+GrowthHP = 100
+GrowthStr = 40
+GrowthDex = 60
+GrowthSpd = 30
 ArmorType = 1
 MovementType = 2
 Requirements = Array[Object]([SubResource("Resource_hs6x5"), SubResource("Resource_d1kji")])

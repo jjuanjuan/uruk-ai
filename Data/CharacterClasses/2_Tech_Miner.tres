@@ -34,10 +34,14 @@ metadata/_custom_type_script = "uid://bmylglyshe6wd"
 [resource]
 script = ExtResource("8_qxra2")
 ClassName = "Miner"
-BaseHP = 70
 ClassTextureFront = ExtResource("4_sui15")
 ClassTextureBack = ExtResource("4_n8s35")
 AttacksPerPosition = Array[Object]([SubResource("Resource_ncstq"), SubResource("Resource_fpcew"), SubResource("Resource_hqaj3")])
-BaseAttackDamage = 20
+BaseHP = 20
+GrowthHP = 100
+GrowthStr = 40
+GrowthDex = 20
+GrowthInt = 20
+GrowthSpd = 12
 Requirements = Array[Object]([SubResource("Resource_qyw1s")])
 metadata/_custom_type_script = "uid://1pbhreu2codn"
