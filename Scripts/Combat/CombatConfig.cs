@@ -12,6 +12,7 @@ public partial class CombatConfig : Resource
         Fire,
         Ice,
         Electric,
+        Arcane,
     }
 
     public enum ArmorType
@@ -39,7 +40,7 @@ public partial class CombatConfig : Resource
     }
 
     [Export]
-    public float[] Multipliers = new float[30]; // 6 x 5
+    public float[] Multipliers = new float[35]; // 7 x 5
 
     // Combat
     [Export]
