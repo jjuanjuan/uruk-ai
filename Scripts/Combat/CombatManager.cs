@@ -263,11 +263,16 @@ public partial class CombatManager : Node
             if (orc == null) continue;
 
             int speed = orc.Spd;
+            int extraUnits = Mathf.Max(0, orc.CurrentParty.CurrentUnits - 1);
 
-            if (!groups.ContainsKey(speed))
-                groups[speed] = new List<OrcInstance>();
+            int speedCalc = Mathf.RoundToInt(speed * (
+                1f - extraUnits * GameManager.I.CombatConfig.SpeedDecreasePerSize
+            ));
 
-            groups[speed].Add(orc);
+            if (!groups.ContainsKey(speedCalc))
+                groups[speedCalc] = new List<OrcInstance>();
+
+            groups[speedCalc].Add(orc);
         }
 
         var speeds = groups.Keys.ToList();
