@@ -6,4 +6,5 @@
 script = ExtResource("1_jj8ef")
 AttackName = "Smash"
 AttackType = 0
+StrFactor = 1.0
 metadata/_custom_type_script = "uid://8p18r81fnngn"

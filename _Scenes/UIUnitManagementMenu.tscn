@@ -6,7 +6,7 @@
 [ext_resource type="FontFile" uid="uid://dd6yoetodmb25" path="res://Art/Fonts/PixgamerRegular-OVD6A.ttf" id="4_tipyi"]
 [ext_resource type="Script" uid="uid://jw62aqdff52j" path="res://Scripts/UI/UIOrcPool.cs" id="5_t7kqc"]
 [ext_resource type="PackedScene" uid="uid://jh1ftys40xae" path="res://_Scenes/PoolItem.tscn" id="6_ymbnh"]
-[ext_resource type="PackedScene" uid="uid://h84cfy2fd5db" path="res://_Scenes/UIPartyEdit.tscn" id="7_ck0cg"]
+[ext_resource type="PackedScene" uid="uid://h84cfy2fd5db" path="res://_Scenes/UIPartyInfo.tscn" id="7_ck0cg"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_eqnvv"]
 bg_color = Color(0.3491902, 0.3491902, 0.3491902, 0.90000004)

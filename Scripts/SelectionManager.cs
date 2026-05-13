@@ -4,29 +4,77 @@ public partial class SelectionManager : Node
 {
     public static SelectionManager I;
 
-    public MapUnit Selected;
+    [Signal]
+    public delegate void SelectedOrcChangedEventHandler(OrcInstance orc);
+
+    [Signal]
+    public delegate void SelectedMapUnitChangedEventHandler(MapUnit unit);
+
+    public OrcInstance SelectedOrc;
+    public MapUnit SelectedMapUnit;
 
     public override void _EnterTree()
     {
         I = this;
     }
 
-    public void Select(MapUnit unit)
+    // =====================================================
+    // ORCS
+    // =====================================================
+
+    public void SelectOrc(OrcInstance orc)
     {
-        if (Selected != null)
-            Selected.SetSelected(false);
+        SelectedOrc = orc;
 
-        Selected = unit;
-
-        if (Selected != null)
-            Selected.SetSelected(true);
+        EmitSignal(
+            SignalName.SelectedOrcChanged,
+            orc
+        );
     }
 
-    public void ClearSelection()
+    public void ClearOrcSelection()
     {
-        if (Selected != null && IsInstanceValid(Selected))
-            Selected.SetSelected(false);
+        SelectedOrc = null;
 
-        Selected = null;
+        EmitSignal(
+            SignalName.SelectedOrcChanged,
+            (OrcInstance)null
+        );
+    }
+
+    // =====================================================
+    // MAP UNITS
+    // =====================================================
+
+    public void SelectMapUnit(MapUnit unit)
+    {
+        if (SelectedMapUnit != null)
+            SelectedMapUnit.SetSelected(false);
+
+        SelectedMapUnit = unit;
+
+        if (SelectedMapUnit != null)
+            SelectedMapUnit.SetSelected(true);
+
+        EmitSignal(
+            SignalName.SelectedMapUnitChanged,
+            unit
+        );
+    }
+
+    public void ClearMapUnitSelection()
+    {
+        if (SelectedMapUnit != null &&
+            IsInstanceValid(SelectedMapUnit))
+        {
+            SelectedMapUnit.SetSelected(false);
+        }
+
+        SelectedMapUnit = null;
+
+        EmitSignal(
+            SignalName.SelectedMapUnitChanged,
+            (MapUnit)null
+        );
     }
 }

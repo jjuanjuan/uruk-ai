@@ -5,7 +5,8 @@
 [resource]
 script = ExtResource("1_u5ois")
 AttackName = "Ice Lance"
-BaseDamageMultiplier = 0.9
 AttackType = 4
 Target = 5
+IntFactor = 0.5
+WisFactor = 0.5
 metadata/_custom_type_script = "uid://8p18r81fnngn"

@@ -7,17 +7,19 @@ public partial class CharacterClass : Resource
 	[Export]
 	string ClassName = "Clase base";
 	[Export]
-	int BaseHP = 100;
-	[Export]
 	Texture2D ClassTextureFront, ClassTextureBack;
 	[Export]
 	Godot.Collections.Array<AttackPerPosition> AttacksPerPosition;
+	// Stats
+	[Export] public int BaseStr = 10;
+	[Export] public int BaseDex = 10;
+	[Export] public int BaseInt = 10;
+	[Export] public int BaseWis = 10;
+	[Export] public int BaseSpd = 10;
+	[Export] public int BaseHP = 20;
+	//
 	[Export]
-	int BaseAttackDamage = 10;
-	[Export]
-	int BaseSpeed = 1;
-	[Export]
-	CombatConfig.ArmorType ArmorType;
+	public CombatConfig.ArmorType ArmorType;
 	[Export]
 	public MovementType MovementType;
 
@@ -26,12 +28,8 @@ public partial class CharacterClass : Resource
 	[Export] int XPToNextLevel = 100;
 
 	public string GetClassName() { return ClassName; }
-	public int GetBaseHP() { return BaseHP; }
 	public Texture2D GetFrontTexture() { return ClassTextureFront; }
 	public Texture2D GetBackTexture() { return ClassTextureBack; }
-	public int GetBaseAttackDamage() { return BaseAttackDamage; }
-	public int GetBaseSpeed() { return BaseSpeed; }
-	public CombatConfig.ArmorType GetArmorType() { return ArmorType; }
 	public Godot.Collections.Array<ClassRequirements> GetRequirements() { return Requirements; }
 	public int GetXPToNextLevel() { return XPToNextLevel; }
 	public AttackPerPosition GetAttackPerPosition(int Row)

@@ -5,7 +5,7 @@
 [resource]
 script = ExtResource("1_8ie3c")
 AttackName = "Barrage"
-BaseDamageMultiplier = 0.5
 AttackType = 0
 Target = 9
+IntFactor = 1.0
 metadata/_custom_type_script = "uid://8p18r81fnngn"

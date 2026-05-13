@@ -11,14 +11,22 @@ public partial class OrcInstance : Resource
     [Export] public CharacterClass CharacterClass;
     [Export] public Godot.Collections.Array<ClassProgress> ClassProgresses = new();
 
-    public int Damage = 0;
-    public int MaxHP => Template.BaseHP + CharacterClass.GetBaseHP();
+    public PartyPosition PartyPosition;
+    public CharacterParty CurrentParty;
+
+    // STATS
+    public int MaxHP => Template.BaseHP + CharacterClass.BaseHP;
+    public int Str => Template.BaseStr + CharacterClass.BaseStr;
+    public int Dex => Template.BaseDex + CharacterClass.BaseDex;
+    public int Int => Template.BaseInt + CharacterClass.BaseInt;
+    public int Wis => Template.BaseWis + CharacterClass.BaseWis;
+    public int Spd => Template.BaseSpd + CharacterClass.BaseSpd;
+
     public int CurrentHP => Mathf.Max(MaxHP - Damage, 0);
     public float CurrentHPPercentile => CurrentHP / (float)MaxHP;
     public bool IsAlive => CurrentHP > 0;
+    public int Damage = 0;
 
-    public PartyPosition PartyPosition;
-    public CharacterParty CurrentParty;
 
     public string GetCustomName()
     {

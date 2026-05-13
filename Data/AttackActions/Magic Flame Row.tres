@@ -5,7 +5,8 @@
 [resource]
 script = ExtResource("1_en66q")
 AttackName = "Firewall"
-BaseDamageMultiplier = 0.9
 AttackType = 3
 Target = 8
+IntFactor = 0.5
+WisFactor = 0.5
 metadata/_custom_type_script = "uid://8p18r81fnngn"

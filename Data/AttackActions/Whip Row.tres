@@ -5,7 +5,8 @@
 [resource]
 script = ExtResource("1_pu0yn")
 AttackName = "Whip Row"
-BaseDamageMultiplier = 0.75
 AttackType = 0
 Target = 6
+StrFactor = 0.25
+DexFactor = 0.75
 metadata/_custom_type_script = "uid://8p18r81fnngn"

@@ -6,4 +6,5 @@
 script = ExtResource("1_m7env")
 AttackName = "Zap"
 AttackType = 5
+IntFactor = 1.0
 metadata/_custom_type_script = "uid://8p18r81fnngn"

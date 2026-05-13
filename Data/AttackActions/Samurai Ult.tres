@@ -5,6 +5,8 @@
 [resource]
 script = ExtResource("1_hv1oq")
 AttackName = "Column Slash"
-BaseDamageMultiplier = 2.0
 Target = 4
+StrFactor = 0.5
+DexFactor = 1.0
+WisFactor = 0.5
 metadata/_custom_type_script = "uid://8p18r81fnngn"

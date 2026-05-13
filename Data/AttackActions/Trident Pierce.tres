@@ -5,7 +5,8 @@
 [resource]
 script = ExtResource("1_eb7e7")
 AttackName = "Trident"
-BaseDamageMultiplier = 0.75
 AttackType = 2
 Target = 4
+StrFactor = 0.75
+DexFactor = 0.25
 metadata/_custom_type_script = "uid://8p18r81fnngn"

@@ -7,4 +7,5 @@ script = ExtResource("1_gbc4e")
 AttackName = "Flame Cannon"
 AttackType = 3
 Target = 2
+IntFactor = 1.0
 metadata/_custom_type_script = "uid://8p18r81fnngn"

@@ -5,6 +5,6 @@
 [resource]
 script = ExtResource("1_lbt5t")
 AttackName = "Weak Smash"
-BaseDamageMultiplier = 0.5
 AttackType = 0
+StrFactor = 0.5
 metadata/_custom_type_script = "uid://8p18r81fnngn"

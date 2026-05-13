@@ -5,7 +5,8 @@
 [resource]
 script = ExtResource("1_7unft")
 AttackName = "Fireblast"
-BaseDamageMultiplier = 2.0
 AttackType = 3
 Target = 2
+IntFactor = 0.5
+WisFactor = 0.5
 metadata/_custom_type_script = "uid://8p18r81fnngn"

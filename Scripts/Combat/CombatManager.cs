@@ -262,7 +262,7 @@ public partial class CombatManager : Node
         {
             if (orc == null) continue;
 
-            int speed = orc.CharacterClass.GetBaseSpeed();
+            int speed = orc.Spd;
 
             if (!groups.ContainsKey(speed))
                 groups[speed] = new List<OrcInstance>();
@@ -624,9 +624,24 @@ public partial class CombatManager : Node
 
     private void ApplyDamage(OrcInstance attacker, OrcInstance target, AttackAction action)
     {
-        int baseDamage = attacker.CharacterClass.GetBaseAttackDamage();
-        double multiplier = action.BaseDamageMultiplier;
-        int finalDamage = (int)(baseDamage * multiplier);
+        int baseDamage = action.BaseDamage;
+        float strMultiplier = Mathf.Max(1f, action.StrFactor * attacker.Str / 10f);
+        float dexMultiplier = Mathf.Max(1f, action.DexFactor * attacker.Dex / 10f);
+        float intMultiplier = Mathf.Max(1f, action.IntFactor * attacker.Int / 10f);
+        float wisMultiplier = Mathf.Max(1f, action.WisFactor * attacker.Wis / 10f);
+        float statMultiplier = strMultiplier * dexMultiplier * intMultiplier * wisMultiplier;
+
+        float typeMultiplier =
+            GameManager.I.CombatConfig.GetMultiplier(
+                action.AttackType,
+                target.CharacterClass.ArmorType
+            );
+
+        int finalDamage = Mathf.RoundToInt(
+            baseDamage *
+            statMultiplier *
+            typeMultiplier
+        );
 
         float oldHP = target.CurrentHP;
 

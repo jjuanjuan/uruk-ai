@@ -272,11 +272,11 @@ public partial class MapUnit : Area2D
     // SELECTION
     void Select()
     {
-        SelectionManager.I.Select(this);
+        SelectionManager.I.SelectMapUnit(this);
     }
     void IssueMoveCommand()
     {
-        if (SelectionManager.I.Selected != this)
+        if (SelectionManager.I.SelectedMapUnit != this)
             return;
 
         Vector2 mouseWorld = GetGlobalMousePosition();

@@ -7,4 +7,6 @@ script = ExtResource("1_ax5l8")
 AttackName = "Flame"
 AttackType = 3
 Target = 2
+IntFactor = 0.5
+WisFactor = 0.5
 metadata/_custom_type_script = "uid://8p18r81fnngn"

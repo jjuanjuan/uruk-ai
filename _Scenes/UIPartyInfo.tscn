@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://h84cfy2fd5db"]
 
 [ext_resource type="PackedScene" uid="uid://cafr2y4kkkt35" path="res://_Scenes/PartySlotEdit.tscn" id="1_jemnh"]
+[ext_resource type="Script" uid="uid://8fqvy88va0mm" path="res://Scripts/UI/UIPartyInfo.cs" id="1_q4s5w"]
 [ext_resource type="FontFile" uid="uid://dd6yoetodmb25" path="res://Art/Fonts/PixgamerRegular-OVD6A.ttf" id="1_v8s7c"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5ta8f"]
@@ -9,13 +10,14 @@ border_width_top = 8
 border_width_right = 8
 border_width_bottom = 8
 
-[node name="UIPartyEdit" type="Control" unique_id=382418319]
+[node name="UIPartyInfo" type="Control" unique_id=382418319]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_q4s5w")
 
 [node name="Background" type="ColorRect" parent="." unique_id=576227407]
 layout_mode = 1
@@ -42,6 +44,30 @@ grow_vertical = 2
 pivot_offset_ratio = Vector2(0.5, 0.5)
 theme_override_styles/panel = SubResource("StyleBoxFlat_5ta8f")
 
+[node name="SetLeaderButton" type="Button" parent="Button Panel" unique_id=751622853]
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 0
+offset_left = 20.0
+offset_top = 20.0
+offset_right = 100.0
+offset_bottom = 100.0
+theme_override_fonts/font = ExtResource("1_v8s7c")
+theme_override_font_sizes/font_size = 20
+text = "Set
+Leader"
+
+[node name="ChangeClassButton" type="Button" parent="Button Panel" unique_id=829804497]
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 0
+offset_left = 120.0
+offset_top = 20.0
+offset_right = 200.0
+offset_bottom = 100.0
+theme_override_fonts/font = ExtResource("1_v8s7c")
+theme_override_font_sizes/font_size = 20
+text = "Change
+Class"
+
 [node name="Party UI" type="Panel" parent="." unique_id=376519429]
 layout_mode = 1
 anchors_preset = 8
@@ -58,14 +84,22 @@ grow_vertical = 2
 pivot_offset_ratio = Vector2(0.5, 0.5)
 theme_override_styles/panel = SubResource("StyleBoxFlat_5ta8f")
 
-[node name="PartySlot" parent="Party UI" unique_id=506167646 instance=ExtResource("1_jemnh")]
+[node name="SlotsContainer" type="Control" parent="Party UI" unique_id=933342494]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PartySlot" parent="Party UI/SlotsContainer" unique_id=506167646 instance=ExtResource("1_jemnh")]
 layout_mode = 0
 offset_left = 12.5
 offset_top = 12.5
 offset_right = 137.5
 offset_bottom = 137.5
 
-[node name="PartySlot2" parent="Party UI" unique_id=245252503 instance=ExtResource("1_jemnh")]
+[node name="PartySlot2" parent="Party UI/SlotsContainer" unique_id=245252503 instance=ExtResource("1_jemnh")]
 layout_mode = 0
 offset_left = 68.75
 offset_top = 12.5
@@ -73,7 +107,7 @@ offset_right = 193.75
 offset_bottom = 137.5
 Column = 1
 
-[node name="PartySlot3" parent="Party UI" unique_id=27098340 instance=ExtResource("1_jemnh")]
+[node name="PartySlot3" parent="Party UI/SlotsContainer" unique_id=27098340 instance=ExtResource("1_jemnh")]
 layout_mode = 0
 offset_left = 137.5
 offset_top = 12.5
@@ -81,7 +115,7 @@ offset_right = 262.5
 offset_bottom = 137.5
 Column = 2
 
-[node name="PartySlot4" parent="Party UI" unique_id=698709864 instance=ExtResource("1_jemnh")]
+[node name="PartySlot4" parent="Party UI/SlotsContainer" unique_id=698709864 instance=ExtResource("1_jemnh")]
 layout_mode = 0
 offset_left = 200.0
 offset_top = 12.5
@@ -89,7 +123,7 @@ offset_right = 325.0
 offset_bottom = 137.5
 Column = 3
 
-[node name="PartySlot5" parent="Party UI" unique_id=534789047 instance=ExtResource("1_jemnh")]
+[node name="PartySlot5" parent="Party UI/SlotsContainer" unique_id=534789047 instance=ExtResource("1_jemnh")]
 layout_mode = 0
 offset_left = 262.5
 offset_top = 12.5
@@ -97,7 +131,7 @@ offset_right = 387.5
 offset_bottom = 137.5
 Column = 4
 
-[node name="PartySlot6" parent="Party UI" unique_id=497536497 instance=ExtResource("1_jemnh")]
+[node name="PartySlot6" parent="Party UI/SlotsContainer" unique_id=497536497 instance=ExtResource("1_jemnh")]
 layout_mode = 0
 offset_left = 13.0
 offset_top = 68.75
@@ -105,7 +139,7 @@ offset_right = 138.0
 offset_bottom = 193.75
 Row = 1
 
-[node name="PartySlot7" parent="Party UI" unique_id=711681314 instance=ExtResource("1_jemnh")]
+[node name="PartySlot7" parent="Party UI/SlotsContainer" unique_id=711681314 instance=ExtResource("1_jemnh")]
 layout_mode = 0
 offset_left = 69.25
 offset_top = 68.75
@@ -114,7 +148,7 @@ offset_bottom = 193.75
 Row = 1
 Column = 1
 
-[node name="PartySlot8" parent="Party UI" unique_id=567924449 instance=ExtResource("1_jemnh")]
+[node name="PartySlot8" parent="Party UI/SlotsContainer" unique_id=567924449 instance=ExtResource("1_jemnh")]
 layout_mode = 0
 offset_left = 138.0
 offset_top = 68.75
@@ -123,7 +157,7 @@ offset_bottom = 193.75
 Row = 1
 Column = 2
 
-[node name="PartySlot9" parent="Party UI" unique_id=1312657290 instance=ExtResource("1_jemnh")]
+[node name="PartySlot9" parent="Party UI/SlotsContainer" unique_id=1312657290 instance=ExtResource("1_jemnh")]
 layout_mode = 0
 offset_left = 200.0
 offset_top = 68.75
@@ -132,7 +166,7 @@ offset_bottom = 193.75
 Row = 1
 Column = 3
 
-[node name="PartySlot10" parent="Party UI" unique_id=461974655 instance=ExtResource("1_jemnh")]
+[node name="PartySlot10" parent="Party UI/SlotsContainer" unique_id=461974655 instance=ExtResource("1_jemnh")]
 layout_mode = 0
 offset_left = 263.0
 offset_top = 68.75
@@ -141,7 +175,7 @@ offset_bottom = 193.75
 Row = 1
 Column = 4
 
-[node name="PartySlot11" parent="Party UI" unique_id=1804660172 instance=ExtResource("1_jemnh")]
+[node name="PartySlot11" parent="Party UI/SlotsContainer" unique_id=1804660172 instance=ExtResource("1_jemnh")]
 layout_mode = 0
 offset_left = 13.0
 offset_top = 137.5
@@ -149,7 +183,7 @@ offset_right = 138.0
 offset_bottom = 262.5
 Row = 2
 
-[node name="PartySlot12" parent="Party UI" unique_id=700724309 instance=ExtResource("1_jemnh")]
+[node name="PartySlot12" parent="Party UI/SlotsContainer" unique_id=700724309 instance=ExtResource("1_jemnh")]
 layout_mode = 0
 offset_left = 69.25
 offset_top = 137.5
@@ -158,7 +192,7 @@ offset_bottom = 262.5
 Row = 2
 Column = 1
 
-[node name="PartySlot13" parent="Party UI" unique_id=1691481767 instance=ExtResource("1_jemnh")]
+[node name="PartySlot13" parent="Party UI/SlotsContainer" unique_id=1691481767 instance=ExtResource("1_jemnh")]
 layout_mode = 0
 offset_left = 138.0
 offset_top = 137.5
@@ -167,7 +201,7 @@ offset_bottom = 262.5
 Row = 2
 Column = 2
 
-[node name="PartySlot14" parent="Party UI" unique_id=539491472 instance=ExtResource("1_jemnh")]
+[node name="PartySlot14" parent="Party UI/SlotsContainer" unique_id=539491472 instance=ExtResource("1_jemnh")]
 layout_mode = 0
 offset_left = 200.0
 offset_top = 137.5
@@ -176,7 +210,7 @@ offset_bottom = 262.5
 Row = 2
 Column = 3
 
-[node name="PartySlot15" parent="Party UI" unique_id=1376822840 instance=ExtResource("1_jemnh")]
+[node name="PartySlot15" parent="Party UI/SlotsContainer" unique_id=1376822840 instance=ExtResource("1_jemnh")]
 layout_mode = 0
 offset_left = 263.0
 offset_top = 137.5
@@ -185,7 +219,7 @@ offset_bottom = 262.5
 Row = 2
 Column = 4
 
-[node name="PartySlot16" parent="Party UI" unique_id=465368031 instance=ExtResource("1_jemnh")]
+[node name="PartySlot16" parent="Party UI/SlotsContainer" unique_id=465368031 instance=ExtResource("1_jemnh")]
 layout_mode = 0
 offset_left = 13.0
 offset_top = 200.0
@@ -193,7 +227,7 @@ offset_right = 138.0
 offset_bottom = 325.0
 Row = 3
 
-[node name="PartySlot17" parent="Party UI" unique_id=324823567 instance=ExtResource("1_jemnh")]
+[node name="PartySlot17" parent="Party UI/SlotsContainer" unique_id=324823567 instance=ExtResource("1_jemnh")]
 layout_mode = 0
 offset_left = 69.25
 offset_top = 200.0
@@ -202,7 +236,7 @@ offset_bottom = 325.0
 Row = 3
 Column = 1
 
-[node name="PartySlot18" parent="Party UI" unique_id=1118303594 instance=ExtResource("1_jemnh")]
+[node name="PartySlot18" parent="Party UI/SlotsContainer" unique_id=1118303594 instance=ExtResource("1_jemnh")]
 layout_mode = 0
 offset_left = 138.0
 offset_top = 200.0
@@ -211,7 +245,7 @@ offset_bottom = 325.0
 Row = 3
 Column = 2
 
-[node name="PartySlot19" parent="Party UI" unique_id=63695307 instance=ExtResource("1_jemnh")]
+[node name="PartySlot19" parent="Party UI/SlotsContainer" unique_id=63695307 instance=ExtResource("1_jemnh")]
 layout_mode = 0
 offset_left = 200.0
 offset_top = 200.0
@@ -220,7 +254,7 @@ offset_bottom = 325.0
 Row = 3
 Column = 3
 
-[node name="PartySlot20" parent="Party UI" unique_id=1360188311 instance=ExtResource("1_jemnh")]
+[node name="PartySlot20" parent="Party UI/SlotsContainer" unique_id=1360188311 instance=ExtResource("1_jemnh")]
 layout_mode = 0
 offset_left = 263.0
 offset_top = 200.0
@@ -229,7 +263,7 @@ offset_bottom = 325.0
 Row = 3
 Column = 4
 
-[node name="PartySlot21" parent="Party UI" unique_id=1146487682 instance=ExtResource("1_jemnh")]
+[node name="PartySlot21" parent="Party UI/SlotsContainer" unique_id=1146487682 instance=ExtResource("1_jemnh")]
 layout_mode = 0
 offset_left = 13.0
 offset_top = 263.0
@@ -237,7 +271,7 @@ offset_right = 138.0
 offset_bottom = 388.0
 Row = 4
 
-[node name="PartySlot22" parent="Party UI" unique_id=966735674 instance=ExtResource("1_jemnh")]
+[node name="PartySlot22" parent="Party UI/SlotsContainer" unique_id=966735674 instance=ExtResource("1_jemnh")]
 layout_mode = 0
 offset_left = 69.25
 offset_top = 263.0
@@ -246,7 +280,7 @@ offset_bottom = 388.0
 Row = 4
 Column = 1
 
-[node name="PartySlot23" parent="Party UI" unique_id=1461557151 instance=ExtResource("1_jemnh")]
+[node name="PartySlot23" parent="Party UI/SlotsContainer" unique_id=1461557151 instance=ExtResource("1_jemnh")]
 layout_mode = 0
 offset_left = 138.0
 offset_top = 263.0
@@ -255,7 +289,7 @@ offset_bottom = 388.0
 Row = 4
 Column = 2
 
-[node name="PartySlot24" parent="Party UI" unique_id=1227597301 instance=ExtResource("1_jemnh")]
+[node name="PartySlot24" parent="Party UI/SlotsContainer" unique_id=1227597301 instance=ExtResource("1_jemnh")]
 layout_mode = 0
 offset_left = 200.0
 offset_top = 263.0
@@ -264,7 +298,7 @@ offset_bottom = 388.0
 Row = 4
 Column = 3
 
-[node name="PartySlot25" parent="Party UI" unique_id=1290304573 instance=ExtResource("1_jemnh")]
+[node name="PartySlot25" parent="Party UI/SlotsContainer" unique_id=1290304573 instance=ExtResource("1_jemnh")]
 layout_mode = 0
 offset_left = 263.0
 offset_top = 263.0
@@ -272,6 +306,40 @@ offset_right = 388.0
 offset_bottom = 388.0
 Row = 4
 Column = 4
+
+[node name="Label Party" type="RichTextLabel" parent="Party UI" unique_id=1927500739]
+custom_minimum_size = Vector2(0, 29)
+layout_mode = 1
+offset_left = -1.0
+offset_top = -40.0
+offset_right = 183.0
+theme_override_constants/shadow_outline_size = 4
+theme_override_constants/outline_size = 4
+theme_override_fonts/normal_font = ExtResource("1_v8s7c")
+theme_override_font_sizes/normal_font_size = 24
+text = "Lupe's Party"
+fit_content = true
+scroll_active = false
+vertical_alignment = 2
+
+[node name="Label PartyMovement" type="RichTextLabel" parent="Party UI" unique_id=586908085]
+custom_minimum_size = Vector2(0, 29)
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -184.0
+offset_top = -40.0
+grow_horizontal = 0
+theme_override_constants/shadow_outline_size = 4
+theme_override_constants/outline_size = 4
+theme_override_fonts/normal_font = ExtResource("1_v8s7c")
+theme_override_font_sizes/normal_font_size = 24
+text = "Flying"
+fit_content = true
+scroll_active = false
+horizontal_alignment = 2
+vertical_alignment = 2
 
 [node name="Unit Stats" type="Panel" parent="." unique_id=1549096806]
 layout_mode = 1
@@ -632,6 +700,27 @@ theme_override_font_sizes/normal_font_size = 18
 text = "Medium Armor"
 scroll_active = false
 
+[node name="Label Movement Type" type="RichTextLabel" parent="Unit Stats" unique_id=1415989185]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 18.0
+offset_top = 250.0
+offset_right = -10.0
+offset_bottom = -121.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.5)
+theme_override_constants/shadow_outline_size = 4
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 1
+theme_override_constants/outline_size = 4
+theme_override_fonts/normal_font = ExtResource("1_v8s7c")
+theme_override_font_sizes/normal_font_size = 18
+text = "Movement Type: Ground"
+scroll_active = false
+
 [node name="Label Attack" type="RichTextLabel" parent="Unit Stats" unique_id=1890725112]
 clip_contents = false
 layout_mode = 1
@@ -639,7 +728,7 @@ anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = 18.0
-offset_top = 250.0
+offset_top = 276.0
 offset_right = -10.0
 offset_bottom = -12.0
 grow_horizontal = 2
