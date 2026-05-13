@@ -34,11 +34,13 @@ metadata/_custom_type_script = "uid://bmylglyshe6wd"
 [resource]
 script = ExtResource("8_h3o5b")
 ClassName = "Vulcan"
-BaseHP = 65
 ClassTextureFront = ExtResource("5_yf0hl")
 ClassTextureBack = ExtResource("4_noa3r")
 AttacksPerPosition = Array[Object]([SubResource("Resource_tq6mj"), SubResource("Resource_fvaiu"), SubResource("Resource_ooqhg")])
-BaseAttackDamage = 35
+GrowthHP = 60
+GrowthStr = 22
+GrowthInt = 90
+GrowthWis = 60
 ArmorType = 3
 Requirements = Array[Object]([SubResource("Resource_mfcxo")])
 metadata/_custom_type_script = "uid://1pbhreu2codn"

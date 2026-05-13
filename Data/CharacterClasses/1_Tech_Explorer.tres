@@ -38,6 +38,7 @@ ClassName = "Explorer"
 ClassTextureFront = ExtResource("4_h1anj")
 ClassTextureBack = ExtResource("3_bf02q")
 AttacksPerPosition = Array[Object]([SubResource("Resource_ncstq"), SubResource("Resource_fpcew"), SubResource("Resource_hqaj3")])
+BaseHP = 10
 BaseSpd = 15
 GrowthHP = 80
 GrowthStr = 20

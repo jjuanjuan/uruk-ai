@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="AttackAction" format=3 uid="uid://cq25nbsbc4143"]
+
+[ext_resource type="Script" uid="uid://8p18r81fnngn" path="res://Scripts/Combat/AttackAction.cs" id="1_ahj07"]
+
+[resource]
+script = ExtResource("1_ahj07")
+AttackName = "Skull Bomb"
+AttackType = 6
+Target = 2
+BaseDamage = 50
+IntFactor = 0.5
+WisFactor = 0.5
+metadata/_custom_type_script = "uid://8p18r81fnngn"

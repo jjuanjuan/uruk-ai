@@ -1,11 +1,11 @@
 [gd_resource type="Resource" script_class="AttackAction" format=3 uid="uid://o2jxfym14m6n"]
 
-[ext_resource type="Script" uid="uid://8p18r81fnngn" path="res://Scripts/Combat/AttackAction.cs" id="1_ax5l8"]
+[ext_resource type="Script" uid="uid://8p18r81fnngn" path="res://Scripts/Combat/AttackAction.cs" id="1_37tbw"]
 
 [resource]
-script = ExtResource("1_ax5l8")
-AttackName = "Flame"
-AttackType = 3
+script = ExtResource("1_37tbw")
+AttackName = "Wisp"
+AttackType = 6
 Target = 2
 IntFactor = 0.5
 WisFactor = 0.5

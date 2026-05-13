@@ -35,11 +35,13 @@ metadata/_custom_type_script = "uid://bmylglyshe6wd"
 [resource]
 script = ExtResource("7_t311i")
 ClassName = "Blaze"
-BaseHP = 55
 ClassTextureFront = ExtResource("5_ii50i")
 ClassTextureBack = ExtResource("3_ii50i")
 AttacksPerPosition = Array[Object]([SubResource("Resource_tq6mj"), SubResource("Resource_fvaiu"), SubResource("Resource_ooqhg")])
-BaseAttackDamage = 18
+BaseHP = 10
+GrowthStr = 18
+GrowthInt = 60
+GrowthWis = 40
 ArmorType = 3
 Requirements = Array[Object]([SubResource("Resource_mfcxo")])
 metadata/_custom_type_script = "uid://1pbhreu2codn"

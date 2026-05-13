@@ -38,6 +38,7 @@ ClassName = "Tinkerer"
 ClassTextureFront = ExtResource("4_ihv4s")
 ClassTextureBack = ExtResource("3_uejn5")
 AttacksPerPosition = Array[Object]([SubResource("Resource_ncstq"), SubResource("Resource_fpcew"), SubResource("Resource_hqaj3")])
+BaseHP = 10
 GrowthStr = 20
 GrowthDex = 15
 GrowthInt = 40

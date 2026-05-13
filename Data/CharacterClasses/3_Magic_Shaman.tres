@@ -1,0 +1,50 @@
+[gd_resource type="Resource" script_class="CharacterClass" format=3 uid="uid://gfqammqv82l4"]
+
+[ext_resource type="Resource" uid="uid://d27slsudc6cqx" path="res://Data/AttackActions/Magic Arcane All.tres" id="1_xwaqo"]
+[ext_resource type="Script" uid="uid://du724smqstcfc" path="res://Scripts/Combat/AttackPerPosition.cs" id="2_gpnhc"]
+[ext_resource type="Resource" uid="uid://o3gvmrl8qchx" path="res://Data/AttackActions/Basic Smash.tres" id="3_gpnhc"]
+[ext_resource type="Texture2D" uid="uid://de5j0u588upr7" path="res://Art/Placeholders/Units/0_militia_back.png" id="4_omymm"]
+[ext_resource type="Texture2D" uid="uid://bpc02gcjy8cgs" path="res://Art/Placeholders/Units/3_shaman_front.png" id="5_xwaqo"]
+[ext_resource type="Resource" uid="uid://cgnly0tj7kmy0" path="res://Data/CharacterClasses/2_Magic_Druid.tres" id="6_xwaqo"]
+[ext_resource type="Script" uid="uid://bmylglyshe6wd" path="res://Scripts/Unit/ClassRequirements.cs" id="7_m8mqy"]
+[ext_resource type="Script" uid="uid://1pbhreu2codn" path="res://Scripts/Unit/CharacterClass.cs" id="8_06326"]
+
+[sub_resource type="Resource" id="Resource_tq6mj"]
+script = ExtResource("2_gpnhc")
+AttackAction = ExtResource("1_xwaqo")
+Amount = 2
+metadata/_custom_type_script = "uid://du724smqstcfc"
+
+[sub_resource type="Resource" id="Resource_fvaiu"]
+script = ExtResource("2_gpnhc")
+AttackAction = ExtResource("1_xwaqo")
+Amount = 2
+metadata/_custom_type_script = "uid://du724smqstcfc"
+
+[sub_resource type="Resource" id="Resource_ooqhg"]
+script = ExtResource("2_gpnhc")
+AttackAction = ExtResource("3_gpnhc")
+Amount = 2
+metadata/_custom_type_script = "uid://du724smqstcfc"
+
+[sub_resource type="Resource" id="Resource_mfcxo"]
+script = ExtResource("7_m8mqy")
+RequiredClass = ExtResource("6_xwaqo")
+RequiredLevel = 3
+metadata/_custom_type_script = "uid://bmylglyshe6wd"
+
+[resource]
+script = ExtResource("8_06326")
+ClassName = "Shaman"
+ClassTextureFront = ExtResource("5_xwaqo")
+ClassTextureBack = ExtResource("4_omymm")
+AttacksPerPosition = Array[Object]([SubResource("Resource_tq6mj"), SubResource("Resource_fvaiu"), SubResource("Resource_ooqhg")])
+BaseHP = 30
+GrowthHP = 125
+GrowthStr = 15
+GrowthDex = 15
+GrowthInt = 60
+GrowthWis = 90
+MovementType = 4
+Requirements = Array[Object]([SubResource("Resource_mfcxo")])
+metadata/_custom_type_script = "uid://1pbhreu2codn"

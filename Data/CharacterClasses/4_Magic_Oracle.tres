@@ -1,0 +1,59 @@
+[gd_resource type="Resource" script_class="CharacterClass" format=3 uid="uid://5p2isyhci6f5"]
+
+[ext_resource type="Resource" uid="uid://d27slsudc6cqx" path="res://Data/AttackActions/Magic Arcane All.tres" id="1_rhn8o"]
+[ext_resource type="Script" uid="uid://du724smqstcfc" path="res://Scripts/Combat/AttackPerPosition.cs" id="2_py6xs"]
+[ext_resource type="Resource" uid="uid://cq25nbsbc4143" path="res://Data/AttackActions/Magic Arcane Bomb.tres" id="3_ehm04"]
+[ext_resource type="Resource" uid="uid://o2jxfym14m6n" path="res://Data/AttackActions/Magic Arcane Single.tres" id="4_cx4pn"]
+[ext_resource type="Texture2D" uid="uid://de5j0u588upr7" path="res://Art/Placeholders/Units/0_militia_back.png" id="4_ehm04"]
+[ext_resource type="Texture2D" uid="uid://cqi1qm67gq8q2" path="res://Art/Placeholders/Units/4_oracle_front.png" id="5_py6xs"]
+[ext_resource type="Resource" uid="uid://gfqammqv82l4" path="res://Data/CharacterClasses/3_Magic_Shaman.tres" id="6_rhn8o"]
+[ext_resource type="Script" uid="uid://bmylglyshe6wd" path="res://Scripts/Unit/ClassRequirements.cs" id="7_sgh8n"]
+[ext_resource type="Resource" uid="uid://cc72aj4j7xt21" path="res://Data/CharacterClasses/3_Magic_Witch.tres" id="8_ehm04"]
+[ext_resource type="Script" uid="uid://1pbhreu2codn" path="res://Scripts/Unit/CharacterClass.cs" id="8_g6or5"]
+
+[sub_resource type="Resource" id="Resource_tq6mj"]
+script = ExtResource("2_py6xs")
+AttackAction = ExtResource("1_rhn8o")
+Amount = 3
+metadata/_custom_type_script = "uid://du724smqstcfc"
+
+[sub_resource type="Resource" id="Resource_fvaiu"]
+script = ExtResource("2_py6xs")
+AttackAction = ExtResource("3_ehm04")
+Amount = 3
+metadata/_custom_type_script = "uid://du724smqstcfc"
+
+[sub_resource type="Resource" id="Resource_ooqhg"]
+script = ExtResource("2_py6xs")
+AttackAction = ExtResource("4_cx4pn")
+Amount = 3
+metadata/_custom_type_script = "uid://du724smqstcfc"
+
+[sub_resource type="Resource" id="Resource_mfcxo"]
+script = ExtResource("7_sgh8n")
+RequiredClass = ExtResource("6_rhn8o")
+RequiredLevel = 3
+metadata/_custom_type_script = "uid://bmylglyshe6wd"
+
+[sub_resource type="Resource" id="Resource_cx4pn"]
+script = ExtResource("7_sgh8n")
+RequiredClass = ExtResource("8_ehm04")
+RequiredLevel = 3
+metadata/_custom_type_script = "uid://bmylglyshe6wd"
+
+[resource]
+script = ExtResource("8_g6or5")
+ClassName = "Oracle"
+ClassTextureFront = ExtResource("5_py6xs")
+ClassTextureBack = ExtResource("4_ehm04")
+AttacksPerPosition = Array[Object]([SubResource("Resource_tq6mj"), SubResource("Resource_fvaiu"), SubResource("Resource_ooqhg")])
+BaseHP = 30
+BaseSpd = 15
+GrowthHP = 80
+GrowthDex = 22
+GrowthInt = 70
+GrowthWis = 110
+GrowthSpd = 22
+MovementType = 2
+Requirements = Array[Object]([SubResource("Resource_mfcxo"), SubResource("Resource_cx4pn")])
+metadata/_custom_type_script = "uid://1pbhreu2codn"

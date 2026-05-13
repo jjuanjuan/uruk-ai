@@ -1,0 +1,50 @@
+[gd_resource type="Resource" script_class="CharacterClass" format=3 uid="uid://cc72aj4j7xt21"]
+
+[ext_resource type="Resource" uid="uid://cq25nbsbc4143" path="res://Data/AttackActions/Magic Arcane Bomb.tres" id="1_mxfeh"]
+[ext_resource type="Script" uid="uid://du724smqstcfc" path="res://Scripts/Combat/AttackPerPosition.cs" id="2_mxfeh"]
+[ext_resource type="Resource" uid="uid://o2jxfym14m6n" path="res://Data/AttackActions/Magic Arcane Single.tres" id="3_6qpro"]
+[ext_resource type="Texture2D" uid="uid://de5j0u588upr7" path="res://Art/Placeholders/Units/0_militia_back.png" id="4_0ev04"]
+[ext_resource type="Resource" uid="uid://6lj5hlhugy7f" path="res://Data/AttackActions/Weak Smash.tres" id="4_ugms1"]
+[ext_resource type="Texture2D" uid="uid://bx4qmlm2seffd" path="res://Art/Placeholders/Units/3_witch_front.png" id="5_a612w"]
+[ext_resource type="Resource" uid="uid://cgnly0tj7kmy0" path="res://Data/CharacterClasses/2_Magic_Druid.tres" id="6_a612w"]
+[ext_resource type="Script" uid="uid://bmylglyshe6wd" path="res://Scripts/Unit/ClassRequirements.cs" id="7_w4muq"]
+[ext_resource type="Script" uid="uid://1pbhreu2codn" path="res://Scripts/Unit/CharacterClass.cs" id="8_i2mag"]
+
+[sub_resource type="Resource" id="Resource_tq6mj"]
+script = ExtResource("2_mxfeh")
+AttackAction = ExtResource("1_mxfeh")
+Amount = 2
+metadata/_custom_type_script = "uid://du724smqstcfc"
+
+[sub_resource type="Resource" id="Resource_fvaiu"]
+script = ExtResource("2_mxfeh")
+AttackAction = ExtResource("3_6qpro")
+Amount = 4
+metadata/_custom_type_script = "uid://du724smqstcfc"
+
+[sub_resource type="Resource" id="Resource_ooqhg"]
+script = ExtResource("2_mxfeh")
+AttackAction = ExtResource("4_ugms1")
+metadata/_custom_type_script = "uid://du724smqstcfc"
+
+[sub_resource type="Resource" id="Resource_mfcxo"]
+script = ExtResource("7_w4muq")
+RequiredClass = ExtResource("6_a612w")
+RequiredLevel = 3
+metadata/_custom_type_script = "uid://bmylglyshe6wd"
+
+[resource]
+script = ExtResource("8_i2mag")
+ClassName = "Witch"
+ClassTextureFront = ExtResource("5_a612w")
+ClassTextureBack = ExtResource("4_0ev04")
+AttacksPerPosition = Array[Object]([SubResource("Resource_tq6mj"), SubResource("Resource_fvaiu"), SubResource("Resource_ooqhg")])
+BaseHP = 10
+GrowthHP = 75
+GrowthDex = 25
+GrowthInt = 70
+GrowthWis = 80
+GrowthSpd = 18
+MovementType = 2
+Requirements = Array[Object]([SubResource("Resource_mfcxo")])
+metadata/_custom_type_script = "uid://1pbhreu2codn"

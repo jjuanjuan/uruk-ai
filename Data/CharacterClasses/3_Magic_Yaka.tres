@@ -35,11 +35,15 @@ metadata/_custom_type_script = "uid://bmylglyshe6wd"
 [resource]
 script = ExtResource("8_m0swo")
 ClassName = "Yaka"
-BaseHP = 90
 ClassTextureFront = ExtResource("5_jodsy")
 ClassTextureBack = ExtResource("4_o876v")
 AttacksPerPosition = Array[Object]([SubResource("Resource_tq6mj"), SubResource("Resource_fvaiu"), SubResource("Resource_ooqhg")])
-BaseAttackDamage = 24
+BaseHP = 20
+GrowthHP = 90
+GrowthStr = 15
+GrowthDex = 15
+GrowthInt = 85
+GrowthWis = 70
 ArmorType = 4
 Requirements = Array[Object]([SubResource("Resource_mfcxo")])
 metadata/_custom_type_script = "uid://1pbhreu2codn"
