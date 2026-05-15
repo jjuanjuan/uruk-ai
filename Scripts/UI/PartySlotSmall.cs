@@ -7,7 +7,6 @@ public partial class PartySlotSmall : Control
     [Export] TextureRect CharImg;
     [Export] ColorRect HPBarParent;
     [Export] HealthBar HPBar;
-    [Export] Panel Background;
 
     public CharacterParty Party;
     public UIPartySmall UIParty;

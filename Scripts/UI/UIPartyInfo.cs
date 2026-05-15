@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using System.Linq;
 using Godot;
 
 public partial class UIPartyInfo : Control
@@ -38,9 +40,7 @@ public partial class UIPartyInfo : Control
     public override void _ExitTree()
     {
         if (SelectionManager.I != null)
-        {
             SelectionManager.I.SelectedOrcChanged -= OnSelectedOrcChanged;
-        }
     }
 
     public void Setup(CharacterParty party)
@@ -83,6 +83,7 @@ public partial class UIPartyInfo : Control
             UnitName.Text = "None selected";
             UnitClass.Text = "";
             UnitLvl.Text = "";
+            UnitHP.Text = "";
             UnitSTR.Text = "";
             UnitDEX.Text = "";
             UnitINT.Text = "";
@@ -95,20 +96,43 @@ public partial class UIPartyInfo : Control
         }
 
         var attack = orc.CharacterClass.GetAttackPerPosition(orc.PartyPosition.Row);
+        var scaling = new List<(string Stat, float Factor)>
+            {
+                ("STR", attack.AttackAction.StrFactor),
+                ("DEX", attack.AttackAction.DexFactor),
+                ("INT", attack.AttackAction.IntFactor),
+                ("WIS", attack.AttackAction.WisFactor),
+            };
 
+        // sacar factores en 0
+        scaling = scaling
+            .Where(x => x.Factor > 0f)
+            .OrderByDescending(x => x.Factor)
+            .ToList();
+
+        string attackScaling =
+            scaling.Count > 0
+            ? string.Join(
+                " / ",
+                scaling.Select(x => x.Stat)
+              ) + " scaling"
+            : "No scaling";
+            
         UnitName.Text = orc.GetCustomName();
         UnitClass.Text = orc.CharacterClass.GetClassName() + " lvl X"; // TODO
         UnitLvl.Text = "Lvl 17"; // TODO
+        UnitHP.Text = orc.CurrentHP + "/" + orc.MaxHP;
         UnitSTR.Text = "" + orc.Str;
         UnitDEX.Text = "" + orc.Dex;
         UnitINT.Text = "" + orc.Int;
         UnitWIS.Text = "" + orc.Wis;
         UnitSPD.Text = "" + orc.Spd;
-        UnitArmor.Text = orc.CharacterClass.ArmorType + "armor";
-        UnitMovement.Text = "" + orc.CharacterClass.MovementType;
+        UnitArmor.Text = orc.CharacterClass.ArmorType + " Armor";
+        UnitMovement.Text = orc.CharacterClass.MovementType + " Movement";
         UnitAttack.Text =
         $@"{attack.AttackAction.AttackName}
         ({attack.AttackAction.AttackType})
-        {attack.Amount} times";
+        {attack.Amount} times
+        {attackScaling}";
     }
 }

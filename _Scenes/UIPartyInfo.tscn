@@ -27,6 +27,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 script = ExtResource("1_q4s5w")
 UnitName = NodePath("Unit Stats/Label Name")
 UnitLvl = NodePath("Unit Stats/Label Lvl")
@@ -44,16 +45,6 @@ SetLeaderButton = NodePath("Button Panel/SetLeaderButton")
 ChangeClassButton = NodePath("Button Panel/ChangeClassButton")
 CloseButton = NodePath("CloseButton")
 SlotsContainer = NodePath("Party UI/SlotsContainer")
-
-[node name="Background" type="ColorRect" parent="." unique_id=576227407]
-visible = false
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0, 0, 0, 0.5)
 
 [node name="Button Panel" type="Panel" parent="." unique_id=818601732]
 layout_mode = 1
@@ -109,6 +100,7 @@ offset_bottom = 143.0
 grow_horizontal = 2
 grow_vertical = 2
 pivot_offset_ratio = Vector2(0.5, 0.5)
+mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_5ta8f")
 
 [node name="SlotsContainer" type="Control" parent="Party UI" unique_id=933342494]
@@ -118,6 +110,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 
 [node name="PartySlot" parent="Party UI/SlotsContainer" unique_id=506167646 instance=ExtResource("1_jemnh")]
 layout_mode = 0
