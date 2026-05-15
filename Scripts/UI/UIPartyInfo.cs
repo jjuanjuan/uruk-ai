@@ -104,9 +104,9 @@ public partial class UIPartyInfo : Control
                 ("WIS", attack.AttackAction.WisFactor),
             };
 
-        // sacar factores en 0
+        // sacar factores chicos
         scaling = scaling
-            .Where(x => x.Factor > 0f)
+            .Where(x => x.Factor > 0.175f)
             .OrderByDescending(x => x.Factor)
             .ToList();
 
@@ -117,7 +117,7 @@ public partial class UIPartyInfo : Control
                 scaling.Select(x => x.Stat)
               ) + " scaling"
             : "No scaling";
-            
+
         UnitName.Text = orc.GetCustomName();
         UnitClass.Text = orc.CharacterClass.GetClassName() + " lvl X"; // TODO
         UnitLvl.Text = "Lvl 17"; // TODO

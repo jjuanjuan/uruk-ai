@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="CharacterClass" format=3 uid="uid://ckq2tps25fbrd"]
 
-[ext_resource type="Resource" uid="uid://o3gvmrl8qchx" path="res://Data/AttackActions/Basic Smash.tres" id="1_jwy36"]
+[ext_resource type="Resource" uid="uid://bvjvexkg8b0k2" path="res://Data/AttackActions/Str Rock Throw.tres" id="1_ksjki"]
 [ext_resource type="Script" uid="uid://du724smqstcfc" path="res://Scripts/Combat/AttackPerPosition.cs" id="2_mwbdv"]
 [ext_resource type="Resource" uid="uid://b6qbtcv87hfo7" path="res://Data/AttackActions/Morgenstern Smash.tres" id="3_mwbdv"]
 [ext_resource type="Texture2D" uid="uid://de5j0u588upr7" path="res://Art/Placeholders/Units/0_militia_back.png" id="4_uynei"]
@@ -11,14 +11,12 @@
 
 [sub_resource type="Resource" id="Resource_ncstq"]
 script = ExtResource("2_mwbdv")
-AttackAction = ExtResource("1_jwy36")
-Amount = 2
+AttackAction = ExtResource("1_ksjki")
 metadata/_custom_type_script = "uid://du724smqstcfc"
 
 [sub_resource type="Resource" id="Resource_fpcew"]
 script = ExtResource("2_mwbdv")
 AttackAction = ExtResource("3_mwbdv")
-Amount = 2
 metadata/_custom_type_script = "uid://du724smqstcfc"
 
 [sub_resource type="Resource" id="Resource_hqaj3"]

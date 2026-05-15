@@ -5,5 +5,5 @@
 [resource]
 script = ExtResource("1_fq6ff")
 AttackName = "Do nothing"
-BaseDamageMultiplier = 0.0
+BaseDamage = 0
 metadata/_custom_type_script = "uid://8p18r81fnngn"

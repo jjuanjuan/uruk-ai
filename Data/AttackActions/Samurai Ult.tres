@@ -6,6 +6,7 @@
 script = ExtResource("1_hv1oq")
 AttackName = "Column Slash"
 Target = 4
+BaseDamage = 40
 StrFactor = 0.5
 DexFactor = 1.0
 WisFactor = 0.5

@@ -1,6 +1,7 @@
 [gd_resource type="Resource" script_class="CharacterClass" format=3 uid="uid://drgell8yjnncv"]
 
 [ext_resource type="Resource" uid="uid://die58tr4ggpit" path="res://Data/AttackActions/Trident Pierce.tres" id="1_pwnhl"]
+[ext_resource type="Resource" uid="uid://ct40qcdlhw7ry" path="res://Data/AttackActions/Trident Throw.tres" id="1_utmwy"]
 [ext_resource type="Script" uid="uid://du724smqstcfc" path="res://Scripts/Combat/AttackPerPosition.cs" id="2_nejg1"]
 [ext_resource type="Texture2D" uid="uid://bj11igbjb0h5h" path="res://Art/Placeholders/Units/3_trident_front.png" id="4_6vckn"]
 [ext_resource type="Texture2D" uid="uid://de5j0u588upr7" path="res://Art/Placeholders/Units/0_militia_back.png" id="4_scv6j"]
@@ -10,7 +11,7 @@
 
 [sub_resource type="Resource" id="Resource_ncstq"]
 script = ExtResource("2_nejg1")
-AttackAction = ExtResource("1_pwnhl")
+AttackAction = ExtResource("1_utmwy")
 Amount = 2
 metadata/_custom_type_script = "uid://du724smqstcfc"
 
@@ -23,7 +24,7 @@ metadata/_custom_type_script = "uid://du724smqstcfc"
 [sub_resource type="Resource" id="Resource_hqaj3"]
 script = ExtResource("2_nejg1")
 AttackAction = ExtResource("1_pwnhl")
-Amount = 3
+Amount = 2
 metadata/_custom_type_script = "uid://du724smqstcfc"
 
 [sub_resource type="Resource" id="Resource_hs6x5"]

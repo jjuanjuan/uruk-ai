@@ -7,6 +7,7 @@ script = ExtResource("1_ym0mh")
 AttackName = "Snipe"
 AttackType = 2
 Target = 1
+BaseDamage = 40
 DexFactor = 0.75
 IntFactor = 0.75
 metadata/_custom_type_script = "uid://8p18r81fnngn"

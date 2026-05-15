@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="CharacterClass" format=3 uid="uid://gogb8s6l7npy"]
 
-[ext_resource type="Resource" uid="uid://casgtele230c8" path="res://Data/AttackActions/Stone Throw.tres" id="1_jhtq4"]
+[ext_resource type="Resource" uid="uid://casgtele230c8" path="res://Data/AttackActions/Slinger Stone Throw.tres" id="1_jhtq4"]
 [ext_resource type="Script" uid="uid://du724smqstcfc" path="res://Scripts/Combat/AttackPerPosition.cs" id="2_el0ib"]
 [ext_resource type="Resource" uid="uid://6lj5hlhugy7f" path="res://Data/AttackActions/Weak Smash.tres" id="3_ov00o"]
 [ext_resource type="Texture2D" uid="uid://de5j0u588upr7" path="res://Art/Placeholders/Units/0_militia_back.png" id="4_mqyk0"]

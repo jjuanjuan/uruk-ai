@@ -4,7 +4,7 @@
 
 [resource]
 script = ExtResource("1_chg41")
-AttackName = "Whip"
+AttackName = "Whip Strike"
 AttackType = 0
 StrFactor = 0.25
 DexFactor = 0.75
