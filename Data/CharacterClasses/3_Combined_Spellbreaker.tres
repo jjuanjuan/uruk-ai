@@ -1,0 +1,60 @@
+[gd_resource type="Resource" script_class="CharacterClass" format=3 uid="uid://c05rypd7iufim"]
+
+[ext_resource type="Resource" uid="uid://dr414lsnew0tp" path="res://Data/AttackActions/Magebane Slash.tres" id="1_fxp61"]
+[ext_resource type="Resource" uid="uid://dbp35fknwua1b" path="res://Data/AttackActions/Magebane Throw.tres" id="1_goaor"]
+[ext_resource type="Script" uid="uid://du724smqstcfc" path="res://Scripts/Combat/AttackPerPosition.cs" id="2_goaor"]
+[ext_resource type="Texture2D" uid="uid://de5j0u588upr7" path="res://Art/Placeholders/Units/0_militia_back.png" id="4_cqtcs"]
+[ext_resource type="Texture2D" uid="uid://y7440xm38gcw" path="res://Art/Placeholders/Units/3_spellbreaker_front.png" id="5_v62jm"]
+[ext_resource type="Resource" uid="uid://c4y6v7ox6s0ai" path="res://Data/CharacterClasses/2_Warrior_Rogue.tres" id="6_l8rd3"]
+[ext_resource type="Script" uid="uid://bmylglyshe6wd" path="res://Scripts/Unit/ClassRequirements.cs" id="7_bblof"]
+[ext_resource type="Script" uid="uid://1pbhreu2codn" path="res://Scripts/Unit/CharacterClass.cs" id="8_aw55j"]
+[ext_resource type="Resource" uid="uid://cgnly0tj7kmy0" path="res://Data/CharacterClasses/2_Magic_Druid.tres" id="8_goaor"]
+
+[sub_resource type="Resource" id="Resource_hqaj3"]
+script = ExtResource("2_goaor")
+AttackAction = ExtResource("1_goaor")
+Amount = 3
+metadata/_custom_type_script = "uid://du724smqstcfc"
+
+[sub_resource type="Resource" id="Resource_fpcew"]
+script = ExtResource("2_goaor")
+AttackAction = ExtResource("1_goaor")
+Amount = 4
+metadata/_custom_type_script = "uid://du724smqstcfc"
+
+[sub_resource type="Resource" id="Resource_ncstq"]
+script = ExtResource("2_goaor")
+AttackAction = ExtResource("1_fxp61")
+Amount = 3
+metadata/_custom_type_script = "uid://du724smqstcfc"
+
+[sub_resource type="Resource" id="Resource_qyw1s"]
+script = ExtResource("7_bblof")
+RequiredClass = ExtResource("6_l8rd3")
+RequiredLevel = 3
+metadata/_custom_type_script = "uid://bmylglyshe6wd"
+
+[sub_resource type="Resource" id="Resource_t2ehi"]
+script = ExtResource("7_bblof")
+RequiredClass = ExtResource("8_goaor")
+RequiredLevel = 3
+metadata/_custom_type_script = "uid://bmylglyshe6wd"
+
+[resource]
+script = ExtResource("8_aw55j")
+ClassName = "Spellbreaker"
+ClassTextureFront = ExtResource("5_v62jm")
+ClassTextureBack = ExtResource("4_cqtcs")
+AttacksPerPosition = Array[Object]([SubResource("Resource_hqaj3"), SubResource("Resource_fpcew"), SubResource("Resource_ncstq")])
+BaseHP = 20
+BaseWis = 50
+BaseSpd = 20
+GrowthHP = 60
+GrowthStr = 15
+GrowthDex = 60
+GrowthInt = 25
+GrowthWis = 80
+GrowthSpd = 40
+MovementType = 4
+Requirements = Array[Object]([SubResource("Resource_qyw1s"), SubResource("Resource_t2ehi")])
+metadata/_custom_type_script = "uid://1pbhreu2codn"

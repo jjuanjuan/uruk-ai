@@ -654,6 +654,7 @@ public partial class CombatManager : Node
             case CombatConfig.AttackType.Fire:
             case CombatConfig.AttackType.Ice:
             case CombatConfig.AttackType.Electric:
+            case CombatConfig.AttackType.Arcane:
                 wisDefenderMultiplier =
                     Mathf.Max(0.35f, 200f / (200f + target.Wis)); // 100 WIS = 33% reducción
                 break;

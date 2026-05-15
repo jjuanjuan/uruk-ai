@@ -1,0 +1,51 @@
+[gd_resource type="Resource" script_class="CharacterClass" format=3 uid="uid://cfndbkcxl2l2k"]
+
+[ext_resource type="Resource" uid="uid://bvjvexkg8b0k2" path="res://Data/AttackActions/Str Rock Throw.tres" id="1_pfnmq"]
+[ext_resource type="Script" uid="uid://du724smqstcfc" path="res://Scripts/Combat/AttackPerPosition.cs" id="2_oshi6"]
+[ext_resource type="Resource" uid="uid://dcbco0ilieqbg" path="res://Data/AttackActions/Hammer Throw.tres" id="3_oshi6"]
+[ext_resource type="Texture2D" uid="uid://de5j0u588upr7" path="res://Art/Placeholders/Units/0_militia_back.png" id="4_17t46"]
+[ext_resource type="Resource" uid="uid://o3gvmrl8qchx" path="res://Data/AttackActions/Basic Smash.tres" id="4_fqk5v"]
+[ext_resource type="Texture2D" uid="uid://dlrw6te73lo8m" path="res://Art/Placeholders/Units/3_berserker_front.png" id="6_17t46"]
+[ext_resource type="Script" uid="uid://bmylglyshe6wd" path="res://Scripts/Unit/ClassRequirements.cs" id="7_mayph"]
+[ext_resource type="Resource" uid="uid://cf8qa6gk5twwa" path="res://Data/CharacterClasses/2_Warrior_WildOne.tres" id="7_oshi6"]
+[ext_resource type="Script" uid="uid://1pbhreu2codn" path="res://Scripts/Unit/CharacterClass.cs" id="8_hco78"]
+
+[sub_resource type="Resource" id="Resource_ncstq"]
+script = ExtResource("2_oshi6")
+AttackAction = ExtResource("1_pfnmq")
+metadata/_custom_type_script = "uid://du724smqstcfc"
+
+[sub_resource type="Resource" id="Resource_fpcew"]
+script = ExtResource("2_oshi6")
+AttackAction = ExtResource("3_oshi6")
+Amount = 3
+metadata/_custom_type_script = "uid://du724smqstcfc"
+
+[sub_resource type="Resource" id="Resource_hqaj3"]
+script = ExtResource("2_oshi6")
+AttackAction = ExtResource("4_fqk5v")
+Amount = 4
+metadata/_custom_type_script = "uid://du724smqstcfc"
+
+[sub_resource type="Resource" id="Resource_hs6x5"]
+script = ExtResource("7_mayph")
+RequiredClass = ExtResource("7_oshi6")
+RequiredLevel = 5
+metadata/_custom_type_script = "uid://bmylglyshe6wd"
+
+[resource]
+script = ExtResource("8_hco78")
+ClassName = "Berserker"
+ClassTextureFront = ExtResource("6_17t46")
+ClassTextureBack = ExtResource("4_17t46")
+AttacksPerPosition = Array[Object]([SubResource("Resource_ncstq"), SubResource("Resource_fpcew"), SubResource("Resource_hqaj3")])
+BaseHP = 30
+GrowthHP = 220
+GrowthStr = 100
+GrowthDex = 30
+GrowthInt = 5
+GrowthWis = 7
+GrowthSpd = 22
+ArmorType = 1
+Requirements = Array[Object]([SubResource("Resource_hs6x5")])
+metadata/_custom_type_script = "uid://1pbhreu2codn"

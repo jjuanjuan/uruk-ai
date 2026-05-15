@@ -167,6 +167,8 @@ public partial class GameManager : Node
 
         GD.Print($"Generated: {instance.CustomName} the {instance.CharacterClass.GetClassName()}");
 
+        instance.GainXP(instance.CharacterClass.GetXPToNextLevel());
+
         return instance;
     }
 

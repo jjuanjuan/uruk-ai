@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="AttackAction" format=3 uid="uid://dimx7e1cql72"]
+
+[ext_resource type="Script" uid="uid://8p18r81fnngn" path="res://Scripts/Combat/AttackAction.cs" id="1_7c7pn"]
+
+[resource]
+script = ExtResource("1_7c7pn")
+AttackName = "Drill Attack"
+AttackType = 2
+StrFactor = 0.5
+IntFactor = 0.5
+metadata/_custom_type_script = "uid://8p18r81fnngn"

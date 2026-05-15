@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="AttackAction" format=3 uid="uid://jp472ni3s3yy"]
+
+[ext_resource type="Script" uid="uid://8p18r81fnngn" path="res://Scripts/Combat/AttackAction.cs" id="1_y2b0e"]
+
+[resource]
+script = ExtResource("1_y2b0e")
+AttackName = "Magebane"
+Target = 7
+DexFactor = 0.6
+WisFactor = 0.4
+metadata/_custom_type_script = "uid://8p18r81fnngn"

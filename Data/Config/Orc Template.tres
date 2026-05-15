@@ -31,9 +31,11 @@
 [ext_resource type="Resource" uid="uid://dedv4yix4egnt" path="res://Data/CharacterClasses/3_Combined_SkyPirate.tres" id="26_1u8gv"]
 [ext_resource type="Resource" uid="uid://bjmyp1xc7kxll" path="res://Data/CharacterClasses/3_Magic_Vulcan.tres" id="27_dgkec"]
 [ext_resource type="Resource" uid="uid://dywdnwfffm48j" path="res://Data/CharacterClasses/3_Magic_Yaka.tres" id="28_0sls3"]
+[ext_resource type="Resource" uid="uid://bkrqcdfvwb777" path="res://Data/CharacterClasses/3_Combined_Excavator.tres" id="28_ccsp2"]
 [ext_resource type="Resource" uid="uid://bcyo7hv1ml5i7" path="res://Data/CharacterClasses/3_Tech_Inventor.tres" id="29_ccsp2"]
 [ext_resource type="Resource" uid="uid://gfqammqv82l4" path="res://Data/CharacterClasses/3_Magic_Shaman.tres" id="29_rm4yp"]
 [ext_resource type="Resource" uid="uid://b5dfxisg1bqvg" path="res://Data/CharacterClasses/3_Tech_Ironclad.tres" id="30_gffj5"]
+[ext_resource type="Resource" uid="uid://c05rypd7iufim" path="res://Data/CharacterClasses/3_Combined_Spellbreaker.tres" id="30_go04m"]
 [ext_resource type="Resource" uid="uid://cc72aj4j7xt21" path="res://Data/CharacterClasses/3_Magic_Witch.tres" id="31_1u8gv"]
 [ext_resource type="Resource" uid="uid://cg4wg58pgbr6l" path="res://Data/CharacterClasses/3_Warrior_AxeThrower.tres" id="31_go04m"]
 [ext_resource type="Resource" uid="uid://ce6exe4327m40" path="res://Data/CharacterClasses/3_Warrior_Cataphract.tres" id="32_07d5f"]
@@ -42,9 +44,12 @@
 [ext_resource type="Resource" uid="uid://drgell8yjnncv" path="res://Data/CharacterClasses/3_Warrior_Trident.tres" id="35_a0xm2"]
 [ext_resource type="Resource" uid="uid://dhaftn373vlsb" path="res://Data/CharacterClasses/4_Combined_Comet.tres" id="36_ubfmy"]
 [ext_resource type="Resource" uid="uid://bpd4kie8cjj6u" path="res://Data/CharacterClasses/4_Combined_Zealot.tres" id="37_nun1w"]
+[ext_resource type="Resource" uid="uid://cfndbkcxl2l2k" path="res://Data/CharacterClasses/3_Warrior_Berserker.tres" id="38_07d5f"]
 [ext_resource type="Resource" uid="uid://5p2isyhci6f5" path="res://Data/CharacterClasses/4_Magic_Oracle.tres" id="42_dgkec"]
+[ext_resource type="Resource" uid="uid://cycakk6wsjtbg" path="res://Data/CharacterClasses/4_Combined_Magebane.tres" id="44_avt0b"]
+[ext_resource type="Resource" uid="uid://c0ve7nd7yr4ci" path="res://Data/CharacterClasses/4_Combined_Mechadrill.tres" id="45_t6fhs"]
 
 [resource]
 script = ExtResource("1_sm56y")
-BaseClasses = Array[Object]([ExtResource("17_wqynm"), ExtResource("2_72mds"), ExtResource("2_eyntb"), ExtResource("4_8ex31"), ExtResource("18_snyh8"), ExtResource("19_xbibs"), ExtResource("24_snyh8"), ExtResource("7_s15qj"), ExtResource("8_prkh7"), ExtResource("3_fmdy7"), ExtResource("4_s2q0r"), ExtResource("5_snyh8"), ExtResource("20_o84qu"), ExtResource("14_bxnvv"), ExtResource("21_euhi4"), ExtResource("14_o1ptf"), ExtResource("15_fxtq7"), ExtResource("16_ijow0"), ExtResource("17_8ex31"), ExtResource("18_bxnvv"), ExtResource("19_rm4yp"), ExtResource("6_i82go"), ExtResource("7_a1wix"), ExtResource("8_fygm1"), ExtResource("9_1uckk"), ExtResource("10_uq1o5"), ExtResource("11_vl8je"), ExtResource("26_1u8gv"), ExtResource("29_rm4yp"), ExtResource("27_dgkec"), ExtResource("31_1u8gv"), ExtResource("28_0sls3"), ExtResource("29_ccsp2"), ExtResource("30_gffj5"), ExtResource("31_go04m"), ExtResource("32_07d5f"), ExtResource("33_avt0b"), ExtResource("34_t6fhs"), ExtResource("35_a0xm2"), ExtResource("36_ubfmy"), ExtResource("37_nun1w"), ExtResource("42_dgkec")])
+BaseClasses = Array[Object]([ExtResource("17_wqynm"), ExtResource("2_72mds"), ExtResource("2_eyntb"), ExtResource("4_8ex31"), ExtResource("18_snyh8"), ExtResource("19_xbibs"), ExtResource("24_snyh8"), ExtResource("7_s15qj"), ExtResource("8_prkh7"), ExtResource("3_fmdy7"), ExtResource("4_s2q0r"), ExtResource("5_snyh8"), ExtResource("20_o84qu"), ExtResource("14_bxnvv"), ExtResource("21_euhi4"), ExtResource("14_o1ptf"), ExtResource("15_fxtq7"), ExtResource("16_ijow0"), ExtResource("17_8ex31"), ExtResource("18_bxnvv"), ExtResource("19_rm4yp"), ExtResource("6_i82go"), ExtResource("7_a1wix"), ExtResource("8_fygm1"), ExtResource("9_1uckk"), ExtResource("10_uq1o5"), ExtResource("11_vl8je"), ExtResource("28_ccsp2"), ExtResource("26_1u8gv"), ExtResource("30_go04m"), ExtResource("29_rm4yp"), ExtResource("27_dgkec"), ExtResource("31_1u8gv"), ExtResource("28_0sls3"), ExtResource("29_ccsp2"), ExtResource("30_gffj5"), ExtResource("31_go04m"), ExtResource("38_07d5f"), ExtResource("32_07d5f"), ExtResource("33_avt0b"), ExtResource("34_t6fhs"), ExtResource("35_a0xm2"), ExtResource("36_ubfmy"), ExtResource("44_avt0b"), ExtResource("45_t6fhs"), ExtResource("37_nun1w"), ExtResource("42_dgkec")])
 metadata/_custom_type_script = "uid://dbqerfupo2uot"
